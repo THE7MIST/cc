@@ -1,0 +1,135 @@
+| Acronym | Full Form                                     |
+| ------- | --------------------------------------------- |
+| ITIL    | Information Technology Infrastructure Library |
+| ITSM    | IT Service Management                         |
+| SVS     | Service Value System                          |
+| SLA     | Service Level Agreement                       |
+| SDP     | Service Design Package                        |
+| CSI     | Continual Service Improvement                 |
+| SACM    | Service Asset and Configuration Management    |
+| CMDB    | Configuration Management Database             |
+| CAB     | Change Advisory Board                         |
+| RFC     | Request For Change                            |
+
+
+Core ITIL Acronyms
+````````````````````
+| Acronym | Full Form                                     |
+| ------- | --------------------------------------------- |
+| ITIL    | Information Technology Infrastructure Library |
+| ITSM    | IT Service Management                         |
+| SVS     | Service Value System                          |
+| SLA     | Service Level Agreement                       |
+| SDP     | Service Design Package                        |
+| CSI     | Continual Service Improvement                 |
+| SACM    | Service Asset and Configuration Management    |
+| CMDB    | Configuration Management Database             |
+| CAB     | Change Advisory Board                         |
+| ELS     | Early Life Support                            |
+| CI      | Configuration Item                            |
+| RFC     | Request For Change                            |
+
+
+
+Service Management Terms
+`````````````````````````
+| Short Form | Full Form                                  |
+| ---------- | ------------------------------------------ |
+| ROI        | Return on Investment                       |
+| TCO        | Total Cost of Ownership                    |
+| NPV        | Net Present Value                          |
+| KPI        | Key Performance Indicator                  |
+| PDCA       | Plan Do Check Act                          |
+| SWOT       | Strengths Weaknesses Opportunities Threats |
+| SLA        | Service Level Agreement                    |
+| SLM        | Service Level Management                   |
+
+
+
+Service Lifecycle Terms
+````````````````````````
+| Acronym | Full Form                                  |
+| ------- | ------------------------------------------ |
+| SLM     | Service Level Management                   |
+| SACM    | Service Asset and Configuration Management |
+| CSI     | Continual Service Improvement              |
+| ELS     | Early Life Support                         |
+| CMDB    | Configuration Management Database          |
+| CAB     | Change Advisory Board                      |
+
+
+ITIL Governance & Value Terms
+`````````````````````````````
+| Term              | Meaning                                        |
+| ----------------- | ---------------------------------------------- |
+| Value             | Perceived benefits, usefulness, and importance |
+| Governance        | Organizational direction and control           |
+| Demand            | Need/desire for services                       |
+| Opportunity       | Potential value creation                       |
+| Practice          | Organizational resource set for work           |
+| Guiding Principle | Universal recommendation                       |
+
+
+Cloud & DevOps Acronyms
+```````````````````````
+| Acronym | Full Form                                      |
+| ------- | ---------------------------------------------- |
+| AWS     | Amazon Web Services                            |
+| VPC     | Virtual Private Cloud                          |
+| EC2     | Elastic Compute Cloud                          |
+| S3      | Simple Storage Service                         |
+| IAM     | Identity and Access Management                 |
+| CI/CD   | Continuous Integration / Continuous Deployment |
+| SAN     | Storage Area Network                           |
+| HVAC    | Heating Ventilation and Air Conditioning       |
+| WAN     | Wide Area Network                              |
+| NOC     | Network Operations Center                      |
+| ISP     | Internet Service Provider                      |
+| ZFS     | Zettabyte File System                          |
+| iSCSI   | Internet Small Computer Systems Interface      |
+
+
+Virtualization Acronyms
+````````````````````````
+| Acronym           | Full Form             |
+| ----------------- | --------------------- |
+| VM                | Virtual Machine       |
+| Type-1 Hypervisor | Bare Metal Hypervisor |
+| Type-2 Hypervisor | Hosted Hypervisor     |
+
+
+Monitoring & Automation Acronyms
+`````````````````````````````````
+| Acronym | Full Form                          |
+| ------- | ---------------------------------- |
+| YAML    | YAML Ain’t Markup Language         |
+| API     | Application Programming Interface  |
+| CPU     | Central Processing Unit            |
+| HTTPD   | HyperText Transfer Protocol Daemon |
+| NGINX   | Engine-X                           |
+| GUI     | Graphical User Interface           |
+
+
+Networking Acronyms
+````````````````````
+| Acronym | Full Form                                         |
+| ------- | ------------------------------------------------- |
+| IP      | Internet Protocol                                 |
+| DNS     | Domain Name System                                |
+| NAT     | Network Address Translation                       |
+| SSH     | Secure Shell                                      |
+| LAN     | Local Area Network                                |
+| VLAN    | Virtual Local Area Network                        |
+| TCP/IP  | Transmission Control Protocol / Internet Protocol |
+| OSI     | Open Systems Interconnection                      |
+
+
+Security Acronyms
+`````````````````
+| Acronym | Full Form                              |
+| ------- | -------------------------------------- |
+| CIA     | Confidentiality Integrity Availability |
+| PKI     | Public Key Infrastructure              |
+| SSL     | Secure Sockets Layer                   |
+| TLS     | Transport Layer Security               |
+| SSH     | Secure Shell                           |
