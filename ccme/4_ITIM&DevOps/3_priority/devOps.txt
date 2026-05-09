@@ -1,0 +1,237 @@
+PART 2  DEVOPS TOPICS
+
+These topics belong to:
+    Automation
+    Deployment
+    Cloud
+    Containers
+    Infrastructure
+    CI/CD
+    Monitoring
+    IaC
+
+MOST IMPORTANT OVERALL TOPICS
+DevOps
+    Docker
+    AWS VPC
+    Kubernetes
+    Jenkins
+    Git/GitHub
+    Terraform
+    Linux Networking
+
+These are:
+    Practical-heavy
+    Lab-heavy
+    Industry-oriented
+
+DEVOPS FLOW
+        Linux
+        ↓
+        Git
+        ↓
+        Docker
+        ↓
+        Jenkins
+        ↓
+        AWS
+        ↓
+        Kubernetes
+        ↓
+        Terraform
+        ↓
+        Monitoring
+
+
+A. VIRTUALIZATION
+`````````````````
+| No. | Topic                   |
+| --- | ----------------------- |
+| 1   | Virtualization basics   |
+| 2   | Type-1 hypervisor       |
+| 3   | Type-2 hypervisor       |
+| 4   | Hardware virtualization |
+| 5   | Para-virtualization     |
+| 6   | Cloning                 |
+| 7   | Snapshots               |
+| 8   | Templates               |
+
+
+B. STORAGE AREA NETWORK (SAN)
+`````````````````````````````
+| No. | Topic             |
+| --- | ----------------- |
+| 1   | FreeNAS           |
+| 2   | High availability |
+| 3   | ZFS               |
+| 4   | IP-based storage  |
+
+
+
+C. CLOUD COMPUTING
+``````````````````
+| No. | Topic              |
+| --- | ------------------ |
+| 1   | Cloud computing    |
+| 2   | SPI model          |
+| 3   | Public cloud       |
+| 4   | Private cloud      |
+| 5   | Hybrid cloud       |
+| 6   | IaaS               |
+| 7   | PaaS               |
+| 8   | SaaS               |
+| 9   | IAM                |
+| 10  | SLA                |
+| 11  | Cloud architecture |
+
+Most Important Areas
+    IaaS/PaaS/SaaS
+    IAM
+    Deployment models
+
+D. CHEF & PUPPET
+`````````````````
+| No. | Topic                       |
+| --- | --------------------------- |
+| 1   | Chef architecture           |
+| 2   | Chef installation           |
+| 3   | Puppet architecture         |
+| 4   | Puppet installation         |
+| 5   | Infrastructure provisioning |
+
+
+E. PROMETHEUS
+``````````````
+| No. | Topic               |
+| --- | ------------------- |
+| 1   | Prometheus concepts |
+| 2   | Monitoring          |
+| 3   | Node exporter       |
+| 4   | Metrics             |
+| 5   | Visualization       |
+
+F. DOCKER
+``````````
+| No. | Topic           |
+| --- | --------------- |
+| 1   | Docker concepts |
+| 2   | Dockerfile      |
+| 3   | Images          |
+| 4   | Containers      |
+| 5   | Volumes         |
+| 6   | Networking      |
+| 7   | Docker Compose  |
+| 8   | Docker Hub      |
+| 9   | Port mapping    |
+
+Most Important Areas
+    Dockerfile
+    Images vs containers
+    Networking
+    Volumes
+    Compose
+
+G. GIT & GITHUB
+````````````````
+| No. | Topic      |
+| --- | ---------- |
+| 1   | Git basics |
+| 2   | Repository |
+| 3   | Clone      |
+| 4   | Commit     |
+| 5   | Push       |
+| 6   | Pull       |
+| 7   | Branch     |
+| 8   | Merge      |
+
+Most Important Areas
+    Merge conflict
+    Branching
+    Workflow
+
+
+H. JENKINS
+```````````
+| No. | Topic                |
+| --- | -------------------- |
+| 1   | Jenkins installation |
+| 2   | Jobs                 |
+| 3   | Pipelines            |
+| 4   | GitHub integration   |
+| 5   | Docker integration   |
+| 6   | CI/CD                |
+
+Most Important Areas
+    Pipeline flow
+    GitHub integration
+    Automation
+
+
+I. AWS
+```````
+| No. | Topic            |
+| --- | ---------------- |
+| 1   | EC2              |
+| 2   | S3               |
+| 3   | Lambda           |
+| 4   | VPC              |
+| 5   | Public subnet    |
+| 6   | Private subnet   |
+| 7   | Route table      |
+| 8   | Internet gateway |
+
+
+Most Important Areas
+    VPC
+    EC2
+    Public/private subnet
+    Connectivity
+
+
+J. KUBERNETES & DOCKER SWARM
+`````````````````````````````
+| No. | Topic           |
+| --- | --------------- |
+| 1   | Kubernetes      |
+| 2   | Docker Swarm    |
+| 3   | Replica scaling |
+| 4   | Microservices   |
+| 5   | Rolling updates |
+| 6   | Master node     |
+| 7   | Worker node     |
+
+Most Important Areas
+    Pods
+    Deployments
+    Scaling
+    Replica sets
+
+K. ANSIBLE
+```````````
+| No. | Topic          |
+| --- | -------------- |
+| 1   | Playbooks      |
+| 2   | YAML           |
+| 3   | Inventory      |
+| 4   | Roles          |
+| 5   | SSH automation |
+
+
+L. TERRAFORM
+`````````````
+| No. | Topic                  |
+| --- | ---------------------- |
+| 1   | Infrastructure as Code |
+| 2   | Terraform init         |
+| 3   | Terraform plan         |
+| 4   | Terraform apply        |
+| 5   | State management       |
+| 6   | Modules                |
+| 7   | AWS provisioning       |
+
+Most Important Areas
+    IaC
+    State files
+    Modules
+    AWS automation
+

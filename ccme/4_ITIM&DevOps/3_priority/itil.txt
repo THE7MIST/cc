@@ -1,0 +1,146 @@
+ITIL SECTION STRUCTURE
+
+| Area               | Importance  |
+| ------------------ | ----------  |
+| Service Design     | 🔥🔥🔥     |
+| Service Transition | 🔥🔥🔥     |
+| Service Operation  | 🔥🔥🔥     |
+| CSI                | 🔥🔥🔥     |
+| Strategy           | 🔥🔥        |
+| Data Center        | 🔥          |
+
+MOST IMPORTANT OVERALL TOPICS
+ITIL
+    Service Design
+    Service Transition
+    Service Operation
+    CSI
+    Change Management
+
+Service Strategy
+        ↓
+Service Design
+        ↓
+Service Transition
+        ↓
+Service Operation
+        ↓
+Continual Service Improvement
+
+
+A. SERVICE STRATEGY
+```````````````````
+| No. | Topic                                 |
+| --- | ------------------------------------- |
+| 1   | General strategy                      |
+| 2   | Competition and market space          |
+| 3   | Service provider types                |
+| 4   | Service management as strategic asset |
+| 5   | Financial management                  |
+| 6   | Service portfolio management          |
+| 7   | Demand management                     |
+| 8   | Roles and responsibilities            |
+
+Important Concepts
+    SWOT
+    Market analysis
+    ROI
+    Cost-benefit analysis
+    Service value
+    Business alignment
+
+B. SERVICE DESIGN
+``````````````````
+| No. | Topic                        |
+| --- | ---------------------------- |
+| 1   | Architecture design          |
+| 2   | Process design               |
+| 3   | Policies                     |
+| 4   | Documentation                |
+| 5   | Future scalability           |
+| 6   | Service Design Package (SDP) |
+| 7   | Service catalog management   |
+| 8   | Service level management     |
+| 9   | Capacity management          |
+| 10  | IT service continuity        |
+| 11  | Information security         |
+Most Important Areas
+    SDP
+    SLA
+    Capacity planning
+    Information security
+    Service catalog
+
+
+C. SERVICE TRANSITION
+`````````````````````
+| No. | Topic                                    |
+| --- | ---------------------------------------- |
+| 1   | Service Asset & Configuration Management |
+| 2   | CMDB                                     |
+| 3   | Transition Planning & Support            |
+| 4   | Release & Deployment Management          |
+| 5   | Change Management                        |
+| 6   | CAB                                      |
+| 7   | Knowledge Management                     |
+| 8   | Early Life Support                       |
+Most Important Areas
+    Change management
+    CAB
+    CMDB
+    Release management
+    Deployment lifecycle
+
+
+D. SERVICE OPERATION
+````````````````````
+| No. | Topic                         |
+| --- | ----------------------------- |
+| 1   | Event management              |
+| 2   | Incident management           |
+| 3   | Problem management            |
+| 4   | Request fulfillment           |
+| 5   | Asset management              |
+| 6   | Service desk                  |
+| 7   | Technical management          |
+| 8   | Application management        |
+| 9   | Reliability vs cost balancing |
+Most Important Areas
+    Incident vs problem management
+    Event management
+    Service desk workflow
+    Root cause analysis
+
+E. CONTINUAL SERVICE IMPROVEMENT (CSI)
+``````````````````````````````````````
+| No. | Topic                  |
+| --- | ---------------------- |
+| 1   | Training & awareness   |
+| 2   | Ongoing scheduling     |
+| 3   | Roles creation         |
+| 4   | Ownership assignment   |
+| 5   | Continuous improvement |
+| 6   | PDCA cycle             |
+| 7   | KPI                    |
+| 8   | Benchmarking           |
+| 9   | Feedback analysis      |
+Most Important Areas
+    PDCA
+    Continuous improvement
+    Metrics
+    KPI
+    Root cause improvement
+
+
+F. DATA CENTER MANAGEMENT
+`````````````````````````
+| No. | Topic                    |
+| --- | ------------------------ |
+| 1   | Data center architecture |
+| 2   | Physical planning        |
+| 3   | Power requirements       |
+| 4   | Cooling & HVAC           |
+| 5   | WAN links                |
+| 6   | NOC                      |
+| 7   | Physical security        |
+| 8   | Logical security         |

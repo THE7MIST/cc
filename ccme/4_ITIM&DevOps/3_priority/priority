@@ -1,0 +1,42 @@
+
+------------------------------------------------------------------------------------------
+| No. | Syllabus Topic                      |  Priority    | Estimated MCQs | Weight     |
+| --- | ----------------------------------- | ------------ | -------------- | ---------- |
+| 1   | Service Strategy                    | 🔴 High      | 250–350        | Very High  |
+| 2   | Service Design                      | 🔴 High      | 250–350        | Very High  |
+| 3   | Service Transition                  | 🔴 High      | 250–350        | Very High  |
+| 4   | Service Operation                   | 🔴 High      | 250–350        | Very High  |
+| 5   | Continual Service Improvement (CSI) | 🔴 High      | 200–300        | High       |
+| 6   | ITIL Roles & Processes              | 🟠 Important | 100–150        | Medium     |
+| 7   | Data Center Management              | 🟡 Medium    | 80–120         | Medium     |
+| 8   | Virtualization                      | 🟠 Important | 80–120         | Medium     |
+| 9   | SAN / Storage                       | 🟡 Medium    | 50–100         | Medium-Low |
+| 10  | Cloud Computing Concepts            | 🔴 High      | 150–250        | High       |
+| 11  | Chef & Puppet                       | 🟡 Medium    | 50–80          | Medium-Low |
+| 12  | Prometheus Monitoring               | 🟠 Important | 60–100         | Medium     |
+| 13  | Docker                              | 🔴 Critical  | 200–300        | Very High  |
+| 14  | Git & GitHub                        | 🔴 Critical  | 120–200        | High       |
+| 15  | Jenkins                             | 🔴 Critical  | 150–250        | High       |
+| 16  | AWS                                 | 🔴 Critical  | 200–300        | Very High  |
+| 17  | Kubernetes / Docker Swarm           | 🔴 Critical  | 180–250        | Very High  |
+| 18  | Ansible                             | 🟠 Important | 80–120         | Medium     |
+| 19  | Terraform                           | 🔴 Critical  | 120–180        | High       |
+| 20  | CI/CD Pipelines                     | 🔴 Critical  | 100–150        | High       |
+| 21  | Linux Commands & Administration     | 🔴 Critical  | 150–250        | Very High  |
+| 22  | Networking & VPC                    | 🔴 Critical  | 180–250        | Very High  |
+------------------------------------------------------------------------------------------
+
+-----------------------------------------------------
+| Rank | Topic                  | Expected Frequency |
+| ---- | ---------------------- | ------------------ |
+| 1    | ITIL Service Lifecycle | Extremely High     |
+| 2    | Service Design         | Extremely High     |
+| 3    | Service Transition     | Extremely High     |
+| 4    | Service Operation      | Extremely High     |
+| 5    | CSI                    | Extremely High     |
+| 6    | Docker                 | Very High          |
+| 7    | AWS + VPC              | Very High          |
+| 8    | Kubernetes             | Very High          |
+| 9    | Git + Jenkins          | Very High          |
+| 10   | Linux + Networking     | Very High          |
+------------------------------------------------------
