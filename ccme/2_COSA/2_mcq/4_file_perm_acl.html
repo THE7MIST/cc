@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Linux File Permissions & Commands MCQ Test</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+.question{
+    background:#fafafa;
+    border-left:5px solid #3498db;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:6px;
+}
+
+.question h3{
+    color:#2c3e50;
+}
+
+label{
+    display:block;
+    padding:10px;
+    margin:5px 0;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+label:hover{
+    background:#ecf0f1;
+}
+
+button{
+    display:block;
+    margin:30px auto;
+    padding:14px 30px;
+    border:none;
+    border-radius:6px;
+    background:#3498db;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#2980b9;
+}
+
+.correct{
+    background:#d4edda !important;
+    color:green;
+    font-weight:bold;
+}
+
+.wrong{
+    background:#f8d7da !important;
+    color:red;
+}
+
+.solution{
+    margin-top:15px;
+    padding:15px;
+    background:#eef5ff;
+    border-left:4px solid #3498db;
+    border-radius:5px;
+    display:none;
+}
+
+#result{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    margin-top:30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Linux File Permissions, ACL & Commands Test</h1>
+
+<form id="quizForm"></form>
+
+<button onclick="submitQuiz()">Submit Test</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+const questions = [
+
+{
+q:"1. A file has permissions rwxr-s---. Which special permission is enabled?",
+o:["SUID","Sticky Bit","SGID","ACL"],
+a:2,
+s:"The lowercase 's' in the group execute position indicates SGID is enabled."
+},
+
+{
+q:"2. Which command displays Access Control Lists for a file?",
+o:["aclshow","getfacl","setfacl","lsacl"],
+a:1,
+s:"getfacl displays ACL entries associated with files and directories."
+},
+
+{
+q:"3. Which command removes all ACL entries from a file?",
+o:["chmod 777","setfacl -b","rmacl","unsetfacl"],
+a:1,
+s:"setfacl -b removes all extended ACL entries."
+},
+
+{
+q:"4. Which permission is required to delete a file inside a directory?",
+o:["Read on file","Write on file","Write on directory","Execute on file"],
+a:2,
+s:"Deletion depends on directory permissions, not file permissions."
+},
+
+{
+q:"5. What will happen if execute permission is removed from a directory?",
+o:["Files become hidden","Cannot traverse directory","Cannot delete files","Cannot compress files"],
+a:1,
+s:"Without execute permission, users cannot enter or traverse the directory."
+},
+
+{
+q:"6. Which command preserves permissions, ownership, timestamps, and symbolic links?",
+o:["cp -r","cp -p","cp -a","cp -l"],
+a:2,
+s:"cp -a preserves almost all file attributes."
+},
+
+{
+q:"7. Which tar option compresses archive using gzip?",
+o:["-xvf","-cvjf","-cvzf","-tvf"],
+a:2,
+s:"z option in tar enables gzip compression."
+},
+
+{
+q:"8. Which command can view compressed gzip content without extracting?",
+o:["gzip -v","gunzip -c","zcat","cat"],
+a:2,
+s:"zcat displays compressed file content directly."
+},
+
+{
+q:"9. What is the main difference between hard link and soft link?",
+o:["Soft links share inode","Hard links work across filesystems","Hard links can link directories","Soft links increase permissions"],
+a:1,
+s:"Hard links generally cannot span filesystems, while symbolic links can."
+},
+
+{
+q:"10. Which command finds files modified within last 2 days?",
+o:["find / -mtime 2","find / -mtime -2","locate recent","find / -ctime 2"],
+a:1,
+s:"-mtime -2 searches files modified less than 2 days ago."
+},
+
+{
+q:"11. Which command displays commands executed by currently logged-in users?",
+o:["ps","jobs","history","w"],
+a:3,
+s:"w shows logged-in users and their current activities."
+},
+
+{
+q:"12. Which command searches manual page descriptions?",
+o:["man","whereis","whatis","apropos"],
+a:2,
+s:"whatis gives one-line descriptions of commands."
+},
+
+{
+q:"13. Which command sorts file contents uniquely and alphabetically?",
+o:["uniq file","sort -u file","grep -u","wc -u"],
+a:1,
+s:"sort -u sorts and removes duplicate lines."
+},
+
+{
+q:"14. Which command shows differences side-by-side between files?",
+o:["cmp","diff -y","comm","patch"],
+a:1,
+s:"diff -y provides side-by-side comparison output."
+},
+
+{
+q:"15. Which command can recursively remove non-empty directories?",
+o:["rmdir -r","rm -rf","delete -r","unlink -r"],
+a:1,
+s:"rm -rf recursively and forcefully deletes directories and contents."
+},
+
+{
+q:"16. Which command creates a compressed tar archive named backup.tar.gz?",
+o:["gzip backup","tar -cvzf backup.tar.gz files","zip backup.tar.gz","tar -xvzf backup.tar.gz"],
+a:1,
+s:"tar -cvzf creates a gzip compressed archive."
+},
+
+{
+q:"17. Which command displays running processes hierarchically?",
+o:["ps aux","pstree","jobs","top"],
+a:1,
+s:"pstree shows parent-child process relationships."
+},
+
+{
+q:"18. Which command creates an alias temporarily in current shell?",
+o:["alias ll='ls -l'","export alias","set alias","alias add"],
+a:0,
+s:"Aliases created with alias command exist only in current shell session unless added to shell config."
+},
+
+{
+q:"19. Which command displays beginning and ending lines simultaneously?",
+o:["headtail","cat","sed","head && tail"],
+a:3,
+s:"Combining head and tail commands displays start and end portions."
+},
+
+{
+q:"20. Which command calculates floating-point mathematical operations in Linux?",
+o:["expr","bc -l","calc","math"],
+a:1,
+s:"bc -l loads math library and supports floating-point calculations."
+}
+
+];
+
+const quizForm = document.getElementById("quizForm");
+
+questions.forEach((question,index)=>{
+
+const div = document.createElement("div");
+div.classList.add("question");
+
+let html = `<h3>${question.q}</h3>`;
+
+question.o.forEach((option,i)=>{
+
+html += `
+<label>
+<input type="radio" name="q${index}" value="${i}">
+${option}
+</label>
+`;
+
+});
+
+html += `
+<div class="solution" id="solution${index}">
+<strong>Detailed Solution:</strong><br><br>
+${question.s}
+</div>
+`;
+
+div.innerHTML = html;
+
+quizForm.appendChild(div);
+
+});
+
+function submitQuiz(){
+
+event.preventDefault();
+
+let score = 0;
+
+questions.forEach((question,index)=>{
+
+const options = document.getElementsByName(`q${index}`);
+const selected = document.querySelector(`input[name="q${index}"]:checked`);
+
+options.forEach((option,i)=>{
+
+const parent = option.parentElement;
+
+if(i === question.a){
+parent.classList.add("correct");
+}
+
+if(option.checked && i !== question.a){
+parent.classList.add("wrong");
+}
+
+option.disabled = true;
+
+});
+
+document.getElementById(`solution${index}`).style.display = "block";
+
+if(selected){
+
+if(parseInt(selected.value) === question.a){
+score++;
+}
+
+}
+
+});
+
+const percentage = ((score/questions.length)*100).toFixed(2);
+
+let grade = "";
+
+if(score >= 18){
+grade = "Excellent";
+}
+else if(score >= 14){
+grade = "Good";
+}
+else if(score >= 10){
+grade = "Average";
+}
+else{
+grade = "Needs Improvement";
+}
+
+document.getElementById("result").innerHTML = `
+Your Score: ${score} / ${questions.length}
+<br><br>
+Percentage: ${percentage}%
+<br><br>
+Grade: ${grade}
+`;
+
+document.querySelector("button").disabled = true;
+
+window.scrollTo(0,document.body.scrollHeight);
+
+}
+
+</script>
+
+</body>
+</html>

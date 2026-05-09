@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Windows Administration MCQ Test</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+.question{
+    background:#fafafa;
+    padding:20px;
+    margin-bottom:20px;
+    border-left:5px solid #3498db;
+    border-radius:6px;
+}
+
+.question h3{
+    color:#2c3e50;
+}
+
+label{
+    display:block;
+    padding:10px;
+    margin:5px 0;
+    border-radius:5px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+label:hover{
+    background:#ecf0f1;
+}
+
+button{
+    display:block;
+    margin:30px auto;
+    padding:14px 30px;
+    background:#3498db;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#2980b9;
+}
+
+button:disabled{
+    background:gray;
+    cursor:not-allowed;
+}
+
+.correct{
+    background:#d4edda !important;
+    color:green;
+    font-weight:bold;
+}
+
+.wrong{
+    background:#f8d7da !important;
+    color:red;
+}
+
+.solution{
+    margin-top:15px;
+    padding:15px;
+    background:#eef5ff;
+    border-left:4px solid #3498db;
+    border-radius:5px;
+    display:none;
+}
+
+#result{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    margin-top:30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Windows Administration MCQ Test</h1>
+
+<form id="quizForm"></form>
+
+<button onclick="submitQuiz()">Submit Test</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+const questions = [
+
+{
+q:"1. Which tool is commonly used to create Windows deployment images?",
+o:["IIS","WDS","Hyper-V","DNS"],
+a:1,
+s:"Windows Deployment Services (WDS) is used to deploy Windows operating systems over a network using deployment images."
+},
+
+{
+q:"2. Which backup utility is built into Windows Server?",
+o:["Norton Backup","Windows Server Backup","Acronis","Clonezilla"],
+a:1,
+s:"Windows Server Backup (WSB) is the native Microsoft utility used for backup and recovery operations."
+},
+
+{
+q:"3. Which Active Directory component stores user and group information?",
+o:["DNS","DHCP","AD DS","IIS"],
+a:2,
+s:"Active Directory Domain Services (AD DS) stores and manages user accounts, groups, computers, and policies."
+},
+
+{
+q:"4. What is the primary role of a Domain Controller?",
+o:["DNS Filtering","Authentication and Authorization","Web Hosting","Backup"],
+a:1,
+s:"A Domain Controller authenticates users and enforces security policies within a Windows domain."
+},
+
+{
+q:"5. Which protocol does DNS primarily use?",
+o:["HTTP","FTP","TCP/UDP Port 53","SMTP"],
+a:2,
+s:"DNS uses TCP and UDP port 53 for resolving hostnames into IP addresses."
+},
+
+{
+q:"6. What is the purpose of DHCP?",
+o:["Website Hosting","Dynamic IP Assignment","User Authentication","Firewall Filtering"],
+a:1,
+s:"DHCP automatically assigns IP addresses and network configurations to client systems."
+},
+
+{
+q:"7. What does IPAM stand for?",
+o:["Internet Protocol Allocation Manager","IP Address Management","Internet Policy Access Management","IP Authentication Module"],
+a:1,
+s:"IPAM helps centrally manage and monitor IP address spaces in enterprise environments."
+},
+
+{
+q:"8. Which Group Policy type is applied only to a local computer?",
+o:["Domain Policy","OU Policy","Local Policy","Site Policy"],
+a:2,
+s:"Local Group Policy affects only the individual computer where it is configured."
+},
+
+{
+q:"9. Which Windows feature provides secure remote connectivity?",
+o:["DFS","VPN","WDS","NLB"],
+a:1,
+s:"Virtual Private Network (VPN) enables secure encrypted remote access over public networks."
+},
+
+{
+q:"10. Which service hosts websites on Windows Server?",
+o:["DHCP","DNS","IIS","Hyper-V"],
+a:2,
+s:"Internet Information Services (IIS) is Microsoft's web server platform."
+},
+
+{
+q:"11. Which protocol version uses 128-bit addressing?",
+o:["IPv4","IPv6","TCP","UDP"],
+a:1,
+s:"IPv6 uses 128-bit addresses and supports a much larger address space than IPv4."
+},
+
+{
+q:"12. What is the purpose of DFS?",
+o:["DNS Resolution","Distributed File Access","Backup","Remote Desktop"],
+a:1,
+s:"Distributed File System (DFS) allows shared folders to be grouped logically across servers."
+},
+
+{
+q:"13. Which service is used to deploy Windows OS over the network?",
+o:["DHCP","DNS","WDS","NLB"],
+a:2,
+s:"Windows Deployment Services (WDS) supports network-based operating system deployment."
+},
+
+{
+q:"14. Which virtualization technology is developed by Microsoft?",
+o:["VMware","VirtualBox","Hyper-V","KVM"],
+a:2,
+s:"Hyper-V is Microsoft's native hypervisor for virtualization."
+},
+
+{
+q:"15. What is data deduplication used for?",
+o:["Improving DNS","Reducing Storage Usage","User Authentication","Firewall Security"],
+a:1,
+s:"Data deduplication removes duplicate data blocks to save storage space."
+},
+
+{
+q:"16. Which Windows feature manages storage quotas and file screening?",
+o:["DFS","FSRM","NPS","IIS"],
+a:1,
+s:"File Server Resource Manager (FSRM) manages quotas, storage reports, and file screening."
+},
+
+{
+q:"17. What is the role of Network Policy Server (NPS)?",
+o:["Virtualization","Authentication and Authorization","Web Hosting","Deployment"],
+a:1,
+s:"NPS acts as a RADIUS server for network authentication and authorization."
+},
+
+{
+q:"18. What is the primary purpose of Network Load Balancing?",
+o:["DNS Replication","Traffic Distribution","Storage Management","Deployment"],
+a:1,
+s:"NLB distributes client traffic across multiple servers for availability and performance."
+},
+
+{
+q:"19. Which security mechanism protects Windows disks through encryption?",
+o:["NTFS","BitLocker","DFS","Hyper-V"],
+a:1,
+s:"BitLocker provides full disk encryption to secure data on Windows systems."
+},
+
+{
+q:"20. What is a major security concern at the Active Directory level?",
+o:["Weak Password Policies","Screen Resolution","Wallpaper Settings","Printer Driver"],
+a:0,
+s:"Weak password policies can lead to unauthorized access and compromise domain security."
+},
+
+{
+q:"21. Which PowerShell cmdlet displays running processes?",
+o:["Get-Service","Get-Event","Get-Process","Get-Job"],
+a:2,
+s:"Get-Process retrieves information about processes currently running on the system."
+},
+
+{
+q:"22. Which PowerShell feature allows execution of commands on remote systems?",
+o:["Remote Desktop","PowerShell Remoting","Task Scheduler","IIS"],
+a:1,
+s:"PowerShell Remoting uses WinRM to execute commands remotely."
+},
+
+{
+q:"23. Which service provides centralized email management in Microsoft environments?",
+o:["IIS","Exchange Server","DNS","NPS"],
+a:1,
+s:"Exchange Server manages enterprise email, calendaring, and collaboration."
+},
+
+{
+q:"24. Which PowerShell cmdlet retrieves system event logs?",
+o:["Get-Service","Get-EventLog","Get-Process","Get-ADUser"],
+a:1,
+s:"Get-EventLog is used to retrieve event logs from local or remote systems."
+},
+
+{
+q:"25. Which feature allows Windows servers to run multiple virtual machines?",
+o:["DFS","IIS","Hyper-V","WDS"],
+a:2,
+s:"Hyper-V enables hardware virtualization and VM management."
+},
+
+{
+q:"26. Which Windows service resolves hostnames to IP addresses?",
+o:["DHCP","DNS","NLB","VPN"],
+a:1,
+s:"DNS translates human-readable hostnames into IP addresses."
+},
+
+{
+q:"27. Which Active Directory object stores policy settings?",
+o:["OU","GPO","ADC","DFS"],
+a:1,
+s:"Group Policy Objects (GPOs) contain policy settings applied to users and computers."
+},
+
+{
+q:"28. Which protocol is commonly used for secure remote PowerShell communication?",
+o:["FTP","SSH/WinRM","SMTP","SNMP"],
+a:1,
+s:"PowerShell remoting commonly uses WinRM and can also use SSH for secure remote sessions."
+},
+
+{
+q:"29. Which feature helps deploy identical Windows installations to multiple systems?",
+o:["NLB","Sysprep","DFS","VPN"],
+a:1,
+s:"Sysprep prepares a Windows image for duplication and deployment."
+},
+
+{
+q:"30. Which command is used to test network connectivity in Windows?",
+o:["mkdir","ping","copy","gpupdate"],
+a:1,
+s:"The ping command checks network connectivity between systems using ICMP."
+}
+
+];
+
+const quizForm = document.getElementById("quizForm");
+
+questions.forEach((question,index)=>{
+
+    const div = document.createElement("div");
+    div.classList.add("question");
+
+    let html = `<h3>${question.q}</h3>`;
+
+    question.o.forEach((option,i)=>{
+
+        html += `
+        <label>
+            <input type="radio" name="q${index}" value="${i}">
+            ${option}
+        </label>
+        `;
+
+    });
+
+    html += `
+    <div class="solution" id="solution${index}">
+        <strong>Detailed Solution:</strong><br><br>
+        ${question.s}
+    </div>
+    `;
+
+    div.innerHTML = html;
+
+    quizForm.appendChild(div);
+
+});
+
+function submitQuiz(){
+
+    event.preventDefault();
+
+    let score = 0;
+
+    questions.forEach((question,index)=>{
+
+        const options = document.getElementsByName(`q${index}`);
+
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+
+        options.forEach((option,i)=>{
+
+            const parent = option.parentElement;
+
+            if(i === question.a){
+                parent.classList.add("correct");
+            }
+
+            if(option.checked && i !== question.a){
+                parent.classList.add("wrong");
+            }
+
+            option.disabled = true;
+
+        });
+
+        document.getElementById(`solution${index}`).style.display = "block";
+
+        if(selected){
+
+            if(parseInt(selected.value) === question.a){
+
+                score++;
+
+            }
+
+        }
+
+    });
+
+    const result = document.getElementById("result");
+
+    const percentage = ((score/questions.length)*100).toFixed(2);
+
+    let grade = "";
+
+    if(score >= 27){
+        grade = "Excellent";
+    }
+    else if(score >= 21){
+        grade = "Good";
+    }
+    else if(score >= 15){
+        grade = "Average";
+    }
+    else{
+        grade = "Needs Improvement";
+    }
+
+    result.innerHTML = `
+        Your Score: ${score} / ${questions.length}
+        <br><br>
+        Percentage: ${percentage}%
+        <br><br>
+        Grade: ${grade}
+    `;
+
+    document.querySelector("button").disabled = true;
+
+    window.scrollTo(0,document.body.scrollHeight);
+
+}
+
+</script>
+
+</body>
+</html>

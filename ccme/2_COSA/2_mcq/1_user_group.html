@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Linux User & Group Management MCQ Test</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+    margin-bottom:30px;
+}
+
+.question{
+    background:#fafafa;
+    padding:20px;
+    margin-bottom:20px;
+    border-left:5px solid #3498db;
+    border-radius:6px;
+}
+
+.question h3{
+    margin-bottom:15px;
+    color:#2c3e50;
+}
+
+label{
+    display:block;
+    padding:10px;
+    margin-bottom:8px;
+    border-radius:5px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+label:hover{
+    background:#ecf0f1;
+}
+
+button{
+    display:block;
+    margin:30px auto;
+    padding:14px 30px;
+    font-size:18px;
+    border:none;
+    background:#3498db;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#2980b9;
+}
+
+button:disabled{
+    background:gray;
+    cursor:not-allowed;
+}
+
+#result{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    margin-top:30px;
+    padding:20px;
+}
+
+.correct{
+    color:green;
+}
+
+.wrong{
+    color:red;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Linux User & Group Management MCQ Test</h1>
+
+<form id="quizForm"></form>
+
+<button onclick="submitQuiz()">Submit Test</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+const questions = [
+
+{
+q:"1. Which command creates a user with a home directory and bash shell?",
+o:[
+"useradd -m -s /bin/bash user1",
+"adduser user1 bash",
+"usermod -d /home/user1",
+"useradd user1"
+],
+a:0
+},
+
+{
+q:"2. Which file stores encrypted passwords in Linux?",
+o:[
+"/etc/passwd",
+"/etc/group",
+"/etc/shadow",
+"/etc/security"
+],
+a:2
+},
+
+{
+q:"3. Which command is used to expire a user's password immediately?",
+o:[
+"passwd -e username",
+"passwd -x username",
+"chage -d 0 username",
+"usermod -e username"
+],
+a:2
+},
+
+{
+q:"4. What is the purpose of UID 0 in Linux?",
+o:[
+"Guest account",
+"System account",
+"Administrator/root account",
+"Service account"
+],
+a:2
+},
+
+{
+q:"5. Which command appends a user to supplementary groups without removing existing groups?",
+o:[
+"usermod -G",
+"usermod -aG",
+"groupmod -a",
+"useradd -G"
+],
+a:1
+},
+
+{
+q:"6. Which command displays password aging information for a user?",
+o:[
+"passwd -S",
+"chage -l",
+"usermod -l",
+"shadowconfig"
+],
+a:1
+},
+
+{
+q:"7. What is the default location for user home directories?",
+o:[
+"/root",
+"/users",
+"/home",
+"/usr/home"
+],
+a:2
+},
+
+{
+q:"8. Which command locks a user account password?",
+o:[
+"passwd -l username",
+"usermod -L username",
+"userlock username",
+"Both A and B"
+],
+a:3
+},
+
+{
+q:"9. Which file contains group definitions?",
+o:[
+"/etc/groups",
+"/etc/group",
+"/etc/passwd",
+"/etc/shadow"
+],
+a:1
+},
+
+{
+q:"10. Which command changes the primary group of a user?",
+o:[
+"groupmod",
+"usermod -g",
+"usermod -G",
+"chgrp"
+],
+a:1
+},
+
+{
+q:"11. Which permission set allows rwx for owner, rx for group, and no access for others?",
+o:[
+"755",
+"744",
+"750",
+"700"
+],
+a:2
+},
+
+{
+q:"12. Which command recursively changes ownership of a directory?",
+o:[
+"chmod -R",
+"chgrp -R",
+"chown -R",
+"usermod -R"
+],
+a:2
+},
+
+{
+q:"13. What does the sticky bit do on a shared directory?",
+o:[
+"Prevents execution",
+"Allows only owner to delete files",
+"Hides files",
+"Encrypts files"
+],
+a:1
+},
+
+{
+q:"14. Which command sets the sticky bit on /shared directory?",
+o:[
+"chmod 1777 /shared",
+"chmod 777 /shared",
+"chmod +s /shared",
+"chmod 4777 /shared"
+],
+a:0
+},
+
+{
+q:"15. Which special permission allows execution with file owner's privileges?",
+o:[
+"Sticky Bit",
+"ACL",
+"SUID",
+"SGID"
+],
+a:2
+},
+
+{
+q:"16. Which command displays all groups a user belongs to?",
+o:[
+"groups username",
+"id username",
+"cat /etc/group",
+"Both A and B"
+],
+a:3
+},
+
+{
+q:"17. Which command deletes a user along with home directory?",
+o:[
+"userdel username",
+"userdel -r username",
+"rmuser username",
+"deluser -d username"
+],
+a:1
+},
+
+{
+q:"18. What is the maximum permission value in chmod numeric mode?",
+o:[
+"999",
+"888",
+"777",
+"111"
+],
+a:2
+},
+
+{
+q:"19. Which command changes a user's login shell?",
+o:[
+"passwd -s",
+"shellmod",
+"usermod -s",
+"chsh -g"
+],
+a:2
+},
+
+{
+q:"20. Which command checks currently logged-in users?",
+o:[
+"w",
+"who",
+"users",
+"All of the above"
+],
+a:3
+},
+
+{
+q:"21. Which command modifies password expiry warning days?",
+o:[
+"chage -W",
+"passwd -w",
+"usermod -W",
+"shadow -w"
+],
+a:0
+},
+
+{
+q:"22. Which command can create both user and group simultaneously?",
+o:[
+"useradd",
+"adduser",
+"groupadd",
+"usermod"
+],
+a:1
+},
+
+{
+q:"23. Which file defines default values for new users?",
+o:[
+"/etc/login.defs",
+"/etc/default/useradd",
+"Both A and B",
+"/etc/passwd"
+],
+a:2
+},
+
+{
+q:"24. What does the command 'id username' display?",
+o:[
+"Only UID",
+"Only GID",
+"UID, GID, and groups",
+"Only groups"
+],
+a:2
+},
+
+{
+q:"25. Which command temporarily switches to another user account?",
+o:[
+"sudo",
+"su",
+"switch",
+"usermod"
+],
+a:1
+},
+
+{
+q:"26. Which command changes group ownership of a file?",
+o:[
+"chmod",
+"chown",
+"chgrp",
+"groupmod"
+],
+a:2
+},
+
+{
+q:"27. Which command grants sudo privileges by editing sudoers safely?",
+o:[
+"sudoedit",
+"visudo",
+"sudoers",
+"chmod sudo"
+],
+a:1
+},
+
+{
+q:"28. Which command lists password status information?",
+o:[
+"passwd -S",
+"passwd -l",
+"passwd -x",
+"passwd -a"
+],
+a:0
+},
+
+{
+q:"29. Which command sets account expiry date for a user?",
+o:[
+"usermod -e",
+"passwd -e",
+"chage -x",
+"groupmod -e"
+],
+a:0
+},
+
+{
+q:"30. Which permission is represented by numeric value 4?",
+o:[
+"Write",
+"Execute",
+"Read",
+"Delete"
+],
+a:2
+}
+
+];
+
+const quizForm = document.getElementById("quizForm");
+
+questions.forEach((question,index)=>{
+
+    const div = document.createElement("div");
+    div.classList.add("question");
+
+    let html = `<h3>${question.q}</h3>`;
+
+    question.o.forEach((option,i)=>{
+
+        html += `
+        <label>
+            <input type="radio" name="q${index}" value="${i}">
+            ${option}
+        </label>
+        `;
+
+    });
+
+    div.innerHTML = html;
+
+    quizForm.appendChild(div);
+
+});
+
+function submitQuiz(){
+
+    event.preventDefault();
+
+    let score = 0;
+
+    questions.forEach((question,index)=>{
+
+        const options = document.getElementsByName(`q${index}`);
+
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+
+        options.forEach((option,i)=>{
+
+            const parent = option.parentElement;
+
+            parent.style.fontWeight = "normal";
+
+            // Correct Answer
+            if(i === question.a){
+
+                parent.style.backgroundColor = "#d4edda";
+                parent.style.color = "green";
+                parent.style.fontWeight = "bold";
+
+            }
+
+            // Wrong Selected Answer
+            if(option.checked && i !== question.a){
+
+                parent.style.backgroundColor = "#f8d7da";
+                parent.style.color = "red";
+
+            }
+
+            option.disabled = true;
+
+        });
+
+        if(selected){
+
+            if(parseInt(selected.value) === question.a){
+
+                score++;
+
+            }
+
+        }
+
+    });
+
+    const result = document.getElementById("result");
+
+    const percentage = ((score/questions.length)*100).toFixed(2);
+
+    let grade = "";
+
+    if(score >= 27){
+        grade = "Excellent";
+    }
+    else if(score >= 21){
+        grade = "Good";
+    }
+    else if(score >= 15){
+        grade = "Average";
+    }
+    else{
+        grade = "Needs Improvement";
+    }
+
+    result.innerHTML = `
+        Your Score: ${score} / ${questions.length}
+        <br><br>
+        Percentage: ${percentage}%
+        <br><br>
+        Result: ${grade}
+    `;
+
+    if(score >= 21){
+
+        result.className = "correct";
+
+    }else{
+
+        result.className = "wrong";
+
+    }
+
+    document.querySelector("button").disabled = true;
+
+    window.scrollTo(0,document.body.scrollHeight);
+
+}
+
+</script>
+
+</body>
+</html>

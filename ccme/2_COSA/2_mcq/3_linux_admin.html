@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Linux Administration MCQ Test</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+.question{
+    background:#fafafa;
+    border-left:5px solid #3498db;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:6px;
+}
+
+.question h3{
+    color:#2c3e50;
+}
+
+label{
+    display:block;
+    padding:10px;
+    margin:5px 0;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+label:hover{
+    background:#ecf0f1;
+}
+
+button{
+    display:block;
+    margin:30px auto;
+    padding:14px 30px;
+    border:none;
+    border-radius:6px;
+    background:#3498db;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#2980b9;
+}
+
+.correct{
+    background:#d4edda !important;
+    color:green;
+    font-weight:bold;
+}
+
+.wrong{
+    background:#f8d7da !important;
+    color:red;
+}
+
+.solution{
+    margin-top:15px;
+    padding:15px;
+    background:#eef5ff;
+    border-left:4px solid #3498db;
+    border-radius:5px;
+    display:none;
+}
+
+#result{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    margin-top:30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Advanced Linux Administration MCQ Test</h1>
+
+<form id="quizForm"></form>
+
+<button onclick="submitQuiz()">Submit Test</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+const questions = [
+
+{
+q:"1. Which command displays inode numbers of files?",
+o:["ls -i","inode","stat -n","find -inode"],
+a:0,
+s:"The command ls -i displays inode numbers associated with files. Understanding inodes is essential for filesystem management."
+},
+
+{
+q:"2. Which command preserves symbolic links while copying recursively?",
+o:["cp -r","cp -R","cp -a","cp -L"],
+a:2,
+s:"cp -a preserves permissions, ownership, timestamps, and symbolic links."
+},
+
+{
+q:"3. What happens if hard link source file is deleted?",
+o:["Both files deleted","Hard link becomes invalid","Data still accessible","Kernel panic"],
+a:2,
+s:"Hard links reference the same inode, so deleting one filename does not remove the actual data until all links are removed."
+},
+
+{
+q:"4. Which permission allows directory traversal?",
+o:["Read","Write","Execute","Sticky"],
+a:2,
+s:"Execute permission on a directory allows entering/traversing it."
+},
+
+{
+q:"5. Which command searches binaries in predefined paths?",
+o:["find","whereis","which","locate"],
+a:2,
+s:"which searches executable binaries in directories specified in PATH."
+},
+
+{
+q:"6. Which command compresses while keeping original file?",
+o:["gzip","gzip -k","gunzip","tar -xvf"],
+a:1,
+s:"gzip -k compresses while retaining the original file."
+},
+
+{
+q:"7. Which file stores local user account details?",
+o:["/etc/group","/etc/shadow","/etc/passwd","/etc/profile"],
+a:2,
+s:"/etc/passwd contains user account information such as username, UID, GID, shell, and home directory."
+},
+
+{
+q:"8. Which command modifies ACL permissions?",
+o:["chmod","setfacl","getfacl","aclmod"],
+a:1,
+s:"setfacl modifies Access Control Lists for advanced permissions."
+},
+
+{
+q:"9. What is the default shell in most Linux distributions?",
+o:["fish","bash","zsh","csh"],
+a:1,
+s:"Bash is the default shell in most Linux systems."
+},
+
+{
+q:"10. Which command displays currently running jobs?",
+o:["jobs","ps","top","fg"],
+a:0,
+s:"jobs displays background jobs started from the current shell."
+},
+
+{
+q:"11. Which command creates symbolic links?",
+o:["ln","ln -s","link","mklink"],
+a:1,
+s:"ln -s creates symbolic (soft) links."
+},
+
+{
+q:"12. Which command compares two files line by line?",
+o:["cmp","comm","diff","uniq"],
+a:2,
+s:"diff compares files and shows line-by-line differences."
+},
+
+{
+q:"13. What does the sticky bit do on directories?",
+o:["Encrypts files","Allows shared execution","Restricts deletion to owners","Improves performance"],
+a:2,
+s:"Sticky bit prevents users from deleting files owned by others in shared directories."
+},
+
+{
+q:"14. Which command displays file type?",
+o:["type","stat","file","lsattr"],
+a:2,
+s:"file identifies file types using magic numbers."
+},
+
+{
+q:"15. Which command finds files based on permissions?",
+o:["locate","find","grep","which"],
+a:1,
+s:"find can search using -perm option for permissions."
+},
+
+{
+q:"16. Which GRUB file stores bootloader configuration in RHEL-based systems?",
+o:["/etc/grub.conf","/boot/grub2/grub.cfg","/etc/default/grub","/boot/grub/menu.lst"],
+a:1,
+s:"grub.cfg contains generated bootloader configuration."
+},
+
+{
+q:"17. Which runlevel represents multi-user mode without GUI in SysV init?",
+o:["1","3","5","6"],
+a:1,
+s:"Runlevel 3 is multi-user text mode."
+},
+
+{
+q:"18. Which command rebuilds GRUB configuration in RHEL?",
+o:["grub-install","grub-mkconfig","update-grub","grub-rebuild"],
+a:1,
+s:"grub-mkconfig generates GRUB configuration files."
+},
+
+{
+q:"19. What is the role of initramfs?",
+o:["Stores user data","Temporary root filesystem during boot","Configures DNS","Creates swap"],
+a:1,
+s:"Initramfs initializes hardware and mounts the real root filesystem."
+},
+
+{
+q:"20. Which package manager is native to Debian-based systems?",
+o:["yum","rpm","apt","dnf"],
+a:2,
+s:"APT is the package management utility used in Debian/Ubuntu systems."
+},
+
+{
+q:"21. Which file contains mounted filesystem information?",
+o:["/etc/mtab","/etc/fstab","/proc/mounts","All of the above"],
+a:3,
+s:"All three contain mounted filesystem information in different contexts."
+},
+
+{
+q:"22. Which command displays disk usage by directory?",
+o:["df","du","fdisk","mount"],
+a:1,
+s:"du calculates space used by directories and files."
+},
+
+{
+q:"23. Which SSH command securely copies files?",
+o:["scp","ftp","telnet","wget"],
+a:0,
+s:"scp securely transfers files using SSH."
+},
+
+{
+q:"24. Which service provides remote GUI access in Linux?",
+o:["SSH","FTP","VNC","DNS"],
+a:2,
+s:"VNC provides graphical remote desktop access."
+},
+
+{
+q:"25. Which command displays routing table?",
+o:["route","netstat -r","ip route","All of the above"],
+a:3,
+s:"All commands display routing information."
+},
+
+{
+q:"26. Which command is used for partitioning GPT disks?",
+o:["fdisk","parted","gdisk","mkfs"],
+a:2,
+s:"gdisk is specifically designed for GPT partition tables."
+},
+
+{
+q:"27. Which LVM component combines physical volumes?",
+o:["VG","LV","PV","FS"],
+a:0,
+s:"Volume Groups combine multiple Physical Volumes."
+},
+
+{
+q:"28. Which command activates logical volumes?",
+o:["lvcreate","lvextend","lvchange -ay","vgdisplay"],
+a:2,
+s:"lvchange -ay activates logical volumes."
+},
+
+{
+q:"29. Which service shares Linux files with Windows systems?",
+o:["NFS","FTP","Samba","SSH"],
+a:2,
+s:"Samba implements SMB/CIFS for Windows interoperability."
+},
+
+{
+q:"30. Which daemon is used for DHCP services?",
+o:["dhcpd","named","sshd","smbd"],
+a:0,
+s:"dhcpd provides DHCP services."
+},
+
+{
+q:"31. Which Apache directive defines virtual hosts?",
+o:["<VirtualHost>","ServerRoot","DocumentRoot","Alias"],
+a:0,
+s:"<VirtualHost> defines separate websites on the same server."
+},
+
+{
+q:"32. Which protocol does Postfix primarily handle?",
+o:["POP3","SMTP","IMAP","HTTP"],
+a:1,
+s:"Postfix is an SMTP mail transfer agent."
+},
+
+{
+q:"33. Which command checks listening network ports?",
+o:["ss -tulnp","ps aux","mount","iptables"],
+a:0,
+s:"ss -tulnp displays open/listening ports and processes."
+},
+
+{
+q:"34. Which file stores DNS zone information in BIND?",
+o:["named.conf","resolv.conf","zone files","hosts"],
+a:2,
+s:"Zone files contain DNS records."
+},
+
+{
+q:"35. Which protocol does LDAP use by default?",
+o:["389","22","53","80"],
+a:0,
+s:"LDAP commonly uses port 389."
+},
+
+{
+q:"36. Which command displays CPU and memory utilization interactively?",
+o:["ps","jobs","top","uptime"],
+a:2,
+s:"top provides interactive resource monitoring."
+},
+
+{
+q:"37. Which log file stores authentication logs in many Linux systems?",
+o:["/var/log/messages","/var/log/auth.log","/var/log/dmesg","/etc/shadow"],
+a:1,
+s:"Authentication events are stored in auth.log."
+},
+
+{
+q:"38. Which command synchronizes system time with NTP servers?",
+o:["ntpd","chronyc","ntpdate","All of the above"],
+a:3,
+s:"All commands/tools are used in NTP synchronization."
+},
+
+{
+q:"39. Which shell symbol redirects stderr?",
+o:[">","2>","&>","<"],
+a:1,
+s:"2> redirects standard error."
+},
+
+{
+q:"40. Which Bash loop executes until condition becomes true?",
+o:["for","while","until","case"],
+a:2,
+s:"until loop runs until condition evaluates true."
+},
+
+{
+q:"41. Which command debugs shell scripts line by line?",
+o:["bash -d","bash -x","debug","trace"],
+a:1,
+s:"bash -x enables execution tracing for debugging."
+},
+
+{
+q:"42. Which regex symbol represents beginning of line?",
+o:["$","^","*","."],
+a:1,
+s:"^ anchors pattern to start of line."
+},
+
+{
+q:"43. Which variable stores exit status of last command?",
+o:["$#","$$","$?","$0"],
+a:2,
+s:"$? contains exit code of previous command."
+},
+
+{
+q:"44. Which command archives files without compression?",
+o:["gzip","zip","tar","gunzip"],
+a:2,
+s:"tar archives multiple files without compression unless combined with gzip/bzip2."
+},
+
+{
+q:"45. Which command displays kernel ring buffer messages?",
+o:["journalctl","syslog","dmesg","messages"],
+a:2,
+s:"dmesg shows kernel boot and hardware messages."
+},
+
+{
+q:"46. Which command changes ownership recursively?",
+o:["chmod -R","chgrp -R","chown -R","own -r"],
+a:2,
+s:"chown -R recursively changes ownership."
+},
+
+{
+q:"47. Which command schedules one-time tasks?",
+o:["cron","crontab","at","systemctl"],
+a:2,
+s:"at schedules one-time future tasks."
+},
+
+{
+q:"48. Which protocol is insecure because it transmits data in plaintext?",
+o:["ssh","sftp","telnet","scp"],
+a:2,
+s:"Telnet is insecure because it does not encrypt communication."
+},
+
+{
+q:"49. Which service caches web content to improve performance?",
+o:["Apache","Squid","Postfix","Dovecot"],
+a:1,
+s:"Squid acts as a proxy cache server."
+},
+
+{
+q:"50. Which virtualization technology is commonly used in Linux?",
+o:["Hyper-V","KVM","VMware ESXi","Xen only"],
+a:1,
+s:"KVM is the primary Linux kernel virtualization technology."
+}
+
+];
+
+const quizForm = document.getElementById("quizForm");
+
+questions.forEach((question,index)=>{
+
+const div = document.createElement("div");
+div.classList.add("question");
+
+let html = `<h3>${question.q}</h3>`;
+
+question.o.forEach((option,i)=>{
+
+html += `
+<label>
+<input type="radio" name="q${index}" value="${i}">
+${option}
+</label>
+`;
+
+});
+
+html += `
+<div class="solution" id="solution${index}">
+<strong>Detailed Solution:</strong><br><br>
+${question.s}
+</div>
+`;
+
+div.innerHTML = html;
+
+quizForm.appendChild(div);
+
+});
+
+function submitQuiz(){
+
+event.preventDefault();
+
+let score = 0;
+
+questions.forEach((question,index)=>{
+
+const options = document.getElementsByName(`q${index}`);
+const selected = document.querySelector(`input[name="q${index}"]:checked`);
+
+options.forEach((option,i)=>{
+
+const parent = option.parentElement;
+
+if(i === question.a){
+parent.classList.add("correct");
+}
+
+if(option.checked && i !== question.a){
+parent.classList.add("wrong");
+}
+
+option.disabled = true;
+
+});
+
+document.getElementById(`solution${index}`).style.display = "block";
+
+if(selected){
+
+if(parseInt(selected.value) === question.a){
+score++;
+}
+
+}
+
+});
+
+const percentage = ((score/questions.length)*100).toFixed(2);
+
+let grade = "";
+
+if(score >= 45){
+grade = "Excellent";
+}
+else if(score >= 35){
+grade = "Good";
+}
+else if(score >= 25){
+grade = "Average";
+}
+else{
+grade = "Needs Improvement";
+}
+
+document.getElementById("result").innerHTML = `
+Your Score: ${score} / ${questions.length}
+<br><br>
+Percentage: ${percentage}%
+<br><br>
+Grade: ${grade}
+`;
+
+document.querySelector("button").disabled = true;
+
+window.scrollTo(0,document.body.scrollHeight);
+
+}
+
+</script>
+
+</body>
+</html>
