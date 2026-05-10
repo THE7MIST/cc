@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python MCQ Quiz</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:950px;
+    background:#111827;
+    padding:30px;
+    border-radius:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#38bdf8;
+}
+
+.progress{
+    margin-bottom:20px;
+    color:#facc15;
+    font-size:18px;
+}
+
+.question{
+    font-size:24px;
+    line-height:1.5;
+    margin-bottom:25px;
+}
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.option{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:0.3s;
+}
+
+.option:hover{
+    background:#334155;
+}
+
+.option.selected{
+    border-color:#38bdf8;
+    background:#0f766e;
+}
+
+.buttons{
+    margin-top:30px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+}
+
+button{
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.prev-btn{
+    background:#475569;
+    color:white;
+}
+
+.next-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.submit-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.result-box{
+    display:none;
+}
+
+.review-item{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.correct{
+    color:#4ade80;
+}
+
+.wrong{
+    color:#f87171;
+}
+
+.answer{
+    color:#facc15;
+}
+
+@media(max-width:600px){
+
+    .question{
+        font-size:20px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+    button{
+        width:100%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="quiz-container">
+
+<h1>Python MCQ Quiz</h1>
+
+<div class="progress" id="progress"></div>
+
+<div class="question" id="question"></div>
+
+<div class="options" id="options"></div>
+
+<div class="buttons">
+<button class="prev-btn" id="prevBtn">Previous</button>
+<button class="next-btn" id="nextBtn">Next</button>
+<button class="submit-btn" id="submitBtn">Submit</button>
+</div>
+
+</div>
+
+<div class="result-box" id="resultBox">
+
+<h1>Quiz Result</h1>
+
+<div id="resultStats"></div>
+
+<div id="review"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+question:"Output of a=[1,2,3] print(a[1])?",
+options:["1","2","3","Error"],
+answer:"2"
+},
+
+{
+question:"Output of a=[1,2] a.append(3) print(a)?",
+options:["[1,2]","[1,2,3]","[3,1,2]","Error"],
+answer:"[1,2,3]"
+},
+
+{
+question:"Output of a=[1,2,3] print(len(a))?",
+options:["1","2","3","Error"],
+answer:"3"
+},
+
+{
+question:"Output of a=[1,2,3] print(a[-1])?",
+options:["1","2","3","Error"],
+answer:"3"
+},
+
+{
+question:"Output of a=[1,2,3] a.remove(2) print(a)?",
+options:["[1,2,3]","[1,3]","[2,3]","Error"],
+answer:"[1,3]"
+},
+
+{
+question:"Output of a=[1,2] a.extend([3,4]) print(a)?",
+options:["[1,2,[3,4]]","[1,2,3,4]","[3,4]","Error"],
+answer:"[1,2,3,4]"
+},
+
+{
+question:"Output of a=[1,2,3] print(a[0:2])?",
+options:["[1]","[1,2]","[2,3]","[1,2,3]"],
+answer:"[1,2]"
+},
+
+{
+question:"Output of a=[1,2,3] a.insert(1,10) print(a)?",
+options:["[1,10,2,3]","[10,1,2,3]","[1,2,10,3]","Error"],
+answer:"[1,10,2,3]"
+},
+
+{
+question:"Output of a=[1,2,3] print(2 in a)?",
+options:["True","False","2","Error"],
+answer:"True"
+},
+
+{
+question:"Output of a=[1,2,3] print(a*2)?",
+options:["[2,4,6]","[1,2,3,1,2,3]","Error","[1,1,2,2,3,3]"],
+answer:"[1,2,3,1,2,3]"
+},
+
+{
+question:"Output of a=[1,2,3] a.pop() print(a)?",
+options:["[1,2]","[2,3]","[1,2,3]","Error"],
+answer:"[1,2]"
+},
+
+{
+question:"Output of a=[3,1,2] a.sort() print(a)?",
+options:["[3,1,2]","[1,2,3]","[3,2,1]","Error"],
+answer:"[1,2,3]"
+},
+
+{
+question:"Output of a=[1,2,3] a.reverse() print(a)?",
+options:["[1,2,3]","[3,2,1]","Error","[2,1,3]"],
+answer:"[3,2,1]"
+},
+
+{
+question:"Output of a=[1,2,3] print(a[::-1])?",
+options:["[1,2,3]","[3,2,1]","Error","[]"],
+answer:"[3,2,1]"
+},
+
+{
+question:"Output of a=[1,2] b=a b.append(3) print(a)?",
+options:["[1,2]","[1,2,3]","[3]","Error"],
+answer:"[1,2,3]"
+},
+
+{
+question:"Output of a=[1,2] b=a.copy() b.append(3) print(a)?",
+options:["[1,2]","[1,2,3]","[3]","Error"],
+answer:"[1,2]"
+},
+
+{
+question:'Output of d={"a":1,"b":2} print(d["a"])?',
+options:["a","1","2","Error"],
+answer:"1"
+},
+
+{
+question:'Output of d={"a":1} d["b"]=2 print(d)?',
+options:['{"a":1}','{"b":2}','{"a":1,"b":2}','Error'],
+answer:'{"a":1,"b":2}'
+},
+
+{
+question:'Output of d={"a":1} print(len(d))?',
+options:["0","1","2","Error"],
+answer:"1"
+},
+
+{
+question:'Output of d={"a":1} print("a" in d)?',
+options:["True","False","1","Error"],
+answer:"True"
+},
+
+{
+question:'Output of d={"a":1} print(d.get("b"))?',
+options:["Error","None","0","False"],
+answer:"None"
+},
+
+{
+question:'Output of d={"a":1} d.pop("a") print(d)?',
+options:['{"a":1}','{}',"Error","None"],
+answer:'{}'
+},
+
+{
+question:'Output of d={"a":1,"b":2} print(d.keys())?',
+options:['["a","b"]',"dict_keys(['a','b'])","('a','b')","Error"],
+answer:"dict_keys(['a','b'])"
+},
+
+{
+question:'Output of d={"a":1} d.update({"b":2}) print(d)?',
+options:['{"a":1}','{"b":2}','{"a":1,"b":2}','Error'],
+answer:'{"a":1,"b":2}'
+},
+
+{
+question:'Output of s="python" print(s[0])?',
+options:["p","y","n","Error"],
+answer:"p"
+},
+
+{
+question:'Output of s="python" print(s[-1])?',
+options:["p","y","n","Error"],
+answer:"n"
+},
+
+{
+question:'Output of s="python" print(s[0:3])?',
+options:["pyt","tho","python","Error"],
+answer:"pyt"
+},
+
+{
+question:'Output of s="python" print(s[::-1])?',
+options:["python","nohtyp","Error","[]"],
+answer:"nohtyp"
+},
+
+{
+question:'Output of s="hello" print(len(s))?',
+options:["4","5","6","Error"],
+answer:"5"
+},
+
+{
+question:'Output of s="hello" print(s.upper())?',
+options:["hello","HELLO","Hello","Error"],
+answer:"HELLO"
+},
+
+{
+question:'Output of s="HELLO" print(s.lower())?',
+options:["hello","HELLO","Hello","Error"],
+answer:"hello"
+},
+
+{
+question:'Output of s="hello world" print(s.split())?',
+options:["['hello','world']","hello world","('hello','world')","Error"],
+answer:"['hello','world']"
+},
+
+{
+question:'Output of a=["a","b","c"] print("-".join(a))?',
+options:["abc","a-b-c","['a-b-c']","Error"],
+answer:"a-b-c"
+},
+
+{
+question:'Output of s="python" print("py" in s)?',
+options:["True","False","py","Error"],
+answer:"True"
+},
+
+{
+question:'Output of s="python" print(s.find("t"))?',
+options:["1","2","3","Error"],
+answer:"2"
+},
+
+{
+question:'Output of s="python" print(s.replace("python","java"))?',
+options:["python","java","Error","None"],
+answer:"java"
+},
+
+{
+question:'Output of s="abc" print(s*2)?',
+options:["abcabc","aabbcc","Error","abc2"],
+answer:"abcabc"
+},
+
+{
+question:'Output of s="abc" print(s+"123")?',
+options:["abc123","abc 123","Error","123abc"],
+answer:"abc123"
+},
+
+{
+question:'Output of s="abc" print(s.isalpha())?',
+options:["True","False","abc","Error"],
+answer:"True"
+},
+
+{
+question:'Output of s="123" print(s.isdigit())?',
+options:["True","False","123","Error"],
+answer:"True"
+},
+
+{
+question:'Output of a=[1,2,3] print(a[5])?',
+options:["None","5","IndexError","3"],
+answer:"IndexError"
+},
+
+{
+question:'Output of d={} print(d.get("x",0))?',
+options:["Error","None","0","x"],
+answer:"0"
+},
+
+{
+question:'Output of a=[1,2] print(a+a)?',
+options:["[2,4]","[1,2,1,2]","Error","[1,1,2,2]"],
+answer:"[1,2,1,2]"
+},
+
+{
+question:'Output of a=[1,2,3] del a[1] print(a)?',
+options:["[1,3]","[1,2]","[2,3]","Error"],
+answer:"[1,3]"
+},
+
+{
+question:'Output of s="python" print(s[::2])?',
+options:["pto","ptoh","pto","phn"],
+answer:"pto"
+},
+
+{
+question:'Output of d={"x":1} print(d.setdefault("y",2))?',
+options:["1","2","None","Error"],
+answer:"2"
+},
+
+{
+question:'Output after d.clear()?',
+options:['{}','{"x":1}','None','Error'],
+answer:'{}'
+},
+
+{
+question:'Output of s="Hello" print(s.swapcase())?',
+options:["HELLO","hello","hELLO","Error"],
+answer:"hELLO"
+},
+
+{
+question:'Output of s=" python " print(s.strip())?',
+options:['" python "','"python"',"Error","None"],
+answer:'"python"'
+},
+
+{
+question:'Output of a=[10,20,30] print(sum(a))?',
+options:["10","30","60","Error"],
+answer:"60"
+}
+
+];
+
+let currentQuestion = 0;
+
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML =
+    `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", ()=>{
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+
+        });
+
+        optionsEl.appendChild(div);
+
+    });
+
+}
+
+document.getElementById("nextBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+
+        currentQuestion++;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("prevBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("submitBtn")
+.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+            score++;
+        }
+
+    });
+
+    document.getElementById("quiz-container")
+    .style.display = "none";
+
+    document.getElementById("resultBox")
+    .style.display = "block";
+
+    const percentage =
+    ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats")
+    .innerHTML = `
+
+    <h2>Total Questions: ${quizData.length}</h2>
+    <h2>Correct Answers: ${score}</h2>
+    <h2>Wrong Answers: ${quizData.length - score}</h2>
+    <h2>Percentage: ${percentage}%</h2>
+    <br><br>
+
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const correct =
+        userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+
+        <h3>Q${index+1}. ${q.question}</h3>
+
+        <p class="${correct ? 'correct' : 'wrong'}">
+        Your Answer:
+        ${userAnswers[index] || "Not Attempted"}
+        </p>
+
+        <p class="answer">
+        Correct Answer:
+        ${q.answer}
+        </p>
+
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

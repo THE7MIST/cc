@@ -1,0 +1,1296 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>120 SQL MCQ Quiz</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:1000px;
+    background:#111827;
+    padding:30px;
+    border-radius:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#38bdf8;
+}
+
+.progress{
+    margin-bottom:20px;
+    font-size:18px;
+    color:#facc15;
+}
+
+.question{
+    font-size:24px;
+    margin-bottom:25px;
+    line-height:1.5;
+}
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.option{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:0.3s;
+}
+
+.option:hover{
+    background:#334155;
+}
+
+.option.selected{
+    border-color:#38bdf8;
+    background:#0f766e;
+}
+
+.buttons{
+    margin-top:30px;
+    display:flex;
+    gap:15px;
+    justify-content:space-between;
+}
+
+button{
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.prev-btn{
+    background:#475569;
+    color:white;
+}
+
+.next-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.submit-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.result-box{
+    display:none;
+}
+
+.review-item{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.correct{
+    color:#4ade80;
+}
+
+.wrong{
+    color:#f87171;
+}
+
+.answer{
+    color:#facc15;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="quiz-container">
+
+<h1>120 SQL MCQ Quiz</h1>
+
+<div class="progress" id="progress"></div>
+
+<div class="question" id="question"></div>
+
+<div class="options" id="options"></div>
+
+<div class="buttons">
+<button class="prev-btn" id="prevBtn">Previous</button>
+<button class="next-btn" id="nextBtn">Next</button>
+<button class="submit-btn" id="submitBtn">Submit</button>
+</div>
+
+</div>
+
+<div class="result-box" id="resultBox">
+
+<h1>Quiz Result</h1>
+
+<div id="resultStats"></div>
+
+<div id="review"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+question:"Output of SELECT COUNT(salary) FROM Employee;",
+options:["3","4","5","NULL"],
+answer:"4"
+},
+
+{
+question:"Output of SELECT COUNT(*) FROM Employee;",
+options:["4","5","NULL","Error"],
+answer:"5"
+},
+
+{
+question:"Output of SELECT AVG(salary) FROM Employee;",
+options:["6500","7000","5000","NULL"],
+answer:"6500"
+},
+
+{
+question:"Output of SELECT COUNT(dept) FROM Employee;",
+options:["3","4","5","NULL"],
+answer:"4"
+},
+
+{
+question:"Output of SELECT DISTINCT dept FROM Employee;",
+options:["HR, IT","HR, IT, NULL","HR only","5 rows"],
+answer:"HR, IT, NULL"
+},
+
+{
+question:"Which query counts NULL salaries?",
+options:[
+"SELECT COUNT(salary) FROM Employee;",
+"SELECT COUNT(*) FROM Employee WHERE salary IS NULL;",
+"SELECT NULL(salary) FROM Employee;",
+"SELECT COUNT(NULL) FROM Employee;"
+],
+answer:"SELECT COUNT(*) FROM Employee WHERE salary IS NULL;"
+},
+
+{
+question:"Output of SELECT MAX(salary) FROM Employee;",
+options:["NULL","7000","9000","5000"],
+answer:"9000"
+},
+
+{
+question:"Output of SELECT MIN(salary) FROM Employee;",
+options:["NULL","5000","7000","9000"],
+answer:"5000"
+},
+
+{
+question:"Output of SELECT COUNT(DISTINCT dept) FROM Employee;",
+options:["1","2","3","5"],
+answer:"2"
+},
+
+{
+question:"Which query returns employees with NULL department?",
+options:[
+"WHERE dept = NULL",
+"WHERE dept IS NULL",
+"WHERE dept == NULL",
+"WHERE dept LIKE NULL"
+],
+answer:"WHERE dept IS NULL"
+},
+
+{
+question:"Rows produced by Employee CROSS JOIN Department?",
+options:["5","8","15","20"],
+answer:"15"
+},
+
+{
+question:"Rows produced by INNER JOIN Employee and Department?",
+options:["3","4","5","6"],
+answer:"4"
+},
+
+{
+question:"Which employee excluded in INNER JOIN?",
+options:["A","B","C","E"],
+answer:"E"
+},
+
+{
+question:"LEFT JOIN returns?",
+options:[
+"Only matching rows",
+"All rows from left table",
+"All rows from right table",
+"Cartesian product"
+],
+answer:"All rows from left table"
+},
+
+{
+question:"Rows produced by LEFT JOIN Employee and Department?",
+options:["3","4","5","6"],
+answer:"5"
+},
+
+{
+question:"Which JOIN may accidentally explode row count?",
+options:["INNER JOIN","LEFT JOIN","CROSS JOIN","SELF JOIN"],
+answer:"CROSS JOIN"
+},
+
+{
+question:"What happens if JOIN condition missing?",
+options:[
+"Syntax error",
+"Cartesian product",
+"NULL rows only",
+"Empty result"
+],
+answer:"Cartesian product"
+},
+
+{
+question:"Rows from SELECT * FROM Employee, Department;",
+options:["5","8","15","20"],
+answer:"15"
+},
+
+{
+question:"Which JOIN keeps unmatched left rows?",
+options:["RIGHT JOIN","INNER JOIN","LEFT JOIN","CROSS JOIN"],
+answer:"LEFT JOIN"
+},
+
+{
+question:"Which employee gets NULL manager after LEFT JOIN?",
+options:["A","B","C","E"],
+answer:"E"
+},
+
+{
+question:"Can PRIMARY KEY contain NULL?",
+options:["Yes","No","Sometimes","Only once"],
+answer:"No"
+},
+
+{
+question:"Can UNIQUE allow NULL?",
+options:["Never","Yes","Only integers","Only strings"],
+answer:"Yes"
+},
+
+{
+question:"How many NULLs allowed in UNIQUE column in MySQL?",
+options:["0","1","Multiple","Depends on PK"],
+answer:"Multiple"
+},
+
+{
+question:"Composite Primary Key means?",
+options:[
+"Two foreign keys",
+"Multiple columns together form PK",
+"Multiple tables joined",
+"Duplicate primary keys"
+],
+answer:"Multiple columns together form PK"
+},
+
+{
+question:"FOREIGN KEY mainly ensures?",
+options:[
+"Fast query",
+"Referential integrity",
+"Backup recovery",
+"Index optimization"
+],
+answer:"Referential integrity"
+},
+
+{
+question:"What happens if child row references non-existing parent key?",
+options:["Allowed","Warning only","Error","Converted to NULL"],
+answer:"Error"
+},
+
+{
+question:"Which constraint prevents duplicate + NULL?",
+options:["UNIQUE","NOT NULL","PRIMARY KEY","CHECK"],
+answer:"PRIMARY KEY"
+},
+
+{
+question:"Which command removes table structure too?",
+options:["DELETE","TRUNCATE","DROP","REMOVE"],
+answer:"DROP"
+},
+
+{
+question:"Which command preserves structure?",
+options:["DROP","DELETE","REMOVE DATABASE","DROP DATABASE"],
+answer:"DELETE"
+},
+
+{
+question:"DELETE differs from TRUNCATE because DELETE?",
+options:[
+"Cannot remove rows",
+"Can use WHERE",
+"Removes structure",
+"Drops indexes"
+],
+answer:"Can use WHERE"
+},
+
+{
+question:"Which query is invalid?",
+options:[
+"SELECT * FROM emp;",
+"SELECT name salary FROM emp;",
+"SELECT FROM emp;",
+"SELECT name FROM emp;"
+],
+answer:"SELECT FROM emp;"
+},
+
+{
+question:"Which query has syntax error?",
+options:[
+"SELECT * FROM emp WHERE salary>5000;",
+"SELECT * FROM emp ORDER BY salary;",
+"SELECT * emp;",
+"SELECT COUNT(*) FROM emp;"
+],
+answer:"SELECT * emp;"
+},
+
+{
+question:"Invalid query?",
+options:[
+"UPDATE emp SET salary=5000;",
+"DELETE FROM emp;",
+"INSERT emp VALUES(1);",
+"CREATE TABLE test(id INT);"
+],
+answer:"INSERT emp VALUES(1);"
+},
+
+{
+question:"Which query correctly renames column alias?",
+options:[
+"SELECT salary AS sal FROM emp;",
+"SELECT salary TO sal FROM emp;",
+"SELECT salary RENAME sal FROM emp;",
+"SELECT salary CHANGE sal FROM emp;"
+],
+answer:"SELECT salary AS sal FROM emp;"
+},
+
+{
+question:"Correct syntax for DISTINCT?",
+options:[
+"SELECT DISTINCT(name) FROM emp;",
+"SELECT UNIQUE name FROM emp;",
+"SELECT DISTINCT name FROM emp;",
+"Both A and C"
+],
+answer:"Both A and C"
+},
+
+{
+question:"Best optimized query for searching employee by id?",
+options:[
+"WHERE name='A'",
+"WHERE id=10",
+"WHERE salary>5000",
+"WHERE dept='IT'"
+],
+answer:"WHERE id=10"
+},
+
+{
+question:"Best column for indexing?",
+options:[
+"Frequently searched column",
+"Random text column",
+"NULL-only column",
+"Rarely used column"
+],
+answer:"Frequently searched column"
+},
+
+{
+question:"Slow queries mostly happen due to?",
+options:[
+"Too many indexes",
+"Missing indexes",
+"Too many tables only",
+"Foreign keys only"
+],
+answer:"Missing indexes"
+},
+
+{
+question:"Best command for removing all rows quickly?",
+options:["DELETE","TRUNCATE","DROP","UPDATE"],
+answer:"TRUNCATE"
+},
+
+{
+question:"Safest against SQL Injection?",
+options:[
+'query="SELECT * FROM users WHERE id="+x',
+"Prepared statements",
+"Dynamic SQL concatenation",
+"String formatting"
+],
+answer:"Prepared statements"
+},
+
+{
+question:"Output of SELECT SUM(salary) FROM Employee;",
+options:["26000","21000","NULL","17000"],
+answer:"26000"
+},
+
+{
+question:"Output of SELECT AVG(salary) FROM Employee WHERE dept='HR';",
+options:["5000","10000","NULL","2500"],
+answer:"5000"
+},
+
+{
+question:"Output of SELECT COUNT(*) FROM Employee WHERE dept='IT';",
+options:["1","2","3","0"],
+answer:"2"
+},
+
+{
+question:"Output of SELECT COUNT(salary) FROM Employee WHERE dept='IT';",
+options:["0","1","2","NULL"],
+answer:"1"
+},
+
+{
+question:"Output of SELECT name FROM Employee ORDER BY salary DESC LIMIT 1;",
+options:["B","A","E","C"],
+answer:"E"
+},
+
+{
+question:"Output of SELECT name FROM Employee WHERE salary > 5000;",
+options:["A,B","B,E","E only","B only"],
+answer:"B,E"
+},
+
+{
+question:"Output of SELECT COUNT(*) FROM Employee WHERE salary > 5000;",
+options:["1","2","3","4"],
+answer:"2"
+},
+
+{
+question:"Output of SELECT COUNT(*) FROM Employee WHERE salary >= 5000;",
+options:["2","3","4","5"],
+answer:"4"
+},
+
+{
+question:"Output of SELECT DISTINCT salary FROM Employee;",
+options:["3 rows","4 rows","5 rows","NULL only"],
+answer:"4 rows"
+},
+
+{
+question:"How many rows returned by GROUP BY dept?",
+options:["2","3","4","5"],
+answer:"3"
+},
+
+{
+question:"Rows produced by INNER JOIN Employee and Bonus?",
+options:["2","3","4","5"],
+answer:"3"
+},
+
+{
+question:"Rows produced by LEFT JOIN Employee and Bonus?",
+options:["3","4","5","8"],
+answer:"5"
+},
+
+{
+question:"Which employee gets NULL bonus?",
+options:["A","B","C","D"],
+answer:"C"
+},
+
+{
+question:"Rows produced by RIGHT JOIN Employee and Bonus?",
+options:["3","4","5","6"],
+answer:"3"
+},
+
+{
+question:"Which JOIN preserves all rows of right table?",
+options:["LEFT JOIN","RIGHT JOIN","INNER JOIN","CROSS JOIN"],
+answer:"RIGHT JOIN"
+},
+
+{
+question:"What happens if ON condition wrong?",
+options:[
+"Syntax error",
+"Wrong matching",
+"Automatic correction",
+"Query ignored"
+],
+answer:"Wrong matching"
+},
+
+{
+question:"Which query may create duplicate-looking rows?",
+options:["JOIN","DISTINCT","LIMIT","GROUP BY"],
+answer:"JOIN"
+},
+
+{
+question:"Cartesian product means?",
+options:[
+"Sorted rows",
+"Every row paired with every row",
+"NULL matching",
+"Duplicate deletion"
+],
+answer:"Every row paired with every row"
+},
+
+{
+question:"Rows from 5-row CROSS JOIN 3-row table?",
+options:["5","8","15","30"],
+answer:"15"
+},
+
+{
+question:"Best JOIN for mandatory matching only?",
+options:["LEFT JOIN","RIGHT JOIN","INNER JOIN","CROSS JOIN"],
+answer:"INNER JOIN"
+},
+
+{
+question:"Correct SQL execution order?",
+options:[
+"SELECT → WHERE → FROM",
+"FROM → WHERE → SELECT",
+"WHERE → GROUP BY → FROM",
+"SELECT → FROM → WHERE"
+],
+answer:"FROM → WHERE → SELECT"
+},
+
+{
+question:"Which clause executes after GROUP BY?",
+options:["WHERE","SELECT","HAVING","FROM"],
+answer:"HAVING"
+},
+
+{
+question:"Invalid query?",
+options:[
+"SELECT * FROM emp WHERE salary>5000;",
+"SELECT * FROM emp HAVING salary>5000;",
+"SELECT salary FROM emp;",
+"SELECT COUNT(*) FROM emp;"
+],
+answer:"SELECT * FROM emp HAVING salary>5000;"
+},
+
+{
+question:"Which query correctly counts departments?",
+options:[
+"SELECT dept, COUNT(*) FROM emp GROUP BY dept;",
+"SELECT dept COUNT(*) FROM emp;",
+"SELECT GROUP dept;",
+"COUNT GROUP dept;"
+],
+answer:"SELECT dept, COUNT(*) FROM emp GROUP BY dept;"
+},
+
+{
+question:"Which clause cannot appear before WHERE?",
+options:["FROM","SELECT","ORDER BY","GROUP BY"],
+answer:"ORDER BY"
+},
+
+{
+question:"Which query is invalid?",
+options:[
+"SELECT * FROM emp ORDER BY salary;",
+"SELECT * FROM emp GROUP BY dept;",
+"SELECT * emp WHERE id=1;",
+"SELECT DISTINCT dept FROM emp;"
+],
+answer:"SELECT * emp WHERE id=1;"
+},
+
+{
+question:"Which keyword removes duplicates?",
+options:["UNIQUE","DISTINCT","FILTER","REMOVE"],
+answer:"DISTINCT"
+},
+
+{
+question:"Which clause sorts final output?",
+options:["WHERE","ORDER BY","GROUP BY","HAVING"],
+answer:"ORDER BY"
+},
+
+{
+question:"Output of SELECT COUNT(NULL);",
+options:["0","1","NULL","Error"],
+answer:"0"
+},
+
+{
+question:"Output of SELECT NULL=NULL;",
+options:["TRUE","FALSE","NULL","0"],
+answer:"NULL"
+},
+
+{
+question:"PRIMARY KEY automatically implies?",
+options:[
+"UNIQUE + NOT NULL",
+"UNIQUE only",
+"NOT NULL only",
+"FOREIGN KEY"
+],
+answer:"UNIQUE + NOT NULL"
+},
+
+{
+question:"Can FOREIGN KEY reference UNIQUE column?",
+options:["No","Yes","Only integer PK","Only composite PK"],
+answer:"Yes"
+},
+
+{
+question:"Composite key mainly used when?",
+options:[
+"Single column insufficient",
+"Multiple databases exist",
+"Table too large",
+"NULL exists"
+],
+answer:"Single column insufficient"
+},
+
+{
+question:"Which constraint prevents NULL values?",
+options:["UNIQUE","CHECK","NOT NULL","DEFAULT"],
+answer:"NOT NULL"
+},
+
+{
+question:"Which constraint validates condition?",
+options:["CHECK","UNIQUE","PRIMARY KEY","INDEX"],
+answer:"CHECK"
+},
+
+{
+question:"Which constraint ensures valid relation?",
+options:["FOREIGN KEY","CHECK","UNIQUE","DEFAULT"],
+answer:"FOREIGN KEY"
+},
+
+{
+question:"AUTO_INCREMENT usually used with?",
+options:["Foreign key","Text columns","Primary key","Views"],
+answer:"Primary key"
+},
+
+{
+question:"Can table have multiple UNIQUE constraints?",
+options:["No","Yes","Only two","Only one if PK exists"],
+answer:"Yes"
+},
+
+{
+question:"Can table have multiple PRIMARY KEYs?",
+options:["Yes","No","Only composite","Only with FK"],
+answer:"No"
+},
+
+{
+question:"Composite PRIMARY KEY may contain?",
+options:[
+"NULL",
+"Duplicate combinations",
+"Multiple columns",
+"Foreign keys only"
+],
+answer:"Multiple columns"
+},
+
+{
+question:"Best column to index?",
+options:[
+"Frequently searched",
+"Frequently NULL",
+"Random text blobs",
+"Tiny tables only"
+],
+answer:"Frequently searched"
+},
+
+{
+question:"Index mainly improves?",
+options:[
+"INSERT speed",
+"SELECT speed",
+"DROP speed",
+"DELETE speed only"
+],
+answer:"SELECT speed"
+},
+
+{
+question:"Too many indexes may?",
+options:[
+"Slow INSERT/UPDATE",
+"Speed everything infinitely",
+"Remove duplicates",
+"Prevent joins"
+],
+answer:"Slow INSERT/UPDATE"
+},
+
+{
+question:"Which operation benefits MOST from indexing?",
+options:[
+"WHERE id=10",
+"DROP TABLE",
+"TRUNCATE TABLE",
+"CREATE DATABASE"
+],
+answer:"WHERE id=10"
+},
+
+{
+question:"Best command before dangerous UPDATE?",
+options:["DROP","COMMIT","BACKUP","REVOKE"],
+answer:"BACKUP"
+},
+
+{
+question:"Logical backup usually stores?",
+options:[
+"SQL statements",
+"RAM memory",
+"Index cache",
+"Query logs only"
+],
+answer:"SQL statements"
+},
+
+{
+question:"Physical backup usually contains?",
+options:[
+"Database files",
+"SQL only",
+"User passwords only",
+"NULL values"
+],
+answer:"Database files"
+},
+
+{
+question:"Which scaling adds more machines?",
+options:["Vertical","Horizontal","Logical","Internal"],
+answer:"Horizontal"
+},
+
+{
+question:"Which scaling upgrades CPU/RAM?",
+options:["Horizontal","Vertical","Distributed","Parallel"],
+answer:"Vertical"
+},
+
+{
+question:"Cloud databases mainly help in?",
+options:[
+"Scalability",
+"Physical paper storage",
+"Keyboard speed",
+"Syntax correction"
+],
+answer:"Scalability"
+},
+
+{
+question:"Which query is vulnerable to SQL Injection?",
+options:[
+'query="SELECT * FROM users WHERE id="+x',
+"Prepared statement",
+"Parameterized query",
+"ORM binding"
+],
+answer:'query="SELECT * FROM users WHERE id="+x'
+},
+
+{
+question:"SQL Injection mainly targets?",
+options:[
+"Frontend color",
+"Database queries",
+"Network cables",
+"CPU registers"
+],
+answer:"Database queries"
+},
+
+{
+question:"Best defense against SQL Injection?",
+options:[
+"Dynamic SQL",
+"Prepared statements",
+"String concatenation",
+"Manual spacing"
+],
+answer:"Prepared statements"
+},
+
+{
+question:"Principle of Least Privilege means?",
+options:[
+"Give all admin access",
+"Give minimum required access",
+"Disable database",
+"Remove all users"
+],
+answer:"Give minimum required access"
+},
+
+{
+question:"Readonly user should mainly get?",
+options:["DROP","DELETE","SELECT","ALTER"],
+answer:"SELECT"
+},
+
+{
+question:"GRANT command used for?",
+options:[
+"Removing rows",
+"Giving permissions",
+"Deleting users",
+"Backups"
+],
+answer:"Giving permissions"
+},
+
+{
+question:"REVOKE command used for?",
+options:[
+"Permission removal",
+"Table deletion",
+"Backup recovery",
+"Index creation"
+],
+answer:"Permission removal"
+},
+
+{
+question:"Most dangerous privilege for accidental loss?",
+options:["SELECT","INSERT","DROP","COUNT"],
+answer:"DROP"
+},
+
+{
+question:"Output of COUNT(*) WHERE dept IS NULL?",
+options:["0","1","2","NULL"],
+answer:"1"
+},
+
+{
+question:"Output of COUNT(dept) FROM Employee?",
+options:["3","4","5","NULL"],
+answer:"4"
+},
+
+{
+question:"Output of SUM(salary) WHERE salary IS NULL?",
+options:["NULL","0","Error","9000"],
+answer:"0"
+},
+
+{
+question:"Output of AVG(salary) WHERE salary IS NULL?",
+options:["0","NULL","Error","5000"],
+answer:"NULL"
+},
+
+{
+question:"Output of COUNT(*) WHERE salary IS NOT NULL?",
+options:["3","4","5","NULL"],
+answer:"4"
+},
+
+{
+question:"Rows returned by DISTINCT dept WHERE dept IS NOT NULL?",
+options:["1","2","3","4"],
+answer:"2"
+},
+
+{
+question:"Fastest query for exact id search?",
+options:[
+"WHERE name LIKE '%A%'",
+"WHERE id=5",
+"WHERE salary>1000",
+"WHERE dept IS NOT NULL"
+],
+answer:"WHERE id=5"
+},
+
+{
+question:"Fastest query removing all rows but keeping structure?",
+options:["DELETE","DROP","TRUNCATE","REMOVE"],
+answer:"TRUNCATE"
+},
+
+{
+question:"Which command can usually be rolled back?",
+options:["TRUNCATE","DELETE","DROP DATABASE","DROP TABLE"],
+answer:"DELETE"
+},
+
+{
+question:"Which operation resets AUTO_INCREMENT?",
+options:["DELETE","UPDATE","TRUNCATE","SELECT"],
+answer:"TRUNCATE"
+},
+
+{
+question:"Which query is valid in MySQL?",
+options:[
+"SELECT * FROM emp LIMIT 5;",
+"SELECT TOP 5 * FROM emp;",
+"SELECT FIRST 5 FROM emp;",
+"SELECT * emp 5;"
+],
+answer:"SELECT * FROM emp LIMIT 5;"
+},
+
+{
+question:"Which query skips first 3 rows?",
+options:[
+"LIMIT 3 OFFSET 3",
+"OFFSET 3",
+"LIMIT 3,3",
+"Both A and C"
+],
+answer:"Both A and C"
+},
+
+{
+question:"LIKE '%A' means?",
+options:[
+"Starts with A",
+"Ends with A",
+"Contains only A",
+"NULL A"
+],
+answer:"Ends with A"
+},
+
+{
+question:"LIKE 'A%' means?",
+options:[
+"Ends with A",
+"Starts with A",
+"Contains A anywhere",
+"Exactly A only"
+],
+answer:"Starts with A"
+},
+
+{
+question:"LIKE '%A%' means?",
+options:[
+"Starts with A",
+"Ends with A",
+"Contains A anywhere",
+"Only A"
+],
+answer:"Contains A anywhere"
+},
+
+{
+question:"COUNT(*) counts?",
+options:[
+"Only NULLs",
+"Non-NULL rows only",
+"All rows",
+"Distinct rows only"
+],
+answer:"All rows"
+},
+
+{
+question:"COUNT(column) ignores?",
+options:[
+"Duplicates",
+"NULL values",
+"Integers",
+"Strings"
+],
+answer:"NULL values"
+},
+
+{
+question:"Which query returns second highest salary?",
+options:[
+"SELECT MAX(salary) FROM emp;",
+"SELECT salary FROM emp ORDER BY salary DESC LIMIT 1,1;",
+"SELECT MIN(salary) FROM emp;",
+"SELECT AVG(salary) FROM emp;"
+],
+answer:"SELECT salary FROM emp ORDER BY salary DESC LIMIT 1,1;"
+},
+
+{
+question:"Which query valid for alias?",
+options:[
+"SELECT salary AS sal FROM emp;",
+"SELECT salary TO sal FROM emp;",
+"SELECT salary CHANGE sal FROM emp;",
+"SELECT salary RENAME sal FROM emp;"
+],
+answer:"SELECT salary AS sal FROM emp;"
+},
+
+{
+question:"Best query for duplicate names?",
+options:[
+"SELECT DISTINCT name FROM emp;",
+"SELECT name, COUNT(*) FROM emp GROUP BY name HAVING COUNT(*)>1;",
+"SELECT * FROM emp;",
+"SELECT MAX(name) FROM emp;"
+],
+answer:"SELECT name, COUNT(*) FROM emp GROUP BY name HAVING COUNT(*)>1;"
+},
+
+{
+question:"HAVING mainly works with?",
+options:[
+"ORDER BY",
+"Aggregates/GROUP BY",
+"LIMIT",
+"DISTINCT only"
+],
+answer:"Aggregates/GROUP BY"
+},
+
+{
+question:"Most important thing for SQL MCQ speed?",
+options:[
+"Memorizing syntax only",
+"Deep mathematical proofs",
+"Pattern recognition",
+"Long query writing"
+],
+answer:"Pattern recognition"
+}
+
+
+];
+let currentQuestion = 0;
+
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML =
+        `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", ()=>{
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+
+        });
+
+        optionsEl.appendChild(div);
+
+    });
+
+}
+
+document.getElementById("nextBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+
+        currentQuestion++;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("prevBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("submitBtn")
+.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+            score++;
+        }
+
+    });
+
+    document.getElementById("quiz-container")
+    .style.display = "none";
+
+    document.getElementById("resultBox")
+    .style.display = "block";
+
+    const percentage =
+        ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats")
+    .innerHTML = `
+
+        <h2>Total Questions: ${quizData.length}</h2>
+        <h2>Correct Answers: ${score}</h2>
+        <h2>Wrong Answers: ${quizData.length - score}</h2>
+        <h2>Percentage: ${percentage}%</h2>
+        <br><br>
+
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const correct =
+            userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+
+            <h3>Q${index+1}. ${q.question}</h3>
+
+            <p class="${correct ? 'correct' : 'wrong'}">
+            Your Answer:
+            ${userAnswers[index] || "Not Attempted"}
+            </p>
+
+            <p class="answer">
+            Correct Answer:
+            ${q.answer}
+            </p>
+
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python MCQ Quiz (51-100)</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:950px;
+    background:#111827;
+    padding:30px;
+    border-radius:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#38bdf8;
+}
+
+.progress{
+    margin-bottom:20px;
+    color:#facc15;
+    font-size:18px;
+}
+
+.question{
+    font-size:24px;
+    line-height:1.5;
+    margin-bottom:25px;
+}
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.option{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:0.3s;
+}
+
+.option:hover{
+    background:#334155;
+}
+
+.option.selected{
+    border-color:#38bdf8;
+    background:#0f766e;
+}
+
+.buttons{
+    margin-top:30px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+}
+
+button{
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.prev-btn{
+    background:#475569;
+    color:white;
+}
+
+.next-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.submit-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.result-box{
+    display:none;
+}
+
+.review-item{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.correct{
+    color:#4ade80;
+}
+
+.wrong{
+    color:#f87171;
+}
+
+.answer{
+    color:#facc15;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="quiz-container">
+
+<h1>Python MCQ Quiz (51–100)</h1>
+
+<div class="progress" id="progress"></div>
+
+<div class="question" id="question"></div>
+
+<div class="options" id="options"></div>
+
+<div class="buttons">
+<button class="prev-btn" id="prevBtn">Previous</button>
+<button class="next-btn" id="nextBtn">Next</button>
+<button class="submit-btn" id="submitBtn">Submit</button>
+</div>
+
+</div>
+
+<div class="result-box" id="resultBox">
+
+<h1>Quiz Result</h1>
+
+<div id="resultStats"></div>
+
+<div id="review"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+question:"Which module is used for regex in Python?",
+options:["regex","re","pyregex","rgx"],
+answer:"re"
+},
+
+{
+question:'Output of import re s="python" print(bool(re.search("py",s)))?',
+options:["True","False","None","Error"],
+answer:"True"
+},
+
+{
+question:'Output of import re s="python" print(re.findall("o",s))?',
+options:["o","['o']","('o')","Error"],
+answer:"['o']"
+},
+
+{
+question:'Regex "." means?',
+options:[
+"dot only",
+"any character except newline",
+"whitespace",
+"numbers only"
+],
+answer:"any character except newline"
+},
+
+{
+question:'Regex "\\d" matches?',
+options:["digits","letters","whitespace","symbols"],
+answer:"digits"
+},
+
+{
+question:'Regex "\\w" matches?',
+options:[
+"whitespace only",
+"digits only",
+"word characters",
+"symbols only"
+],
+answer:"word characters"
+},
+
+{
+question:'Regex "\\s" matches?',
+options:["digits","whitespace","symbols","alphabets"],
+answer:"whitespace"
+},
+
+{
+question:'Output of import re s="abc123" print(re.findall("\\d",s))?',
+options:["['1','2','3']","123","[]","Error"],
+answer:"['1','2','3']"
+},
+
+{
+question:'Output of import re s="abc123" print(re.findall("[a-z]",s))?',
+options:["['a','b','c']","abc","[]","Error"],
+answer:"['a','b','c']"
+},
+
+{
+question:'Output of import re s="a b" print(re.findall("\\s",s))?',
+options:["[' ']","[]","Error","['a','b']"],
+answer:"[' ']"
+},
+
+{
+question:"Which function returns first match?",
+options:["re.findall()","re.search()","re.split()","re.group()"],
+answer:"re.search()"
+},
+
+{
+question:'Output of import re s="hello123" print(re.sub("\\d","X",s))?',
+options:["helloXXX","hello123","XXX","Error"],
+answer:"helloXXX"
+},
+
+{
+question:'Output of import re s="a,b,c" print(re.split(",",s))?',
+options:["['a','b','c']","a,b,c","('a','b','c')","Error"],
+answer:"['a','b','c']"
+},
+
+{
+question:'Regex "^a" means?',
+options:[
+"ends with a",
+"starts with a",
+"contains a",
+"exactly a"
+],
+answer:"starts with a"
+},
+
+{
+question:'Regex "a$" means?',
+options:[
+"starts with a",
+"ends with a",
+"contains a",
+"any a"
+],
+answer:"ends with a"
+},
+
+{
+question:'Output of import re s="apple" print(bool(re.match("a",s)))?',
+options:["True","False","None","Error"],
+answer:"True"
+},
+
+{
+question:'Output of import re s="apple" print(bool(re.match("p",s)))?',
+options:["True","False","None","Error"],
+answer:"False"
+},
+
+{
+question:'Regex "+" means?',
+options:[
+"zero or more",
+"one or more",
+"optional",
+"exactly one"
+],
+answer:"one or more"
+},
+
+{
+question:'Regex "*" means?',
+options:[
+"one or more",
+"zero or more",
+"digits only",
+"optional"
+],
+answer:"zero or more"
+},
+
+{
+question:'Regex "?" means?',
+options:[
+"mandatory",
+"optional",
+"any char",
+"digit"
+],
+answer:"optional"
+},
+
+{
+question:'Output of import re s="abc" print(bool(re.search("z",s)))?',
+options:["True","False","None","Error"],
+answer:"False"
+},
+
+{
+question:"Which regex matches only digits?",
+options:["[a-z]","[0-9]","[A-Z]","\\s"],
+answer:"[0-9]"
+},
+
+{
+question:'Output of import re s="2026" print(re.findall("[0-9]",s))?',
+options:["['2','0','2','6']","2026","[]","Error"],
+answer:"['2','0','2','6']"
+},
+
+{
+question:"Which regex matches lowercase letters?",
+options:["[A-Z]","[a-z]","[0-9]","\\w"],
+answer:"[a-z]"
+},
+
+{
+question:'Output of import re s="cat bat rat" print(re.findall("at",s))?',
+options:["['at','at','at']","at","[]","Error"],
+answer:"['at','at','at']"
+},
+
+{
+question:"Which function opens file?",
+options:["file()","open()","fopen()","read()"],
+answer:"open()"
+},
+
+{
+question:'Mode "r" means?',
+options:["write","append","read","binary"],
+answer:"read"
+},
+
+{
+question:'Mode "w" means?',
+options:["read","append","write","binary"],
+answer:"write"
+},
+
+{
+question:'Mode "a" means?',
+options:["append","read","write","binary"],
+answer:"append"
+},
+
+{
+question:"Which method reads full file?",
+options:["read()","write()","close()","append()"],
+answer:"read()"
+},
+
+{
+question:"Which method reads line by line?",
+options:["readline()","write()","append()","remove()"],
+answer:"readline()"
+},
+
+{
+question:"Which method writes into file?",
+options:["read()","write()","open()","close()"],
+answer:"write()"
+},
+
+{
+question:"Why close() important?",
+options:[
+"Deletes file",
+"Saves/releases resources",
+"Encrypts file",
+"Creates file"
+],
+answer:"Saves/releases resources"
+},
+
+{
+question:'Output of f=open("a.txt","w") print(f.mode)?',
+options:["r","w","a","Error"],
+answer:"w"
+},
+
+{
+question:"Which mode creates file if not exists?",
+options:["r","w","read","None"],
+answer:"w"
+},
+
+{
+question:"Which mode preserves old data while writing?",
+options:["w","a","r","x"],
+answer:"a"
+},
+
+{
+question:'Output of f=open("a.txt","w") f.write("hello") f.close() ?',
+options:[
+"File deleted",
+'"hello" written',
+"Error",
+"Nothing"
+],
+answer:'"hello" written'
+},
+
+{
+question:'Which exception may occur opening missing file in "r" mode?',
+options:[
+"ValueError",
+"FileNotFoundError",
+"NameError",
+"SyntaxError"
+],
+answer:"FileNotFoundError"
+},
+
+{
+question:"Best way to auto-close file?",
+options:[
+"with open() as f",
+"auto.open()",
+"close.auto()",
+"safe.open()"
+],
+answer:"with open() as f"
+},
+
+{
+question:"Which method reads all lines as list?",
+options:["readline()","readlines()","read()","lines()"],
+answer:"readlines()"
+},
+
+{
+question:'Mode "x" means?',
+options:[
+"append",
+"exclusive creation",
+"binary",
+"read-only"
+],
+answer:"exclusive creation"
+},
+
+{
+question:'Output of f=open("a.txt","w") print(f.closed)?',
+options:["True","False","None","Error"],
+answer:"False"
+},
+
+{
+question:'Output of f=open("a.txt","w") f.close() print(f.closed)?',
+options:["True","False","None","Error"],
+answer:"True"
+},
+
+{
+question:"Which mode used for binary files?",
+options:["rb","wr","ar","xr"],
+answer:"rb"
+},
+
+{
+question:"Which method moves cursor?",
+options:["move()","seek()","cursor()","point()"],
+answer:"seek()"
+},
+
+{
+question:"Which method gives current cursor position?",
+options:["tell()","seek()","pos()","current()"],
+answer:"tell()"
+},
+
+{
+question:'Output of f=open("a.txt","w") print(type(f))?',
+options:["str","file object","int","list"],
+answer:"file object"
+},
+
+{
+question:"Which method truncates file content?",
+options:["clear()","remove()","truncate()","delete()"],
+answer:"truncate()"
+},
+
+{
+question:"Which mode allows read + write?",
+options:["r+","rr","rw","wr"],
+answer:"r+"
+},
+
+{
+question:"Which file mode appends in binary?",
+options:["ab","ba","wb","rb"],
+answer:"ab"
+}
+
+];
+
+let currentQuestion = 0;
+
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML =
+    `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", ()=>{
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+
+        });
+
+        optionsEl.appendChild(div);
+
+    });
+
+}
+
+document.getElementById("nextBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+
+        currentQuestion++;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("prevBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("submitBtn")
+.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+            score++;
+        }
+
+    });
+
+    document.getElementById("quiz-container")
+    .style.display = "none";
+
+    document.getElementById("resultBox")
+    .style.display = "block";
+
+    const percentage =
+    ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats")
+    .innerHTML = `
+
+    <h2>Total Questions: ${quizData.length}</h2>
+    <h2>Correct Answers: ${score}</h2>
+    <h2>Wrong Answers: ${quizData.length - score}</h2>
+    <h2>Percentage: ${percentage}%</h2>
+    <br><br>
+
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const correct =
+        userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+
+        <h3>Q${index+1}. ${q.question}</h3>
+
+        <p class="${correct ? 'correct' : 'wrong'}">
+        Your Answer:
+        ${userAnswers[index] || "Not Attempted"}
+        </p>
+
+        <p class="answer">
+        Correct Answer:
+        ${q.answer}
+        </p>
+
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

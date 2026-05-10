@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL Administration MCQ Quiz</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:950px;
+    background:#111827;
+    padding:30px;
+    border-radius:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#38bdf8;
+}
+
+.progress{
+    margin-bottom:20px;
+    font-size:18px;
+    color:#facc15;
+}
+
+.question{
+    font-size:24px;
+    margin-bottom:25px;
+    line-height:1.5;
+}
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.option{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:0.3s;
+}
+
+.option:hover{
+    background:#334155;
+}
+
+.option.selected{
+    border-color:#38bdf8;
+    background:#0f766e;
+}
+
+.buttons{
+    margin-top:30px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+}
+
+button{
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.prev-btn{
+    background:#475569;
+    color:white;
+}
+
+.next-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.submit-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.result-box{
+    display:none;
+}
+
+.review-item{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.correct{
+    color:#4ade80;
+}
+
+.wrong{
+    color:#f87171;
+}
+
+.answer{
+    color:#facc15;
+}
+
+@media(max-width:600px){
+
+    .question{
+        font-size:20px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+    button{
+        width:100%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="quiz-container">
+
+<h1>SQL Administration MCQ Quiz</h1>
+
+<div class="progress" id="progress"></div>
+
+<div class="question" id="question"></div>
+
+<div class="options" id="options"></div>
+
+<div class="buttons">
+<button class="prev-btn" id="prevBtn">Previous</button>
+<button class="next-btn" id="nextBtn">Next</button>
+<button class="submit-btn" id="submitBtn">Submit</button>
+</div>
+
+</div>
+
+<div class="result-box" id="resultBox">
+
+<h1>Quiz Result</h1>
+
+<div id="resultStats"></div>
+
+<div id="review"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+question:"Which command creates a new MySQL user?",
+options:[
+"ADD USER 'adi';",
+"CREATE USER 'adi'@'localhost' IDENTIFIED BY 'pass';",
+"NEW USER 'adi';",
+"INSERT USER 'adi';"
+],
+answer:"CREATE USER 'adi'@'localhost' IDENTIFIED BY 'pass';"
+},
+
+{
+question:"Which command gives SELECT permission?",
+options:[
+"ALLOW SELECT",
+"GRANT SELECT",
+"PERMIT SELECT",
+"ENABLE SELECT"
+],
+answer:"GRANT SELECT"
+},
+
+{
+question:"Which command removes privileges?",
+options:["DELETE","REMOVE","REVOKE","DENY"],
+answer:"REVOKE"
+},
+
+{
+question:"Which principle gives minimum required access?",
+options:[
+"Open Access",
+"Root Policy",
+"Principle of Least Privilege",
+"Public Access Principle"
+],
+answer:"Principle of Least Privilege"
+},
+
+{
+question:"Readonly user should mainly receive?",
+options:["DROP","DELETE","SELECT","ALTER"],
+answer:"SELECT"
+},
+
+{
+question:"Which privilege allows table structure modification?",
+options:["UPDATE","ALTER","SELECT","INSERT"],
+answer:"ALTER"
+},
+
+{
+question:"Which privilege is most dangerous?",
+options:["SELECT","INSERT","DROP","COUNT"],
+answer:"DROP"
+},
+
+{
+question:"Which command shows all databases?",
+options:[
+"LIST DATABASES;",
+"SHOW DATABASES;",
+"DISPLAY DATABASES;",
+"GET DATABASES;"
+],
+answer:"SHOW DATABASES;"
+},
+
+{
+question:"Which command selects database for use?",
+options:["CONNECT","OPEN","USE","ACCESS"],
+answer:"USE"
+},
+
+{
+question:"Which command shows all tables?",
+options:[
+"SHOW TABLES;",
+"LIST TABLES;",
+"DISPLAY TABLES;",
+"GET TABLES;"
+],
+answer:"SHOW TABLES;"
+},
+
+{
+question:"Which command displays table structure?",
+options:[
+"DESC employee;",
+"SHOW employee;",
+"VIEW employee;",
+"STRUCT employee;"
+],
+answer:"DESC employee;"
+},
+
+{
+question:"Which backup stores SQL statements?",
+options:[
+"Physical backup",
+"Binary backup",
+"Logical backup",
+"Mirror backup"
+],
+answer:"Logical backup"
+},
+
+{
+question:"Which backup stores actual DB files?",
+options:[
+"Logical backup",
+"Physical backup",
+"SQL backup",
+"Dynamic backup"
+],
+answer:"Physical backup"
+},
+
+{
+question:"Most common MySQL backup utility?",
+options:[
+"mysqlsave",
+"mysqldump",
+"dumpdb",
+"mysqlcopy"
+],
+answer:"mysqldump"
+},
+
+{
+question:"Which backup type is easier to migrate across systems?",
+options:[
+"Physical",
+"Logical",
+"Binary",
+"RAM backup"
+],
+answer:"Logical"
+},
+
+{
+question:"Main purpose of indexing?",
+options:[
+"Encryption",
+"Faster searching",
+"Backup recovery",
+"Compression"
+],
+answer:"Faster searching"
+},
+
+{
+question:"Too many indexes may?",
+options:[
+"Improve INSERT speed",
+"Slow INSERT/UPDATE",
+"Remove duplicates",
+"Prevent joins"
+],
+answer:"Slow INSERT/UPDATE"
+},
+
+{
+question:"Which query benefits MOST from indexing?",
+options:[
+"WHERE id=10",
+"DROP TABLE emp",
+"TRUNCATE TABLE emp",
+"CREATE DATABASE test"
+],
+answer:"WHERE id=10"
+},
+
+{
+question:"Slow queries usually happen due to?",
+options:[
+"Too many backups",
+"Missing indexes",
+"Too many users only",
+"NULL values only"
+],
+answer:"Missing indexes"
+},
+
+{
+question:"Which scaling increases CPU/RAM?",
+options:[
+"Horizontal scaling",
+"Vertical scaling",
+"Cloud scaling",
+"Parallel scaling"
+],
+answer:"Vertical scaling"
+},
+
+{
+question:"Which scaling adds more servers?",
+options:[
+"Horizontal scaling",
+"Vertical scaling",
+"Static scaling",
+"Internal scaling"
+],
+answer:"Horizontal scaling"
+},
+
+{
+question:"Amazon RDS is example of?",
+options:[
+"Local DBMS",
+"Cloud database service",
+"File system",
+"Compiler"
+],
+answer:"Cloud database service"
+},
+
+{
+question:"Which attack manipulates SQL queries through user input?",
+options:[
+"XSS",
+"CSRF",
+"SQL Injection",
+"Spoofing"
+],
+answer:"SQL Injection"
+},
+
+{
+question:"Best protection against SQL Injection?",
+options:[
+"Dynamic SQL concatenation",
+"Prepared statements",
+"Plain text queries",
+"Manual filtering only"
+],
+answer:"Prepared statements"
+},
+
+{
+question:"Which user usually has full database privileges?",
+options:[
+"readonly_user",
+"guest",
+"root/admin",
+"anonymous"
+],
+answer:"root/admin"
+},
+
+{
+question:"What happens if backup is absent and DB crashes?",
+options:[
+"Automatic recovery always",
+"Permanent data loss possible",
+"Index rebuild fixes everything",
+"Only users deleted"
+],
+answer:"Permanent data loss possible"
+},
+
+{
+question:"Which command removes all rows but keeps structure?",
+options:[
+"DROP",
+"DELETE",
+"TRUNCATE",
+"REMOVE"
+],
+answer:"TRUNCATE"
+},
+
+{
+question:"Which command removes structure also?",
+options:[
+"DELETE",
+"TRUNCATE",
+"DROP",
+"REMOVE ROWS"
+],
+answer:"DROP"
+},
+
+{
+question:"Best action before dangerous UPDATE/DELETE?",
+options:[
+"DROP INDEX",
+"TAKE BACKUP",
+"REVOKE USERS",
+"RESTART MYSQL"
+],
+answer:"TAKE BACKUP"
+},
+
+{
+question:"Which statement about cloud databases is TRUE?",
+options:[
+"Cannot scale",
+"No backups possible",
+"Often provide automated backup/scaling",
+"Cannot handle security"
+],
+answer:"Often provide automated backup/scaling"
+}
+
+];
+
+let currentQuestion = 0;
+
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML =
+    `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", ()=>{
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+
+        });
+
+        optionsEl.appendChild(div);
+
+    });
+
+}
+
+document.getElementById("nextBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+
+        currentQuestion++;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("prevBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("submitBtn")
+.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+            score++;
+        }
+
+    });
+
+    document.getElementById("quiz-container")
+    .style.display = "none";
+
+    document.getElementById("resultBox")
+    .style.display = "block";
+
+    const percentage =
+    ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats")
+    .innerHTML = `
+
+    <h2>Total Questions: ${quizData.length}</h2>
+    <h2>Correct Answers: ${score}</h2>
+    <h2>Wrong Answers: ${quizData.length - score}</h2>
+    <h2>Percentage: ${percentage}%</h2>
+    <br><br>
+
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const correct =
+        userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+
+        <h3>Q${index+1}. ${q.question}</h3>
+
+        <p class="${correct ? 'correct' : 'wrong'}">
+        Your Answer:
+        ${userAnswers[index] || "Not Attempted"}
+        </p>
+
+        <p class="answer">
+        Correct Answer:
+        ${q.answer}
+        </p>
+
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+ITIL
+````
+    Knewget
+        https://youtu.be/c3QfSmKo4QA?si=hrwN-1qH8N35RIOx
+    SimpliLearn
+        https://youtu.be/8jyD53vtp0I?si=6AsmW65CXNBE5FPT
+
+DevOps
+``````
+    Git
+        https://youtu.be/mAFoROnOfHs?si=mrh_Fu8dnK-CqoH1
+        https://youtu.be/Uszj_k0DGsg?si=cGpKM7v774fJf4gR
+    DOCKER
+        https://youtu.be/zJ6WbK9zFpI?si=VnMo56TA7Ik58ZoQ
+        docker Swarm
+        https://youtu.be/Tm0Q5zr3FL4?si=YFPsBblATDKQr-Ni
+    JENKINS
+        https://youtu.be/6YZvp2GwT0A?si=ho0YfXPY9omiY0Wd
+    Kubernetes
+        https://youtu.be/MTHGoGUFpvE?si=uo6koFNYWownWB02
+

@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python MCQ Quiz (51-100)</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:950px;
+    background:#111827;
+    padding:30px;
+    border-radius:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#38bdf8;
+}
+
+.progress{
+    margin-bottom:20px;
+    color:#facc15;
+    font-size:18px;
+}
+
+.question{
+    font-size:24px;
+    line-height:1.5;
+    margin-bottom:25px;
+}
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.option{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:0.3s;
+}
+
+.option:hover{
+    background:#334155;
+}
+
+.option.selected{
+    border-color:#38bdf8;
+    background:#0f766e;
+}
+
+.buttons{
+    margin-top:30px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+}
+
+button{
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.prev-btn{
+    background:#475569;
+    color:white;
+}
+
+.next-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.submit-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.result-box{
+    display:none;
+}
+
+.review-item{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.correct{
+    color:#4ade80;
+}
+
+.wrong{
+    color:#f87171;
+}
+
+.answer{
+    color:#facc15;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="quiz-container">
+
+<h1>Python MCQ Quiz (51–100)</h1>
+
+<div class="progress" id="progress"></div>
+
+<div class="question" id="question"></div>
+
+<div class="options" id="options"></div>
+
+<div class="buttons">
+<button class="prev-btn" id="prevBtn">Previous</button>
+<button class="next-btn" id="nextBtn">Next</button>
+<button class="submit-btn" id="submitBtn">Submit</button>
+</div>
+
+</div>
+
+<div class="result-box" id="resultBox">
+
+<h1>Quiz Result</h1>
+
+<div id="resultStats"></div>
+
+<div id="review"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+question:"Which method connects client to server?",
+options:["bind()","connect()","listen()","attach()"],
+answer:"connect()"
+},
+
+{
+question:"Which side usually uses bind() + listen()?",
+options:["Client","Server","Browser","Switch"],
+answer:"Server"
+},
+
+{
+question:'Output of import socket s=socket.socket() print(type(s)) ?',
+options:["int","socket object","tuple","Error"],
+answer:"socket object"
+},
+
+{
+question:"Which function converts hostname to IP?",
+options:[
+"socket.ip()",
+"socket.gethostbyname()",
+"socket.host()",
+"socket.resolve()"
+],
+answer:"socket.gethostbyname()"
+},
+
+{
+question:"Which protocol is connectionless?",
+options:["TCP","UDP","HTTP","HTTPS"],
+answer:"UDP"
+},
+
+{
+question:"Which socket type used for reliable communication?",
+options:[
+"SOCK_DGRAM",
+"SOCK_STREAM",
+"SOCK_RAW",
+"SOCK_UDP"
+],
+answer:"SOCK_STREAM"
+},
+
+{
+question:"recv() usually returns?",
+options:[
+"integer",
+"received bytes/data",
+"IP address only",
+"boolean"
+],
+answer:"received bytes/data"
+},
+
+{
+question:"What happens if server not listening?",
+options:[
+"Client connects normally",
+"Connection error possible",
+"Auto server creation",
+"Infinite loop always"
+],
+answer:"Connection error possible"
+},
+
+{
+question:"Which layer mainly handles ports?",
+options:[
+"Physical",
+"Network",
+"Transport",
+"Application"
+],
+answer:"Transport"
+},
+
+{
+question:"Default HTTP port?",
+options:["20","21","80","443"],
+answer:"80"
+},
+
+{
+question:'Output of x=0 while x<3: print(x) x+=1 else: print("done") ?',
+options:[
+"0 1 2",
+"done",
+"0 1 2 done",
+"Error"
+],
+answer:"0 1 2 done"
+},
+
+{
+question:'Output of for i in range(3): if i==1: pass print(i) ?',
+options:["0 2","0 1 2","1 only","Error"],
+answer:"0 1 2"
+},
+
+{
+question:'Output of for i in range(1,6): if i%2==0: print(i) ?',
+options:["1 3 5","2 4","1 2 3 4 5","Error"],
+answer:"2 4"
+},
+
+{
+question:'Output of x=5 print("YES" if x>3 else "NO") ?',
+options:["YES","NO","Error","None"],
+answer:"YES"
+},
+
+{
+question:'Output of for i in range(3): for j in range(3): if j==1: break print(j) ?',
+options:["1","2","3","6"],
+answer:"3"
+},
+
+{
+question:'Output of x=1 for i in range(4): x*=2 print(x) ?',
+options:["8","16","32","Error"],
+answer:"16"
+},
+
+{
+question:'Output of print(list(range(5,-1,-1))) ?',
+options:[
+"[5,4,3,2,1,0]",
+"[5,4,3,2,1]",
+"[0,1,2,3,4,5]",
+"Error"
+],
+answer:"[5,4,3,2,1,0]"
+},
+
+{
+question:'Output of x=0 if not x: print("A") ?',
+options:["A","0","False","Error"],
+answer:"A"
+},
+
+{
+question:'Output of for i in []: print(i) else: print("done") ?',
+options:["Nothing","done","Error","[]"],
+answer:"done"
+},
+
+{
+question:'Output of x=[1,2,3] for i in x: x.append(4) break print(x) ?',
+options:[
+"[1,2,3]",
+"[1,2,3,4]",
+"Error",
+"Infinite loop"
+],
+answer:"[1,2,3,4]"
+},
+
+{
+question:'Output of print(bool(None)) ?',
+options:["True","False","None","Error"],
+answer:"False"
+},
+
+{
+question:'Output of print(int("10")) ?',
+options:['"10"',"10","Error","None"],
+answer:"10"
+},
+
+{
+question:'Output of print(float(5)) ?',
+options:["5","5.0","Error","None"],
+answer:"5.0"
+},
+
+{
+question:'Output of print(str(123)) ?',
+options:["123",'"123"',"Error","None"],
+answer:'"123"'
+},
+
+{
+question:'Output of print(type(lambda x:x)) ?',
+options:["lambda","function","int","Error"],
+answer:"function"
+},
+
+{
+question:'Output of print(list(map(int,["1","2"]))) ?',
+options:["['1','2']","[1,2]","Error","None"],
+answer:"[1,2]"
+},
+
+{
+question:'Output of print(tuple([1,2])) ?',
+options:["[1,2]","(1,2)","Error","None"],
+answer:"(1,2)"
+},
+
+{
+question:'Output of print(set([1,1,2,2])) ?',
+options:["{1,2}","[1,2]","Error","(1,2)"],
+answer:"{1,2}"
+},
+
+{
+question:'Output of print(sum([True,False,True])) ?',
+options:["0","1","2","Error"],
+answer:"2"
+},
+
+{
+question:'Output of print(abs(-3.5)) ?',
+options:["-3.5","3.5","Error","3"],
+answer:"3.5"
+},
+
+{
+question:'Output of x=lambda a,b:a+b print(x(10,20)) ?',
+options:["30","1020","Error","None"],
+answer:"30"
+},
+
+{
+question:'Output of a=[1,2,3] print(list(map(lambda x:x+1,a))) ?',
+options:["[1,2,3]","[2,3,4]","Error","None"],
+answer:"[2,3,4]"
+},
+
+{
+question:'Output of a=[1,2,3,4] print(list(filter(lambda x:x>2,a))) ?',
+options:["[1,2]","[3,4]","[1,2,3,4]","Error"],
+answer:"[3,4]"
+},
+
+{
+question:'Output of print((lambda x:x*x)(4)) ?',
+options:["8","16","Error","None"],
+answer:"16"
+},
+
+{
+question:"Lambda functions can contain?",
+options:[
+"Multiple statements",
+"Single expression",
+"Loops only",
+"Classes only"
+],
+answer:"Single expression"
+},
+
+{
+question:"Which complexity grows fastest?",
+options:["O(1)","O(log n)","O(n²)","O(2ⁿ)"],
+answer:"O(2ⁿ)"
+},
+
+{
+question:"Which search checks elements sequentially?",
+options:[
+"Binary Search",
+"Linear Search",
+"DFS",
+"Merge Sort"
+],
+answer:"Linear Search"
+},
+
+{
+question:'Output of print(7&4) ?',
+options:["4","3","7","Error"],
+answer:"4"
+},
+
+{
+question:'Output of print(7|4) ?',
+options:["3","4","7","Error"],
+answer:"7"
+},
+
+{
+question:'Output of print(7^4) ?',
+options:["3","4","7","Error"],
+answer:"3"
+},
+
+{
+question:'Output of print(1<<2) ?',
+options:["2","4","8","Error"],
+answer:"4"
+},
+
+{
+question:'Output of print(8>>1) ?',
+options:["2","4","8","Error"],
+answer:"4"
+},
+
+{
+question:"Which data structure generally fastest membership lookup?",
+options:["list","tuple","set","string"],
+answer:"set"
+},
+
+{
+question:'Output of print(len(set([1,1,2,2,3]))) ?',
+options:["5","3","2","Error"],
+answer:"3"
+},
+
+{
+question:"Recursion means?",
+options:[
+"nested loops",
+"function calling itself",
+"binary search only",
+"lambda usage"
+],
+answer:"function calling itself"
+},
+
+{
+question:"Which algorithm repeatedly swaps adjacent elements?",
+options:[
+"Merge Sort",
+"Bubble Sort",
+"Binary Search",
+"DFS"
+],
+answer:"Bubble Sort"
+},
+
+{
+question:"Which algorithm best suited for sorted arrays?",
+options:[
+"Binary Search",
+"Bubble Sort",
+"Linear Search",
+"BFS"
+],
+answer:"Binary Search"
+},
+
+{
+question:"Which complexity usually best?",
+options:["O(n²)","O(n)","O(log n)","O(2ⁿ)"],
+answer:"O(log n)"
+},
+
+{
+question:'Output of a=[1,2,3] print(a[::-1]) ?',
+options:["[1,2,3]","[3,2,1]","Error","None"],
+answer:"[3,2,1]"
+},
+
+{
+question:"Most important thing for MCQ coding speed?",
+options:[
+"Memorizing theory only",
+"Pattern recognition",
+"Writing long projects",
+"Avoiding practice"
+],
+answer:"Pattern recognition"
+}
+
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let currentQuestion = 0;
+
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML =
+    `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", ()=>{
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+
+        });
+
+        optionsEl.appendChild(div);
+
+    });
+
+}
+
+document.getElementById("nextBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+
+        currentQuestion++;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("prevBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("submitBtn")
+.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+            score++;
+        }
+
+    });
+
+    document.getElementById("quiz-container")
+    .style.display = "none";
+
+    document.getElementById("resultBox")
+    .style.display = "block";
+
+    const percentage =
+    ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats")
+    .innerHTML = `
+
+    <h2>Total Questions: ${quizData.length}</h2>
+    <h2>Correct Answers: ${score}</h2>
+    <h2>Wrong Answers: ${quizData.length - score}</h2>
+    <h2>Percentage: ${percentage}%</h2>
+    <br><br>
+
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const correct =
+        userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+
+        <h3>Q${index+1}. ${q.question}</h3>
+
+        <p class="${correct ? 'correct' : 'wrong'}">
+        Your Answer:
+        ${userAnswers[index] || "Not Attempted"}
+        </p>
+
+        <p class="answer">
+        Correct Answer:
+        ${q.answer}
+        </p>
+
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python MCQ Quiz (51-100)</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:950px;
+    background:#111827;
+    padding:30px;
+    border-radius:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#38bdf8;
+}
+
+.progress{
+    margin-bottom:20px;
+    color:#facc15;
+    font-size:18px;
+}
+
+.question{
+    font-size:24px;
+    line-height:1.5;
+    margin-bottom:25px;
+}
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.option{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:0.3s;
+}
+
+.option:hover{
+    background:#334155;
+}
+
+.option.selected{
+    border-color:#38bdf8;
+    background:#0f766e;
+}
+
+.buttons{
+    margin-top:30px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+}
+
+button{
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.prev-btn{
+    background:#475569;
+    color:white;
+}
+
+.next-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.submit-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.result-box{
+    display:none;
+}
+
+.review-item{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.correct{
+    color:#4ade80;
+}
+
+.wrong{
+    color:#f87171;
+}
+
+.answer{
+    color:#facc15;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="quiz-container">
+
+<h1>Python MCQ Quiz (51–100)</h1>
+
+<div class="progress" id="progress"></div>
+
+<div class="question" id="question"></div>
+
+<div class="options" id="options"></div>
+
+<div class="buttons">
+<button class="prev-btn" id="prevBtn">Previous</button>
+<button class="next-btn" id="nextBtn">Next</button>
+<button class="submit-btn" id="submitBtn">Submit</button>
+</div>
+
+</div>
+
+<div class="result-box" id="resultBox">
+
+<h1>Quiz Result</h1>
+
+<div id="resultStats"></div>
+
+<div id="review"></div>
+
+</div>
+
+</div>
+
+<script>
+
+
+const quizData = [
+
+{
+question:'Output of import re s="abc123xyz" print(re.findall("[a-z]+",s))?',
+options:["['abc','xyz']","['abc123xyz']","['123']","Error"],
+answer:"['abc','xyz']"
+},
+
+{
+question:'Output of import re s="abc123" print(re.findall("[0-9]+",s))?',
+options:["['123']","[1,2,3]","['abc']","Error"],
+answer:"['123']"
+},
+
+{
+question:'Output of import re s="a1b2c3" print(re.findall("[a-z][0-9]",s))?',
+options:["['a1','b2','c3']","['abc']","['123']","Error"],
+answer:"['a1','b2','c3']"
+},
+
+{
+question:'Output of import re s="hello" print(re.sub("l","X",s))?',
+options:["heXXo","hello","XX","Error"],
+answer:"heXXo"
+},
+
+{
+question:'Output of import re s="one two three" print(re.split("\\s",s))?',
+options:["['one','two','three']","one two three","[]","Error"],
+answer:"['one','two','three']"
+},
+
+{
+question:'Output of import re s="abc" print(re.findall(".",s))?',
+options:["['a','b','c']","abc","[]","Error"],
+answer:"['a','b','c']"
+},
+
+{
+question:'Regex "|" means?',
+options:["and","or","optional","repeat"],
+answer:"or"
+},
+
+{
+question:'Output of import re s="cat bat" print(re.findall("cat|bat",s))?',
+options:["['cat','bat']","catbat","[]","Error"],
+answer:"['cat','bat']"
+},
+
+{
+question:'Output of import re s="abc123" print(bool(re.search("[0-9]",s)))?',
+options:["True","False","None","Error"],
+answer:"True"
+},
+
+{
+question:'Regex "[^0-9]" means?',
+options:["digits only","non-digits","letters only","spaces only"],
+answer:"non-digits"
+},
+
+{
+question:'Output of import re s="123abc" print(re.findall("[^0-9]",s))?',
+options:["['1','2','3']","['a','b','c']","[]","Error"],
+answer:"['a','b','c']"
+},
+
+{
+question:'Regex "{2}" means?',
+options:["optional","exactly two times","one or more","zero or more"],
+answer:"exactly two times"
+},
+
+{
+question:'Output of import re s="aaab" print(bool(re.search("a{3}",s)))?',
+options:["True","False","None","Error"],
+answer:"True"
+},
+
+{
+question:'Which regex matches email-like text best?',
+options:["\\d+","\\w+@\\w+","[0-9]+","\\s+"],
+answer:"\\w+@\\w+"
+},
+
+{
+question:'Output of import re s="Python" print(bool(re.search("python",s)))?',
+options:["True","False","Error","None"],
+answer:"False"
+},
+
+{
+question:"Regex is generally?",
+options:[
+"case-sensitive",
+"numeric only",
+"file-only",
+"OOP-only"
+],
+answer:"case-sensitive"
+},
+
+{
+question:'Output of import re s="hello\\nworld" print(bool(re.search(".",s)))?',
+options:["True","False","Error","None"],
+answer:"True"
+},
+
+{
+question:'Output of import re s="aaa" print(re.findall("a*",s))?',
+options:[
+"Multiple matches possible",
+"[]",
+"aaa only",
+"Error"
+],
+answer:"Multiple matches possible"
+},
+
+{
+question:'Which regex matches whitespace?',
+options:["\\w","\\d","\\s","\\b"],
+answer:"\\s"
+},
+
+{
+question:'Output of import re s="ab12cd34" print(re.findall("\\d+",s))?',
+options:["['12','34']","[12,34]","['ab','cd']","Error"],
+answer:"['12','34']"
+},
+
+{
+question:'What happens in "w" mode if file exists?',
+options:[
+"Error",
+"Appends data",
+"Overwrites file",
+"Read only"
+],
+answer:"Overwrites file"
+},
+
+{
+question:'Output of f=open("a.txt","w") f.write("abc") print(f.tell())?',
+options:["0","1","3","Error"],
+answer:"3"
+},
+
+{
+question:'Which method changes cursor location?',
+options:["tell()","seek()","move()","jump()"],
+answer:"seek()"
+},
+
+{
+question:'Output of f=open("a.txt","w") print(f.writable())?',
+options:["True","False","None","Error"],
+answer:"True"
+},
+
+{
+question:'Output of f=open("a.txt","r") print(f.readable())?',
+options:["True","False","Error","None"],
+answer:"True"
+},
+
+{
+question:'Output of f=open("a.txt","a") print(f.mode)?',
+options:["r","w","a","x"],
+answer:"a"
+},
+
+{
+question:'Which mode causes error if file already exists?',
+options:["r","w","x","a"],
+answer:"x"
+},
+
+{
+question:'Which method writes multiple lines?',
+options:["writelines()","lineswrite()","multiline()","appendlines()"],
+answer:"writelines()"
+},
+
+{
+question:'Output of f=open("a.txt","w") f.write("hello") f.seek(0) print(f.tell())?',
+options:["0","5","Error","None"],
+answer:"0"
+},
+
+{
+question:'Which object returned by open()?',
+options:["string","list","file object","tuple"],
+answer:"file object"
+},
+
+{
+question:'Output of with open("a.txt","w") as f: print(f.closed)?',
+options:["True","False","None","Error"],
+answer:"False"
+},
+
+{
+question:'Main benefit of "with open()"?',
+options:[
+"Faster regex",
+"Auto file closing",
+"Prevents syntax errors",
+"Encrypts file"
+],
+answer:"Auto file closing"
+},
+
+{
+question:'Output of f=open("a.txt","w") print(f.name)?',
+options:["a.txt","file","w","Error"],
+answer:"a.txt"
+},
+
+{
+question:'Which method empties file partially/full?',
+options:["remove()","truncate()","delete()","clear()"],
+answer:"truncate()"
+},
+
+{
+question:'Which mode allows both reading and writing?',
+options:["r+","rr","wr","ar"],
+answer:"r+"
+},
+
+{
+question:"OOP stands for?",
+options:[
+"Object Oriented Programming",
+"Open Object Programming",
+"Organized Operation Processing",
+"Object Operation Principle"
+],
+answer:"Object Oriented Programming"
+},
+
+{
+question:"Class is?",
+options:[
+"Object instance",
+"Blueprint for objects",
+"Function only",
+"Module"
+],
+answer:"Blueprint for objects"
+},
+
+{
+question:"Object is?",
+options:[
+"Blueprint",
+"Real instance of class",
+"Keyword",
+"Loop"
+],
+answer:"Real instance of class"
+},
+
+{
+question:'Output of class A: pass x=A() print(type(x))?',
+options:[
+"class",
+"object",
+"<class '__main__.A'>",
+"Error"
+],
+answer:"<class '__main__.A'>"
+},
+
+{
+question:'Which method initializes object automatically?',
+options:["init()","start()","__init__()","constructor()"],
+answer:"__init__()"
+},
+
+{
+question:'Output of class A: def __init__(self): print("Hello") x=A() ?',
+options:["Nothing","Hello","Error","Object"],
+answer:"Hello"
+},
+
+{
+question:'"self" refers to?',
+options:[
+"class itself",
+"current object",
+"parent class",
+"function only"
+],
+answer:"current object"
+},
+
+{
+question:'Output of class A: x=5 o=A() print(o.x) ?',
+options:["5","x","Error","None"],
+answer:"5"
+},
+
+{
+question:"Inheritance means?",
+options:[
+"Hiding data",
+"Reusing properties from another class",
+"Deleting objects",
+"File handling"
+],
+answer:"Reusing properties from another class"
+},
+
+{
+question:"Encapsulation means?",
+options:[
+"Combining data and methods",
+"Regex processing",
+"File encryption",
+"List slicing"
+],
+answer:"Combining data and methods"
+},
+
+{
+question:'Output of class A: def show(self): print("Hi") x=A() x.show() ?',
+options:["show","Hi","Error","None"],
+answer:"Hi"
+},
+
+{
+question:'Output of class A: pass x=A() print(isinstance(x,A)) ?',
+options:["True","False","Error","None"],
+answer:"True"
+},
+
+{
+question:'Which function checks object type?',
+options:["class()","type()","object()","check()"],
+answer:"type()"
+},
+
+{
+question:'Output of class A: x=10 a=A() b=A() b.x=20 print(a.x) ?',
+options:["10","20","Error","None"],
+answer:"10"
+},
+
+{
+question:'Output of class A: x=5 print(A.x) ?',
+options:["5","x","Error","None"],
+answer:"5"
+}
+
+];
+
+
+let currentQuestion = 0;
+
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML =
+    `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", ()=>{
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+
+        });
+
+        optionsEl.appendChild(div);
+
+    });
+
+}
+
+document.getElementById("nextBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+
+        currentQuestion++;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("prevBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("submitBtn")
+.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+            score++;
+        }
+
+    });
+
+    document.getElementById("quiz-container")
+    .style.display = "none";
+
+    document.getElementById("resultBox")
+    .style.display = "block";
+
+    const percentage =
+    ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats")
+    .innerHTML = `
+
+    <h2>Total Questions: ${quizData.length}</h2>
+    <h2>Correct Answers: ${score}</h2>
+    <h2>Wrong Answers: ${quizData.length - score}</h2>
+    <h2>Percentage: ${percentage}%</h2>
+    <br><br>
+
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const correct =
+        userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+
+        <h3>Q${index+1}. ${q.question}</h3>
+
+        <p class="${correct ? 'correct' : 'wrong'}">
+        Your Answer:
+        ${userAnswers[index] || "Not Attempted"}
+        </p>
+
+        <p class="answer">
+        Correct Answer:
+        ${q.answer}
+        </p>
+
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python MCQ Quiz (51-100)</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:950px;
+    background:#111827;
+    padding:30px;
+    border-radius:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#38bdf8;
+}
+
+.progress{
+    margin-bottom:20px;
+    color:#facc15;
+    font-size:18px;
+}
+
+.question{
+    font-size:24px;
+    line-height:1.5;
+    margin-bottom:25px;
+}
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.option{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:0.3s;
+}
+
+.option:hover{
+    background:#334155;
+}
+
+.option.selected{
+    border-color:#38bdf8;
+    background:#0f766e;
+}
+
+.buttons{
+    margin-top:30px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+}
+
+button{
+    padding:14px 24px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.prev-btn{
+    background:#475569;
+    color:white;
+}
+
+.next-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.submit-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.result-box{
+    display:none;
+}
+
+.review-item{
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.correct{
+    color:#4ade80;
+}
+
+.wrong{
+    color:#f87171;
+}
+
+.answer{
+    color:#facc15;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="quiz-container">
+
+<h1>Python MCQ Quiz (51–100)</h1>
+
+<div class="progress" id="progress"></div>
+
+<div class="question" id="question"></div>
+
+<div class="options" id="options"></div>
+
+<div class="buttons">
+<button class="prev-btn" id="prevBtn">Previous</button>
+<button class="next-btn" id="nextBtn">Next</button>
+<button class="submit-btn" id="submitBtn">Submit</button>
+</div>
+
+</div>
+
+<div class="result-box" id="resultBox">
+
+<h1>Quiz Result</h1>
+
+<div id="resultStats"></div>
+
+<div id="review"></div>
+
+</div>
+
+</div>
+
+<script>
+
+
+const quizData = [
+
+{
+question:"Which module is mainly used for socket programming?",
+options:["net","socket","sockets","network"],
+answer:"socket"
+},
+
+{
+question:"Socket programming mainly enables?",
+options:[
+"Image editing",
+"Client-server communication",
+"File compression",
+"Regex parsing"
+],
+answer:"Client-server communication"
+},
+
+{
+question:"Which function creates socket?",
+options:[
+"socket.make()",
+"socket.socket()",
+"socket.create()",
+"socket.open()"
+],
+answer:"socket.socket()"
+},
+
+{
+question:"Which protocol is reliable?",
+options:["UDP","TCP","HTTP","FTP"],
+answer:"TCP"
+},
+
+{
+question:"TCP is?",
+options:[
+"Connectionless",
+"Connection-oriented",
+"Stateless only",
+"File-only protocol"
+],
+answer:"Connection-oriented"
+},
+
+{
+question:"UDP is generally?",
+options:[
+"Reliable delivery",
+"Faster but less reliable",
+"Object-oriented",
+"Encrypted always"
+],
+answer:"Faster but less reliable"
+},
+
+{
+question:"Which method binds socket to address?",
+options:["attach()","bind()","connect()","listen()"],
+answer:"bind()"
+},
+
+{
+question:"Which method waits for incoming connections?",
+options:["bind()","recv()","listen()","send()"],
+answer:"listen()"
+},
+
+{
+question:"Which method accepts client connection?",
+options:["accept()","attach()","recv()","bind()"],
+answer:"accept()"
+},
+
+{
+question:"Which method sends data?",
+options:["recv()","send()","bind()","attach()"],
+answer:"send()"
+},
+
+{
+question:"Which method receives data?",
+options:["recv()","send()","accept()","bind()"],
+answer:"recv()"
+},
+
+{
+question:"Port number identifies?",
+options:[
+"File location",
+"Specific service/application",
+"CPU core",
+"IP class"
+],
+answer:"Specific service/application"
+},
+
+{
+question:"IP address identifies?",
+options:[
+"Application only",
+"Network device",
+"File system",
+"Port only"
+],
+answer:"Network device"
+},
+
+{
+question:"Which socket type usually used for TCP?",
+options:[
+"SOCK_DGRAM",
+"SOCK_TCP",
+"SOCK_STREAM",
+"SOCK_CONN"
+],
+answer:"SOCK_STREAM"
+},
+
+{
+question:"Which socket type used for UDP?",
+options:[
+"SOCK_DGRAM",
+"SOCK_STREAM",
+"SOCK_TCP",
+"SOCK_CONN"
+],
+answer:"SOCK_DGRAM"
+},
+
+{
+question:'Output of import socket print(type(socket.socket())) ?',
+options:["int","socket object","tuple","Error"],
+answer:"socket object"
+},
+
+{
+question:"Which function closes socket?",
+options:[
+"stop()",
+"close()",
+"end()",
+"shutdownsocket()"
+],
+answer:"close()"
+},
+
+{
+question:"Client generally initiates?",
+options:[
+"binding",
+"connection",
+"listening",
+"broadcasting"
+],
+answer:"connection"
+},
+
+{
+question:"Server usually performs first?",
+options:["recv()","listen()","close()","print()"],
+answer:"listen()"
+},
+
+{
+question:"Which protocol commonly used for webpages?",
+options:[
+"TCP/IP + HTTP",
+"UDP only",
+"SMTP only",
+"FTP only"
+],
+answer:"TCP/IP + HTTP"
+},
+
+{
+question:'Output of for i in range(5,0,-1): print(i) ?',
+options:[
+"5 4 3 2 1",
+"0 1 2 3 4",
+"5 4 3 2 1 0",
+"Error"
+],
+answer:"5 4 3 2 1"
+},
+
+{
+question:'Output of x=1 while x<10: x*=2 print(x) ?',
+options:["8","10","16","Error"],
+answer:"16"
+},
+
+{
+question:'Output of for i in range(3): for j in range(2): print(i,j) ?',
+options:["3","5","6","9"],
+answer:"6"
+},
+
+{
+question:'Output of for i in range(3): if i==1: continue print(i) ?',
+options:["0 1 2","0 2","1 only","Error"],
+answer:"0 2"
+},
+
+{
+question:'Output of for i in range(3): if i==1: break print(i) ?',
+options:["0","0 1","1 2","Error"],
+answer:"0"
+},
+
+{
+question:'Output of x=5 if x: print("YES") ?',
+options:["YES","NO","Error","Nothing"],
+answer:"YES"
+},
+
+{
+question:'Output of print(bool("")) ?',
+options:["True","False","Error","None"],
+answer:"False"
+},
+
+{
+question:'Output of print(bool(" ")) ?',
+options:["True","False","Error","None"],
+answer:"True"
+},
+
+{
+question:'Output of for i in range(2): print(i) else: print("done") ?',
+options:[
+"0 1",
+"done only",
+"0 1 done",
+"Error"
+],
+answer:"0 1 done"
+},
+
+{
+question:'Output of x=[1,2,3] for i in x: print(i*2) ?',
+options:["1 2 3","2 4 6","3 6 9","Error"],
+answer:"2 4 6"
+},
+
+{
+question:'Output of print(all([1,2,3])) ?',
+options:["True","False","Error","None"],
+answer:"True"
+},
+
+{
+question:'Output of print(all([1,0,3])) ?',
+options:["True","False","Error","None"],
+answer:"False"
+},
+
+{
+question:'Output of print(any([0,0,1])) ?',
+options:["True","False","Error","None"],
+answer:"True"
+},
+
+{
+question:'Output of print(any([0,0,0])) ?',
+options:["True","False","Error","None"],
+answer:"False"
+},
+
+{
+question:'Output of print(eval("2+3")) ?',
+options:['"2+3"',"5","Error","None"],
+answer:"5"
+},
+
+{
+question:'Output of print(pow(2,3,5)) ?',
+options:["8","3","1","Error"],
+answer:"3"
+},
+
+{
+question:'Output of print(sorted([3,1,2])) ?',
+options:["[1,2,3]","[3,2,1]","Error","None"],
+answer:"[1,2,3]"
+},
+
+{
+question:'Output of print(reversed([1,2,3])) ?',
+options:[
+"[3,2,1]",
+"reverseiterator object",
+"Error",
+"None"
+],
+answer:"reverseiterator object"
+},
+
+{
+question:'Output of print(list(reversed([1,2,3]))) ?',
+options:["[1,2,3]","[3,2,1]","Error","None"],
+answer:"[3,2,1]"
+},
+
+{
+question:"Output of print(enumerate(['a','b'])) ?",
+options:[
+"[('a',0),('b',1)]",
+"enumerate object",
+"Error",
+"None"
+],
+answer:"enumerate object"
+},
+
+{
+question:"Which complexity better?",
+options:["O(n²)","O(log n)","O(n³)","O(2ⁿ)"],
+answer:"O(log n)"
+},
+
+{
+question:"Linear search worst-case complexity?",
+options:["O(1)","O(log n)","O(n)","O(n²)"],
+answer:"O(n)"
+},
+
+{
+question:"Binary search requires?",
+options:[
+"Random data",
+"Sorted data",
+"Duplicate-free data only",
+"Tuples only"
+],
+answer:"Sorted data"
+},
+
+{
+question:"Which sorting generally fastest average-case among these?",
+options:[
+"Bubble Sort",
+"Quick Sort",
+"Linear Search",
+"Selection Sort"
+],
+answer:"Quick Sort"
+},
+
+{
+question:'Output of print(10//3) ?',
+options:["3.3","3","4","Error"],
+answer:"3"
+},
+
+{
+question:'Output of print(10%3) ?',
+options:["3","1","0","Error"],
+answer:"1"
+},
+
+{
+question:'Output of print(2**3) ?',
+options:["6","8","9","Error"],
+answer:"8"
+},
+
+{
+question:'Output of a=5 b=3 print(a&b) ?',
+options:["1","7","8","Error"],
+answer:"1"
+},
+
+{
+question:'Output of a=5 b=3 print(a|b) ?',
+options:["1","7","8","Error"],
+answer:"7"
+},
+
+{
+question:'Output of a=5 print(~a) ?',
+options:["-6","6","-5","Error"],
+answer:"-6"
+}
+
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let currentQuestion = 0;
+
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML =
+    `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", ()=>{
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+
+        });
+
+        optionsEl.appendChild(div);
+
+    });
+
+}
+
+document.getElementById("nextBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+
+        currentQuestion++;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("prevBtn")
+.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        loadQuestion();
+
+    }
+
+});
+
+document.getElementById("submitBtn")
+.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+            score++;
+        }
+
+    });
+
+    document.getElementById("quiz-container")
+    .style.display = "none";
+
+    document.getElementById("resultBox")
+    .style.display = "block";
+
+    const percentage =
+    ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats")
+    .innerHTML = `
+
+    <h2>Total Questions: ${quizData.length}</h2>
+    <h2>Correct Answers: ${score}</h2>
+    <h2>Wrong Answers: ${quizData.length - score}</h2>
+    <h2>Percentage: ${percentage}%</h2>
+    <br><br>
+
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const correct =
+        userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+
+        <h3>Q${index+1}. ${q.question}</h3>
+
+        <p class="${correct ? 'correct' : 'wrong'}">
+        Your Answer:
+        ${userAnswers[index] || "Not Attempted"}
+        </p>
+
+        <p class="answer">
+        Correct Answer:
+        ${q.answer}
+        </p>
+
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

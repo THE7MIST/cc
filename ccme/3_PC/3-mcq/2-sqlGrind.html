@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>100 SQL MCQ Practice</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:950px;
+    background:#111827;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(0,0,0,0.5);
+}
+
+h1{
+    text-align:center;
+    color:#38bdf8;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#cbd5e1;
+    margin-bottom:25px;
+}
+
+.progress{
+    margin-bottom:25px;
+    font-size:18px;
+    color:#facc15;
+    font-weight:bold;
+}
+
+.question{
+    font-size:24px;
+    line-height:1.5;
+    margin-bottom:25px;
+}
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.option{
+    background:#1e293b;
+    padding:15px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:0.3s;
+    border:2px solid transparent;
+    font-size:18px;
+}
+
+.option:hover{
+    background:#334155;
+}
+
+.option.selected{
+    border-color:#38bdf8;
+    background:#0f766e;
+}
+
+.buttons{
+    margin-top:30px;
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    justify-content:space-between;
+}
+
+button{
+    padding:14px 22px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.prev-btn{
+    background:#475569;
+    color:white;
+}
+
+.next-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.submit-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.result-box{
+    display:none;
+}
+
+.result-box h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#38bdf8;
+}
+
+.result-stats{
+    text-align:center;
+    line-height:2;
+    font-size:22px;
+    margin-bottom:25px;
+}
+
+.review-item{
+    background:#1e293b;
+    padding:18px;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.correct{
+    color:#4ade80;
+}
+
+.wrong{
+    color:#f87171;
+}
+
+.answer{
+    color:#facc15;
+}
+
+@media(max-width:600px){
+
+    .question{
+        font-size:20px;
+    }
+
+    .option{
+        font-size:16px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+    button{
+        width:100%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="quiz-container">
+
+        <h1>SQL 100 MCQ Practice</h1>
+        <p class="subtitle">Interactive MySQL Quiz Engine</p>
+
+        <div class="progress" id="progress">
+            Question 1 / 100
+        </div>
+
+        <div class="question" id="question"></div>
+
+        <div class="options" id="options"></div>
+
+        <div class="buttons">
+            <button class="prev-btn" id="prevBtn">Previous</button>
+            <button class="next-btn" id="nextBtn">Next</button>
+            <button class="submit-btn" id="submitBtn">Submit Quiz</button>
+        </div>
+
+    </div>
+
+    <div class="result-box" id="resultBox">
+
+        <h2>Quiz Result</h2>
+
+        <div class="result-stats" id="resultStats"></div>
+
+        <div id="review"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+question:"Which constraint prevents duplicate values?",
+options:["CHECK","UNIQUE","DEFAULT","NOT NULL"],
+answer:"UNIQUE"
+},
+
+{
+question:"Which SQL clause is executed first internally?",
+options:["SELECT","ORDER BY","FROM","HAVING"],
+answer:"FROM"
+},
+
+{
+question:"Which command removes all records and resets auto increment?",
+options:["DELETE","REMOVE","TRUNCATE","UPDATE"],
+answer:"TRUNCATE"
+},
+
+{
+question:"What will COUNT(column_name) ignore?",
+options:["Integers","Strings","NULL values","Duplicates"],
+answer:"NULL values"
+},
+
+{
+question:"Which statement is DDL?",
+options:["INSERT","UPDATE","CREATE","SELECT"],
+answer:"CREATE"
+},
+
+{
+question:"Which statement belongs to DML?",
+options:["DROP","ALTER","DELETE","CREATE"],
+answer:"DELETE"
+},
+
+{
+question:"Which command permanently saves changes?",
+options:["SAVE","COMMIT","PUSH","STORE"],
+answer:"COMMIT"
+},
+
+{
+question:"Which command cancels uncommitted changes?",
+options:["RETURN","ROLLBACK","UNDO","RESET"],
+answer:"ROLLBACK"
+},
+
+{
+question:"Which SQL operator checks multiple possible values?",
+options:["BETWEEN","LIKE","IN","EXISTS"],
+answer:"IN"
+},
+
+{
+question:"Which wildcard represents single character?",
+options:["*","%","_","#"],
+answer:"_"
+},
+
+{
+question:"Which wildcard represents multiple characters?",
+options:["%","_","?","!"],
+answer:"%"
+},
+
+{
+question:"Which clause removes duplicate rows from output?",
+options:["UNIQUE","DISTINCT","FILTER","REMOVE"],
+answer:"DISTINCT"
+},
+
+{
+question:"Which function converts string to uppercase?",
+options:["UPPER()","CAPITAL()","MAX()","TOP()"],
+answer:"UPPER()"
+},
+
+{
+question:"Which function returns string length?",
+options:["COUNT()","LENGTH()","SIZE()","CHAR()"],
+answer:"LENGTH()"
+},
+
+{
+question:"Which function combines strings?",
+options:["MERGE()","APPEND()","CONCAT()","COMBINE()"],
+answer:"CONCAT()"
+},
+
+{
+question:"Which operator searches pattern in string?",
+options:["MATCH","SEARCH","LIKE","FIND"],
+answer:"LIKE"
+},
+
+{
+question:"Which keyword is used for aliasing tables?",
+options:["TO","AS","ALIAS","RENAME"],
+answer:"AS"
+},
+
+{
+question:"What is the default sort order?",
+options:["RANDOM","DESC","ASC","NONE"],
+answer:"ASC"
+},
+
+{
+question:"Which SQL clause comes after WHERE?",
+options:["SELECT","ORDER BY","GROUP BY","LIMIT"],
+answer:"GROUP BY"
+},
+
+{
+question:"Which JOIN returns unmatched rows from both tables too?",
+options:["INNER JOIN","CROSS JOIN","FULL OUTER JOIN","SELF JOIN"],
+answer:"FULL OUTER JOIN"
+},
+
+{
+question:"Which key can contain NULL?",
+options:["Primary Key","Foreign Key","Candidate Key","Super Key"],
+answer:"Foreign Key"
+},
+
+{
+question:"Which command changes existing records only?",
+options:["INSERT","ALTER","UPDATE","CREATE"],
+answer:"UPDATE"
+},
+
+{
+question:"What does ACID stand for in DBMS?",
+options:[
+"Atomicity, Consistency, Isolation, Durability",
+"Accuracy, Consistency, Integrity, Durability",
+"Atomicity, Connectivity, Isolation, Duplication",
+"Atomicity, Consistency, Integrity, Dependency"
+],
+answer:"Atomicity, Consistency, Isolation, Durability"
+},
+
+{
+question:"Which property ensures transaction completes fully or not at all?",
+options:["Consistency","Isolation","Durability","Atomicity"],
+answer:"Atomicity"
+},
+
+{
+question:"Which command starts transaction manually?",
+options:["BEGIN","START TRANSACTION","OPEN","Both A and B"],
+answer:"Both A and B"
+},
+
+{
+question:"Which query returns second highest salary?",
+options:[
+"SELECT MAX(salary) FROM emp;",
+"SELECT salary FROM emp ORDER BY salary DESC LIMIT 1,1;",
+"SELECT MIN(salary) FROM emp;",
+"SELECT AVG(salary) FROM emp;"
+],
+answer:"SELECT salary FROM emp ORDER BY salary DESC LIMIT 1,1;"
+},
+
+{
+question:"Which normal form removes partial dependency?",
+options:["1NF","2NF","3NF","BCNF"],
+answer:"2NF"
+},
+
+{
+question:"Which normal form removes transitive dependency?",
+options:["1NF","2NF","3NF","4NF"],
+answer:"3NF"
+},
+
+{
+question:"Which command displays table structure?",
+options:["SHOW TABLE","DESC","VIEW TABLE","STRUCTURE"],
+answer:"DESC"
+},
+
+{
+question:"Which datatype stores variable length strings?",
+options:["CHAR","VARCHAR","TEXT","STRING"],
+answer:"VARCHAR"
+},
+
+{
+question:"Which datatype stores date only?",
+options:["YEAR","TIME","DATE","DATETIME"],
+answer:"DATE"
+},
+
+{
+question:"Which datatype stores date and time both?",
+options:["TIMESTAMP","DATETIME","DATE","YEAR"],
+answer:"DATETIME"
+},
+
+{
+question:"Which SQL function returns current date?",
+options:["CURDATE()","TODAY()","NOWDATE()","GETDATE()"],
+answer:"CURDATE()"
+},
+
+{
+question:"Which SQL function returns current timestamp?",
+options:["CURDATE()","NOW()","TIME()","DATE()"],
+answer:"NOW()"
+},
+
+{
+question:"Which operator checks range of values?",
+options:["LIKE","IN","BETWEEN","EXISTS"],
+answer:"BETWEEN"
+},
+
+{
+question:"Which statement creates relationship between tables?",
+options:["PRIMARY KEY","FOREIGN KEY","UNIQUE","INDEX"],
+answer:"FOREIGN KEY"
+},
+
+{
+question:"Which JOIN joins table with itself?",
+options:["SELF JOIN","CROSS JOIN","INNER JOIN","OUTER JOIN"],
+answer:"SELF JOIN"
+},
+
+{
+question:"Which clause executes last?",
+options:["WHERE","GROUP BY","HAVING","LIMIT"],
+answer:"LIMIT"
+},
+
+{
+question:"Which storage engine supports transactions in MySQL?",
+options:["MyISAM","InnoDB","CSV","MEMORY"],
+answer:"InnoDB"
+},
+
+{
+question:"Which key automatically increments values?",
+options:["UNIQUE","SERIAL","AUTO_INCREMENT","PRIMARY AUTO"],
+answer:"AUTO_INCREMENT"
+},
+
+{
+question:"What does NULL mean?",
+options:["Zero","Empty string","Unknown value","False"],
+answer:"Unknown value"
+},
+
+{
+question:"Which command renames a table?",
+options:[
+"ALTER TABLE old RENAME new;",
+"RENAME TABLE old TO new;",
+"MODIFY TABLE",
+"CHANGE TABLE"
+],
+answer:"RENAME TABLE old TO new;"
+},
+
+{
+question:"Which query deletes database permanently?",
+options:[
+"REMOVE DATABASE db;",
+"DELETE DATABASE db;",
+"DROP DATABASE db;",
+"ERASE DATABASE db;"
+],
+answer:"DROP DATABASE db;"
+},
+
+{
+question:"Which SQL clause filters records after aggregation?",
+options:["WHERE","GROUP BY","HAVING","ORDER BY"],
+answer:"HAVING"
+},
+
+{
+question:"Which command creates database backup generally?",
+options:["mysqldump","mysqlbackup","dumpmysql","dbsave"],
+answer:"mysqldump"
+},
+
+{
+question:"Which attack manipulates input fields to execute SQL?",
+options:["XSS","CSRF","SQL Injection","Phishing"],
+answer:"SQL Injection"
+},
+
+{
+question:"Which privilege allows only reading data?",
+options:["UPDATE","INSERT","SELECT","DELETE"],
+answer:"SELECT"
+},
+
+{
+question:"Which privilege modifies table structure?",
+options:["ALTER","UPDATE","DELETE","EXECUTE"],
+answer:"ALTER"
+},
+
+{
+question:"Which SQL command changes password?",
+options:["MODIFY USER","SET PASSWORD","CHANGE PASSWORD","UPDATE USER"],
+answer:"SET PASSWORD"
+},
+
+{
+question:"Which command shows all databases?",
+options:["SHOW DBS;","SHOW DATABASES;","DISPLAY DATABASES;","LIST DATABASES;"],
+answer:"SHOW DATABASES;"
+},
+
+{
+question:"Which command selects database for use?",
+options:["OPEN","CONNECT","USE","SELECT DATABASE"],
+answer:"USE"
+},
+
+{
+question:"Which clause can contain aggregate functions?",
+options:["WHERE","HAVING","FROM","JOIN"],
+answer:"HAVING"
+},
+
+{
+question:"Which command changes column datatype?",
+options:["ALTER TABLE MODIFY","UPDATE COLUMN","CHANGE TYPE","MODIFY DATA"],
+answer:"ALTER TABLE MODIFY"
+},
+
+{
+question:"Which SQL clause is optional?",
+options:["SELECT","FROM","WHERE","None"],
+answer:"WHERE"
+},
+
+{
+question:"Which function rounds number?",
+options:["ROUND()","CEIL()","FLOOR()","All of these"],
+answer:"All of these"
+},
+
+{
+question:"Which SQL function returns remainder?",
+options:["REM()","MOD()","DIV()","AVG()"],
+answer:"MOD()"
+},
+
+{
+question:"Which command removes duplicate rows physically?",
+options:["DISTINCT","NORMALIZE","DELETE using conditions","UNIQUE"],
+answer:"DELETE using conditions"
+},
+
+{
+question:"Which keyword checks existence of subquery result?",
+options:["IN","EXISTS","BETWEEN","LIKE"],
+answer:"EXISTS"
+},
+
+{
+question:"Which operator joins conditions?",
+options:["AND","OR","NOT","All of these"],
+answer:"All of these"
+},
+
+{
+question:"Which SQL command removes entire database object?",
+options:["DELETE","REMOVE","DROP","TRUNCATE"],
+answer:"DROP"
+},
+
+{
+question:"Which SQL command changes existing constraint?",
+options:["ALTER","UPDATE","MODIFY","REPLACE"],
+answer:"ALTER"
+},
+
+{
+question:"Which statement about PRIMARY KEY is TRUE?",
+options:[
+"Allows duplicates",
+"Allows multiple NULLs",
+"Uniquely identifies rows",
+"Used only for joins"
+],
+answer:"Uniquely identifies rows"
+},
+
+{
+question:"Which command removes index?",
+options:["DROP INDEX","DELETE INDEX","REMOVE INDEX","ALTER INDEX"],
+answer:"DROP INDEX"
+},
+
+{
+question:"Which datatype stores large text?",
+options:["VARCHAR","STRING","TEXT","CHAR"],
+answer:"TEXT"
+},
+
+{
+question:"Which datatype stores decimal numbers accurately?",
+options:["FLOAT","INT","DECIMAL","DOUBLE"],
+answer:"DECIMAL"
+},
+
+{
+question:"Which operator negates condition?",
+options:["OR","NOT","AND","XOR"],
+answer:"NOT"
+},
+
+{
+question:"Which clause is used with LIMIT for pagination mostly?",
+options:["OFFSET","PAGE","RANGE","STEP"],
+answer:"OFFSET"
+},
+
+{
+question:"Which command changes database currently in use?",
+options:["OPEN","USE","SWITCH","CONNECT"],
+answer:"USE"
+},
+
+{
+question:"Which command lists all tables?",
+options:["SHOW TABLES;","LIST TABLES;","DISPLAY TABLES;","GET TABLES;"],
+answer:"SHOW TABLES;"
+},
+
+{
+question:"Which query removes duplicates from output only?",
+options:["UNIQUE","DISTINCT","GROUP BY","INDEX"],
+answer:"DISTINCT"
+},
+
+{
+question:"Which command restores database backup usually?",
+options:["mysql","restoredb","dbimport","mysqlload"],
+answer:"mysql"
+},
+
+{
+question:"Which command creates view?",
+options:["MAKE VIEW","CREATE VIEW","NEW VIEW","BUILD VIEW"],
+answer:"CREATE VIEW"
+},
+
+{
+question:"Which object stores query virtually not physically?",
+options:["Trigger","View","Index","Procedure"],
+answer:"View"
+},
+
+{
+question:"Which SQL feature improves repeated query performance?",
+options:["Indexing","Dropping","Truncating","Revoking"],
+answer:"Indexing"
+},
+
+{
+question:"Which concept minimizes user permissions?",
+options:["Admin Access","Least Privilege","Open Access","Full Control"],
+answer:"Least Privilege"
+},
+
+{
+question:"Which scaling type is cheaper initially?",
+options:["Horizontal","Vertical","Distributed","Clustered"],
+answer:"Vertical"
+},
+
+{
+question:"Which issue occurs without indexes on large tables?",
+options:["Fast queries","Slow queries","Data encryption","Deadlock prevention"],
+answer:"Slow queries"
+},
+
+{
+question:"Which JOIN condition mistake commonly causes Cartesian product?",
+options:[
+"Missing WHERE/JOIN condition",
+"Using DISTINCT",
+"Using GROUP BY",
+"Using LIMIT"
+],
+answer:"Missing WHERE/JOIN condition"
+},
+
+{
+question:"Which query returns employees having salary between 5k and 10k?",
+options:[
+"WHERE salary IN(5000,10000)",
+"WHERE salary BETWEEN 5000 AND 10000",
+"WHERE salary LIKE 5000",
+"WHERE salary >5000 <10000"
+],
+answer:"WHERE salary BETWEEN 5000 AND 10000"
+},
+
+{
+question:"Which query is valid for creating foreign key?",
+options:[
+"FOREIGN KEY(dept_id) REFERENCES dept(id)",
+"CONNECT dept_id REFERENCES dept(id)",
+"LINK KEY(dept_id)",
+"PRIMARY REFERENCES dept(id)"
+],
+answer:"FOREIGN KEY(dept_id) REFERENCES dept(id)"
+},
+
+{
+question:"Which query gets first 5 rows?",
+options:[
+"SELECT * FROM emp LIMIT 5;",
+"SELECT TOP 5 * FROM emp;",
+"GET 5 FROM emp;",
+"FETCH 5 FROM emp;"
+],
+answer:"SELECT * FROM emp LIMIT 5;"
+},
+
+{
+question:"Which query skips first 5 rows and returns next 5?",
+options:[
+"SELECT * FROM emp LIMIT 5 OFFSET 5;",
+"SELECT * FROM emp SKIP 5;",
+"SELECT NEXT 5 FROM emp;",
+"SELECT * FROM emp PAGE 2;"
+],
+answer:"SELECT * FROM emp LIMIT 5 OFFSET 5;"
+},
+
+{
+question:"Which command changes database currently in use?",
+options:["OPEN","USE","SWITCH","CONNECT"],
+answer:"USE"
+},
+
+{
+question:"Which command lists all tables?",
+options:["SHOW TABLES;","LIST TABLES;","DISPLAY TABLES;","GET TABLES;"],
+answer:"SHOW TABLES;"
+},
+
+{
+question:"Which query removes duplicates from output only?",
+options:["UNIQUE","DISTINCT","GROUP BY","INDEX"],
+answer:"DISTINCT"
+},
+
+{
+question:"Which command restores database backup usually?",
+options:["mysql","restoredb","dbimport","mysqlload"],
+answer:"mysql"
+},
+
+{
+question:"Which query checks pattern ending with 'n'?",
+options:[
+"WHERE name LIKE '%n'",
+"WHERE name LIKE 'n%'",
+"WHERE name='n'",
+"WHERE name IN 'n'"
+],
+answer:"WHERE name LIKE '%n'"
+},
+
+{
+question:"Which query checks names starting with 'A'?",
+options:[
+"WHERE name LIKE '%A'",
+"WHERE name LIKE 'A%'",
+"WHERE name='A%'",
+"WHERE name IN 'A'"
+],
+answer:"WHERE name LIKE 'A%'"
+},
+
+{
+question:"Which command creates view?",
+options:["MAKE VIEW","CREATE VIEW","NEW VIEW","BUILD VIEW"],
+answer:"CREATE VIEW"
+},
+
+{
+question:"Which object stores query virtually not physically?",
+options:["Trigger","View","Index","Procedure"],
+answer:"View"
+},
+
+{
+question:"Which SQL feature improves repeated query performance?",
+options:["Indexing","Dropping","Truncating","Revoking"],
+answer:"Indexing"
+},
+
+{
+question:"Which query finds average salary department-wise?",
+options:[
+"SELECT AVG(salary) FROM emp;",
+"SELECT dept_id, AVG(salary) FROM emp GROUP BY dept_id;",
+"SELECT dept_id FROM emp;",
+"SELECT salary FROM emp;"
+],
+answer:"SELECT dept_id, AVG(salary) FROM emp GROUP BY dept_id;"
+},
+
+{
+question:"Which query is safest against SQL Injection?",
+options:[
+'query = "SELECT * FROM users WHERE id=" + user_input',
+'query = f"SELECT * FROM users WHERE id={user_input}"',
+"Prepared statements / parameterized queries",
+"Dynamic SQL concatenation"
+],
+answer:"Prepared statements / parameterized queries"
+},
+
+{
+question:"Which concept minimizes user permissions?",
+options:["Admin Access","Least Privilege","Open Access","Full Control"],
+answer:"Least Privilege"
+},
+
+{
+question:"Which scaling type is cheaper initially?",
+options:["Horizontal","Vertical","Distributed","Clustered"],
+answer:"Vertical"
+},
+
+{
+question:"Which issue occurs without indexes on large tables?",
+options:["Fast queries","Slow queries","Data encryption","Deadlock prevention"],
+answer:"Slow queries"
+},
+
+{
+question:"Which query counts total employees?",
+options:[
+"SELECT COUNT(*) FROM emp;",
+"SELECT TOTAL(*) FROM emp;",
+"SELECT NUMBER(*) FROM emp;",
+"SELECT ALL(*) FROM emp;"
+],
+answer:"SELECT COUNT(*) FROM emp;"
+},
+
+{
+question:"Which JOIN condition mistake commonly causes Cartesian product?",
+options:[
+"Missing WHERE/JOIN condition",
+"Using DISTINCT",
+"Using GROUP BY",
+"Using LIMIT"
+],
+answer:"Missing WHERE/JOIN condition"
+},
+
+{
+question:"Which query returns employees having salary between 5k and 10k?",
+options:[
+"WHERE salary IN(5000,10000)",
+"WHERE salary BETWEEN 5000 AND 10000",
+"WHERE salary LIKE 5000",
+"WHERE salary >5000 <10000"
+],
+answer:"WHERE salary BETWEEN 5000 AND 10000"
+},
+
+{
+question:"Which query is valid for creating foreign key?",
+options:[
+"FOREIGN KEY(dept_id) REFERENCES dept(id)",
+"CONNECT dept_id REFERENCES dept(id)",
+"LINK KEY(dept_id)",
+"PRIMARY REFERENCES dept(id)"
+],
+answer:"FOREIGN KEY(dept_id) REFERENCES dept(id)"
+},
+
+{
+question:"Which query gets first 5 rows?",
+options:[
+"SELECT * FROM emp LIMIT 5;",
+"SELECT TOP 5 * FROM emp;",
+"GET 5 FROM emp;",
+"FETCH 5 FROM emp;"
+],
+answer:"SELECT * FROM emp LIMIT 5;"
+},
+
+{
+question:"Which query skips first 5 rows and returns next 5?",
+options:[
+"SELECT * FROM emp LIMIT 5 OFFSET 5;",
+"SELECT * FROM emp SKIP 5;",
+"SELECT NEXT 5 FROM emp;",
+"SELECT * FROM emp PAGE 2;"
+],
+answer:"SELECT * FROM emp LIMIT 5 OFFSET 5;"
+},
+
+{
+question:"Which command changes database currently in use?",
+options:["OPEN","USE","SWITCH","CONNECT"],
+answer:"USE"
+},
+
+{
+question:"Which command lists all tables?",
+options:["SHOW TABLES;","LIST TABLES;","DISPLAY TABLES;","GET TABLES;"],
+answer:"SHOW TABLES;"
+},
+
+{
+question:"Which query removes duplicates from output only?",
+options:["UNIQUE","DISTINCT","GROUP BY","INDEX"],
+answer:"DISTINCT"
+},
+
+{
+question:"Which command restores database backup usually?",
+options:["mysql","restoredb","dbimport","mysqlload"],
+answer:"mysql"
+},
+
+{
+question:"Which query checks pattern ending with 'n'?",
+options:[
+"WHERE name LIKE '%n'",
+"WHERE name LIKE 'n%'",
+"WHERE name='n'",
+"WHERE name IN 'n'"
+],
+answer:"WHERE name LIKE '%n'"
+},
+
+{
+question:"Which query checks names starting with 'A'?",
+options:[
+"WHERE name LIKE '%A'",
+"WHERE name LIKE 'A%'",
+"WHERE name='A%'",
+"WHERE name IN 'A'"
+],
+answer:"WHERE name LIKE 'A%'"
+},
+
+{
+question:"Which command creates view?",
+options:["MAKE VIEW","CREATE VIEW","NEW VIEW","BUILD VIEW"],
+answer:"CREATE VIEW"
+},
+
+{
+question:"Which object stores query virtually not physically?",
+options:["Trigger","View","Index","Procedure"],
+answer:"View"
+},
+
+{
+question:"Which SQL feature improves repeated query performance?",
+options:["Indexing","Dropping","Truncating","Revoking"],
+answer:"Indexing"
+},
+
+{
+question:"Which query finds average salary department-wise?",
+options:[
+"SELECT AVG(salary) FROM emp;",
+"SELECT dept_id, AVG(salary) FROM emp GROUP BY dept_id;",
+"SELECT dept_id FROM emp;",
+"SELECT salary FROM emp;"
+],
+answer:"SELECT dept_id, AVG(salary) FROM emp GROUP BY dept_id;"
+},
+
+{
+question:"Which query is safest against SQL Injection?",
+options:[
+'query = "SELECT * FROM users WHERE id=" + user_input',
+'query = f"SELECT * FROM users WHERE id={user_input}"',
+"Prepared statements / parameterized queries",
+"Dynamic SQL concatenation"
+],
+answer:"Prepared statements / parameterized queries"
+},
+
+{
+question:"Which concept minimizes user permissions?",
+options:["Admin Access","Least Privilege","Open Access","Full Control"],
+answer:"Least Privilege"
+},
+
+{
+question:"Which scaling type is cheaper initially?",
+options:["Horizontal","Vertical","Distributed","Clustered"],
+answer:"Vertical"
+},
+
+{
+question:"Which issue occurs without indexes on large tables?",
+options:["Fast queries","Slow queries","Data encryption","Deadlock prevention"],
+answer:"Slow queries"
+},
+
+{
+question:"Which query counts total employees?",
+options:[
+"SELECT COUNT(*) FROM emp;",
+"SELECT TOTAL(*) FROM emp;",
+"SELECT NUMBER(*) FROM emp;",
+"SELECT ALL(*) FROM emp;"
+],
+answer:"SELECT COUNT(*) FROM emp;"
+},
+
+{
+question:"Which JOIN condition mistake commonly causes Cartesian product?",
+options:[
+"Missing WHERE/JOIN condition",
+"Using DISTINCT",
+"Using GROUP BY",
+"Using LIMIT"
+],
+answer:"Missing WHERE/JOIN condition"
+},
+
+{
+question:"Which query returns employees having salary between 5k and 10k?",
+options:[
+"WHERE salary IN(5000,10000)",
+"WHERE salary BETWEEN 5000 AND 10000",
+"WHERE salary LIKE 5000",
+"WHERE salary >5000 <10000"
+],
+answer:"WHERE salary BETWEEN 5000 AND 10000"
+},
+
+{
+question:"Which query is valid for creating foreign key?",
+options:[
+"FOREIGN KEY(dept_id) REFERENCES dept(id)",
+"CONNECT dept_id REFERENCES dept(id)",
+"LINK KEY(dept_id)",
+"PRIMARY REFERENCES dept(id)"
+],
+answer:"FOREIGN KEY(dept_id) REFERENCES dept(id)"
+}
+
+];
+
+let currentQuestion = 0;
+
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const submitBtn = document.getElementById("submitBtn");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML =
+        `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option => {
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", ()=>{
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+
+        });
+
+        optionsEl.appendChild(div);
+
+    });
+
+}
+
+nextBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+
+        currentQuestion++;
+
+        loadQuestion();
+
+    }
+
+});
+
+prevBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        loadQuestion();
+
+    }
+
+});
+
+submitBtn.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+
+            score++;
+
+        }
+
+    });
+
+    document.getElementById("quiz-container").style.display = "none";
+
+    const resultBox = document.getElementById("resultBox");
+
+    resultBox.style.display = "block";
+
+    const percentage =
+        ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats").innerHTML = `
+        <p>Total Questions: ${quizData.length}</p>
+        <p>Correct Answers: ${score}</p>
+        <p>Wrong Answers: ${quizData.length - score}</p>
+        <p>Percentage: ${percentage}%</p>
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const isCorrect =
+            userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+            <h3>Q${index + 1}. ${q.question}</h3>
+
+            <p class="${isCorrect ? 'correct' : 'wrong'}">
+                Your Answer:
+                ${userAnswers[index] || "Not Attempted"}
+            </p>
+
+            <p class="answer">
+                Correct Answer:
+                ${q.answer}
+            </p>
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
