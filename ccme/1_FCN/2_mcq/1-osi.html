@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>COSA Mock Test - Set 2</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#0f172a;
+        color:white;
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        padding:20px;
+    }
+
+    .container{
+        width:100%;
+        max-width:900px;
+        background:#111827;
+        border-radius:20px;
+        padding:30px;
+        box-shadow:0 0 25px rgba(0,0,0,0.5);
+    }
+
+    h1{
+        text-align:center;
+        margin-bottom:10px;
+        color:#38bdf8;
+    }
+
+    .subtitle{
+        text-align:center;
+        margin-bottom:25px;
+        color:#cbd5e1;
+    }
+
+    .top-bar{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:25px;
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+    .progress{
+        font-size:18px;
+        font-weight:bold;
+        color:#facc15;
+    }
+
+    .question-box{
+        margin-bottom:25px;
+    }
+
+    .question{
+        font-size:22px;
+        margin-bottom:20px;
+        line-height:1.5;
+    }
+
+    .options{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .option{
+        background:#1e293b;
+        border:2px solid transparent;
+        padding:15px;
+        border-radius:12px;
+        cursor:pointer;
+        transition:0.3s;
+        font-size:18px;
+    }
+
+    .option:hover{
+        background:#334155;
+        transform:scale(1.01);
+    }
+
+    .option.selected{
+        border:2px solid #38bdf8;
+        background:#0f766e;
+    }
+
+    .buttons{
+        display:flex;
+        justify-content:space-between;
+        margin-top:30px;
+        gap:15px;
+        flex-wrap:wrap;
+    }
+
+    button{
+        padding:14px 22px;
+        border:none;
+        border-radius:10px;
+        font-size:16px;
+        cursor:pointer;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    .prev-btn{
+        background:#475569;
+        color:white;
+    }
+
+    .next-btn{
+        background:#2563eb;
+        color:white;
+    }
+
+    .submit-btn{
+        background:#16a34a;
+        color:white;
+    }
+
+    button:hover{
+        opacity:0.9;
+        transform:translateY(-2px);
+    }
+
+    .result-box{
+        display:none;
+    }
+
+    .result-box h2{
+        text-align:center;
+        margin-bottom:20px;
+        color:#38bdf8;
+    }
+
+    .result-stats{
+        text-align:center;
+        margin-bottom:25px;
+        line-height:2;
+        font-size:20px;
+    }
+
+    .review{
+        margin-top:20px;
+    }
+
+    .review-item{
+        background:#1e293b;
+        padding:18px;
+        margin-bottom:15px;
+        border-radius:12px;
+    }
+
+    .correct{
+        color:#4ade80;
+        margin-top:10px;
+    }
+
+    .wrong{
+        color:#f87171;
+        margin-top:10px;
+    }
+
+    .answer{
+        color:#facc15;
+        margin-top:8px;
+    }
+
+    @media(max-width:600px){
+
+        .question{
+            font-size:18px;
+        }
+
+        .option{
+            font-size:16px;
+        }
+
+        button{
+            width:100%;
+        }
+
+        .buttons{
+            flex-direction:column;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="quiz-container">
+
+        <h1>COSA Mock Test - Set 2</h1>
+        <p class="subtitle">Windows + Linux Interactive MCQ Quiz</p>
+
+        <div class="top-bar">
+            <div class="progress" id="progress">Question 1 / 40</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question" id="question"></div>
+
+            <div class="options" id="options"></div>
+        </div>
+
+        <div class="buttons">
+            <button class="prev-btn" id="prevBtn">Previous</button>
+            <button class="next-btn" id="nextBtn">Next</button>
+            <button class="submit-btn" id="submitBtn">Submit Quiz</button>
+        </div>
+
+    </div>
+
+    <div class="result-box" id="resultBox">
+        <h2>Quiz Result</h2>
+
+        <div class="result-stats" id="resultStats"></div>
+
+        <div class="review" id="review"></div>
+    </div>
+
+</div>
+
+<script>
+
+const quizData = [
+// que here
+
+<!-- Paste inside const quizData = [ ] -->
+
+{
+question:"Which OSI layer is responsible for logical addressing?",
+options:["Data Link","Transport","Network","Session"],
+answer:"Network"
+},
+
+{
+question:"Which protocol works at the Transport layer?",
+options:["IP","TCP","ARP","ICMP"],
+answer:"TCP"
+},
+
+{
+question:"Which device primarily operates at Layer 2?",
+options:["Router","Gateway","Switch","Repeater"],
+answer:"Switch"
+},
+
+{
+question:"What is the PDU at the Network layer called?",
+options:["Segment","Frame","Packet","Bit"],
+answer:"Packet"
+},
+
+{
+question:"Which layer converts bits into signals?",
+options:["Physical","Data Link","Network","Session"],
+answer:"Physical"
+},
+
+{
+question:"Which cable type provides better EMI protection?",
+options:["UTP","Coaxial","STP","Fiber patch"],
+answer:"STP"
+},
+
+{
+question:"Which protocol is connection-oriented?",
+options:["UDP","IP","TCP","ARP"],
+answer:"TCP"
+},
+
+{
+question:"Which layer performs error detection using CRC?",
+options:["Physical","Data Link","Session","Presentation"],
+answer:"Data Link"
+},
+
+{
+question:"What is the default connector used in Ethernet UTP cables?",
+options:["RJ11","BNC","RJ45","SC"],
+answer:"RJ45"
+},
+
+{
+question:"Which device regenerates signals?",
+options:["Router","Repeater","Switch","Firewall"],
+answer:"Repeater"
+},
+
+{
+question:"Which protocol maps IP address to MAC address?",
+options:["RARP","ARP","ICMP","DHCP"],
+answer:"ARP"
+},
+
+{
+question:"At which layer does encryption mainly occur in OSI?",
+options:["Session","Presentation","Data Link","Network"],
+answer:"Presentation"
+},
+
+{
+question:"Which PDU belongs to the Data Link layer?",
+options:["Segment","Datagram","Frame","Packet"],
+answer:"Frame"
+},
+
+{
+question:"Which topology uses a central device?",
+options:["Bus","Ring","Star","Mesh"],
+answer:"Star"
+},
+
+{
+question:"What is the binary equivalent of decimal 255?",
+options:["11111110","11110000","11111111","00000000"],
+answer:"11111111"
+},
+
+{
+question:"Which protocol belongs to Application layer?",
+options:["TCP","HTTP","IP","Ethernet"],
+answer:"HTTP"
+},
+
+{
+question:"Which layer is responsible for routing?",
+options:["Session","Data Link","Network","Physical"],
+answer:"Network"
+},
+
+{
+question:"Which cable standard is most commonly used today?",
+options:["568A","568B","Coaxial-B","Fiber-A"],
+answer:"568B"
+},
+
+{
+question:"Which protocol is mainly used for email retrieval?",
+options:["SMTP","POP3","FTP","SNMP"],
+answer:"POP3"
+},
+
+{
+question:"What is the function of MAC address?",
+options:["Logical identification","Physical identification","Encryption","Routing"],
+answer:"Physical identification"
+},
+
+{
+question:"Which layer ensures end-to-end delivery?",
+options:["Physical","Transport","Data Link","Presentation"],
+answer:"Transport"
+},
+
+{
+question:"Which wireless standard operates in 5 GHz band?",
+options:["802.11a","802.3","802.5","802.15"],
+answer:"802.11a"
+},
+
+{
+question:"Which device breaks collision domains?",
+options:["Hub","Repeater","Switch","Bridge only"],
+answer:"Switch"
+},
+
+{
+question:"Which OSI layer handles dialogue control?",
+options:["Session","Physical","Transport","Network"],
+answer:"Session"
+},
+
+{
+question:"What is the size of MAC address?",
+options:["32-bit","64-bit","48-bit","128-bit"],
+answer:"48-bit"
+},
+
+{
+question:"Which layer adds source and destination MAC address?",
+options:["Physical","Data Link","Network","Session"],
+answer:"Data Link"
+},
+
+{
+question:"Which protocol uses port 80?",
+options:["HTTPS","DNS","HTTP","SSH"],
+answer:"HTTP"
+},
+
+{
+question:"Which medium is immune to electromagnetic interference?",
+options:["UTP","STP","Fiber Optic","Coaxial"],
+answer:"Fiber Optic"
+},
+
+{
+question:"Which device forwards packets based on IP address?",
+options:["Hub","Switch","Router","Repeater"],
+answer:"Router"
+},
+
+{
+question:"What is encapsulation?",
+options:["Removing headers","Adding headers layer by layer","Fragmenting packet","Encrypting frame"],
+answer:"Adding headers layer by layer"
+},
+
+{
+question:"Which layer is closest to the user?",
+options:["Application","Physical","Network","Transport"],
+answer:"Application"
+},
+
+{
+question:"Which protocol is unreliable but faster?",
+options:["TCP","UDP","FTP","SMTP"],
+answer:"UDP"
+},
+
+{
+question:"Which device works only at Physical layer?",
+options:["Router","Gateway","Hub","Firewall"],
+answer:"Hub"
+},
+
+{
+question:"Which protocol is used for secure web communication?",
+options:["HTTP","FTP","HTTPS","Telnet"],
+answer:"HTTPS"
+},
+
+{
+question:"Which cable uses light for transmission?",
+options:["STP","UTP","Fiber","Coaxial"],
+answer:"Fiber"
+},
+
+{
+question:"What is the PDU at Transport layer?",
+options:["Packet","Frame","Segment","Bit"],
+answer:"Segment"
+},
+
+{
+question:"Which layer performs segmentation?",
+options:["Session","Transport","Network","Data Link"],
+answer:"Transport"
+},
+
+{
+question:"Which protocol is used to test connectivity?",
+options:["ARP","ICMP","FTP","SMTP"],
+answer:"ICMP"
+},
+
+{
+question:"Which OSI layer is responsible for compression?",
+options:["Presentation","Session","Network","Physical"],
+answer:"Presentation"
+},
+
+{
+question:"Which device connects different networks?",
+options:["Switch","Bridge","Router","Hub"],
+answer:"Router"
+},
+
+{
+question:"What is the full form of CSMA/CD?",
+options:[
+"Carrier Signal Multiple Access",
+"Carrier Sense Multiple Access with Collision Detection",
+"Collision Sense Multiple Access",
+"Carrier Signal Media Access"
+],
+answer:"Carrier Sense Multiple Access with Collision Detection"
+},
+
+{
+question:"Which standard defines Ethernet?",
+options:["802.11","802.3","802.5","802.15"],
+answer:"802.3"
+},
+
+{
+question:"Which cable pair transmits data in 568B standard first?",
+options:["Green pair","Orange pair","Blue pair","Brown pair"],
+answer:"Orange pair"
+},
+
+{
+question:"Which layer is responsible for framing?",
+options:["Data Link","Physical","Session","Application"],
+answer:"Data Link"
+},
+
+{
+question:"What is the default port of HTTPS?",
+options:["20","21","443","25"],
+answer:"443"
+},
+
+{
+question:"Which address changes hop by hop?",
+options:["MAC","IP","Port","Hostname"],
+answer:"MAC"
+},
+
+{
+question:"Which protocol provides automatic IP assignment?",
+options:["DNS","DHCP","ARP","ICMP"],
+answer:"DHCP"
+},
+
+{
+question:"Which OSI layer handles syntax translation?",
+options:["Network","Presentation","Session","Physical"],
+answer:"Presentation"
+},
+
+{
+question:"Which protocol translates domain names to IP addresses?",
+options:["HTTP","DNS","FTP","SMTP"],
+answer:"DNS"
+},
+
+{
+question:"Which cable type is cheapest?",
+options:["Fiber","STP","UTP","Coaxial"],
+answer:"UTP"
+},
+
+{
+question:"Which protocol uses three-way handshake?",
+options:["UDP","TCP","ARP","ICMP"],
+answer:"TCP"
+},
+
+{
+question:"Which layer is responsible for flow control?",
+options:["Transport","Physical","Session","Presentation"],
+answer:"Transport"
+},
+
+{
+question:"Which protocol is used for remote login insecurely?",
+options:["SSH","HTTPS","Telnet","SNMP"],
+answer:"Telnet"
+},
+
+{
+question:"Which device filters traffic using MAC addresses?",
+options:["Router","Switch","Hub","Repeater"],
+answer:"Switch"
+},
+
+{
+question:"Which PDU belongs to Physical layer?",
+options:["Segment","Frame","Packet","Bit"],
+answer:"Bit"
+},
+
+{
+question:"Which wireless standard is Wi-Fi related?",
+options:["802.11","802.3","802.5","802.1Q"],
+answer:"802.11"
+},
+
+{
+question:"Which layer establishes, maintains, and terminates sessions?",
+options:["Session","Presentation","Data Link","Network"],
+answer:"Session"
+},
+
+{
+question:"Which address is burned into NIC?",
+options:["IP","Port","MAC","Gateway"],
+answer:"MAC"
+},
+
+{
+question:"Which device is intelligent among following?",
+options:["Hub","Repeater","Switch","Passive tap"],
+answer:"Switch"
+},
+
+{
+question:"Which cable pin arrangement differs between 568A and 568B?",
+options:["Blue pair","Brown pair","Orange and Green pair","White-blue pair"],
+answer:"Orange and Green pair"
+},
+
+{
+question:"Which protocol is used to transfer files?",
+options:["FTP","SMTP","SNMP","DHCP"],
+answer:"FTP"
+},
+
+{
+question:"Which OSI layer provides services directly to user applications?",
+options:["Application","Presentation","Session","Transport"],
+answer:"Application"
+},
+
+{
+question:"Which protocol uses port 53?",
+options:["FTP","DNS","HTTP","SSH"],
+answer:"DNS"
+},
+
+{
+question:"Which layer performs logical addressing?",
+options:["Transport","Data Link","Network","Physical"],
+answer:"Network"
+},
+
+{
+question:"Which medium supports highest bandwidth?",
+options:["UTP","STP","Fiber","Coaxial"],
+answer:"Fiber"
+},
+
+{
+question:"Which protocol is mainly used for network management?",
+options:["SNMP","FTP","SMTP","ARP"],
+answer:"SNMP"
+},
+
+{
+question:"Which device creates one collision domain per port?",
+options:["Hub","Switch","Repeater","Modem"],
+answer:"Switch"
+},
+
+{
+question:"What is decapsulation?",
+options:["Adding trailer","Removing headers layer by layer","Encrypting packet","Compressing frame"],
+answer:"Removing headers layer by layer"
+},
+
+{
+question:"Which layer converts frames into bits?",
+options:["Data Link","Network","Physical","Session"],
+answer:"Physical"
+},
+
+{
+question:"Which protocol secures remote login?",
+options:["FTP","Telnet","SSH","TFTP"],
+answer:"SSH"
+},
+
+{
+question:"Which layer uses port numbers?",
+options:["Physical","Transport","Network","Session"],
+answer:"Transport"
+},
+
+{
+question:"Which address remains same from source to destination generally?",
+options:["MAC","IP","Frame check sequence","Switch table entry"],
+answer:"IP"
+},
+
+{
+question:"Which layer performs path determination?",
+options:["Transport","Network","Physical","Session"],
+answer:"Network"
+},
+
+{
+question:"Which protocol is used for sending emails?",
+options:["POP3","SMTP","IMAP","FTP"],
+answer:"SMTP"
+},
+
+{
+question:"Which layer handles retransmission?",
+options:["Session","Network","Transport","Physical"],
+answer:"Transport"
+},
+
+{
+question:"Which connector is commonly used with fiber?",
+options:["RJ45","BNC","SC","RJ11"],
+answer:"SC"
+},
+
+{
+question:"Which device can operate on multiple OSI layers?",
+options:["Gateway","Hub","Repeater","Patch panel"],
+answer:"Gateway"
+},
+
+{
+question:"Which layer is responsible for physical topology?",
+options:["Physical","Data Link","Network","Session"],
+answer:"Physical"
+},
+
+{
+question:"Which protocol uses ACK mechanism heavily?",
+options:["UDP","TCP","ARP","ICMP"],
+answer:"TCP"
+},
+
+{
+question:"Which wireless issue occurs due to overlapping channels?",
+options:["Fragmentation","Collision","Interference","Encryption"],
+answer:"Interference"
+},
+
+{
+question:"Which layer checks MAC address?",
+options:["Network","Physical","Data Link","Session"],
+answer:"Data Link"
+},
+
+{
+question:"Which protocol is connectionless?",
+options:["TCP","UDP","FTP","HTTPS"],
+answer:"UDP"
+},
+
+{
+question:"Which cable arrangement is used for crossover cable?",
+options:[
+"568A both ends",
+"568B both ends",
+"568A one end and 568B other end",
+"Fiber crossover"
+],
+answer:"568A one end and 568B other end"
+},
+
+{
+question:"Which layer handles synchronization?",
+options:["Session","Network","Physical","Data Link"],
+answer:"Session"
+},
+
+{
+question:"Which device stores MAC address table?",
+options:["Router","Switch","Hub","Modem"],
+answer:"Switch"
+},
+
+{
+question:"Which protocol is used by ping?",
+options:["TCP","ICMP","UDP","ARP"],
+answer:"ICMP"
+},
+
+{
+question:"Which layer adds IP addresses?",
+options:["Transport","Network","Data Link","Physical"],
+answer:"Network"
+},
+
+{
+question:"Which transmission mode allows simultaneous send/receive?",
+options:["Simplex","Half duplex","Full duplex","Broadcast"],
+answer:"Full duplex"
+},
+
+{
+question:"Which protocol is more suitable for video streaming?",
+options:["TCP","FTP","UDP","SMTP"],
+answer:"UDP"
+},
+
+{
+question:"Which layer provides process-to-process communication?",
+options:["Network","Physical","Transport","Session"],
+answer:"Transport"
+},
+
+{
+question:"Which IEEE standard is related to VLAN tagging?",
+options:["802.11","802.1Q","802.3u","802.5"],
+answer:"802.1Q"
+},
+
+{
+question:"Which OSI layer interacts directly with networking hardware?",
+options:["Presentation","Session","Physical","Application"],
+answer:"Physical"
+},
+
+{
+question:"Which protocol can discover path issues using TTL expiry?",
+options:["ARP","ICMP","SMTP","FTP"],
+answer:"ICMP"
+},
+
+{
+question:"Which device works using broadcast transmission mainly?",
+options:["Switch","Router","Hub","Firewall"],
+answer:"Hub"
+},
+
+{
+question:"Which cable category commonly supports Gigabit Ethernet?",
+options:["CAT3","CAT4","CAT5e","CAT1"],
+answer:"CAT5e"
+},
+
+{
+question:"Which layer is responsible for multiplexing?",
+options:["Transport","Physical","Session","Data Link"],
+answer:"Transport"
+},
+
+{
+question:"Which protocol secures HTTP?",
+options:["SSL/TLS","UDP","ARP","ICMP"],
+answer:"SSL/TLS"
+},
+
+{
+question:"Which address is used by switch for forwarding?",
+options:["IP","MAC","Port number","DNS"],
+answer:"MAC"
+},
+
+{
+question:"Which topology has highest redundancy?",
+options:["Bus","Star","Ring","Mesh"],
+answer:"Mesh"
+},
+
+{
+question:"Which layer receives raw bits from transmission media?",
+options:["Data Link","Session","Physical","Transport"],
+answer:"Physical"
+}
+
+];
+
+let currentQuestion = 0;
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const submitBtn = document.getElementById("submitBtn");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML = `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option => {
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", () => {
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+        });
+
+        optionsEl.appendChild(div);
+    });
+}
+
+nextBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+        currentQuestion++;
+        loadQuestion();
+    }
+
+});
+
+prevBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+        currentQuestion--;
+        loadQuestion();
+    }
+
+});
+
+submitBtn.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+            score++;
+        }
+
+    });
+
+    document.getElementById("quiz-container").style.display = "none";
+
+    const resultBox = document.getElementById("resultBox");
+
+    resultBox.style.display = "block";
+
+    const percentage = ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats").innerHTML = `
+        <p>Total Questions: ${quizData.length}</p>
+        <p>Correct Answers: ${score}</p>
+        <p>Wrong Answers: ${quizData.length - score}</p>
+        <p>Percentage: ${percentage}%</p>
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const isCorrect = userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+            <h3>Q${index + 1}. ${q.question}</h3>
+
+            <p class="${isCorrect ? 'correct' : 'wrong'}">
+                Your Answer: ${userAnswers[index] || "Not Attempted"}
+            </p>
+
+            <p class="answer">
+                Correct Answer: ${q.answer}
+            </p>
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

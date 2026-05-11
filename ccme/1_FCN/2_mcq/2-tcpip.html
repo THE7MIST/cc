@@ -238,19 +238,448 @@
 <script>
 
 const quizData = [
-// que here
 
 
-// {
-// question:"A browser shows 403 Forbidden on Apache site. Most likely cause?",
-// options:[
-// "Wrong permissions/SELinux issue",
-// "GRUB corruption",
-// "Swap failure",
-// "SSH daemon stopped"
-// ],
-// answer:"Wrong permissions/SELinux issue"
-// }
+
+{
+question:"Which TCP/IP layer is responsible for routing packets between networks?",
+options:[
+"Application",
+"Internet",
+"Network Access",
+"Transport"
+],
+answer:"Internet"
+},
+
+{
+question:"Which protocol belongs to the Internet layer?",
+options:[
+"TCP",
+"FTP",
+"IP",
+"HTTP"
+],
+answer:"IP"
+},
+
+{
+question:"What is the PDU at TCP/IP Internet layer?",
+options:[
+"Frame",
+"Segment",
+"Packet",
+"Bit"
+],
+answer:"Packet"
+},
+
+{
+question:"Which protocol is connectionless?",
+options:[
+"TCP",
+"FTP",
+"UDP",
+"HTTPS"
+],
+answer:"UDP"
+},
+
+{
+question:"Which protocol is mainly responsible for reliable delivery?",
+options:[
+"UDP",
+"IP",
+"TCP",
+"ARP"
+],
+answer:"TCP"
+},
+
+{
+question:"Which device mainly works at the Internet layer?",
+options:[
+"Hub",
+"Router",
+"Repeater",
+"NIC"
+],
+answer:"Router"
+},
+
+{
+question:"Which protocol converts domain names into IP addresses?",
+options:[
+"DHCP",
+"DNS",
+"ARP",
+"ICMP"
+],
+answer:"DNS"
+},
+
+{
+question:"Which TCP/IP layer corresponds mainly to OSI Transport layer?",
+options:[
+"Internet",
+"Transport",
+"Application",
+"Network Access"
+],
+answer:"Transport"
+},
+
+{
+question:"Which protocol uses port number 80?",
+options:[
+"HTTPS",
+"SSH",
+"HTTP",
+"FTP"
+],
+answer:"HTTP"
+},
+
+{
+question:"What is encapsulation?",
+options:[
+"Removing headers",
+"Adding headers at each layer",
+"Encrypting packets",
+"Fragmenting frames"
+],
+answer:"Adding headers at each layer"
+},
+
+{
+question:"Which protocol maps IP address to MAC address?",
+options:[
+"ICMP",
+"DNS",
+"ARP",
+"TCP"
+],
+answer:"ARP"
+},
+
+{
+question:"Which protocol is used by ping command?",
+options:[
+"TCP",
+"ICMP",
+"ARP",
+"UDP"
+],
+answer:"ICMP"
+},
+
+{
+question:"Which TCP/IP layer interacts directly with physical media?",
+options:[
+"Internet",
+"Application",
+"Transport",
+"Network Access"
+],
+answer:"Network Access"
+},
+
+{
+question:"Which protocol is best suited for video streaming?",
+options:[
+"TCP",
+"SMTP",
+"UDP",
+"FTP"
+],
+answer:"UDP"
+},
+
+{
+question:"Which protocol establishes connection using three-way handshake?",
+options:[
+"UDP",
+"IP",
+"TCP",
+"ARP"
+],
+answer:"TCP"
+},
+
+{
+question:"Which address changes at every router hop?",
+options:[
+"IP Address",
+"MAC Address",
+"Port Number",
+"Hostname"
+],
+answer:"MAC Address"
+},
+
+{
+question:"Which protocol is used to automatically assign IP addresses?",
+options:[
+"DNS",
+"DHCP",
+"FTP",
+"ICMP"
+],
+answer:"DHCP"
+},
+
+{
+question:"Which TCP/IP layer handles process-to-process communication?",
+options:[
+"Internet",
+"Network Access",
+"Application",
+"Transport"
+],
+answer:"Transport"
+},
+
+{
+question:"Which protocol secures web communication?",
+options:[
+"HTTP",
+"FTP",
+"HTTPS",
+"TFTP"
+],
+answer:"HTTPS"
+},
+
+{
+question:"Which PDU is associated with Network Access layer?",
+options:[
+"Packet",
+"Segment",
+"Frame",
+"Datagram"
+],
+answer:"Frame"
+},
+
+{
+question:"Which protocol is used for sending emails?",
+options:[
+"SMTP",
+"POP3",
+"IMAP",
+"SNMP"
+],
+answer:"SMTP"
+},
+
+{
+question:"Which protocol is used for retrieving emails?",
+options:[
+"SMTP",
+"FTP",
+"POP3",
+"SSH"
+],
+answer:"POP3"
+},
+
+{
+question:"Which protocol is unreliable but faster?",
+options:[
+"TCP",
+"UDP",
+"HTTPS",
+"ICMP"
+],
+answer:"UDP"
+},
+
+{
+question:"Which field in TCP ensures proper ordering?",
+options:[
+"MAC Address",
+"Sequence Number",
+"TTL",
+"Checksum only"
+],
+answer:"Sequence Number"
+},
+
+{
+question:"Which protocol is responsible for logical addressing?",
+options:[
+"Ethernet",
+"ARP",
+"IP",
+"HTTP"
+],
+answer:"IP"
+},
+
+{
+question:"Which protocol mainly works with MAC addressing?",
+options:[
+"Ethernet",
+"TCP",
+"FTP",
+"DNS"
+],
+answer:"Ethernet"
+},
+
+{
+question:"Which device forwards frames using MAC table?",
+options:[
+"Router",
+"Hub",
+"Switch",
+"Gateway"
+],
+answer:"Switch"
+},
+
+{
+question:"What is decapsulation?",
+options:[
+"Adding trailer",
+"Removing layer headers",
+"Compressing packet",
+"Encrypting frame"
+],
+answer:"Removing layer headers"
+},
+
+{
+question:"Which protocol uses port 443?",
+options:[
+"HTTP",
+"FTP",
+"HTTPS",
+"Telnet"
+],
+answer:"HTTPS"
+},
+
+{
+question:"Which TCP/IP layer combines OSI Session and Presentation layers?",
+options:[
+"Transport",
+"Internet",
+"Application",
+"Network Access"
+],
+answer:"Application"
+},
+
+{
+question:"Which protocol checks connectivity and reports errors?",
+options:[
+"FTP",
+"ICMP",
+"DHCP",
+"SMTP"
+],
+answer:"ICMP"
+},
+
+{
+question:"Which protocol is used for remote login securely?",
+options:[
+"Telnet",
+"FTP",
+"SSH",
+"HTTP"
+],
+answer:"SSH"
+},
+
+{
+question:"Which protocol carries webpages?",
+options:[
+"FTP",
+"DNS",
+"HTTP",
+"ARP"
+],
+answer:"HTTP"
+},
+
+{
+question:"Which address remains mostly unchanged end-to-end?",
+options:[
+"MAC Address",
+"IP Address",
+"Frame Address",
+"Switch Port"
+],
+answer:"IP Address"
+},
+
+{
+question:"Which protocol works closest to hardware transmission?",
+options:[
+"Ethernet",
+"HTTP",
+"FTP",
+"DNS"
+],
+answer:"Ethernet"
+},
+
+{
+question:"Which protocol provides error recovery and retransmission?",
+options:[
+"UDP",
+"IP",
+"TCP",
+"ARP"
+],
+answer:"TCP"
+},
+
+{
+question:"Which layer converts packets into frames?",
+options:[
+"Internet",
+"Transport",
+"Network Access",
+"Application"
+],
+answer:"Network Access"
+},
+
+{
+question:"Which protocol is commonly used for file transfer?",
+options:[
+"FTP",
+"ICMP",
+"ARP",
+"DHCP"
+],
+answer:"FTP"
+},
+
+{
+question:"Which protocol contains source and destination port numbers?",
+options:[
+"IP",
+"Ethernet",
+"TCP/UDP",
+"ARP"
+],
+answer:"TCP/UDP"
+},
+
+{
+question:"Which protocol is mainly responsible for packet delivery between networks?",
+options:[
+"TCP",
+"Ethernet",
+"IP",
+"HTTP"
+],
+answer:"IP"
+}
 
 
 
