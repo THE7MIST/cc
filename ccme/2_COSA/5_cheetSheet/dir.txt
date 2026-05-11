@@ -1,0 +1,218 @@
+
+
+
+# 1. USER & AUTHENTICATION FILES
+
+| File/Dir                    | Purpose                | Possible Trap             |
+| --------------------------- | ---------------------- | ------------------------- |
+| `/etc/passwd`               | User account info      | Password NOT stored here  |
+| `/etc/shadow`               | Encrypted passwords    | Root-only readable        |
+| `/etc/group`                | Group info             | Group passwords may exist |
+| `/etc/gshadow`              | Secure group passwords | Similar to shadow         |
+| `/home/username`            | User home directory    | Not config file           |
+| `/root`                     | Root user home         | NOT `/home/root`          |
+| `/etc/login.defs`           | User defaults          | UID/GID ranges            |
+| `/etc/skel`                 | Default home template  | Copied during useradd     |
+| `/etc/sudoers`              | sudo permissions       | Edit using `visudo`       |
+| `/etc/security/limits.conf` | User resource limits   | ulimit related            |
+
+---
+
+# 2. BOOTING / GRUB / SYSTEMD
+
+| File/Dir                   | Purpose                | Trap                       |
+| -------------------------- | ---------------------- | -------------------------- |
+| `/boot/grub2/grub.cfg`     | GRUB config            | Auto-generated             |
+| `/etc/default/grub`        | Editable GRUB defaults | NOT actual boot menu       |
+| `/boot/vmlinuz-*`          | Linux kernel image     | Kernel binary              |
+| `/boot/initramfs-*`        | Initial RAM FS         | Temporary root FS          |
+| `/etc/fstab`               | Permanent mounts       | Wrong entry may break boot |
+| `/etc/systemd/system/`     | Custom unit files      | Higher priority            |
+| `/usr/lib/systemd/system/` | Default unit files     | Vendor supplied            |
+| `/etc/inittab`             | Old SysV init config   | Mostly obsolete in systemd |
+
+---
+
+# 3. FILESYSTEM / STORAGE / LVM
+
+| File/Dir       | Purpose             | Trap                          |
+| -------------- | ------------------- | ----------------------------- |
+| `/etc/fstab`   | Auto-mount config   | `mount -a` tests it           |
+| `/etc/mtab`    | Mounted filesystems | Often symlink                 |
+| `/proc/mounts` | Kernel mount info   | Runtime generated             |
+| `/dev/sda`     | Entire disk         | Not partition                 |
+| `/dev/sda1`    | Partition           | Number matters                |
+| `/etc/lvm/`    | LVM configs         | VG/LV metadata                |
+| `/swapfile`    | Swap file           | Alternative to swap partition |
+
+---
+
+# 4. NETWORKING FILES
+
+| File/Dir                          | Purpose                | Trap             |
+| --------------------------------- | ---------------------- | ---------------- |
+| `/etc/hosts`                      | Local hostname mapping | Bypasses DNS     |
+| `/etc/resolv.conf`                | DNS servers            | Client-side DNS  |
+| `/etc/hostname`                   | System hostname        | Used at boot     |
+| `/etc/services`                   | Port ↔ service mapping | Reference only   |
+| `/etc/hosts.allow`                | TCP wrappers allow     | Old security     |
+| `/etc/hosts.deny`                 | TCP wrappers deny      | Works with allow |
+| `/etc/sysconfig/network-scripts/` | Old NIC configs        | RHEL/CentOS      |
+| `/etc/NetworkManager/`            | Modern networking      | NM configs       |
+
+---
+
+# 5. SSH / FTP / REMOTE ACCESS
+
+| File/Dir                  | Purpose                   | Trap             |
+| ------------------------- | ------------------------- | ---------------- |
+| `/etc/ssh/sshd_config`    | SSH server config         | Daemon config    |
+| `/etc/ssh/ssh_config`     | SSH client config         | Client-side      |
+| `~/.ssh/id_rsa`           | Private key               | NEVER share      |
+| `~/.ssh/id_rsa.pub`       | Public key                | Shared safely    |
+| `~/.ssh/authorized_keys`  | Allowed public keys       | Server-side auth |
+| `~/.ssh/known_hosts`      | Trusted host fingerprints | Prevents MITM    |
+| `/etc/vsftpd/vsftpd.conf` | FTP server config         | vsftpd config    |
+
+---
+
+# 6. DNS / DHCP FILES
+
+| File/Dir                      | Purpose     | Trap                |
+| ----------------------------- | ----------- | ------------------- |
+| `/etc/named.conf`             | BIND config | Main DNS config     |
+| `/var/named/`                 | Zone files  | DNS records stored  |
+| `/etc/dhcp/dhcpd.conf`        | DHCP config | IP ranges           |
+| `/var/lib/dhcpd/dhcpd.leases` | DHCP leases | Dynamic assignments |
+
+---
+
+# 7. APACHE / WEB SERVER
+
+| File/Dir                     | Purpose              | Trap                  |
+| ---------------------------- | -------------------- | --------------------- |
+| `/etc/httpd/conf/httpd.conf` | Apache main config   | RHEL                  |
+| `/etc/apache2/apache2.conf`  | Apache config        | Debian/Ubuntu         |
+| `/var/www/html`              | Default website root | DocumentRoot          |
+| `/var/log/httpd/access_log`  | Apache access logs   | Requests              |
+| `/var/log/httpd/error_log`   | Apache errors        | Troubleshooting       |
+| `/etc/httpd/conf.d/`         | Extra configs        | Virtual hosts/modules |
+
+---
+
+# 8. SAMBA / NFS
+
+| File/Dir              | Purpose           | Trap          |
+| --------------------- | ----------------- | ------------- |
+| `/etc/samba/smb.conf` | Samba config      | SMB shares    |
+| `/etc/exports`        | NFS export config | Server-side   |
+| `/var/lib/nfs/`       | NFS runtime data  | Internal data |
+
+---
+
+# 9. MAIL SERVER
+
+| File/Dir                    | Purpose        | Trap               |
+| --------------------------- | -------------- | ------------------ |
+| `/etc/postfix/main.cf`      | Postfix config | Main mail settings |
+| `/etc/dovecot/dovecot.conf` | Dovecot config | IMAP/POP3          |
+| `/var/spool/mail/`          | User mailboxes | Local mail         |
+| `/var/log/maillog`          | Mail logs      | SMTP issues        |
+
+---
+
+# 10. SQUID / PROXY
+
+| File/Dir                    | Purpose            | Trap            |
+| --------------------------- | ------------------ | --------------- |
+| `/etc/squid/squid.conf`     | Squid config       | ACL/proxy rules |
+| `/var/log/squid/access.log` | Proxy access logs  | User requests   |
+| `/var/log/squid/cache.log`  | Squid cache/errors | Troubleshooting |
+
+---
+
+# 11. LDAP / NIS
+
+| File/Dir         | Purpose            | Trap           |
+| ---------------- | ------------------ | -------------- |
+| `/etc/openldap/` | LDAP configs       | OpenLDAP       |
+| `/etc/ldap.conf` | LDAP client config | Authentication |
+| `/var/lib/ldap/` | LDAP database      | Directory data |
+| `/var/yp/`       | NIS maps           | yp domain data |
+
+---
+
+# 12. PRINTING / NTP
+
+| File/Dir           | Purpose        | Trap       |
+| ------------------ | -------------- | ---------- |
+| `/etc/cups/`       | CUPS config    | Printing   |
+| `/etc/chrony.conf` | Chrony config  | Modern NTP |
+| `/etc/ntp.conf`    | Old NTP config | ntpd       |
+
+---
+
+# 13. FIREWALL / SECURITY
+
+| File/Dir              | Purpose            | Trap               |
+| --------------------- | ------------------ | ------------------ |
+| `/etc/firewalld/`     | firewalld configs  | Zones/services     |
+| `/etc/selinux/config` | SELinux mode       | Persistent SELinux |
+| `/var/log/secure`     | Security/auth logs | SSH/sudo failures  |
+
+---
+
+# 14. LOGGING FILES
+
+| File/Dir            | Purpose             | Trap            |
+| ------------------- | ------------------- | --------------- |
+| `/var/log/messages` | General system logs | RHEL            |
+| `/var/log/syslog`   | General logs        | Debian          |
+| `/var/log/boot.log` | Boot logs           | Startup issues  |
+| `/var/log/dmesg`    | Kernel messages     | Hardware/kernel |
+| `/var/log/wtmp`     | Login history       | Binary file     |
+| `/var/log/btmp`     | Failed logins       | Binary          |
+| `/var/log/lastlog`  | Last login info     | Binary          |
+
+---
+
+# 15. SPECIAL DIRECTORIES
+
+| Directory       | Purpose                       | Trap                    |
+| --------------- | ----------------------------- | ----------------------- |
+| `/proc`         | Virtual kernel/process FS     | Not real disk files     |
+| `/sys`          | Kernel device interface       | sysfs                   |
+| `/dev`          | Device files                  | Hardware abstraction    |
+| `/tmp`          | Temporary files               | Often cleaned at reboot |
+| `/var`          | Variable/changing data        | Logs/spool/cache        |
+| `/opt`          | Optional third-party software | Extra packages          |
+| `/bin`          | Essential binaries            | User commands           |
+| `/sbin`         | System admin binaries         | Root commands           |
+| `/usr/bin`      | User programs                 | Most commands           |
+| `/usr/sbin`     | Admin commands                | System tools            |
+| `/lib` `/lib64` | Shared libraries              | Dynamic linking         |
+
+---
+
+# VERY COMMON CDAC TRAPS
+
+| Trap                               | Correct                             |
+| ---------------------------------- | ----------------------------------- |
+| `/root` vs `/home/root`            | `/root`                             |
+| `sshd_config` vs `ssh_config`      | server vs client                    |
+| `main.cf` vs `master.cf`           | Postfix configs                     |
+| `authorized_keys` vs `known_hosts` | allowed keys vs remote fingerprints |
+| `/etc/hosts` vs DNS                | local mapping overrides DNS         |
+| `fstab` vs `mtab`                  | static vs current mounts            |
+| `grub.cfg` vs `/etc/default/grub`  | generated vs editable               |
+| `systemctl start` vs `enable`      | now vs boot                         |
+| `reload` vs `restart`              | config reload vs full restart       |
+| `firewalld` vs `iptables`          | modern vs older                     |
+| `chronyd` vs `ntpd`                | newer vs older NTP                  |
+| `access_log` vs `error_log`        | requests vs errors                  |
+| `A` vs `PTR`                       | hostname→IP vs IP→hostname          |
+| `IMAP` vs `POP3`                   | server mail vs download             |
+| `Bridge` vs `NAT`                  | direct LAN vs hidden VM             |
+| `Hard link` vs `Soft link`         | inode shared vs pointer             |
+| `root_squash` vs `no_root_squash`  | security vs root preserved          |
+

@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>COSA Mock Test - Set 2</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#0f172a;
+        color:white;
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        padding:20px;
+    }
+
+    .container{
+        width:100%;
+        max-width:900px;
+        background:#111827;
+        border-radius:20px;
+        padding:30px;
+        box-shadow:0 0 25px rgba(0,0,0,0.5);
+    }
+
+    h1{
+        text-align:center;
+        margin-bottom:10px;
+        color:#38bdf8;
+    }
+
+    .subtitle{
+        text-align:center;
+        margin-bottom:25px;
+        color:#cbd5e1;
+    }
+
+    .top-bar{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:25px;
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+    .progress{
+        font-size:18px;
+        font-weight:bold;
+        color:#facc15;
+    }
+
+    .question-box{
+        margin-bottom:25px;
+    }
+
+    .question{
+        font-size:22px;
+        margin-bottom:20px;
+        line-height:1.5;
+    }
+
+    .options{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .option{
+        background:#1e293b;
+        border:2px solid transparent;
+        padding:15px;
+        border-radius:12px;
+        cursor:pointer;
+        transition:0.3s;
+        font-size:18px;
+    }
+
+    .option:hover{
+        background:#334155;
+        transform:scale(1.01);
+    }
+
+    .option.selected{
+        border:2px solid #38bdf8;
+        background:#0f766e;
+    }
+
+    .buttons{
+        display:flex;
+        justify-content:space-between;
+        margin-top:30px;
+        gap:15px;
+        flex-wrap:wrap;
+    }
+
+    button{
+        padding:14px 22px;
+        border:none;
+        border-radius:10px;
+        font-size:16px;
+        cursor:pointer;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    .prev-btn{
+        background:#475569;
+        color:white;
+    }
+
+    .next-btn{
+        background:#2563eb;
+        color:white;
+    }
+
+    .submit-btn{
+        background:#16a34a;
+        color:white;
+    }
+
+    button:hover{
+        opacity:0.9;
+        transform:translateY(-2px);
+    }
+
+    .result-box{
+        display:none;
+    }
+
+    .result-box h2{
+        text-align:center;
+        margin-bottom:20px;
+        color:#38bdf8;
+    }
+
+    .result-stats{
+        text-align:center;
+        margin-bottom:25px;
+        line-height:2;
+        font-size:20px;
+    }
+
+    .review{
+        margin-top:20px;
+    }
+
+    .review-item{
+        background:#1e293b;
+        padding:18px;
+        margin-bottom:15px;
+        border-radius:12px;
+    }
+
+    .correct{
+        color:#4ade80;
+        margin-top:10px;
+    }
+
+    .wrong{
+        color:#f87171;
+        margin-top:10px;
+    }
+
+    .answer{
+        color:#facc15;
+        margin-top:8px;
+    }
+
+    @media(max-width:600px){
+
+        .question{
+            font-size:18px;
+        }
+
+        .option{
+            font-size:16px;
+        }
+
+        button{
+            width:100%;
+        }
+
+        .buttons{
+            flex-direction:column;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="quiz-container">
+
+        <h1>COSA Mock Test - Set 2</h1>
+        <p class="subtitle">Windows + Linux Interactive MCQ Quiz</p>
+
+        <div class="top-bar">
+            <div class="progress" id="progress">Question 1 / 40</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question" id="question"></div>
+
+            <div class="options" id="options"></div>
+        </div>
+
+        <div class="buttons">
+            <button class="prev-btn" id="prevBtn">Previous</button>
+            <button class="next-btn" id="nextBtn">Next</button>
+            <button class="submit-btn" id="submitBtn">Submit Quiz</button>
+        </div>
+
+    </div>
+
+    <div class="result-box" id="resultBox">
+        <h2>Quiz Result</h2>
+
+        <div class="result-stats" id="resultStats"></div>
+
+        <div class="review" id="review"></div>
+    </div>
+
+</div>
+
+<script>
+const quizData = [
+
+{
+question:"What is the primary purpose of grep?",
+options:["Compress files","Search text patterns","Manage users","Schedule tasks"],
+answer:"Search text patterns"
+},
+
+{
+question:"Which command searches for the word error in file.txt?",
+options:["grep error file.txt","find error file.txt","awk error file.txt","cut error file.txt"],
+answer:"grep error file.txt"
+},
+
+{
+question:"Which option makes grep case-insensitive?",
+options:["-r","-v","-i","-n"],
+answer:"-i"
+},
+
+{
+question:"Which grep option displays line numbers?",
+options:["-i","-n","-v","-c"],
+answer:"-n"
+},
+
+{
+question:"Which command searches recursively in directories?",
+options:["grep -r","grep -i","grep -n","grep -v"],
+answer:"grep -r"
+},
+
+{
+question:"Which option in grep inverts the match?",
+options:["-r","-x","-v","-l"],
+answer:"-v"
+},
+
+{
+question:"Which command counts matching lines?",
+options:["grep -v","grep -c","grep -n","grep -x"],
+answer:"grep -c"
+},
+
+{
+question:"Which symbol represents beginning of line in regex?",
+options:["$","*","^","."],
+answer:"^"
+},
+
+{
+question:"Which symbol represents end of line in regex?",
+options:["^","*","$","+"],
+answer:"$"
+},
+
+{
+question:"What does this command do? grep '^root' /etc/passwd",
+options:[
+"Finds lines ending with root",
+"Finds lines starting with root",
+"Deletes root user",
+"Counts root users"
+],
+answer:"Finds lines starting with root"
+},
+
+{
+question:"Which grep option shows only matching filenames?",
+options:["-l","-n","-v","-o"],
+answer:"-l"
+},
+
+{
+question:"What does grep -o do?",
+options:[
+"Recursive search",
+"Displays only matched text",
+"Shows line numbers",
+"Ignores case"
+],
+answer:"Displays only matched text"
+},
+
+{
+question:"Which command finds blank lines?",
+options:[
+'grep "^$" file',
+'grep "*" file',
+'grep "." file',
+'grep "#" file'
+],
+answer:'grep "^$" file'
+},
+
+{
+question:"Which regex symbol means any single character?",
+options:["*","^",".","$"],
+answer:"."
+},
+
+{
+question:"Which command excludes lines containing error?",
+options:[
+"grep error file",
+"grep -v error file",
+"grep -c error file",
+"grep -n error file"
+],
+answer:"grep -v error file"
+},
+
+{
+question:"Which command searches for files in Linux?",
+options:["grep","awk","find","cut"],
+answer:"find"
+},
+
+{
+question:"Which command finds a file named test.txt?",
+options:[
+"find / -name test.txt",
+"grep test.txt",
+"locate test.txt",
+"awk test.txt"
+],
+answer:"find / -name test.txt"
+},
+
+{
+question:"Which option searches directories recursively by default?",
+options:["grep","find","cut","which"],
+answer:"find"
+},
+
+{
+question:"Which command finds directories only?",
+options:[
+"find / -type d",
+"find / -type f",
+"find / -perm",
+"find / -name"
+],
+answer:"find / -type d"
+},
+
+{
+question:"Which command finds files only?",
+options:[
+"find / -type d",
+"find / -type f",
+"find / -type l",
+"find / -type p"
+],
+answer:"find / -type f"
+},
+
+{
+question:"Which command finds files larger than 100MB?",
+options:[
+"find / -size +100M",
+"grep 100M",
+"awk 100M",
+"cut 100M"
+],
+answer:"find / -size +100M"
+},
+
+{
+question:"Which command finds files owned by user alice?",
+options:[
+"find / -user alice",
+"grep alice",
+"awk alice",
+"which alice"
+],
+answer:"find / -user alice"
+},
+
+{
+question:"Which command finds files modified within 1 day?",
+options:[
+"find / -mtime 1",
+"find / -mtime -1",
+"find / -mtime +1",
+"find / -size -1"
+],
+answer:"find / -mtime -1"
+},
+
+{
+question:"Which command executes rm on found files?",
+options:[
+"find / -exec rm {} ;",
+"grep rm",
+"awk rm",
+"cut rm"
+],
+answer:"find / -exec rm {} ;"
+},
+
+{
+question:"What does {} represent in find -exec?",
+options:[
+"Root directory",
+"Current found file",
+"User home",
+"File extension"
+],
+answer:"Current found file"
+},
+
+{
+question:"Which command finds files with permission 777?",
+options:[
+"find / -perm 777",
+"grep 777",
+"chmod 777",
+"awk 777"
+],
+answer:"find / -perm 777"
+},
+
+{
+question:"Which command finds empty files?",
+options:[
+"find / -empty",
+"find / -null",
+"grep empty",
+"awk empty"
+],
+answer:"find / -empty"
+},
+
+{
+question:"Which command searches case-insensitively by name?",
+options:["-iname","-name","-type","-perm"],
+answer:"-iname"
+},
+
+{
+question:"Which command finds symbolic links?",
+options:[
+"find / -type l",
+"find / -type d",
+"find / -type f",
+"find / -type s"
+],
+answer:"find / -type l"
+},
+
+{
+question:"What is the purpose of locate compared to find?",
+options:[
+"Uses indexed database for faster search",
+"Changes ownership",
+"Compresses files",
+"Schedules jobs"
+],
+answer:"Uses indexed database for faster search"
+},
+
+{
+question:"What is awk mainly used for?",
+options:[
+"File compression",
+"Pattern scanning and processing",
+"User creation",
+"Scheduling"
+],
+answer:"Pattern scanning and processing"
+},
+
+{
+question:"Which field variable represents the first column in awk?",
+options:["$0","$1","$2","NF"],
+answer:"$1"
+},
+
+{
+question:"What does $0 represent in awk?",
+options:[
+"First field",
+"Last field",
+"Entire line",
+"Total fields"
+],
+answer:"Entire line"
+},
+
+{
+question:"Which command prints first column?",
+options:[
+"awk '{print $1}' file",
+"grep $1 file",
+"cut $0 file",
+"find $1"
+],
+answer:"awk '{print $1}' file"
+},
+
+{
+question:"Which awk variable represents number of fields?",
+options:["NR","NF","FS","RS"],
+answer:"NF"
+},
+
+{
+question:"Which awk variable represents current line number?",
+options:["NF","NR","FS","RS"],
+answer:"NR"
+},
+
+{
+question:"Which command prints lines containing error?",
+options:[
+"awk '/error/' file",
+"awk '{error}' file",
+"awk '$error' file",
+"awk 'print error'"
+],
+answer:"awk '/error/' file"
+},
+
+{
+question:"Which command sums first column numbers?",
+options:[
+"awk '{sum+=$1} END {print sum}' file",
+"grep sum file",
+"cut -f1 file",
+"find sum"
+],
+answer:"awk '{sum+=$1} END {print sum}' file"
+},
+
+{
+question:"Which option sets field separator?",
+options:["-r","-F","-i","-v"],
+answer:"-F"
+},
+
+{
+question:"What does this command use as separator? awk -F: '{print $1}' /etc/passwd",
+options:["Space","Tab","Colon","Comma"],
+answer:"Colon"
+},
+
+{
+question:"Which command prints second and third columns?",
+options:[
+"awk '{print $2,$3}' file",
+"grep $2 file",
+'cut -d " " -f2 file',
+"find $2"
+],
+answer:"awk '{print $2,$3}' file"
+},
+
+{
+question:"What does BEGIN block execute?",
+options:[
+"End of file",
+"Before processing input",
+"After every line",
+"Only on errors"
+],
+answer:"Before processing input"
+},
+
+{
+question:"What does END block execute?",
+options:[
+"Before processing",
+"During processing",
+"After processing all input",
+"Before file open"
+],
+answer:"After processing all input"
+},
+
+{
+question:"Which awk command prints line numbers?",
+options:[
+"awk '{print NR,$0}' file",
+"grep NR",
+"cut NR",
+"find NR"
+],
+answer:"awk '{print NR,$0}' file"
+},
+
+{
+question:"Which awk command prints last field?",
+options:["$NF","$NR","$FS","$RS"],
+answer:"$NF"
+},
+
+{
+question:"What is cut used for?",
+options:[
+"File deletion",
+"Extracting sections of text",
+"Scheduling tasks",
+"Permission management"
+],
+answer:"Extracting sections of text"
+},
+
+{
+question:"Which option specifies delimiter in cut?",
+options:["-f","-d","-c","-n"],
+answer:"-d"
+},
+
+{
+question:"Which command extracts first field separated by colon?",
+options:[
+"cut -d: -f1 file",
+"grep -f1 file",
+"awk -f1 file",
+"find -f1 file"
+],
+answer:"cut -d: -f1 file"
+},
+
+{
+question:"Which option extracts character positions?",
+options:["-f","-d","-c","-x"],
+answer:"-c"
+},
+
+{
+question:"Which command extracts first 5 characters?",
+options:[
+"cut -c1-5 file",
+"grep -c1-5",
+"awk -c1-5",
+"find -c1-5"
+],
+answer:"cut -c1-5 file"
+},
+
+{
+question:"Which command extracts fields 1 and 3?",
+options:[
+"cut -d: -f1,3 file",
+"grep -f1,3",
+"find -f1,3",
+"awk -d1,3"
+],
+answer:"cut -d: -f1,3 file"
+},
+
+{
+question:"What happens if delimiter is missing in cut?",
+options:[
+"Syntax error",
+"Uses tab by default",
+"Deletes file",
+"Uses colon"
+],
+answer:"Uses tab by default"
+},
+
+{
+question:"Which tool is generally more powerful?",
+options:["cut","awk","both equal","grep"],
+answer:"awk"
+},
+
+{
+question:"Which command works better for fixed-column extraction?",
+options:["cut","cron","which","whereis"],
+answer:"cut"
+},
+
+{
+question:"Which command extracts username field from /etc/passwd?",
+options:[
+"cut -d: -f1 /etc/passwd",
+"grep passwd",
+"find passwd",
+"which passwd"
+],
+answer:"cut -d: -f1 /etc/passwd"
+},
+
+{
+question:"What does which command show?",
+options:[
+"File permissions",
+"Command path",
+"User groups",
+"Cron jobs"
+],
+answer:"Command path"
+},
+
+{
+question:"Which command shows location of ls command?",
+options:[
+"which ls",
+"grep ls",
+"awk ls",
+"cut ls"
+],
+answer:"which ls"
+},
+
+{
+question:"What does whereis provide?",
+options:[
+"Only executable path",
+"Binary, source, and man page locations",
+"User info",
+"File permissions"
+],
+answer:"Binary, source, and man page locations"
+},
+
+{
+question:"Which command uses indexed database?",
+options:["grep","locate","awk","cut"],
+answer:"locate"
+},
+
+{
+question:"Which command updates locate database on many systems?",
+options:["updatedb","locate -u","finddb","grepdb"],
+answer:"updatedb"
+},
+
+{
+question:"What is cron used for?",
+options:[
+"Network monitoring",
+"Scheduled task automation",
+"File compression",
+"User management"
+],
+answer:"Scheduled task automation"
+},
+
+{
+question:"Which command edits current user's cron jobs?",
+options:[
+"cron -e",
+"crontab -e",
+"editcron",
+"taskcron"
+],
+answer:"crontab -e"
+},
+
+{
+question:"Which file stores system-wide cron jobs?",
+options:[
+"/etc/passwd",
+"/etc/shadow",
+"/etc/crontab",
+"/etc/cronjob"
+],
+answer:"/etc/crontab"
+},
+
+{
+question:"How many fields are present in standard cron timing syntax?",
+options:["3","4","5","6"],
+answer:"5"
+},
+
+{
+question:"What does this cron entry mean? 0 2 * * * backup.sh",
+options:[
+"Runs every minute",
+"Runs daily at 2 AM",
+"Runs monthly",
+"Runs every Sunday"
+],
+answer:"Runs daily at 2 AM"
+},
+
+{
+question:"Which symbol means every value in cron?",
+options:["?","*","#","%"],
+answer:"*"
+},
+
+{
+question:"Which field represents day of week in cron?",
+options:["First","Third","Fourth","Fifth"],
+answer:"Fifth"
+},
+
+{
+question:"Which cron field represents month?",
+options:["First","Second","Fourth","Fifth"],
+answer:"Fourth"
+},
+
+{
+question:"What does */5 mean in cron?",
+options:[
+"Every 5 seconds",
+"Every 5 minutes/units",
+"At minute 5 only",
+"Random timing"
+],
+answer:"Every 5 minutes/units"
+},
+
+{
+question:"Which command lists cron jobs?",
+options:[
+"crontab -l",
+"cron -a",
+"listcron",
+"jobs"
+],
+answer:"crontab -l"
+},
+
+{
+question:"What does grep -c root /etc/passwd return?",
+options:[
+"Matching usernames only",
+"Number of matching lines",
+"Root password",
+"File size"
+],
+answer:"Number of matching lines"
+},
+
+{
+question:"Which regex matches lines ending with .log?",
+options:[
+'grep ".log$" file',
+'grep "^.log" file',
+'grep "*log" file',
+'grep "log^" file'
+],
+answer:'grep ".log$" file'
+},
+
+{
+question:"Which command deletes files older than 7 days?",
+options:[
+"find /tmp -mtime +7 -exec rm {} \\;",
+"grep +7",
+"cut +7",
+"awk +7"
+],
+answer:"find /tmp -mtime +7 -exec rm {} \\;"
+},
+
+{
+question:"Which command prints usernames from /etc/passwd using awk?",
+options:[
+"awk -F: '{print $1}' /etc/passwd",
+"grep passwd",
+"cut passwd",
+"find passwd"
+],
+answer:"awk -F: '{print $1}' /etc/passwd"
+},
+
+{
+question:"Which tool is BEST for complex text processing?",
+options:["cut","awk","which","cron"],
+answer:"awk"
+},
+
+{
+question:"Which command shows both binary and man-page location?",
+options:["which","whereis","locate","grep"],
+answer:"whereis"
+},
+
+{
+question:"A cron job is not executing. Which daemon is MOST likely responsible?",
+options:["sshd","crond","systemd-networkd","named"],
+answer:"crond"
+},
+
+{
+question:"Which command searches only exact word matches?",
+options:["grep -w","grep -r","grep -n","grep -v"],
+answer:"grep -w"
+},
+
+{
+question:"Which command finds files and suppresses permission denied errors?",
+options:[
+"find / 2>/dev/null",
+"grep null",
+"awk null",
+"cut null"
+],
+answer:"find / 2>/dev/null"
+},
+
+{
+question:"Which combination is MOST commonly used in shell pipelines for log analysis?",
+options:[
+"grep + awk",
+"cron + which",
+"cut + crontab",
+"whereis + locate"
+],
+answer:"grep + awk"
+}
+
+];
+let currentQuestion = 0;
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const submitBtn = document.getElementById("submitBtn");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML = `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option => {
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", () => {
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+        });
+
+        optionsEl.appendChild(div);
+    });
+}
+
+nextBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+        currentQuestion++;
+        loadQuestion();
+    }
+
+});
+
+prevBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+        currentQuestion--;
+        loadQuestion();
+    }
+
+});
+
+submitBtn.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+            score++;
+        }
+
+    });
+
+    document.getElementById("quiz-container").style.display = "none";
+
+    const resultBox = document.getElementById("resultBox");
+
+    resultBox.style.display = "block";
+
+    const percentage = ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats").innerHTML = `
+        <p>Total Questions: ${quizData.length}</p>
+        <p>Correct Answers: ${score}</p>
+        <p>Wrong Answers: ${quizData.length - score}</p>
+        <p>Percentage: ${percentage}%</p>
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const isCorrect = userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+            <h3>Q${index + 1}. ${q.question}</h3>
+
+            <p class="${isCorrect ? 'correct' : 'wrong'}">
+                Your Answer: ${userAnswers[index] || "Not Attempted"}
+            </p>
+
+            <p class="answer">
+                Correct Answer: ${q.answer}
+            </p>
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>COSA Mock Test - Set 2</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#0f172a;
+        color:white;
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        padding:20px;
+    }
+
+    .container{
+        width:100%;
+        max-width:900px;
+        background:#111827;
+        border-radius:20px;
+        padding:30px;
+        box-shadow:0 0 25px rgba(0,0,0,0.5);
+    }
+
+    h1{
+        text-align:center;
+        margin-bottom:10px;
+        color:#38bdf8;
+    }
+
+    .subtitle{
+        text-align:center;
+        margin-bottom:25px;
+        color:#cbd5e1;
+    }
+
+    .top-bar{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:25px;
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+    .progress{
+        font-size:18px;
+        font-weight:bold;
+        color:#facc15;
+    }
+
+    .question-box{
+        margin-bottom:25px;
+    }
+
+    .question{
+        font-size:22px;
+        margin-bottom:20px;
+        line-height:1.5;
+    }
+
+    .options{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .option{
+        background:#1e293b;
+        border:2px solid transparent;
+        padding:15px;
+        border-radius:12px;
+        cursor:pointer;
+        transition:0.3s;
+        font-size:18px;
+    }
+
+    .option:hover{
+        background:#334155;
+        transform:scale(1.01);
+    }
+
+    .option.selected{
+        border:2px solid #38bdf8;
+        background:#0f766e;
+    }
+
+    .buttons{
+        display:flex;
+        justify-content:space-between;
+        margin-top:30px;
+        gap:15px;
+        flex-wrap:wrap;
+    }
+
+    button{
+        padding:14px 22px;
+        border:none;
+        border-radius:10px;
+        font-size:16px;
+        cursor:pointer;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    .prev-btn{
+        background:#475569;
+        color:white;
+    }
+
+    .next-btn{
+        background:#2563eb;
+        color:white;
+    }
+
+    .submit-btn{
+        background:#16a34a;
+        color:white;
+    }
+
+    button:hover{
+        opacity:0.9;
+        transform:translateY(-2px);
+    }
+
+    .result-box{
+        display:none;
+    }
+
+    .result-box h2{
+        text-align:center;
+        margin-bottom:20px;
+        color:#38bdf8;
+    }
+
+    .result-stats{
+        text-align:center;
+        margin-bottom:25px;
+        line-height:2;
+        font-size:20px;
+    }
+
+    .review{
+        margin-top:20px;
+    }
+
+    .review-item{
+        background:#1e293b;
+        padding:18px;
+        margin-bottom:15px;
+        border-radius:12px;
+    }
+
+    .correct{
+        color:#4ade80;
+        margin-top:10px;
+    }
+
+    .wrong{
+        color:#f87171;
+        margin-top:10px;
+    }
+
+    .answer{
+        color:#facc15;
+        margin-top:8px;
+    }
+
+    @media(max-width:600px){
+
+        .question{
+            font-size:18px;
+        }
+
+        .option{
+            font-size:16px;
+        }
+
+        button{
+            width:100%;
+        }
+
+        .buttons{
+            flex-direction:column;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="quiz-container">
+
+        <h1>COSA Mock Test - Set 2</h1>
+        <p class="subtitle">Windows + Linux Interactive MCQ Quiz</p>
+
+        <div class="top-bar">
+            <div class="progress" id="progress">Question 1 / 40</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question" id="question"></div>
+
+            <div class="options" id="options"></div>
+        </div>
+
+        <div class="buttons">
+            <button class="prev-btn" id="prevBtn">Previous</button>
+            <button class="next-btn" id="nextBtn">Next</button>
+            <button class="submit-btn" id="submitBtn">Submit Quiz</button>
+        </div>
+
+    </div>
+
+    <div class="result-box" id="resultBox">
+        <h2>Quiz Result</h2>
+
+        <div class="result-stats" id="resultStats"></div>
+
+        <div class="review" id="review"></div>
+    </div>
+
+</div>
+
+<script>
+
+const quizData = [
+
+
+{
+question:"What is a partition?",
+options:["User account","Divided section of storage device","Network interface","Process table"],
+answer:"Divided section of storage device"
+},
+
+{
+question:"Which command is commonly used to manage MBR partitions?",
+options:["mkfs","fdisk","mount","swapon"],
+answer:"fdisk"
+},
+
+{
+question:"Which partitioning scheme supports disks larger than 2TB?",
+options:["MBR","GPT","FAT16","ext2"],
+answer:"GPT"
+},
+
+{
+question:"What is the maximum number of primary partitions in MBR?",
+options:["2","4","8","16"],
+answer:"4"
+},
+
+{
+question:"Which partition type is created to overcome MBR partition limits?",
+options:["Swap","Primary","Extended","RAID"],
+answer:"Extended"
+},
+
+{
+question:"Logical partitions are created inside:",
+options:["Swap partition","RAID partition","Extended partition","EFI partition"],
+answer:"Extended partition"
+},
+
+{
+question:"Which partition table is modern and recommended for UEFI systems?",
+options:["MBR","GPT","FAT32","ext3"],
+answer:"GPT"
+},
+
+{
+question:"Which command displays partition tables?",
+options:["lsblk","pwd","grep","awk"],
+answer:"lsblk"
+},
+
+{
+question:"Which command shows block devices and partitions?",
+options:["fdisk","lsblk","mount","passwd"],
+answer:"lsblk"
+},
+
+{
+question:"Which utility is GPT-aware replacement for fdisk?",
+options:["gdisk","mkfs","lvcreate","swapon"],
+answer:"gdisk"
+},
+
+{
+question:"Which partition type can be bootable directly?",
+options:["Logical only","Primary","Swap only","RAID only"],
+answer:"Primary"
+},
+
+{
+question:"How many extended partitions are allowed in MBR?",
+options:["1","2","4","Unlimited"],
+answer:"1"
+},
+
+{
+question:"Which partition numbering usually starts from /dev/sda5?",
+options:["Primary","Extended","Logical","EFI"],
+answer:"Logical"
+},
+
+{
+question:"What is /dev/sda1 typically?",
+options:[
+"First partition of first disk",
+"First logical volume",
+"First RAID array",
+"First swap device"
+],
+answer:"First partition of first disk"
+},
+
+{
+question:"Which partition type mainly acts as a container?",
+options:["Primary","Logical","Extended","EFI"],
+answer:"Extended"
+},
+
+{
+question:"Which is TRUE about logical partitions?",
+options:[
+"Cannot store data",
+"Exist inside extended partition",
+"Only for swap",
+"Only in GPT"
+],
+answer:"Exist inside extended partition"
+},
+
+{
+question:"Which scheme removes primary/logical partition limitation?",
+options:["FAT32","GPT","ext4","Swap"],
+answer:"GPT"
+},
+
+{
+question:"Which partition usually contains bootloader files in UEFI systems?",
+options:[
+"Swap",
+"EFI System Partition",
+"Logical Partition",
+"LVM Partition"
+],
+answer:"EFI System Partition"
+},
+
+{
+question:"Which filesystem is commonly used for EFI partition?",
+options:["ext4","xfs","FAT32","NTFS"],
+answer:"FAT32"
+},
+
+{
+question:"Which command creates partitions interactively?",
+options:["fdisk","mount","umount","mkfs"],
+answer:"fdisk"
+},
+
+{
+question:"Which filesystem is default in many modern Linux distributions?",
+options:["FAT16","ext4","NTFS","exFAT"],
+answer:"ext4"
+},
+
+{
+question:"Which filesystem is commonly used in Red Hat systems?",
+options:["xfs","FAT32","ext2","NTFS"],
+answer:"xfs"
+},
+
+{
+question:"Which filesystem supports journaling?",
+options:["ext2","FAT32","ext4","FAT16"],
+answer:"ext4"
+},
+
+{
+question:"Which filesystem does NOT support Linux permissions?",
+options:["ext4","xfs","FAT32","ext3"],
+answer:"FAT32"
+},
+
+{
+question:"Which command creates filesystem on partition?",
+options:["mkfs","mount","fsck","swapon"],
+answer:"mkfs"
+},
+
+{
+question:"Which command creates ext4 filesystem?",
+options:[
+"mkfs.ext4 /dev/sda1",
+"ext4mkfs /dev/sda1",
+"format.ext4",
+"fdisk ext4"
+],
+answer:"mkfs.ext4 /dev/sda1"
+},
+
+{
+question:"Which command creates xfs filesystem?",
+options:["mkfs.xfs","xfsmk","mkfs.xf","xfscreate"],
+answer:"mkfs.xfs"
+},
+
+{
+question:"Which filesystem is mainly used in Windows?",
+options:["ext4","xfs","NTFS","ext3"],
+answer:"NTFS"
+},
+
+{
+question:"Which filesystem has 4GB single-file size limitation?",
+options:["ext4","xfs","FAT32","NTFS"],
+answer:"FAT32"
+},
+
+{
+question:"Which filesystem check command repairs Linux filesystems?",
+options:["fsck","mount","fdisk","swapon"],
+answer:"fsck"
+},
+
+{
+question:"Which command mounts filesystem manually?",
+options:["mount","fdisk","mkfs","swapoff"],
+answer:"mount"
+},
+
+{
+question:"Which command unmounts filesystem?",
+options:["dismount","unmount","umount","removefs"],
+answer:"umount"
+},
+
+{
+question:"Which file stores permanent mount configurations?",
+options:["/etc/passwd","/etc/fstab","/etc/shadow","/etc/grub"],
+answer:"/etc/fstab"
+},
+
+{
+question:"What does UUID represent in storage systems?",
+options:[
+"User ID",
+"Unique disk identifier",
+"Bootloader",
+"RAID level"
+],
+answer:"Unique disk identifier"
+},
+
+{
+question:"Why are UUIDs preferred in /etc/fstab?",
+options:[
+"Faster CPU performance",
+"Stable device identification",
+"Better networking",
+"Smaller partitions"
+],
+answer:"Stable device identification"
+},
+
+{
+question:"Which command displays mounted filesystems?",
+options:["mount","grep","awk","crontab"],
+answer:"mount"
+},
+
+{
+question:"Which mount point is commonly used for temporary files?",
+options:["/boot","/tmp","/etc","/proc"],
+answer:"/tmp"
+},
+
+{
+question:"Which command tests fstab entries without reboot?",
+options:["mount -a","reboot","fsck","mkfs"],
+answer:"mount -a"
+},
+
+{
+question:"What happens if invalid entry exists in /etc/fstab?",
+options:[
+"Faster boot",
+"Boot problems may occur",
+"Filesystem auto-repair",
+"Disk formatting"
+],
+answer:"Boot problems may occur"
+},
+
+{
+question:"Which command shows disk usage of mounted filesystems?",
+options:["du","df -h","fdisk -l","lsblk"],
+answer:"df -h"
+},
+
+{
+question:"What is swap space used for?",
+options:[
+"Bootloader storage",
+"Virtual memory extension",
+"User authentication",
+"RAID metadata"
+],
+answer:"Virtual memory extension"
+},
+
+{
+question:"Which command creates swap signature?",
+options:["swapon","mkswap","mkfs.swap","swapset"],
+answer:"mkswap"
+},
+
+{
+question:"Which command enables swap?",
+options:["swapon","swapon","mountswap","swapstart"],
+answer:"swapon"
+},
+
+{
+question:"Which command disables swap?",
+options:["swapoff","unswap","swapdisable","umountswap"],
+answer:"swapoff"
+},
+
+{
+question:"Which command displays active swap usage?",
+options:["free -h","mount","fdisk -l","grep swap"],
+answer:"free -h"
+},
+
+{
+question:"Which file is modified for permanent swap mounting?",
+options:["/etc/passwd","/etc/fstab","/etc/grub","/boot"],
+answer:"/etc/fstab"
+},
+
+{
+question:"Which partition type is commonly dedicated for swap?",
+options:["ext4","FAT32","Linux swap","xfs"],
+answer:"Linux swap"
+},
+
+{
+question:"Which is TRUE about swap files?",
+options:[
+"Cannot be used in Linux",
+"Alternative to swap partitions",
+"Only for RAID",
+"Replace RAM permanently"
+],
+answer:"Alternative to swap partitions"
+},
+
+{
+question:"Which command checks memory and swap usage?",
+options:["ps","free","topdisk","mount"],
+answer:"free"
+},
+
+{
+question:"What happens if system runs out of RAM and swap?",
+options:[
+"Faster system",
+"OOM conditions may occur",
+"Filesystem expands automatically",
+"Swap duplicates RAM"
+],
+answer:"OOM conditions may occur"
+},
+
+{
+question:"What does LVM stand for?",
+options:[
+"Linux Volume Manager",
+"Logical Volume Management",
+"Large Virtual Memory",
+"Linux Virtual Mount"
+],
+answer:"Logical Volume Management"
+},
+
+{
+question:"Which LVM layer uses physical disks?",
+options:["VG","LV","PV","FS"],
+answer:"PV"
+},
+
+{
+question:"Which LVM layer groups physical volumes?",
+options:["LV","VG","PV","RAID"],
+answer:"VG"
+},
+
+{
+question:"Which LVM layer contains actual filesystem?",
+options:["LV","VG","PV","UUID"],
+answer:"LV"
+},
+
+{
+question:"Which command creates physical volume?",
+options:["pvcreate","vgcreate","lvcreate","mkpv"],
+answer:"pvcreate"
+},
+
+{
+question:"Which command creates volume group?",
+options:["pvcreate","vgcreate","lvcreate","mkvg"],
+answer:"vgcreate"
+},
+
+{
+question:"Which command creates logical volume?",
+options:["pvcreate","vgcreate","lvcreate","mkfs"],
+answer:"lvcreate"
+},
+
+{
+question:"Which feature is major advantage of LVM?",
+options:[
+"Dynamic resizing",
+"Faster internet",
+"Lower CPU usage",
+"Password management"
+],
+answer:"Dynamic resizing"
+},
+
+{
+question:"Which command extends logical volume?",
+options:["lvextend","vgextend","pvextend","lvresizefs"],
+answer:"lvextend"
+},
+
+{
+question:"Which command reduces logical volume size?",
+options:["lvreduce","lvcut","pvshrink","lvdown"],
+answer:"lvreduce"
+},
+
+{
+question:"Which filesystem can be grown online easily?",
+options:["ext2","xfs","FAT32","NTFS"],
+answer:"xfs"
+},
+
+{
+question:"Which filesystem CANNOT be shrunk directly?",
+options:["ext4","xfs","ext3","ext2"],
+answer:"xfs"
+},
+
+{
+question:"Which command grows xfs filesystem?",
+options:["resize2fs","xfs_growfs","fsck","growpart"],
+answer:"xfs_growfs"
+},
+
+{
+question:"Which command resizes ext filesystem?",
+options:["resize2fs","xfs_growfs","mkfs.ext4","fsck"],
+answer:"resize2fs"
+},
+
+{
+question:"Which is TRUE about LVM snapshots?",
+options:[
+"Used for backup/recovery",
+"Replace RAID",
+"Delete filesystem",
+"Disable journaling"
+],
+answer:"Used for backup/recovery"
+},
+
+{
+question:"What is RAID mainly used for?",
+options:[
+"User authentication",
+"Disk redundancy/performance",
+"File permissions",
+"Package management"
+],
+answer:"Disk redundancy/performance"
+},
+
+{
+question:"Which RAID level provides mirroring?",
+options:["RAID 0","RAID 1","RAID 5","RAID 6"],
+answer:"RAID 1"
+},
+
+{
+question:"Which RAID level provides striping without redundancy?",
+options:["RAID 0","RAID 1","RAID 5","RAID 10"],
+answer:"RAID 0"
+},
+
+{
+question:"Which command shows filesystem UUIDs?",
+options:["blkid","grep","fdisk","awk"],
+answer:"blkid"
+},
+
+{
+question:"Which command shows partition information?",
+options:["fdisk -l","mount -a","swapon","fsck"],
+answer:"fdisk -l"
+},
+
+{
+question:"A Linux admin wants more than 4 partitions on MBR disk. What is required?",
+options:["GPT","Extended partition","Swap partition","RAID"],
+answer:"Extended partition"
+},
+
+{
+question:"Which filesystem is BEST suited for huge files and enterprise storage?",
+options:["FAT16","FAT32","xfs","ext2"],
+answer:"xfs"
+},
+
+{
+question:"A system fails to boot after editing /etc/fstab. Most likely reason?",
+options:[
+"Wrong cron syntax",
+"Invalid mount entry",
+"Corrupted passwd file",
+"Disabled SSH"
+],
+answer:"Invalid mount entry"
+},
+
+{
+question:"Which command permanently mounts all fstab entries immediately?",
+options:["mount -a","mountall","reboot","fsck"],
+answer:"mount -a"
+},
+
+{
+question:"Which storage layer should be resized FIRST when extending LVM filesystem?",
+options:["Filesystem","Logical Volume","Swap","RAID"],
+answer:"Logical Volume"
+},
+
+{
+question:"Which partitioning scheme supports theoretically unlimited partitions?",
+options:["MBR","GPT","FAT32","ext3"],
+answer:"GPT"
+},
+
+{
+question:"A user accidentally runs mkfs on wrong partition. What occurs?",
+options:[
+"Filesystem repaired",
+"Data likely destroyed",
+"Swap enabled",
+"UUID reset only"
+],
+answer:"Data likely destroyed"
+},
+
+{
+question:"Which command displays hierarchical storage tree?",
+options:["lsblk","pwd","df","grep"],
+answer:"lsblk"
+},
+
+{
+question:"Which mount option is MOST useful for security on /tmp?",
+options:["exec","suid","noexec","rwx"],
+answer:"noexec"
+},
+
+{
+question:"Which statement is TRUE?",
+options:[
+"xfs supports shrinking easily",
+"FAT32 supports Linux permissions fully",
+"LVM allows flexible storage management",
+"Swap replaces filesystem"
+],
+answer:"LVM allows flexible storage management"
+}
+
+
+
+
+
+
+
+];
+
+let currentQuestion = 0;
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const submitBtn = document.getElementById("submitBtn");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML = `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option => {
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", () => {
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+        });
+
+        optionsEl.appendChild(div);
+    });
+}
+
+nextBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+        currentQuestion++;
+        loadQuestion();
+    }
+
+});
+
+prevBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+        currentQuestion--;
+        loadQuestion();
+    }
+
+});
+
+submitBtn.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+            score++;
+        }
+
+    });
+
+    document.getElementById("quiz-container").style.display = "none";
+
+    const resultBox = document.getElementById("resultBox");
+
+    resultBox.style.display = "block";
+
+    const percentage = ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats").innerHTML = `
+        <p>Total Questions: ${quizData.length}</p>
+        <p>Correct Answers: ${score}</p>
+        <p>Wrong Answers: ${quizData.length - score}</p>
+        <p>Percentage: ${percentage}%</p>
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const isCorrect = userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+            <h3>Q${index + 1}. ${q.question}</h3>
+
+            <p class="${isCorrect ? 'correct' : 'wrong'}">
+                Your Answer: ${userAnswers[index] || "Not Attempted"}
+            </p>
+
+            <p class="answer">
+                Correct Answer: ${q.answer}
+            </p>
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
