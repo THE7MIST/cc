@@ -1,0 +1,1358 @@
+# RIP (Routing Information Protocol) — Quick Revision
+
+---
+
+## Basic RIP Information
+
+| Concept                | Value / Meaning                  |
+| ---------------------- | -------------------------------- |
+| RIP Full Form          | Routing Information Protocol     |
+| Routing Type           | Distance Vector Routing Protocol |
+| Metric Used            | Hop Count                        |
+| Maximum Valid Hop      | 15                               |
+| Infinity / Unreachable | 16                               |
+| RIP Algorithm          | Bellman-Ford                     |
+| Convergence Speed      | Slow                             |
+
+---
+
+## RIP Communication Details
+
+| Concept                 | Value / Meaning |
+| ----------------------- | --------------- |
+| RIPv1 Communication     | Broadcast       |
+| RIPv2 Communication     | Multicast       |
+| RIPv2 Multicast Address | 224.0.0.9       |
+| Transport Protocol      | UDP             |
+| RIP Port Number         | UDP 520         |
+
+---
+
+## RIP Features
+
+| Concept              | Value / Meaning    |
+| -------------------- | ------------------ |
+| Supports VLSM        | RIPv2 = Yes        |
+| Auto Summary         | Enabled by default |
+| Disable Auto Summary | `no auto-summary`  |
+
+---
+
+## RIP Configuration Commands
+
+| Concept                 | Command                |
+| ----------------------- | ---------------------- |
+| RIP Configuration Start | `router rip`           |
+| Enable RIPv2            | `version 2`            |
+| Advertise Network       | `network <network-id>` |
+
+---
+
+# Routing Loop Revision
+
+| Concept              | Meaning                                   |
+| -------------------- | ----------------------------------------- |
+| Routing Loop         | Packets move endlessly between routers    |
+| Cause                | Wrong/stale routing information           |
+| Counting to Infinity | Hop count increases continuously until 16 |
+| Why RIP Suffers      | No full topology awareness                |
+
+---
+
+# Split Horizon Revision
+
+| Concept       | Meaning                                           |
+| ------------- | ------------------------------------------------- |
+| Split Horizon | Never advertise route back through same interface |
+| Purpose       | Prevent routing loops                             |
+| Main Logic    | "Learned from same interface → don't send back"   |
+| Used In       | RIP                                               |
+
+---
+
+# Poison Reverse Revision
+
+| Concept                       | Meaning                                                             |
+| ----------------------------- | ------------------------------------------------------------------- |
+| Poison Reverse                | Advertise failed route with metric 16                               |
+| Metric Used                   | 16 (Infinity)                                                       |
+| Purpose                       | Fast loop prevention                                                |
+| Difference from Split Horizon | Split Horizon stays silent, Poison Reverse sends unreachable update |
+
+---
+
+# RIP Timer Revision
+
+| Timer         | Value   | Meaning                  |
+| ------------- | ------- | ------------------------ |
+| Update Timer  | 30 sec  | Periodic routing update  |
+| Invalid Timer | 180 sec | Route becomes invalid    |
+| Flush Timer   | 240 sec | Route removed completely |
+
+---
+
+# RIP Timer Flow
+
+```text
+30 sec  → periodic routing update
+
+180 sec → route becomes invalid
+
+240 sec → route removed completely
+```
+
+
+
+
+
+
+````````````````````````````````````````````````````````
+
+
+# EIGRP Routing — Complete Conceptual Explanation
+
+---
+
+# What is EIGRP?
+
+EIGRP stands for:
+
+```text id="e7v3pq"
+Enhanced Interior Gateway Routing Protocol
+```
+
+It is:
+
+* Cisco-developed routing protocol
+* advanced distance vector protocol
+* sometimes called hybrid routing protocol
+
+Used for:
+
+* dynamic routing
+* fast convergence
+* efficient route selection
+
+---
+
+# Main Purpose of EIGRP
+
+EIGRP helps routers:
+
+* discover networks
+* exchange routing information
+* select best path
+* maintain backup routes
+
+---
+
+# Important Features of EIGRP
+
+* fast convergence
+* classless routing
+* VLSM support
+* route summarization
+* unequal-cost load balancing
+* multicast updates
+* low bandwidth usage
+
+Multicast address:
+
+```text id="j1mf38"
+224.0.0.10
+```
+
+---
+
+# EIGRP AS Number
+
+---
+
+# What is AS Number in EIGRP?
+
+AS = Autonomous System
+
+In EIGRP:
+
+* routers must belong to same AS number
+* otherwise neighborship will NOT form
+
+Example:
+
+```bash id="lmgf2s"
+router eigrp 10
+```
+
+Here:
+
+```text id="9d6a1w"
+10 = AS Number
+```
+
+---
+
+# Purpose of AS Number
+
+AS number logically groups routers into same routing domain.
+
+Routers:
+
+* AS 10 ↔ AS 10 → neighbor possible
+* AS 10 ↔ AS 20 → neighbor NOT possible
+
+---
+
+# Important Note
+
+AS number:
+
+* identifies routing domain
+* used during neighbor formation
+* locally significant in EIGRP
+
+---
+
+# Administrative Distance (AD)
+
+---
+
+# What is AD?
+
+Administrative Distance is:
+
+* trust value of routing source
+
+Used when:
+
+* multiple routing protocols give same destination
+
+Router chooses:
+
+```text id="nmijzu"
+lowest AD
+```
+
+---
+
+# EIGRP AD Values
+
+| Route Type     | AD  |
+| -------------- | --- |
+| EIGRP Internal | 90  |
+| EIGRP External | 170 |
+
+---
+
+# Internal vs External Route
+
+---
+
+# Internal Route
+
+Learned:
+
+* inside same EIGRP AS
+
+AD:
+
+```text id="k0ccns"
+90
+```
+
+---
+
+# External Route
+
+Learned:
+
+* from another routing protocol
+* redistributed into EIGRP
+
+AD:
+
+```text id="r9e7fm"
+170
+```
+
+---
+
+# AS vs AD
+
+This is VERY important.
+
+---
+
+# AS Number
+
+| Feature     | Meaning                         |
+| ----------- | ------------------------------- |
+| Full Form   | Autonomous System               |
+| Purpose     | identifies EIGRP routing domain |
+| Used For    | neighborship                    |
+| Must Match? | YES                             |
+| Example     | `router eigrp 10`               |
+
+---
+
+# AD Number
+
+| Feature       | Meaning                 |
+| ------------- | ----------------------- |
+| Full Form     | Administrative Distance |
+| Purpose       | route trustworthiness   |
+| Used For      | route selection         |
+| Lower Better? | YES                     |
+| Example       | EIGRP = 90              |
+
+---
+
+# Shortcut Difference
+
+```text id="4xqjlwm"
+AS → who can become neighbor
+AD → which route is preferred
+```
+
+---
+
+# EIGRP Neighbor Formation Conditions
+
+To become neighbors:
+
+* same AS number
+* same subnet/network
+* no ACL blocking
+* K-values must match
+
+---
+
+# EIGRP Tables
+
+EIGRP maintains:
+
+```text id="ihz2ws"
+3 tables
+```
+
+---
+
+# 1) Neighbor Table
+
+Stores:
+
+* directly connected EIGRP neighbors
+
+Contains:
+
+* neighbor IP
+* hold timer
+* interface
+
+Command:
+
+```bash id="e8eyzi"
+show ip eigrp neighbors
+```
+
+Purpose:
+
+* keeps track of active neighbors
+
+---
+
+# 2) Topology Table
+
+Stores:
+
+* all learned routes
+
+Contains:
+
+* successor routes
+* feasible successor routes
+
+Command:
+
+```bash id="mhl7sh"
+show ip eigrp topology
+```
+
+Purpose:
+
+* backup path selection
+
+---
+
+# 3) Routing Table
+
+Stores:
+
+* best routes only
+
+Command:
+
+```bash id="1zydvr"
+show ip route eigrp
+```
+
+Purpose:
+
+* actual packet forwarding
+
+---
+
+# Successor Route
+
+Successor:
+
+* best route
+* installed in routing table
+
+Chosen using:
+
+* lowest feasible distance
+
+---
+
+# Feasible Successor
+
+Backup route.
+
+Condition:
+
+```text id="y9w5vx"
+RD < FD
+```
+
+Meaning:
+
+* neighbor's reported distance must be less than current feasible distance
+
+---
+
+# Feasible Distance (FD)
+
+FD:
+
+* total metric from local router to destination
+
+Best metric.
+
+---
+
+# Reported Distance (RD)
+
+RD:
+
+* metric reported by neighbor
+
+Also called:
+
+```text id="gks7rj"
+Advertised Distance
+```
+
+---
+
+# EIGRP Metric Calculation
+
+EIGRP uses:
+
+* bandwidth
+* delay
+
+Formula:
+\text{Metric}=(\text{Bandwidth}+\text{Delay})\times256
+
+---
+
+# Prefix in Routing
+
+---
+
+# What is Prefix?
+
+Prefix:
+
+* network portion of IP address
+
+Example:
+
+```text id="jlwmj4"
+192.168.10.0/24
+```
+
+Here:
+
+```text id="ng1v3g"
+/24 = prefix length
+```
+
+Meaning:
+
+* first 24 bits = network bits
+
+---
+
+# Prefix Length Meaning
+
+| Prefix | Subnet Mask   |
+| ------ | ------------- |
+| /8     | 255.0.0.0     |
+| /16    | 255.255.0.0   |
+| /24    | 255.255.255.0 |
+
+---
+
+# Longer Prefix vs Shorter Prefix
+
+| Prefix         | Meaning             |
+| -------------- | ------------------- |
+| Longer Prefix  | more specific route |
+| Shorter Prefix | broader route       |
+
+Example:
+
+```text id="7jlwmx"
+192.168.1.0/24
+```
+
+is more specific than:
+
+```text id="22j6sy"
+192.168.0.0/16
+```
+
+Router prefers:
+
+```text id="36mr9x"
+longest prefix match
+```
+
+---
+
+# Postfix
+
+In networking,
+“postfix” is NOT commonly used like prefix.
+
+Usually students confuse:
+
+* prefix
+* suffix/postfix notation
+
+In routing:
+
+```text id="0cl3i4"
+/24
+```
+
+is called:
+
+* prefix length
+* CIDR notation
+
+NOT postfix officially.
+
+---
+
+# Important EIGRP MCQ Traps
+
+---
+
+# Trap 1
+
+```text id="hm4mfo"
+AS number and AD are NOT same.
+```
+
+---
+
+# Trap 2
+
+```text id="8h2jlwm"
+EIGRP Internal AD = 90
+EIGRP External AD = 170
+```
+
+---
+
+# Trap 3
+
+EIGRP maintains:
+
+```text id="r6cz79"
+Neighbor Table
+Topology Table
+Routing Table
+```
+
+NOT:
+
+* ARP table
+* MAC table
+
+---
+
+# Trap 4
+
+```text id="cyzv3o"
+224.0.0.10
+```
+
+belongs to:
+
+```text id="d0q5lc"
+EIGRP multicast
+```
+
+---
+
+# Trap 5
+
+EIGRP is:
+
+```
+classless protocol
+```
+
+Supports:
+
+* VLSM
+* CIDR
+
+---
+
+# Simple Memory Trick
+
+```
+AS → Neighbor formation
+AD → Route preference
+FD → Best metric
+RD → Neighbor metric
+Successor → Best route
+Feasible Successor → Backup route
+```
+````````````````````````````````````````````````````````````
+
+
+# OSPF — Complete Conceptual Explanation
+
+---
+
+# What is OSPF?
+
+OSPF stands for:
+
+```text id="jlwm1a"
+Open Shortest Path First
+```
+
+It is:
+
+* link-state routing protocol
+* dynamic routing protocol
+* Interior Gateway Protocol (IGP)
+
+Standard:
+
+```text id="jlwm1b"
+Open standard protocol
+```
+
+Works using:
+
+```text id="jlwm1c"
+Shortest Path First (SPF) algorithm
+```
+
+Algorithm:
+
+```text id="jlwm1d"
+Dijkstra Algorithm
+```
+
+---
+
+# Why OSPF is Used?
+
+OSPF provides:
+
+* fast convergence
+* scalable routing
+* loop-free topology
+* hierarchical design
+* efficient bandwidth usage
+
+---
+
+# Important Features of OSPF
+
+* link-state protocol
+* classless routing
+* VLSM support
+* CIDR support
+* fast convergence
+* hierarchical routing
+* authentication support
+
+Multicast addresses:
+
+```text id="jlwm1e"
+224.0.0.5 → All OSPF Routers
+224.0.0.6 → DR/BDR Routers
+```
+
+Administrative Distance:
+
+```text id="jlwm1f"
+110
+```
+
+Protocol Number:
+
+```text id="jlwm1g"
+89
+```
+
+---
+
+# OSPF Terminologies
+
+---
+
+# 1) Area
+
+Area:
+
+* logical grouping of routers
+
+Purpose:
+
+* reduce routing overhead
+* improve scalability
+
+---
+
+# Area Types
+
+---
+
+# A) Backbone Area
+
+Also called:
+
+```text id="jlwm1h"
+Area 0
+```
+
+Most important area.
+
+Purpose:
+
+* connects all OSPF areas together
+
+Rule:
+
+```text id="jlwm1i"
+All non-backbone areas must connect to Area 0
+```
+
+---
+
+# B) Non-Backbone Area
+
+Any area except Area 0.
+
+Examples:
+
+* Area 1
+* Area 2
+* Area 10
+
+---
+
+# C) Stub Area
+
+Blocks:
+
+* external LSAs
+
+Purpose:
+
+* reduce routing table size
+
+Receives:
+
+```text id="jlwm1j"
+default route only
+```
+
+---
+
+# D) Totally Stubby Area
+
+Cisco proprietary.
+
+Blocks:
+
+* external routes
+* inter-area routes
+
+Receives:
+
+```text id="jlwm1k"
+single default route
+```
+
+---
+
+# E) NSSA
+
+(Not-So-Stubby Area)
+
+Allows:
+
+* external route redistribution
+
+While still behaving mostly like stub area.
+
+Uses:
+
+```text id="jlwm1l"
+Type 7 LSA
+```
+
+---
+
+# F) Totally NSSA
+
+Combination of:
+
+* NSSA
+* Totally Stubby
+
+Very restricted LSAs.
+
+---
+
+# OSPF Router Types
+
+---
+
+# 1) Internal Router
+
+All interfaces belong to:
+
+```text id="jlwm1m"
+same OSPF area
+```
+
+---
+
+# 2) Backbone Router
+
+At least one interface in:
+
+```text id="jlwm1n"
+Area 0
+```
+
+---
+
+# 3) ABR
+
+(Area Border Router)
+
+Connects:
+
+```text id="jlwm1o"
+multiple OSPF areas
+```
+
+Usually:
+
+* one interface in Area 0
+* another in non-backbone area
+
+Purpose:
+
+* area communication
+
+---
+
+# 4) ASBR
+
+(Autonomous System Boundary Router)
+
+Redistributes routes from:
+
+* another routing protocol
+* static routes
+
+Examples:
+
+* RIP → OSPF
+* EIGRP → OSPF
+
+---
+
+# OSPF States
+
+Routers form adjacency using states.
+
+---
+
+# Neighbor States
+
+```text id="jlwm1p"
+Down
+Init
+2-Way
+ExStart
+Exchange
+Loading
+Full
+```
+
+---
+
+# Important States
+
+---
+
+# Down State
+
+No hello packets received.
+
+---
+
+# Init State
+
+Hello packet received.
+
+---
+
+# 2-Way State
+
+Bidirectional communication established.
+
+---
+
+# ExStart State
+
+Master/slave election starts.
+
+---
+
+# Exchange State
+
+DBD packets exchanged.
+
+---
+
+# Loading State
+
+LSRs and LSUs exchanged.
+
+---
+
+# Full State
+
+Complete adjacency formed.
+
+---
+
+# OSPF Packet Types
+
+---
+
+# 1) Hello Packet
+
+Used for:
+
+* neighbor discovery
+* keepalive
+
+---
+
+# 2) DBD
+
+(Database Description)
+
+Shares topology summary.
+
+---
+
+# 3) LSR
+
+(Link State Request)
+
+Requests missing information.
+
+---
+
+# 4) LSU
+
+(Link State Update)
+
+Sends requested information.
+
+---
+
+# 5) LSAck
+
+(Link State Acknowledgement)
+
+Acknowledges LSU.
+
+---
+
+# DR and BDR
+
+---
+
+# DR
+
+(Designated Router)
+
+Main router in multi-access network.
+
+Purpose:
+
+* reduces OSPF traffic
+
+---
+
+# BDR
+
+(Backup Designated Router)
+
+Backup of DR.
+
+Takes over if DR fails.
+
+---
+
+# DR Election
+
+Based on:
+
+1. highest OSPF priority
+2. highest Router ID
+
+Default priority:
+
+```text id="jlwm1q"
+1
+```
+
+Priority 0:
+
+```text id="jlwm1r"
+cannot become DR/BDR
+```
+
+---
+
+# Router ID
+
+Unique identifier of OSPF router.
+
+Selection order:
+
+1. manually configured router-id
+2. highest loopback IP
+3. highest physical interface IP
+
+---
+
+# OSPF Tables
+
+---
+
+# 1) Neighbor Table
+
+Stores:
+
+* OSPF neighbors
+
+Command:
+
+```bash id="jlwm1s"
+show ip ospf neighbor
+```
+
+---
+
+# 2) Topology Database
+
+(LSDB)
+
+Stores:
+
+* all LSAs
+
+Command:
+
+```bash id="jlwm1t"
+show ip ospf database
+```
+
+---
+
+# 3) Routing Table
+
+Stores:
+
+* best routes
+
+Command:
+
+```bash id="jlwm1u"
+show ip route ospf
+```
+
+---
+
+# LSAs
+
+(Link State Advertisements)
+
+LSAs contain:
+
+* topology information
+
+---
+
+# Important LSA Types
+
+| LSA Type | Purpose       |
+| -------- | ------------- |
+| Type 1   | Router LSA    |
+| Type 2   | Network LSA   |
+| Type 3   | Summary LSA   |
+| Type 4   | ASBR Summary  |
+| Type 5   | External LSA  |
+| Type 7   | NSSA External |
+
+---
+
+# SPF Algorithm
+
+OSPF uses:
+
+```text id="jlwm1v"
+Shortest Path First
+```
+
+Calculates:
+
+* shortest path tree
+
+Metric used:
+
+```text id="jlwm1w"
+Cost
+```
+
+---
+
+# OSPF Cost
+
+Formula:
+\text{Cost}=\frac{10^8}{\text{Bandwidth}}
+
+Meaning:
+
+* lower cost = preferred path
+
+---
+
+# OSPF Network Types
+
+| Type                | DR/BDR Election |
+| ------------------- | --------------- |
+| Broadcast           | YES             |
+| Non-Broadcast       | YES             |
+| Point-to-Point      | NO              |
+| Point-to-Multipoint | NO              |
+
+---
+
+# OSPF Hello Timers
+
+| Network Type   | Hello  | Dead   |
+| -------------- | ------ | ------ |
+| Broadcast      | 10 sec | 40 sec |
+| Point-to-Point | 10 sec | 40 sec |
+
+---
+
+# OSPF Neighbor Conditions
+
+For adjacency:
+
+* same area ID
+* same hello/dead timer
+* same subnet
+* same authentication
+* unique router ID
+
+---
+
+# OSPF Authentication Types
+
+| Type       | Meaning                  |
+| ---------- | ------------------------ |
+| Null       | No authentication        |
+| Plain Text | Password                 |
+| MD5        | Encrypted authentication |
+
+---
+
+# OSPF Route Types
+
+| Route      | Meaning           |
+| ---------- | ----------------- |
+| Intra-area | inside same area  |
+| Inter-area | between areas     |
+| External   | from outside OSPF |
+
+---
+
+# OSPF Configuration
+
+---
+
+# Basic OSPF
+
+```bash id="jlwm1x"
+router ospf 10
+network 192.168.1.0 0.0.0.255 area 0
+```
+
+---
+
+# Configure Router ID
+
+```bash id="jlwm1y"
+router ospf 10
+router-id 1.1.1.1
+```
+
+---
+
+# Passive Interface
+
+```bash id="jlwm1z"
+passive-interface fa0/0
+```
+
+Purpose:
+
+* stops hello packets
+
+---
+
+# Stub Area Configuration
+
+```bash id="jlwm20"
+area 1 stub
+```
+
+---
+
+# Totally Stubby Area
+
+```bash id="jlwm21"
+area 1 stub no-summary
+```
+
+---
+
+# NSSA Configuration
+
+```bash id="jlwm22"
+area 1 nssa
+```
+
+---
+
+# OSPF MCQ Traps
+
+---
+
+# Trap 1
+
+```text id="jlwm23"
+OSPF uses COST
+NOT hop count
+```
+
+---
+
+# Trap 2
+
+```text id="jlwm24"
+OSPF is link-state protocol
+NOT distance vector
+```
+
+---
+
+# Trap 3
+
+```text id="jlwm25"
+Area 0 is mandatory backbone area
+```
+
+---
+
+# Trap 4
+
+```text id="jlwm26"
+224.0.0.5 → All routers
+224.0.0.6 → DR/BDR
+```
+
+---
+
+# Trap 5
+
+```text id="jlwm27"
+Priority 0 cannot become DR
+```
+
+---
+
+# Trap 6
+
+```text id="jlwm28"
+OSPF AD = 110
+```
+
+---
+
+# Trap 7
+
+```text id="jlwm29"
+Protocol number = 89
+NOT TCP/UDP port
+```
+
+---
+
+# Quick Memory Sheet
+
+```text id="jlwm2a"
+OSPF → Link State
+Metric → Cost
+Algorithm → Dijkstra SPF
+AD → 110
+Area 0 → Backbone
+224.0.0.5 → All Routers
+224.0.0.6 → DR/BDR
+Protocol Number → 89
+DR/BDR → Broadcast networks
+```

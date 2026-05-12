@@ -1,0 +1,350 @@
+# OSI / TCP-IP / Data Units
+```````````````````````````````
+1. What is the data unit of the Transport Layer?
+
+2. What is the data unit of the Network Layer?
+
+3. What is the data unit of the Data Link Layer?
+
+4. What is the data unit of the Physical Layer?
+
+5. Match the following layers with their corresponding data units:
+   - Physical Layer
+   - Data Link Layer
+   - Network Layer
+   - Transport Layer
+
+# Transmission Types
+
+6. What is unicast communication?
+
+7. What is multicast communication?
+
+8. What is broadcast communication?
+
+9. Differentiate between unicast, multicast, and broadcast communication.
+
+10. Which communication type sends data:
+    - one-to-one?
+    - one-to-many but not all?
+    - one-to-all?
+
+# Collision Domain / Duplex / Ethernet
+``````````````````````````````````````
+11. What is a collision domain?
+
+12. In which duplex mode do collisions occur?
+
+13. Why are collisions common in half-duplex communication?
+
+14. Does collision occur in full-duplex communication? Why?
+
+15. Which device creates a single shared collision domain?
+
+16. How many collision domains are present in:
+    - a hub?
+    - a switch?
+    - a router?
+
+17. Why does a switch reduce collisions compared to a hub?
+
+18. Explain collision domain behavior in hubs, switches, and routers.
+
+# CSMA/CD
+`````````
+19. What is CSMA/CD?
+
+20. Expand CSMA/CD.
+
+21. In which type of Ethernet communication is CSMA/CD used?
+
+22. Which networking device commonly uses CSMA/CD?
+
+23. Why is CSMA/CD not required in full-duplex Ethernet?
+
+# NIC
+```````
+24. What is NIC?
+
+25. Expand NIC.
+
+26. What is the function of a Network Interface Card?
+
+27. Which hardware component stores the MAC address?
+
+# UTP / Cable Types
+
+28. What is UTP cable?
+
+29. Differentiate between UTP and STP.
+
+30. Which cable is used to connect different devices?
+
+31. Which cable is used to connect similar devices?
+
+32. Which cable is used for configuring a fresh router or switch?
+
+33. What is the purpose of a rollover cable?
+
+34. Give examples where straight-through cable is used.
+
+35. Give examples where crossover cable is used.
+
+36. Differentiate between:
+    - straight-through cable
+    - crossover cable
+    - rollover cable
+
+# 568A / 568B
+`````````````````
+37. Write the color sequence of T568A standard.
+
+38. Write the color sequence of T568B standard.
+
+39. Differentiate between T568A and T568B standards.
+
+40. Which color pair changes position between T568A and T568B?
+
+# RIP / Routing Loops
+
+41. Why do routing loops occur in RIP?
+
+42. What is “counting to infinity” problem in RIP?
+
+43. How does RIP prevent routing loops?
+
+44. What is Split Horizon?
+
+45. What is Poison Reverse?
+
+46. How does Split Horizon prevent routing loops?
+
+47. How does Poison Reverse work in RIP?
+
+48. What are RIP timers?
+
+49. Name the different RIP timers.
+
+50. What is the default update timer in RIP?
+
+51. What is the invalid timer in RIP?
+
+52. What is the flush timer in RIP?
+
+53. What is the maximum hop count in RIP?
+
+54. What value is considered infinity in RIP?
+
+# Autonomous System / EIGRP
+``````````````````````````````
+55. What is an Autonomous System (AS)?
+
+56. What is the purpose of an AS number?
+
+57. Why are different AS numbers used?
+
+58. Which routing protocol uses Autonomous System numbers?
+
+59. What are the tables maintained by EIGRP?
+
+60. What is the purpose of Neighbor Table in EIGRP?
+
+61. What is stored in EIGRP Topology Table?
+
+62. What is stored in EIGRP Routing Table?
+
+63. Differentiate between:
+    - Neighbor Table
+    - Topology Table
+    - Routing Table
+
+64. Which EIGRP table stores successor and feasible successor routes?
+
+# OSPF
+`````````
+65. What is Area 0 in OSPF?
+
+66. Why is Area 0 called Backbone Area?
+
+67. Can non-backbone areas communicate without Area 0?
+
+68. What is the role of Backbone Area in OSPF?
+
+# Administrative Distance
+
+69. What is Administrative Distance (AD)?
+
+70. Why is AD used in routing?
+
+71. Which route is preferred when multiple routes exist?
+
+72. Which route source has the lowest Administrative Distance?
+
+73. What is the AD value of:
+    - connected route?
+    - static route?
+    - EIGRP?
+    - OSPF?
+    - RIP?
+
+74. Why is lower AD preferred?
+
+75. Is AD advertised between routers?
+
+76. What AD value represents an untrusted route?
+
+# DNS
+``````
+77. Which transport protocol does DNS use?
+
+78. Which port number is used by DNS?
+
+79. What is the purpose of DNS?
+
+80. What is an A record in DNS?
+
+81. What is an AAAA record?
+
+82. What is a CNAME record?
+
+83. What is a PTR record?
+
+84. What is an SRV record?
+
+85. What is a CAA record?
+
+86. Which DNS record is used for reverse lookup?
+
+87. Which DNS record maps domain name to IPv6 address?
+
+88. Which DNS record maps alias to canonical domain name?
+
+# DHCP
+``````
+89. Which ports are used by DHCP server and client?
+
+90. Which transport protocol is used by DHCP?
+
+91. What is DHCP helper command?
+
+92. Why is `ip helper-address` used?
+
+93. What problem does DHCP relay solve?
+
+94. Expand DORA in DHCP.
+
+95. Explain the DHCP DORA process.
+
+96. Which DHCP message is sent first?
+
+97. Which DHCP message confirms IP allocation?
+
+# NAT / PAT
+```````````
+98. What is PAT?
+
+99. Expand PAT.
+
+100. What is NAT overload?
+
+101. Which command enables PAT?
+
+102. How does PAT conserve IPv4 addresses?
+
+103. Differentiate between:
+    - Static NAT
+    - Dynamic NAT
+    - PAT
+
+# IPv6
+````````
+104. What is Global Unicast IPv6 address range?
+
+105. What is Link-Local IPv6 address range?
+
+106. What is the IPv6 loopback address?
+
+107. What is EUI-64 in IPv6?
+
+108. Which address is used in EUI-64 generation?
+
+109. What is inserted in the middle of MAC address during EUI-64 process?
+
+110. Which bit is flipped in EUI-64?
+
+111. Explain EUI-64 address generation process.
+
+112. Why is EUI-64 used?
+
+# VLAN
+````````
+113. Which VLAN cannot be deleted?
+
+114. What is the default VLAN in Cisco switches?
+
+115. What is the normal VLAN range?
+
+116. What is the extended VLAN range?
+
+117. What is the purpose of VLAN?
+
+118. Differentiate between access port and trunk port.
+
+119. What is trunking in VLAN?
+
+120. What is the purpose of encapsulation dot1Q?
+
+121. Which protocol is used for VLAN tagging?
+
+122. Explain the command:
+    encapsulation dot1Q 10
+
+# STP
+``````
+123. What is STP?
+
+124. Why is STP required in switched networks?
+
+125. What problems occur without STP?
+
+126. What is root bridge in STP?
+
+127. How is root bridge selected?
+
+128. What is STP cost?
+
+129. What is the STP cost of a 1000 Mbps link?
+
+130. Which switch becomes root bridge?
+
+131. What is Bridge ID in STP?
+
+132. What are the different STP port states?
+
+# SDN / OpenFlow
+`````````````````
+133. What is SDN?
+
+134. What are the layers of SDN architecture?
+
+135. What is the role of Application Layer in SDN?
+
+136. What is the role of Control Layer in SDN?
+
+137. What is the role of Infrastructure Layer in SDN?
+
+138. What is Northbound API?
+
+139. What is Southbound API?
+
+140. Which protocol is commonly used as Southbound API in SDN?
+
+141. What is OpenFlow?
+
+142. Between which devices does OpenFlow operate?
+
+143. What is the role of OpenFlow in SDN?
+
+144. Which SDN layer controls switches using OpenFlow?
+
+145. How does SDN separate control plane and data plane?

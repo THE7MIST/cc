@@ -1,0 +1,263 @@
+
+# IEEE Standards Quick Revision
+
+| Standard | Technology | Frequency / Purpose | Important Point                          |
+| -------- | ---------- | ------------------- | ---------------------------------------- |
+| 802.3    | Ethernet   | Wired LAN           | Traditional Ethernet standard            |
+| 802.11   | Wi-Fi      | Wireless LAN        | Base Wi-Fi family                        |
+| 802.11a  | Wi-Fi      | 5 GHz               | Faster, less interference, shorter range |
+| 802.11b  | Wi-Fi      | 2.4 GHz             | Older, slower, longer range              |
+| 802.11g  | Wi-Fi      | 2.4 GHz             | Faster than b                            |
+| 802.11n  | Wi-Fi      | 2.4 + 5 GHz         | Better speed and MIMO                    |
+| 802.11ac | Wi-Fi 5    | Mainly 5 GHz        | High speed modern Wi-Fi                  |
+| 802.11ax | Wi-Fi 6    | 2.4 + 5 GHz         | Better efficiency and dense environments |
+| 802.1Q   | VLAN       | VLAN Tagging        | Used in trunk links                      |
+| 802.5    | Token Ring | Ring topology       | IBM old technology                       |
+
+---
+
+# Wireless Standards Memory Trick
+
+| Standard | Speed  | Range   | Interference      |
+| -------- | ------ | ------- | ----------------- |
+| 2.4 GHz  | Lower  | Longer  | More interference |
+| 5 GHz    | Higher | Shorter | Less interference |
+
+So:
+2.4 GHz = range
+5 GHz = speed
+
+---
+
+# OSI Layers Ultra Fast Revision
+
+| Layer          | Main Work           | Keywords                             |
+| -------------- | ------------------- | ------------------------------------ |
+| 7 Application  | User services       | HTTP, FTP, SMTP                      |
+| 6 Presentation | Formatting          | Encryption, Compression, Translation |
+| 5 Session      | Session management  | Synchronization, Dialogue            |
+| 4 Transport    | Reliable delivery   | TCP, UDP, Ports, Retransmission      |
+| 3 Network      | Routing             | IP, Router, Path selection           |
+| 2 Data Link    | Local delivery      | MAC, Frame, CRC, Switching           |
+| 1 Physical     | Signal transmission | Bits, Cables, Signals                |
+
+---
+
+# Layer Wise Important Characteristics
+
+| Layer        | Characteristics                                                              |
+| ------------ | ---------------------------------------------------------------------------- |
+| Application  | Closest to user, provides network services                                   |
+| Presentation | Compression, encryption, syntax translation                                  |
+| Session      | Session establishment and synchronization                                    |
+| Transport    | Ordered delivery, error checking, retransmission, segmentation, flow control |
+| Network      | Logical addressing and routing                                               |
+| Data Link    | Framing, MAC addressing, CRC error detection                                 |
+| Physical     | Converts bits into electrical/light/radio signals                            |
+
+---
+
+# OSI Layer Devices
+
+| Device   | Layer           |
+| -------- | --------------- |
+| Hub      | Layer 1         |
+| Repeater | Layer 1         |
+| Switch   | Layer 2         |
+| Bridge   | Layer 2         |
+| Router   | Layer 3         |
+| Gateway  | Multiple layers |
+
+---
+
+# PDU Mapping
+
+| Layer     | PDU     |
+| --------- | ------- |
+| Physical  | Bit     |
+| Data Link | Frame   |
+| Network   | Packet  |
+| Transport | Segment |
+
+---
+
+# TCP vs UDP
+
+| Feature            | TCP                 | UDP               |
+| ------------------ | ------------------- | ----------------- |
+| Reliability        | Yes                 | No                |
+| ACK                | Yes                 | No                |
+| Speed              | Slower              | Faster            |
+| Connection         | Connection-oriented | Connectionless    |
+| Sequencing         | Yes                 | No                |
+| Retransmission     | Yes                 | No                |
+| Streaming Suitable | Less                | Best              |
+| Examples           | HTTP, HTTPS, FTP    | Streaming, Gaming |
+
+---
+
+# Important Ports
+
+| Protocol | Port  |
+| -------- | ----- |
+| HTTP     | 80    |
+| HTTPS    | 443   |
+| FTP      | 20/21 |
+| SSH      | 22    |
+| Telnet   | 23    |
+| SMTP     | 25    |
+| DNS      | 53    |
+| POP3     | 110   |
+
+---
+
+# Cable Types Revision
+
+| Cable       | Best For               | Advantages            | Disadvantages |
+| ----------- | ---------------------- | --------------------- | ------------- |
+| UTP         | Normal LAN             | Cheap, easy           | EMI affected  |
+| STP         | Noisy environments     | EMI protection        | Costlier      |
+| Coaxial     | Cable TV, old Ethernet | Better shielding      | Bulky         |
+| Fiber Optic | Backbone, high speed   | Very fast, EMI immune | Expensive     |
+
+---
+
+# Fiber Types
+
+| Fiber Type  | Best For       | Characteristics   |
+| ----------- | -------------- | ----------------- |
+| Single Mode | Long distance  | Laser, thin core  |
+| Multi Mode  | Short distance | LED, thicker core |
+
+---
+
+# Which Cable Carries What?
+
+| Cable           | Carries            |
+| --------------- | ------------------ |
+| UTP/STP/Coaxial | Electrical signals |
+| Fiber           | Light signals      |
+
+---
+
+# Connector Revision
+
+| Connector | Used With        |
+| --------- | ---------------- |
+| RJ45      | Ethernet UTP/STP |
+| RJ11      | Telephone        |
+| SC        | Fiber            |
+| ST        | Fiber            |
+| LC        | Fiber            |
+
+---
+
+# 568A vs 568B
+
+## Only Orange and Green Pairs Swap
+
+| Pin | 568A         | 568B         |
+| --- | ------------ | ------------ |
+| 1   | White-Green  | White-Orange |
+| 2   | Green        | Orange       |
+| 3   | White-Orange | White-Green  |
+| 4   | Blue         | Blue         |
+| 5   | White-Blue   | White-Blue   |
+| 6   | Orange       | Green        |
+| 7   | White-Brown  | White-Brown  |
+| 8   | Brown        | Brown        |
+
+---
+
+# Cable Types Based on Termination
+
+| Cable Type      | End 1 | End 2 | Use               |
+| --------------- | ----- | ----- | ----------------- |
+| Straight Cable  | 568A  | 568A  | Different devices |
+| Straight Cable  | 568B  | 568B  | Different devices |
+| Crossover Cable | 568A  | 568B  | Same devices      |
+
+---
+
+# Same Device vs Different Device Rule
+
+| Devices         | Cable     |
+| --------------- | --------- |
+| PC ↔ Switch     | Straight  |
+| Router ↔ Switch | Straight  |
+| PC ↔ PC         | Crossover |
+| Switch ↔ Switch | Crossover |
+
+Modern devices with Auto-MDI/MDIX can auto-adjust.
+
+---
+
+# MAC vs IP Address
+
+| Feature            | MAC       | IP            |
+| ------------------ | --------- | ------------- |
+| Type               | Physical  | Logical       |
+| Layer              | Data Link | Network       |
+| Changes Hop-by-Hop | Yes       | No            |
+| Used By            | Switch    | Router        |
+| Size               | 48-bit    | IPv4 = 32-bit |
+
+---
+
+# Collision vs Broadcast Domain
+
+| Device | Collision Domain | Broadcast Domain |
+| ------ | ---------------- | ---------------- |
+| Hub    | One for all      | One              |
+| Switch | One per port     | One              |
+| Router | One per port     | Breaks broadcast |
+
+---
+
+# Important Networking Concepts
+
+| Concept       | Meaning                             |
+| ------------- | ----------------------------------- |
+| Encapsulation | Adding headers layer by layer       |
+| Decapsulation | Removing headers layer by layer     |
+| Flow Control  | Prevent receiver overload           |
+| Multiplexing  | Multiple applications share network |
+| CRC           | Error detection                     |
+| ARP           | IP → MAC mapping                    |
+| DHCP          | Automatic IP assignment             |
+| DNS           | Domain → IP conversion              |
+| ICMP          | Diagnostics and ping                |
+
+---
+
+# Topology Quick Revision
+
+| Topology | Best Characteristic     |
+| -------- | ----------------------- |
+| Bus      | Cheap                   |
+| Star     | Easy management         |
+| Ring     | Sequential transmission |
+| Mesh     | Highest redundancy      |
+
+---
+
+# Duplex Modes
+
+| Mode        | Communication                     |
+| ----------- | --------------------------------- |
+| Simplex     | One-way                           |
+| Half Duplex | Both directions but one at a time |
+| Full Duplex | Simultaneous both directions      |
+
+---
+
+# Extremely Important Exam Confusions
+
+| Confusion                 | Correct Logic                                            |
+| ------------------------- | -------------------------------------------------------- |
+| MAC vs IP                 | MAC local, IP end-to-end                                 |
+| Collision vs Interference | Wireless mostly interference                             |
+| Hub vs Switch             | Hub broadcasts, switch learns MAC                        |
+| TCP vs UDP                | Reliability vs speed                                     |
+| STP vs Fiber              | STP resists EMI, Fiber immune to EMI                     |
+| Session vs Presentation   | Session manages communication, Presentation formats data |

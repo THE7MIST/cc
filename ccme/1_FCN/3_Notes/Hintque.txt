@@ -1,0 +1,58 @@
+1) transport:segment, nwtwork - pakage, datalink -frame, physicl- bits
+2)unicast - one to one , muticast- one to many but not all , broadcast - one to all
+3)collision domain? what?
+4)haped in ---- duplex collision domain?
+5)csma/c protocol used in  _________ DEVICE
+6)NIC WHAT?
+7)UTP A) STARAIGT CALBE USE TO CONEECT DIFFERERNT PORTS
+        B) cross cable used to connect same protocol
+        c) roll over - to configure fresh DEVICE
+8)568A and 568B colour sequence
+9) how amny collision domain are in hub(one shared )/ switch (one per port)/ router (one per port or interface)? 
+10)why do we have loop in rip[ routing
+11) what is split horizon? poisoin reverser? rip timer ?
+12)AS number? what ? range? different as number?
+13)Eigrp maintains 3 table - 1) neighbor 2) topology table 3) route table
+14) ospf - area 0? 
+15) AD value? 
+
+Definition
+Administrative Distance (AD) is a numerical value used by routers to measure trustworthiness of a routing information source.
+Purpose
+
+When multiple routes to same destination exist:
+
+router chooses lowest AD
+
+Lowest AD = most trusted route.
+
+Important Notes
+AD is local to router
+not advertised to other routers
+resolves routing conflicts
+Default AD Values
+Route Source	AD
+Connected Route	0
+Static Route	1
+EIGRP (Internal)	90
+OSPF	110
+RIP	120
+Unknown/Untrusted	255
+
+16)dns - udp 53
+17) A , AAAA, Cnanme, ptr record , srv, CAA
+18) DHCP port - udp 67 server , udp 68 client
+19) DHCP extended - helper command
+20) PAT - oveload command
+21) IPv6 add range- globale unicast, link local, loop back 
+22)ipv6 - which address will insert in eui-64?
+23) in eui which bit of mac gets flip?
+24)Which VLAN cannot be deleted?
+25) vlan range ? default vlan?
+26) encapsulation dot1Q
+27)stp - cost to reach out to root ? 1000 Mbit = cost 4
+28) SDN open interface api? 
+29) north bound api?
+30) south bound API ? openFlow????
+31) layers in SDN Archecture?
+32)open flow protocol? device control- switches

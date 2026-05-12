@@ -1,0 +1,568 @@
+# DNS — Make It Finally Click
+
+Forget definitions first.
+
+Think about this:
+
+You type:
+
+```text id="c0x1dn"
+www.google.com
+```
+
+But internet actually works using:
+
+```text id="y2p9az"
+142.250.x.x
+```
+
+Machines understand IPs.
+Humans remember names.
+
+So DNS exists basically as:
+
+```text id="w7l4qe"
+Internet Phonebook
+```
+
+But the interesting part is:
+HOW does internet find Google among billions of websites?
+
+That entire journey is DNS.
+
+---
+
+# Full DNS Journey
+
+Suppose you open:
+
+```text id="u3m1rw"
+www.netflix.com
+```
+
+Your computer does NOT magically know its IP.
+
+It starts asking questions step by step.
+
+---
+
+# Step 1 — DNS Resolver
+
+This is your first contact point.
+
+Usually:
+
+* ISP DNS server
+* Google DNS → 8.8.8.8
+* Cloudflare DNS → 1.1.1.1
+
+Your PC asks:
+
+```text id="n8k5va"
+"Hey resolver, what is IP of netflix.com?"
+```
+
+Resolver's job:
+
+```text id="p2q6fd"
+Find final answer for you.
+```
+
+Resolver behaves like:
+
+* assistant
+* middleman
+* DNS detective
+
+---
+
+# Important Idea
+
+Resolver does ALL heavy work.
+
+Your laptop simply asks once.
+
+Resolver searches whole internet hierarchy.
+
+---
+
+# Step 2 — Root Server
+
+If resolver doesn't know answer,
+it asks Root Server.
+
+Root server DOES NOT know Google's IP.
+
+This confuses many students.
+
+Root server only knows:
+
+```text id="m1d9xr"
+"Who handles .com?"
+```
+
+Like airport information desk.
+
+You ask:
+
+```text id="g7n2qw"
+Where is Netflix?
+```
+
+Desk replies:
+
+```text id="q4v8lm"
+Go ask .com department.
+```
+
+---
+
+# Step 3 — TLD Server
+
+TLD = Top Level Domain
+
+Examples:
+
+* .com
+* .org
+* .edu
+* .in
+
+Now resolver asks .com server:
+
+```text id="j0y5ht"
+"Who handles netflix.com?"
+```
+
+TLD server replies:
+
+```text id="a6p3zc"
+"Ask Netflix's authoritative server."
+```
+
+Again:
+TLD still does NOT know actual IP.
+
+It only knows:
+
+```text id="h1w9ke"
+who owns the domain
+```
+
+---
+
+# Step 4 — Authoritative DNS Server
+
+THIS is final source of truth.
+
+Now resolver asks:
+
+```text id="s3m8dp"
+"What is IP of netflix.com?"
+```
+
+Authoritative server replies:
+
+```text id="r5n2ux"
+"Here is the actual IP."
+```
+
+Now resolver gives answer to your browser.
+
+Browser finally connects.
+
+---
+
+# One-Line Flow
+
+```text id="e2x6lr"
+PC → Resolver → Root → TLD → Authoritative → IP Returned
+```
+
+---
+
+# The Real Trick
+
+Most students memorize servers separately.
+
+Instead remember:
+
+| Server        | Knows What?      |
+| ------------- | ---------------- |
+| Resolver      | does searching   |
+| Root          | where TLD exists |
+| TLD           | who owns domain  |
+| Authoritative | final IP answer  |
+
+That’s the entire hierarchy.
+
+---
+
+# Recursive vs Iterative Query
+
+This is where confusion starts usually.
+
+---
+
+# Recursive Query
+
+Think:
+
+```text id="w0q8ne"
+"Bring me final answer no matter what."
+```
+
+Your PC asks resolver recursively.
+
+Meaning:
+
+```text id="n2j5xp"
+Resolver must return FINAL answer.
+```
+
+Your PC doesn't care HOW.
+
+---
+
+# Example
+
+You ask friend:
+
+```text id="d6f4qt"
+"Find Adi's phone number and tell me final answer."
+```
+
+Friend does all searching.
+
+That is:
+
+```text id="u8m3kr"
+recursive
+```
+
+---
+
+# Iterative Query
+
+Now imagine:
+
+You ask someone:
+
+```text id="g1z9wh"
+"Do you know Adi's number?"
+```
+
+They reply:
+
+```text id="x5v2ca"
+"No, ask Rohit."
+```
+
+Then Rohit says:
+
+```text id="f4m1be"
+"No, ask Amit."
+```
+
+You keep moving step-by-step.
+
+That is:
+
+```text id="t7k6lu"
+iterative query
+```
+
+---
+
+# DNS Reality
+
+Usually:
+
+* PC → Resolver = Recursive
+* Resolver → Root/TLD = Iterative
+
+This is IMPORTANT MCQ trap.
+
+---
+
+# DNS Records — Make Them Logical
+
+Records are simply:
+
+```text id="q3r7md"
+different types of DNS information
+```
+
+---
+
+# A Record
+
+Most basic.
+
+Maps:
+
+```text id="m5y2zs"
+Domain → IPv4
+```
+
+Example:
+
+```text id="u1n8pc"
+google.com → 142.250.x.x
+```
+
+A = Address
+
+---
+
+# AAAA Record
+
+Same thing,
+but for IPv6.
+
+Maps:
+
+```text id="d7k1wr"
+Domain → IPv6
+```
+
+Why 4 A's?
+
+Because:
+
+```text id="b4q9ef"
+IPv6 = 128 bits
+IPv4 = 32 bits
+```
+
+So AAAA is bigger version conceptually.
+
+---
+
+# CNAME Record
+
+This is aliasing.
+
+Example:
+
+```text id="z9m4ka"
+www.google.com
+```
+
+may actually point to:
+
+```text id="c8x2tp"
+google.com
+```
+
+Meaning:
+
+```text id="k1w6nj"
+"This name is nickname of another domain."
+```
+
+Like:
+
+```text id="m7v3rd"
+Tony → Anthony
+```
+
+Same person.
+Different names.
+
+---
+
+# PTR Record
+
+Reverse DNS.
+
+Normal DNS:
+
+```text id="y0k1ph"
+Name → IP
+```
+
+PTR:
+
+```text id="r2x7me"
+IP → Name
+```
+
+Used in:
+
+* mail servers
+* verification
+* logging
+
+Example:
+
+```text id="j5n8af"
+142.250.x.x → google.com
+```
+
+---
+
+# SRV Record
+
+SRV = Service Record
+
+Tells:
+
+```text id="c6m2dz"
+which server provides which service
+```
+
+Example:
+
+* VoIP
+* Microsoft Teams
+* SIP
+* XMPP
+
+It can specify:
+
+* hostname
+* port
+* priority
+
+Think:
+
+```text id="s9w5lr"
+service locator
+```
+
+---
+
+# CAA Record
+
+Very modern/security-focused.
+
+CAA tells:
+
+```text id="w3z8bg"
+Which Certificate Authority can issue SSL certificate for domain
+```
+
+Example:
+
+```text id="a1p6nv"
+Only DigiCert allowed
+```
+
+Prevents fake SSL issuance.
+
+Huge security importance.
+
+---
+
+# FQDN
+
+FQDN =
+
+```text id="r4t7ym"
+Fully Qualified Domain Name
+```
+
+Complete exact domain name.
+
+Example:
+
+```text id="z2n1vk"
+mail.google.com
+```
+
+Contains:
+
+* hostname
+* domain
+* TLD
+
+---
+
+# Important Difference
+
+| Name            | Meaning    |
+| --------------- | ---------- |
+| google          | incomplete |
+| google.com      | domain     |
+| mail.google.com | FQDN       |
+
+---
+
+# Most Important MCQ Traps
+
+---
+
+# Trap 1
+
+```text id="n5q1wd"
+DNS usually uses UDP 53
+```
+
+NOT TCP usually.
+
+TCP used for:
+
+* zone transfer
+* large responses
+
+---
+
+# Trap 2
+
+```text id="x9m2lp"
+PTR = Reverse lookup
+```
+
+Students often confuse with CNAME.
+
+---
+
+# Trap 3
+
+```text id="j8r4te"
+AAAA = IPv6
+A = IPv4
+```
+
+---
+
+# Trap 4
+
+```text id="u0w6ns"
+Resolver does searching.
+Root server does NOT know final IP.
+```
+
+---
+
+# Trap 5
+
+```text id="v7k3dy"
+Authoritative server = final source of truth
+```
+
+---
+
+# Final Mental Model
+
+Remember DNS hierarchy like this:
+
+```text id="h3p8qo"
+Resolver → detective
+Root → where TLD exists
+TLD → who owns domain
+Authoritative → actual answer
+```
+
+And records like this:
+
+```text id="b6m1rf"
+A → IPv4
+AAAA → IPv6
+CNAME → nickname
+PTR → reverse lookup
+SRV → service location
+CAA → SSL authority
+FQDN → complete domain name
+```

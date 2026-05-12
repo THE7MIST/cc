@@ -1,0 +1,32 @@
+1) IP range 
+ private IP A B C
+ Apipa
+ loop back ip
+
+2)What is the role of Southbound APIs in SDN?
+b.
+To allow the control plane to interact with the data plane
+
+3)Which component in SDN is responsible for decision-making?
+Question 5Answer
+
+a.
+Control Plane
+
+4)Which of the following is an open-source SDN controller?
+OpenDaylight
+
+5)a.
+Access switch
+
+b.
+Edge switch
+
+c.
+Multilayer switch
+
+d.
+Core switch
+
+6)RIPv2 uses __________ address for multicasting - 224.0.0.9
+
