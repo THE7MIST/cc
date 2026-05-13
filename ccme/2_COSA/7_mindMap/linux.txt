@@ -1,0 +1,580 @@
+LINUX OPERATING SYSTEM & ADMINISTRATION
+│
+├── 1. LINUX FUNDAMENTALS
+│   │
+│   ├── Linux Overview
+│   │   ├── Linux Kernel (Core OS Engine)
+│   │   ├── GNU Utilities (Userland Tools)
+│   │   ├── Open Source Software
+│   │   ├── Distributions (Distros)
+│   │   │   ├── RHEL (Red Hat Enterprise Linux)
+│   │   │   ├── CentOS
+│   │   │   ├── Ubuntu
+│   │   │   ├── Debian
+│   │   │   ├── Fedora
+│   │   │   └── SUSE
+│   │   ├── CLI (Command Line Interface)
+│   │   ├── Shell
+│   │   │   ├── bash (Bourne Again Shell)
+│   │   │   ├── sh (Bourne Shell)
+│   │   │   ├── zsh
+│   │   │   ├── csh
+│   │   │   └── ksh
+│   │   └── Linux Philosophy
+│   │       ├── Everything is File
+│   │       ├── Small Modular Utilities
+│   │       └── Pipe-based Processing
+│   │
+│   ├── Linux Architecture
+│   │   ├── Hardware
+│   │   ├── Kernel Space
+│   │   ├── User Space
+│   │   ├── System Calls
+│   │   ├── Shell
+│   │   └── Applications
+│   │
+│   └── Kernel Components
+│       ├── Process Management
+│       ├── Memory Management
+│       ├── Device Drivers
+│       ├── File System Manager
+│       ├── Network Stack
+│       └── Scheduler
+│
+├── 2. LINUX FILE SYSTEM
+│   │
+│   ├── File System Hierarchy Standard (FHS)
+│   │   ├── / (Root Directory)
+│   │   ├── /bin (Essential User Commands)
+│   │   ├── /sbin (System Administration Commands)
+│   │   ├── /etc (Configuration Files)
+│   │   ├── /home (User Home Directories)
+│   │   ├── /root (Root User Home)
+│   │   ├── /var (Variable Data & Logs)
+│   │   ├── /tmp (Temporary Files)
+│   │   ├── /usr (User Applications & Libraries)
+│   │   ├── /opt (Optional Packages)
+│   │   ├── /dev (Device Files)
+│   │   ├── /proc (Process Information Virtual FS)
+│   │   ├── /sys (Kernel Interface)
+│   │   ├── /mnt (Temporary Mounts)
+│   │   ├── /media (Removable Media)
+│   │   └── /boot (Boot Loader Files)
+│   │
+│   ├── File Types
+│   │   ├── Regular File (-)
+│   │   ├── Directory (d)
+│   │   ├── Character Device (c)
+│   │   ├── Block Device (b)
+│   │   ├── Symbolic Link (l)
+│   │   ├── Socket (s)
+│   │   └── Named Pipe/FIFO (p)
+│   │
+│   ├── Inodes
+│   │   ├── Metadata Storage
+│   │   ├── Inode Number
+│   │   ├── Permissions
+│   │   ├── UID/GID
+│   │   ├── Timestamps
+│   │   └── Block Pointers
+│   │
+│   ├── Links
+│   │   ├── Hard Link (Same Inode)
+│   │   ├── Soft Link/Symbolic Link
+│   │   ├── ln Command
+│   │   └── ln -s Command
+│   │
+│   └── File Systems
+│       ├── ext2
+│       ├── ext3 (Journaling)
+│       ├── ext4
+│       ├── XFS
+│       ├── Btrfs
+│       ├── swap
+│       └── Journaling File Systems
+│
+├── 3. FILE & DIRECTORY COMMANDS
+│   │
+│   ├── Navigation
+│   │   ├── pwd
+│   │   ├── cd
+│   │   └── ls
+│   │
+│   ├── File Operations
+│   │   ├── cp (Copy)
+│   │   ├── mv (Move/Rename)
+│   │   ├── rm (Remove)
+│   │   ├── touch
+│   │   ├── cat
+│   │   ├── tac
+│   │   ├── more
+│   │   ├── less
+│   │   ├── head
+│   │   ├── tail
+│   │   └── stat
+│   │
+│   ├── Directory Operations
+│   │   ├── mkdir
+│   │   ├── rmdir
+│   │   ├── tree
+│   │   └── find
+│   │
+│   ├── Searching & Filtering
+│   │   ├── grep
+│   │   ├── egrep
+│   │   ├── fgrep
+│   │   ├── locate
+│   │   ├── whereis
+│   │   ├── which
+│   │   └── find
+│   │
+│   ├── Text Processing
+│   │   ├── cut
+│   │   ├── awk
+│   │   ├── sed
+│   │   ├── tr
+│   │   ├── sort
+│   │   ├── uniq
+│   │   ├── wc
+│   │   ├── diff
+│   │   ├── cmp
+│   │   └── paste
+│   │
+│   └── Compression & Archiving
+│       ├── tar
+│       ├── gzip
+│       ├── gunzip
+│       ├── bzip2
+│       ├── xz
+│       ├── zip
+│       └── unzip
+│
+├── 4. PERMISSIONS & SECURITY
+│   │
+│   ├── Standard Permissions
+│   │   ├── Read (r = 4)
+│   │   ├── Write (w = 2)
+│   │   ├── Execute (x = 1)
+│   │   └── Numeric Permissions
+│   │       ├── 777
+│   │       ├── 755
+│   │       ├── 644
+│   │       └── 600
+│   │
+│   ├── Ownership
+│   │   ├── User Owner
+│   │   ├── Group Owner
+│   │   ├── chown
+│   │   ├── chgrp
+│   │   └── chmod
+│   │
+│   ├── Special Permissions
+│   │   ├── SUID (Set User ID)
+│   │   ├── SGID (Set Group ID)
+│   │   ├── Sticky Bit
+│   │   └── Octal Values
+│   │       ├── 4000
+│   │       ├── 2000
+│   │       └── 1000
+│   │
+│   ├── ACL (Access Control Lists)
+│   │   ├── setfacl
+│   │   ├── getfacl
+│   │   ├── Default ACL
+│   │   └── Extended Permissions
+│   │
+│   └── Linux Security
+│       ├── PAM (Pluggable Authentication Modules)
+│       ├── SELinux
+│       │   ├── Enforcing
+│       │   ├── Permissive
+│       │   ├── Disabled
+│       │   └── Context Labels
+│       ├── AppArmor
+│       ├── Firewall
+│       │   ├── iptables
+│       │   ├── nftables
+│       │   └── firewalld
+│       └── sudo
+│
+├── 5. USER & GROUP MANAGEMENT
+│   │
+│   ├── User Management
+│   │   ├── useradd
+│   │   ├── adduser
+│   │   ├── passwd
+│   │   ├── usermod
+│   │   ├── userdel
+│   │   └── chage
+│   │
+│   ├── Important Files
+│   │   ├── /etc/passwd
+│   │   ├── /etc/shadow
+│   │   ├── /etc/group
+│   │   └── /etc/gshadow
+│   │
+│   ├── Group Management
+│   │   ├── groupadd
+│   │   ├── groupmod
+│   │   ├── groupdel
+│   │   └── gpasswd
+│   │
+│   ├── User Environment
+│   │   ├── /etc/profile
+│   │   ├── ~/.bashrc
+│   │   ├── ~/.bash_profile
+│   │   ├── Shell Variables
+│   │   ├── Environment Variables
+│   │   └── umask
+│   │
+│   └── Authentication
+│       ├── Local Authentication
+│       ├── LDAP
+│       ├── NIS
+│       ├── Kerberos
+│       └── SSH Keys
+│
+├── 6. PROCESS MANAGEMENT
+│   │
+│   ├── Processes
+│   │   ├── PID (Process ID)
+│   │   ├── PPID (Parent Process ID)
+│   │   ├── Foreground Process
+│   │   ├── Background Process
+│   │   ├── Zombie Process
+│   │   └── Daemon Process
+│   │
+│   ├── Commands
+│   │   ├── ps
+│   │   ├── top
+│   │   ├── htop
+│   │   ├── pstree
+│   │   ├── kill
+│   │   ├── pkill
+│   │   ├── killall
+│   │   ├── jobs
+│   │   ├── bg
+│   │   └── fg
+│   │
+│   ├── Scheduling
+│   │   ├── nice
+│   │   ├── renice
+│   │   ├── cron
+│   │   ├── crontab
+│   │   ├── at
+│   │   └── batch
+│   │
+│   └── System Monitoring
+│       ├── uptime
+│       ├── vmstat
+│       ├── iostat
+│       ├── sar
+│       ├── free
+│       └── dmesg
+│
+├── 7. BOOT PROCESS & SERVICES
+│   │
+│   ├── Boot Sequence
+│   │   ├── BIOS/UEFI
+│   │   ├── MBR/GPT
+│   │   ├── Boot Loader
+│   │   ├── Kernel Loading
+│   │   ├── initramfs/initrd
+│   │   ├── init/systemd
+│   │   └── Target/Runlevel
+│   │
+│   ├── GRUB
+│   │   ├── GRUB2
+│   │   ├── grub.cfg
+│   │   ├── grub-install
+│   │   ├── grub-mkconfig
+│   │   └── Rescue Mode
+│   │
+│   ├── Runlevels/Systemd Targets
+│   │   ├── Runlevel 0 (Shutdown)
+│   │   ├── Runlevel 1 (Single User)
+│   │   ├── Runlevel 3 (Multi-user CLI)
+│   │   ├── Runlevel 5 (GUI)
+│   │   ├── Runlevel 6 (Reboot)
+│   │   └── systemd Targets
+│   │
+│   ├── systemd
+│   │   ├── systemctl
+│   │   ├── journalctl
+│   │   ├── Unit Files
+│   │   ├── Services
+│   │   ├── Targets
+│   │   └── Timers
+│   │
+│   └── Service Management
+│       ├── start
+│       ├── stop
+│       ├── restart
+│       ├── reload
+│       ├── enable
+│       └── disable
+│
+├── 8. PACKAGE MANAGEMENT
+│   │
+│   ├── RPM Based Systems
+│   │   ├── rpm
+│   │   ├── yum
+│   │   ├── dnf
+│   │   ├── Repository
+│   │   ├── GPG Keys
+│   │   └── Dependency Resolution
+│   │
+│   ├── DEB Based Systems
+│   │   ├── dpkg
+│   │   ├── apt
+│   │   ├── apt-get
+│   │   └── apt-cache
+│   │
+│   └── Package Concepts
+│       ├── Install
+│       ├── Remove
+│       ├── Upgrade
+│       ├── Patch Management
+│       └── Security Updates
+│
+├── 9. DISK MANAGEMENT & LVM
+│   │
+│   ├── Partitioning
+│   │   ├── fdisk
+│   │   ├── gdisk
+│   │   ├── parted
+│   │   ├── MBR
+│   │   └── GPT
+│   │
+│   ├── Mounting
+│   │   ├── mount
+│   │   ├── umount
+│   │   ├── /etc/fstab
+│   │   └── UUID
+│   │
+│   ├── LVM (Logical Volume Manager)
+│   │   ├── PV (Physical Volume)
+│   │   ├── VG (Volume Group)
+│   │   ├── LV (Logical Volume)
+│   │   ├── pvcreate
+│   │   ├── vgcreate
+│   │   ├── lvcreate
+│   │   ├── lvextend
+│   │   ├── lvreduce
+│   │   └── Snapshots
+│   │
+│   ├── RAID
+│   │   ├── RAID 0 (Striping)
+│   │   ├── RAID 1 (Mirroring)
+│   │   ├── RAID 5 (Parity)
+│   │   ├── RAID 10
+│   │   └── mdadm
+│   │
+│   └── File System Tools
+│       ├── mkfs
+│       ├── fsck
+│       ├── tune2fs
+│       ├── blkid
+│       └── lsblk
+│
+├── 10. NETWORKING
+│   │
+│   ├── Network Basics
+│   │   ├── IPv4
+│   │   ├── IPv6
+│   │   ├── Subnet Mask
+│   │   ├── CIDR
+│   │   ├── Gateway
+│   │   ├── DNS
+│   │   └── MAC Address
+│   │
+│   ├── Network Configuration
+│   │   ├── ifconfig
+│   │   ├── ip addr
+│   │   ├── nmcli
+│   │   ├── nmtui
+│   │   ├── route
+│   │   └── ip route
+│   │
+│   ├── Troubleshooting
+│   │   ├── ping
+│   │   ├── traceroute
+│   │   ├── netstat
+│   │   ├── ss
+│   │   ├── tcpdump
+│   │   ├── dig
+│   │   ├── nslookup
+│   │   └── host
+│   │
+│   ├── Remote Access
+│   │   ├── SSH
+│   │   ├── SCP
+│   │   ├── SFTP
+│   │   ├── Telnet
+│   │   └── VNC
+│   │
+│   └── Ports & Protocols
+│       ├── SSH → 22
+│       ├── FTP → 21
+│       ├── DNS → 53
+│       ├── HTTP → 80
+│       ├── HTTPS → 443
+│       ├── SMTP → 25
+│       ├── DHCP → 67/68
+│       └── NTP → 123
+│
+├── 11. NETWORK SERVICES
+│   │
+│   ├── DNS Server
+│   │   ├── BIND
+│   │   ├── named.conf
+│   │   ├── Zone Files
+│   │   ├── Forward Zone
+│   │   ├── Reverse Zone
+│   │   └── DNSSEC
+│   │
+│   ├── DHCP Server
+│   │   ├── dhcpd
+│   │   ├── dhcpd.conf
+│   │   ├── Lease Management
+│   │   └── Reservations
+│   │
+│   ├── NFS
+│   │   ├── /etc/exports
+│   │   ├── exportfs
+│   │   ├── showmount
+│   │   └── Remote Mounts
+│   │
+│   ├── Samba
+│   │   ├── SMB/CIFS
+│   │   ├── smbd
+│   │   ├── nmbd
+│   │   ├── smb.conf
+│   │   └── Windows Interoperability
+│   │
+│   ├── Apache Web Server
+│   │   ├── httpd/apache2
+│   │   ├── Virtual Hosts
+│   │   ├── DocumentRoot
+│   │   ├── SSL/TLS
+│   │   ├── Access Logs
+│   │   └── Error Logs
+│   │
+│   ├── Squid Proxy
+│   │   ├── Web Caching
+│   │   ├── ACL Rules
+│   │   ├── squid.conf
+│   │   └── Proxy Filtering
+│   │
+│   └── Mail Services
+│       ├── Postfix (SMTP Server)
+│       ├── Dovecot (IMAP/POP3)
+│       ├── SquirrelMail
+│       ├── Mail Queue
+│       └── Spam Filtering
+│
+├── 12. LOGGING & TROUBLESHOOTING
+│   │
+│   ├── Logs
+│   │   ├── /var/log/messages
+│   │   ├── /var/log/secure
+│   │   ├── /var/log/maillog
+│   │   ├── /var/log/cron
+│   │   ├── /var/log/dmesg
+│   │   └── journalctl Logs
+│   │
+│   ├── Monitoring
+│   │   ├── top
+│   │   ├── htop
+│   │   ├── sar
+│   │   ├── vmstat
+│   │   ├── iostat
+│   │   └── free
+│   │
+│   ├── Troubleshooting
+│   │   ├── Service Failures
+│   │   ├── Boot Issues
+│   │   ├── Network Failures
+│   │   ├── Permission Issues
+│   │   ├── DNS Problems
+│   │   └── Disk Full Conditions
+│   │
+│   └── Performance Tuning
+│       ├── CPU Usage
+│       ├── Memory Usage
+│       ├── I/O Bottlenecks
+│       ├── Swap Usage
+│       └── Load Average
+│
+├── 13. VIRTUALIZATION & CONTAINERS
+│   │
+│   ├── Virtualization
+│   │   ├── KVM
+│   │   ├── QEMU
+│   │   ├── Xen
+│   │   ├── VirtualBox
+│   │   └── VMware
+│   │
+│   ├── VM Management
+│   │   ├── virsh
+│   │   ├── virt-manager
+│   │   ├── Snapshots
+│   │   └── Bridged Networking
+│   │
+│   └── Containers
+│       ├── Docker
+│       ├── Podman
+│       ├── Kubernetes
+│       ├── Images
+│       ├── Containers
+│       └── Registries
+│
+└── 14. BASH SCRIPTING
+    │
+    ├── Script Basics
+    │   ├── Shebang (#!/bin/bash)
+    │   ├── Variables
+    │   ├── Input/Output
+    │   ├── Exit Status
+    │   └── Comments
+    │
+    ├── Control Structures
+    │   ├── if
+    │   ├── case
+    │   ├── for
+    │   ├── while
+    │   ├── until
+    │   └── select
+    │
+    ├── Functions
+    │   ├── Function Declaration
+    │   ├── Return Values
+    │   └── Positional Parameters
+    │
+    ├── Redirection & Pipes
+    │   ├── >
+    │   ├── >>
+    │   ├── <
+    │   ├── 2>
+    │   ├── &
+    │   └── |
+    │
+    ├── Regular Expressions
+    │   ├── grep
+    │   ├── sed
+    │   ├── awk
+    │   └── Pattern Matching
+    │
+    ├── Automation
+    │   ├── cron Jobs
+    │   ├── Monitoring Scripts
+    │   ├── Backup Scripts
+    │   ├── Log Rotation
+    │   └── Patch Automation
+    │
+    └── Debugging
+        ├── bash -x
+        ├── set -x
+        ├── Error Handling
+        ├── Exit Codes
+        └── Logging

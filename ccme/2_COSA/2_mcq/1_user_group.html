@@ -113,339 +113,519 @@ button:disabled{
 
 <script>
 
-const questions = [
+const quizData = [
 
 {
-q:"1. Which command creates a user with a home directory and bash shell?",
-o:[
-"useradd -m -s /bin/bash user1",
-"adduser user1 bash",
-"usermod -d /home/user1",
-"useradd user1"
-],
-a:0
-},
-
-{
-q:"2. Which file stores encrypted passwords in Linux?",
-o:[
-"/etc/passwd",
-"/etc/group",
-"/etc/shadow",
-"/etc/security"
-],
-a:2
-},
-
-{
-q:"3. Which command is used to expire a user's password immediately?",
-o:[
-"passwd -e username",
-"passwd -x username",
-"chage -d 0 username",
-"usermod -e username"
-],
-a:2
-},
-
-{
-q:"4. What is the purpose of UID 0 in Linux?",
-o:[
-"Guest account",
-"System account",
-"Administrator/root account",
-"Service account"
-],
-a:2
-},
-
-{
-q:"5. Which command appends a user to supplementary groups without removing existing groups?",
-o:[
-"usermod -G",
-"usermod -aG",
-"groupmod -a",
-"useradd -G"
-],
-a:1
-},
-
-{
-q:"6. Which command displays password aging information for a user?",
-o:[
-"passwd -S",
-"chage -l",
-"usermod -l",
-"shadowconfig"
-],
-a:1
-},
-
-{
-q:"7. What is the default location for user home directories?",
-o:[
-"/root",
-"/users",
-"/home",
-"/usr/home"
-],
-a:2
-},
-
-{
-q:"8. Which command locks a user account password?",
-o:[
-"passwd -l username",
-"usermod -L username",
-"userlock username",
-"Both A and B"
-],
-a:3
-},
-
-{
-q:"9. Which file contains group definitions?",
-o:[
-"/etc/groups",
-"/etc/group",
-"/etc/passwd",
-"/etc/shadow"
-],
-a:1
-},
-
-{
-q:"10. Which command changes the primary group of a user?",
-o:[
-"groupmod",
-"usermod -g",
-"usermod -G",
-"chgrp"
-],
-a:1
-},
-
-{
-q:"11. Which permission set allows rwx for owner, rx for group, and no access for others?",
-o:[
-"755",
-"744",
-"750",
-"700"
-],
-a:2
-},
-
-{
-q:"12. Which command recursively changes ownership of a directory?",
-o:[
-"chmod -R",
-"chgrp -R",
-"chown -R",
-"usermod -R"
-],
-a:2
-},
-
-{
-q:"13. What does the sticky bit do on a shared directory?",
-o:[
-"Prevents execution",
-"Allows only owner to delete files",
-"Hides files",
-"Encrypts files"
-],
-a:1
-},
-
-{
-q:"14. Which command sets the sticky bit on /shared directory?",
-o:[
-"chmod 1777 /shared",
-"chmod 777 /shared",
-"chmod +s /shared",
-"chmod 4777 /shared"
-],
-a:0
-},
-
-{
-q:"15. Which special permission allows execution with file owner's privileges?",
-o:[
-"Sticky Bit",
-"ACL",
-"SUID",
-"SGID"
-],
-a:2
-},
-
-{
-q:"16. Which command displays all groups a user belongs to?",
-o:[
-"groups username",
-"id username",
-"cat /etc/group",
-"Both A and B"
-],
-a:3
-},
-
-{
-q:"17. Which command deletes a user along with home directory?",
-o:[
-"userdel username",
-"userdel -r username",
-"rmuser username",
-"deluser -d username"
-],
-a:1
-},
-
-{
-q:"18. What is the maximum permission value in chmod numeric mode?",
-o:[
-"999",
-"888",
-"777",
-"111"
-],
-a:2
-},
-
-{
-q:"19. Which command changes a user's login shell?",
-o:[
-"passwd -s",
-"shellmod",
-"usermod -s",
-"chsh -g"
-],
-a:2
-},
-
-{
-q:"20. Which command checks currently logged-in users?",
-o:[
-"w",
-"who",
-"users",
+question:"Consider the command below, which of the following statements is true?",
+options:[
+"file2 will be symbolically linked to file1",
+"Regardless of the size of file1, file2 will have a size of 5 bytes",
+"file1 and file2 have the same inode number",
 "All of the above"
 ],
-a:3
+answer:"file1 and file2 have the same inode number"
 },
 
 {
-q:"21. Which command modifies password expiry warning days?",
-o:[
-"chage -W",
-"passwd -w",
-"usermod -W",
-"shadow -w"
+question:"What type of files are typically in the /etc directory?",
+options:[
+"Configuration files",
+"Miscellaneous files",
+"Standard Linux commands",
+"None of the above"
 ],
-a:0
+answer:"Configuration files"
 },
 
 {
-q:"22. Which command can create both user and group simultaneously?",
-o:[
-"useradd",
-"adduser",
-"groupadd",
-"usermod"
+question:"In what directory are email inboxes stored by default?",
+options:[
+"/var/spool/mail",
+"The /mail directory in the user's home directory",
+"/usr/mail",
+"None of the above"
 ],
-a:1
+answer:"/var/spool/mail"
 },
 
 {
-q:"23. Which file defines default values for new users?",
-o:[
-"/etc/login.defs",
-"/etc/default/useradd",
-"Both A and B",
-"/etc/passwd"
-],
-a:2
+question:"What command lists file permissions?",
+options:["chmod","ls -l","perms","Do not know"],
+answer:"ls -l"
 },
 
 {
-q:"24. What does the command 'id username' display?",
-o:[
-"Only UID",
-"Only GID",
-"UID, GID, and groups",
-"Only groups"
-],
-a:2
+question:"What are the numeric permissions on a file with permissions of -rwxr-x--- after running chmod g+s file?",
+options:["2750","750","751","None of the above"],
+answer:"2750"
 },
 
 {
-q:"25. Which command temporarily switches to another user account?",
-o:[
-"sudo",
-"su",
-"switch",
-"usermod"
-],
-a:1
+question:"Which of the following is best suited for viewing text one page at a time?",
+options:["cut","less","grep","All of the above"],
+answer:"less"
 },
 
 {
-q:"26. Which command changes group ownership of a file?",
-o:[
-"chmod",
-"chown",
-"chgrp",
-"groupmod"
-],
-a:2
+question:"Which of the following is best suited for extracting columns of text?",
+options:["cut","less","grep","None of the above"],
+answer:"cut"
 },
 
 {
-q:"27. Which command grants sudo privileges by editing sudoers safely?",
-o:[
-"sudoedit",
-"visudo",
-"sudoers",
-"chmod sudo"
+question:"Which of the following might you use to configure the network?",
+options:[
+"redhat-config-network",
+"system-config-network",
+"ipconfig",
+"None of the above"
 ],
-a:1
+answer:"system-config-network"
 },
 
 {
-q:"28. Which command lists password status information?",
-o:[
-"passwd -S",
-"passwd -l",
-"passwd -x",
-"passwd -a"
+question:"Where is the configuration information for network interface eth0 stored?",
+options:[
+"/etc/sysconfig/network-scripts/ifcfg-eth0",
+"/etc/sysconfig/eth0.conf",
+"/etc/network/eth0.cfg",
+"None of the above"
 ],
-a:0
+answer:"/etc/sysconfig/network-scripts/ifcfg-eth0"
 },
 
 {
-q:"29. Which command sets account expiry date for a user?",
-o:[
-"usermod -e",
-"passwd -e",
-"chage -x",
-"groupmod -e"
+question:"What will the following command do? ls -l /etc > /tmp/etc.ls",
+options:[
+"Display a long listing of the /etc directory and the /tmp/etc.ls file",
+"Display a long listing of the /etc directory, redirecting the output into the /tmp/etc.ls file",
+"Report an error message",
+"None of the above"
 ],
-a:0
+answer:"Display a long listing of the /etc directory, redirecting the output into the /tmp/etc.ls file"
 },
 
 {
-q:"30. Which permission is represented by numeric value 4?",
-o:[
-"Write",
-"Execute",
-"Read",
-"Delete"
+question:"What command displays a list of processes currently running on your system?",
+options:["ps ax","proc -a","stat","All of the above"],
+answer:"ps ax"
+},
+
+{
+question:"Which of the following will allow you to log into another computer using an encrypted tunnel?",
+options:["telnet","ssh","rlogin","All of the above"],
+answer:"ssh"
+},
+
+{
+question:"The following command returns a list of files. What best describes the files listed? ls .*",
+options:[
+"A list of all files in the present working directory",
+"A list of all non-hidden files in the present working directory",
+"A list of all files in the present working directory that have a dot in the name",
+"None of the above"
 ],
-a:2
-}
+answer:"A list of all files in the present working directory"
+},
+
+{
+question:"Considering this entry in a user's crontab file, how often will the command run? 30 4 * * 3 mycmd",
+options:["Hourly","Weekly","Hourly in March","None of the above"],
+answer:"Weekly"
+},
+
+{
+question:"Which item below best represents the boot sequence?",
+options:[
+"The BIOS loads the boot loader; the boot loader loads the kernel; the kernel runs the initial process",
+"The BIOS loads the kernel; the kernel loads the boot loader",
+"The BIOS loads the initial process; the initial process loads the boot loader",
+"None of the above"
+],
+answer:"The BIOS loads the boot loader; the boot loader loads the kernel; the kernel runs the initial process"
+},
+
+{
+question:"What is the path name to the main apache configuration file?",
+options:[
+"/etc/httpd/conf.d/httpd.conf",
+"/etc/httpd/conf/httpd.conf",
+"/etc/httpd.conf",
+"None of the above"
+],
+answer:"/etc/httpd/conf/httpd.conf"
+},
+
+{
+question:"What command is used to remove files?",
+options:["rm","delete","erase","All of the above"],
+answer:"rm"
+},
+
+{
+question:"What type of packet does an IP ping use?",
+options:["ICMP","HTTP","IMAP","SNMP"],
+answer:"ICMP"
+},
+
+{
+question:"What file is used for associating port numbers to port names?",
+options:[
+"/etc/services",
+"/etc/hosts",
+"/etc/secured",
+"/etc/ports"
+],
+answer:"/etc/services"
+},
+
+{
+question:"What is the file system id of a Linux swap partition?",
+options:["/dev/hda1","/swap","82","83"],
+answer:"82"
+},
+
+{
+question:"By default, the home directory of every user falls under:",
+options:["/usr","/home","/users","/local"],
+answer:"/home"
+},
+
+{
+question:"The name of a reverse lookup zone file has to end in a:",
+options:["in-addr.arpa","com","net","None of these"],
+answer:"in-addr.arpa"
+},
+
+{
+question:"To enable a service immediately from the command line, you have to use:",
+options:["chkconfig","service","setup","None of the choices"],
+answer:"service"
+},
+
+{
+question:"What is the unused runlevel?",
+options:["1","2","3","4"],
+answer:"4"
+},
+
+{
+question:"The command that shows past commands is:",
+options:["last","lastb","history","hist"],
+answer:"history"
+},
+
+{
+question:"Which is a pseudo filesystem used to read kernel data structures?",
+options:["/dev","/dev/kmem","/proc","/dev/proc"],
+answer:"/proc"
+},
+
+{
+question:"Which process has a PID of 1?",
+options:["the kernel","lilo","init","bash"],
+answer:"init"
+},
+
+{
+question:"Which character at the beginning of a filename causes it to be hidden?",
+options:["!","#",".","%"],
+answer:"."
+},
+
+{
+question:"The keystroke in vi that takes cursor to next line is:",
+options:["i","k","l","j"],
+answer:"j"
+},
+
+{
+question:"You are on the SOA tab of DNS server DNS1 and wish to configure zone transfer with DNS2 every 8 hours. Which option helps configure this?",
+options:[
+"Refresh Interval",
+"Retry Attempts",
+"Retry Interval",
+"Expiration"
+],
+answer:"Refresh Interval"
+},
+
+{
+question:"When you copy a shared folder:",
+options:[
+"The original shared folder is still shared, but the copy is not shared",
+"The original folder as well as the copy is shared",
+"The original folder is not shared anymore, but the copy is shared",
+"The original shared folder and the copy both are not shared anymore"
+],
+answer:"The original shared folder is still shared, but the copy is not shared"
+},
+
+{
+question:"What should you do when you want to track disk space use on a per-user basis but do not want to deny users access to a volume?",
+options:[
+"Enable disk quotas",
+"Enable disk quotas and set the disk quota warning level",
+"Enable the disk quota warning level only",
+"Disable disk quotas"
+],
+answer:"Enable disk quotas and set the disk quota warning level"
+},
+
+{
+question:"What happens when you end a disconnected session running on the remote server?",
+options:[
+"all data is lost",
+"only the connection closes",
+"all applications running on the server remain active",
+"the session becomes available on the server"
+],
+answer:"only the connection closes"
+},
+
+{
+question:"Which of the following is not a good practice regarding password policy on a Windows server?",
+options:[
+"Requiring a change in password by the administrator at regular time intervals",
+"Creating a minimum password length",
+"Creating a minimum password age",
+"Allowing the user to change his password"
+],
+answer:"Creating a minimum password age"
+},
+
+{
+question:"Which of the following is a benefit of DHCP-assigned IP addresses?",
+options:[
+"Increased security",
+"Higher network throughput",
+"Decreased administrative overhead",
+"Lower network overhead"
+],
+answer:"Increased security"
+},
+
+{
+question:"Which command allows you to view the IP configuration for all network adapters on a given server?",
+options:[
+"Ipconfig /all",
+"ipconfig",
+"Tpconfig /all",
+"Ping /ipconfig –all"
+],
+answer:"Ipconfig /all"
+},
+
+{
+question:"A folder has specific Read access for user John, who is in group People. The group People has Full Control on same folder. What are John’s effective permissions?",
+options:[
+"Read only",
+"Full Control",
+"Read + Write",
+"Read + Write + Execute"
+],
+answer:"Read only"
+},
+
+{
+question:"Your manager asks you to implement a solution for common desktop background using Group Policy, but desktops do not change. What should you first assume?",
+options:[
+"Group policy has been configured incorrectly",
+"the computers/users are not in the correct groups in group policy",
+"The PC requires a logoff/logon before the new settings will be pulled",
+"The Windows installation on the PC is defective"
+],
+answer:"the computers/users are not in the correct groups in group policy"
+},
+
+{
+question:"What is the DocumentRoot path in Apache?",
+options:[
+"/home/apache",
+"/var/www",
+"/etc/http",
+"/apache"
+],
+answer:"/var/www"
+},
+
+{
+question:"What is default block/chunk size for PV?",
+options:["8MB","16MB","4MB","12MB"],
+answer:"4MB"
+},
+
+{
+question:"A process stack does not contain:",
+options:[
+"function parameters",
+"local variables",
+"return addresses",
+"PID of child process"
+],
+answer:"PID of child process"
+},
+
+{
+question:"The percentage of times a page number is found in the TLB is known as:",
+options:[
+"miss ratio",
+"miss percent",
+"hit ratio",
+"none of the above"
+],
+answer:"hit ratio"
+},
+
+{
+question:"In paged memory systems, if the page size is increased, then the internal fragmentation generally:",
+options:[
+"becomes less",
+"becomes more",
+"remains constant",
+"none of the above"
+],
+answer:"becomes more"
+},
+
+{
+question:"Round Robin Scheduling is the preemptive version of:",
+options:[
+"Shortest job first",
+"FIFO",
+"MultiQueue Feedback",
+"Shortest Deadline first"
+],
+answer:"FIFO"
+},
+
+{
+question:"Which is not the state of a Process?",
+options:[
+"Blocked",
+"Running",
+"Privileged",
+"Ready"
+],
+answer:"Privileged"
+},
+
+{
+question:"FIFO Scheduling is:",
+options:[
+"Shortest job Scheduling",
+"Non Preemptive Scheduling",
+"Fairshare Scheduling",
+"Preemptive Scheduling"
+],
+answer:"Non Preemptive Scheduling"
+},
+
+{
+question:"The number of process completed per unit time is known as:",
+options:[
+"Latency",
+"Execution time",
+"Waiting time",
+"Throughput"
+],
+answer:"Throughput"
+},
+
+{
+question:"A print server Program available in linux os is:",
+options:[
+"cups",
+"dovecot",
+"postfix",
+"cup"
+],
+answer:"cups"
+},
+
+{
+question:"Using which protocol does a client program submit jobs to a print server?",
+options:["IPP","POP","IMAP","PPP"],
+answer:"IPP"
+},
+
+{
+question:"Match the following: 1. Scheduler/Spooler 2. Filter 3. firefox 4. backends",
+options:[
+"1-B,2-D,3-A,4-C",
+"1-C,2-D,3-A,4-B",
+"1-B,2-C,3-D,4-A",
+"1-D,2-A,3-B,4-C"
+],
+answer:"1-B,2-D,3-A,4-C"
+},
+
+{
+question:"Match the following: 1. dovecot 2. postfix 3. cups 4. samba",
+options:[
+"1-B,2-C,3-A,4-D",
+"1-D,2-C,3-B,4-A",
+"1-B,2-A,3-D,4-C",
+"1-C,2-D,3-A,4-B"
+],
+answer:"1-D,2-C,3-B,4-A"
+},
+
+{
+question:"Which protocol is used to send mails from mail client to mail server?",
+options:["POP","SMTP","IMAP","HTTP"],
+answer:"SMTP"
+},
+
+{
+question:"Which protocol is used to download mails from mail server?",
+options:["IMAP","SMTP","Thunderbird","Dovecot"],
+answer:"IMAP"
+},
+
+{
+question:"Which Program is used to share files and printers between unix and windows machines?",
+options:["samba","dovecot","cups","winsep"],
+answer:"cups"
+},
+
+{
+question:"Which protocol/functionality is not implemented by samba?",
+options:["NetBIOS","CIFS","IPP","NTLM"],
+answer:"IPP"
+},
+
+{
+question:"Which program implements the CIFS protocol?",
+options:["dovecot","postfix","samba","cups"],
+answer:"samba"
+},
+
+{
+question:"Which program can act as a MTA (Mail Transfer Agent)?",
+options:["dovecot","postfix","samba","Thunderbird"],
+answer:"postfix"
+},
+
+{
+question:"What command is used to halt a Linux system?",
+options:[
+"init 0",
+"Shutdown -r",
+"Shutdown -g -y0",
+"Ctrl+Alt+Del"
+],
+answer:"init 0"
+},
+
+{
+question:"What can be used to set up a firewall on a Linux system?",
+options:["netstat","route","trace","ipchains"],
+answer:"ipchains"
+},
 
 ];
+
 
 const quizForm = document.getElementById("quizForm");
 

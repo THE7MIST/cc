@@ -1,0 +1,785 @@
+
+
+# 1.
+
+An administrator wants to deploy the same Windows Server configuration to 50 systems with minimal manual work. Which approach is MOST appropriate?
+
+A. Install Windows manually on every server
+B. Use disk cleanup utility
+C. Create and deploy a system image
+D. Use Event Viewer
+
+✅ **Answer:** C
+
+---
+
+# 2.
+
+Which Windows feature is specifically used for creating server backups?
+
+A. Hyper-V
+B. Windows Server Backup
+C. WSUS
+D. BitLocker
+
+✅ **Answer:** B
+
+---
+
+# 3.
+
+A company wants to move workloads from old hardware to new hardware with minimal downtime. Which task is being performed?
+
+A. Formatting
+B. Scheduling
+C. Migration
+D. Compression
+
+✅ **Answer:** C
+
+---
+
+# 4.
+
+Which command-line utility is commonly used to create or manage Windows images?
+
+A. DISM
+B. PING
+C. IPCONFIG
+D. CHKDSK
+
+✅ **Answer:** A
+
+---
+
+# 5.
+
+An administrator wants to prepare a Windows image before deployment by removing system-specific information. Which tool is used?
+
+A. Task Manager
+B. Sysprep
+C. Regedit
+D. Netstat
+
+✅ **Answer:** B
+
+---
+
+# 6.
+
+Which boot mode is REQUIRED for Secure Boot support in modern Windows Server installations?
+
+A. BIOS Legacy
+B. DOS Mode
+C. UEFI
+D. Safe Mode
+
+✅ **Answer:** C
+
+---
+
+# 7.
+
+A server backup must run automatically every night at 2 AM. Which Windows utility is MOST suitable?
+
+A. Resource Monitor
+B. Services.msc
+C. Task Scheduler
+D. Device Manager
+
+✅ **Answer:** C
+
+---
+
+# 8.
+
+Which file system is the default and recommended for modern Windows Server installations?
+
+A. FAT16
+B. FAT32
+C. NTFS
+D. EXT4
+
+✅ **Answer:** C
+
+---
+
+# 9.
+
+An administrator wants to capture and apply Windows images during deployment. Which technology is MOST associated with this process?
+
+A. IIS
+B. WIM Imaging
+C. DHCP Relay
+D. Telnet
+
+✅ **Answer:** B
+
+---
+
+# 10.
+
+Which Windows Server tool helps manage drivers, features, and offline images?
+
+A. DISM
+B. FTP
+C. ARP
+D. NSLOOKUP
+
+✅ **Answer:** A
+
+---
+
+# 11.
+
+A backup contains only files changed since the last full backup. What type of backup is this?
+
+A. Mirror Backup
+B. Differential Backup
+C. Incremental Backup
+D. Snapshot Backup
+
+✅ **Answer:** C
+
+---
+
+# 12.
+
+An administrator wants to restore the complete operating system after hardware failure. Which backup type is MOST useful?
+
+A. Temporary Backup
+B. System Image Backup
+C. Clipboard Backup
+D. User Profile Backup
+
+✅ **Answer:** B
+
+---
+
+# 13.
+
+Which utility is commonly used to check Windows Server event logs?
+
+A. Event Viewer
+B. Device Manager
+C. Services
+D. Disk Cleanup
+
+✅ **Answer:** A
+
+---
+
+# 14.
+
+A company wants centralized deployment of Windows installations over a network. Which technology is MOST suitable?
+
+A. PXE Boot
+B. Bluetooth Pairing
+C. SMTP Relay
+D. ICMP Redirect
+
+✅ **Answer:** A
+
+---
+
+# 15.
+
+Which Windows deployment service allows network-based OS installation?
+
+A. WDS
+B. DNS
+C. DFS
+D. IIS
+
+✅ **Answer:** A
+
+(WDS → Windows Deployment Services)
+
+---
+
+# 16.
+
+An administrator accidentally deletes an important configuration file. Which backup objective is MOST important now?
+
+A. Availability
+B. Recovery
+C. Authentication
+D. Compression
+
+✅ **Answer:** B
+
+---
+
+# 17.
+
+Which command displays detailed IP configuration information in Windows?
+
+A. ifconfig
+B. ipconfig /all
+C. route print
+D. tracert
+
+✅ **Answer:** B
+
+---
+
+# 18.
+
+A Windows Server image is mounted offline for modification before deployment. Which tool supports this operation?
+
+A. DISM
+B. NSLOOKUP
+C. HOSTNAME
+D. TELNET
+
+✅ **Answer:** A
+
+---
+
+# 19.
+
+Which Microsoft feature helps automate repetitive administrative tasks using scripts?
+
+A. PowerShell
+B. Notepad
+C. Paint
+D. WordPad
+
+✅ **Answer:** A
+
+---
+
+# 20.
+
+An administrator wants to maintain identical deployment configurations across multiple systems. Which approach is BEST?
+
+A. Manual installation every time
+B. Using server imaging templates
+C. Random partitioning
+D. Separate OS versions on each system
+
+✅ **Answer:** B
+
+
+# 1.
+
+Which Active Directory component stores information about users, groups, and policies centrally?
+
+A. DHCP
+B. DNS
+C. Active Directory Database
+D. IIS
+
+✅ Answer: C
+
+---
+
+# 2.
+
+An administrator wants users to log in using the same credentials across all systems in the organization. Which service enables this?
+
+A. FTP
+B. Active Directory Domain Services (AD DS)
+C. NAT
+D. SNMP
+
+✅ Answer: B
+
+---
+
+# 3.
+
+Which command is commonly used to install Active Directory Domain Services from PowerShell?
+
+A. Install-WindowsFeature AD-Domain-Services
+B. enable-adservice
+C. add-domain-controller
+D. start-adds
+
+✅ Answer: A
+
+---
+
+# 4.
+
+A server responsible for authenticating users in a domain is called:
+
+A. DHCP Server
+B. Proxy Server
+C. Domain Controller
+D. Print Server
+
+✅ Answer: C
+
+---
+
+# 5.
+
+An organization deploys an additional domain controller mainly for:
+
+A. Increasing monitor resolution
+B. Redundancy and fault tolerance
+C. Reducing RAM usage
+D. Disabling replication
+
+✅ Answer: B
+
+---
+
+# 6.
+
+Which protocol does Active Directory primarily depend on for name resolution?
+
+A. FTP
+B. DNS
+C. SNMP
+D. ICMP
+
+✅ Answer: B
+
+---
+
+# 7.
+
+A Windows 11 system joined to a domain but not hosting AD DS is categorized as:
+
+A. Domain Controller
+B. Member Server
+C. Client Machine
+D. Root Server
+
+✅ Answer: C
+
+---
+
+# 8.
+
+Which MMC utility is MOST commonly used to manage Active Directory users and groups?
+
+A. dsa.msc
+B. devmgmt.msc
+C. diskmgmt.msc
+D. eventvwr.msc
+
+✅ Answer: A
+
+---
+
+# 9.
+
+An administrator wants to organize users into logical administrative units. Which AD object is MOST suitable?
+
+A. OU (Organizational Unit)
+B. DNS Zone
+C. IP Scope
+D. Workgroup
+
+✅ Answer: A
+
+---
+
+# 10.
+
+Which feature automatically assigns IP addresses to clients in a network?
+
+A. DNS
+B. DHCP
+C. LDAP
+D. AD DS
+
+✅ Answer: B
+
+---
+
+# 11.
+
+A DHCP client is unable to obtain an IP address. Which protocol message is typically sent FIRST by the client?
+
+A. DHCPACK
+B. DHCPDISCOVER
+C. DHCPREQUEST
+D. DHCPNAK
+
+✅ Answer: B
+
+---
+
+# 12.
+
+Which port numbers are used by DHCP?
+
+A. TCP 20/21
+B. UDP 67/68
+C. TCP 25
+D. UDP 161
+
+✅ Answer: B
+
+---
+
+# 13.
+
+An administrator wants to manually reserve a specific IP for one device using its MAC address. What is this called?
+
+A. Lease Expiration
+B. Scope Deletion
+C. DHCP Reservation
+D. Zone Transfer
+
+✅ Answer: C
+
+---
+
+# 14.
+
+Which DNS record maps a hostname to an IPv4 address?
+
+A. MX
+B. PTR
+C. A Record
+D. CNAME
+
+✅ Answer: C
+
+---
+
+# 15.
+
+Which DNS record is specifically used for reverse lookup?
+
+A. TXT
+B. PTR
+C. SOA
+D. AAAA
+
+✅ Answer: B
+
+---
+
+# 16.
+
+An administrator wants to centrally manage and track IP addresses across the enterprise. Which technology is designed for this?
+
+A. IIS
+B. IPAM
+C. WDS
+D. DFS
+
+✅ Answer: B
+
+(IPAM → IP Address Management)
+
+---
+
+# 17.
+
+A newly promoted Domain Controller is not replicating properly. Which AD feature is MOST directly involved in synchronization between DCs?
+
+A. Replication
+B. Compression
+C. Routing
+D. Fragmentation
+
+✅ Answer: A
+
+---
+
+# 18.
+
+Which command is commonly used to verify DNS resolution from a client machine?
+
+A. tracert
+B. nslookup
+C. netstat
+D. route
+
+✅ Answer: B
+
+---
+
+# 19.
+
+A member server differs from a Domain Controller because it:
+
+A. Cannot join a domain
+B. Does not store AD DS database
+C. Cannot host services
+D. Uses Linux kernel
+
+✅ Answer: B
+
+---
+
+# 20.
+
+An administrator wants centralized authentication, authorization, and policy enforcement in Windows networks. Which infrastructure BEST provides this?
+
+A. Workgroup
+B. Peer-to-Peer Network
+C. Active Directory Infrastructure
+D. Static Routing
+
+✅ Answer: C
+
+
+# 1.
+
+Which policy applies only to a single local computer and not the entire domain?
+
+A. Domain Policy
+B. Group Policy
+C. Local Security Policy
+D. Forest Policy
+
+✅ Answer: C
+
+---
+
+# 2.
+
+Which command is commonly used to force Group Policy updates immediately?
+
+A. gpupdate /force
+B. net update
+C. policy-refresh
+D. gpo /reload
+
+✅ Answer: A
+
+---
+
+# 3.
+
+An administrator wants password complexity rules applied to every computer in a domain. Which feature is MOST suitable?
+
+A. Local Users
+B. Group Policy
+C. Task Scheduler
+D. Device Manager
+
+✅ Answer: B
+
+---
+
+# 4.
+
+Which MMC console is commonly used to manage Group Policies?
+
+A. gpmc.msc
+B. diskmgmt.msc
+C. devmgmt.msc
+D. perfmon.msc
+
+✅ Answer: A
+
+---
+
+# 5.
+
+A company wants users to access office resources securely from home through an encrypted tunnel. Which technology is MOST suitable?
+
+A. FTP
+B. VPN
+C. Telnet
+D. ARP
+
+✅ Answer: B
+
+---
+
+# 6.
+
+Which protocol is MOST commonly associated with secure remote web access?
+
+A. HTTP
+B. HTTPS
+C. SNMP
+D. TFTP
+
+✅ Answer: B
+
+---
+
+# 7.
+
+An administrator wants to verify network connectivity between two hosts. Which command is MOST commonly used?
+
+A. ping
+B. mkdir
+C. format
+D. gpresult
+
+✅ Answer: A
+
+---
+
+# 8.
+
+Which Windows command displays current network configuration details?
+
+A. netstat
+B. ipconfig
+C. tracert
+D. route
+
+✅ Answer: B
+
+---
+
+# 9.
+
+A VPN mainly provides:
+
+A. File Compression
+B. Secure Remote Connectivity
+C. Disk Partitioning
+D. DNS Replication
+
+✅ Answer: B
+
+---
+
+# 10.
+
+Which IIS service is primarily used for hosting websites on Windows Server?
+
+A. FTP Service
+B. DNS Service
+C. Web Server Service
+D. DHCP Service
+
+✅ Answer: C
+
+---
+
+# 11.
+
+Which default protocol/port combination is used by IIS for secure web traffic?
+
+A. HTTP / 80
+B. HTTPS / 443
+C. FTP / 21
+D. DNS / 53
+
+✅ Answer: B
+
+---
+
+# 12.
+
+Which command-line tool is commonly used to test whether a web server port is reachable?
+
+A. telnet
+B. hostname
+C. shutdown
+D. tree
+
+✅ Answer: A
+
+---
+
+# 13.
+
+An administrator wants to host multiple websites on a single IIS server using different hostnames. Which IIS feature supports this?
+
+A. Binding
+B. Compression
+C. Mirroring
+D. Partitioning
+
+✅ Answer: A
+
+---
+
+# 14.
+
+Which IPv6 address type represents the loopback address?
+
+A. 127.0.0.1
+B. ::1
+C. FE80::1
+D. FF00::1
+
+✅ Answer: B
+
+---
+
+# 15.
+
+Which IPv6 address type is automatically assigned for local network communication?
+
+A. Public Address
+B. Link-Local Address
+C. Broadcast Address
+D. Loopback Address
+
+✅ Answer: B
+
+---
+
+# 16.
+
+Which feature allows files to be shared and replicated across multiple Windows servers?
+
+A. DFS
+B. IIS
+C. WDS
+D. PXE
+
+✅ Answer: A
+
+(DFS → Distributed File System)
+
+---
+
+# 17.
+
+An administrator wants branch offices to access replicated shared folders efficiently. Which Windows technology is MOST suitable?
+
+A. DFS Replication
+B. Telnet
+C. ICMP Redirect
+D. NAT Traversal
+
+✅ Answer: A
+
+---
+
+# 18.
+
+Which command displays active network connections and listening ports?
+
+A. netstat
+B. gpupdate
+C. tasklist
+D. whoami
+
+✅ Answer: A
+
+---
+
+# 19.
+
+A Group Policy setting is applied at the domain level but not taking effect on a client. Which command helps verify applied GPOs?
+
+A. gpresult
+B. format
+C. diskpart
+D. chkdsk
+
+✅ Answer: A
+
+---
+
+# 20.
+
+An administrator wants centralized management of security settings, software deployment, and login scripts in Windows networks. Which technology BEST supports this?
+
+A. Group Policy Infrastructure
+B. Local Storage
+C. Standalone Workgroup
+D. DHCP Reservation
+
+✅ Answer: A
+
+

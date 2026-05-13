@@ -1,0 +1,474 @@
+WINDOWS OPERATING SYSTEM & ADMINISTRATION
+│
+├── 1. WINDOWS OS FUNDAMENTALS
+│   │
+│   ├── Windows Family
+│   │   ├── Windows 10 (Client OS)
+│   │   ├── Windows 11 (Modern Client OS)
+│   │   ├── Windows Server 2016 (Server Platform)
+│   │   ├── Windows Server 2022 (Modern Server Platform)
+│   │   └── Editions
+│   │       ├── Standard Edition
+│   │       ├── Datacenter Edition
+│   │       └── Essentials
+│   │
+│   ├── Core Components
+│   │   ├── Kernel (ntoskrnl.exe → Core OS Engine)
+│   │   ├── HAL (Hardware Abstraction Layer)
+│   │   ├── Registry (Central Config Database)
+│   │   ├── Services (Background Processes)
+│   │   ├── Processes & Threads
+│   │   ├── Session Manager (smss.exe)
+│   │   ├── Winlogon.exe (Login Process)
+│   │   └── LSASS (Local Security Authority Subsystem Service)
+│   │
+│   ├── GUI & CLI
+│   │   ├── GUI (Graphical User Interface)
+│   │   ├── CMD (Command Prompt)
+│   │   ├── PowerShell (Automation Shell)
+│   │   ├── Windows Terminal
+│   │   └── MMC (Microsoft Management Console)
+│   │
+│   └── Common Tools
+│       ├── taskmgr.exe (Task Manager)
+│       ├── eventvwr.msc (Event Viewer)
+│       ├── services.msc (Service Manager)
+│       ├── devmgmt.msc (Device Manager)
+│       ├── diskmgmt.msc (Disk Management)
+│       ├── secpol.msc (Local Security Policy)
+│       ├── gpedit.msc (Local Group Policy)
+│       └── compmgmt.msc (Computer Management)
+│
+├── 2. WINDOWS INSTALLATION & DEPLOYMENT
+│   │
+│   ├── Installation Types
+│   │   ├── Fresh Installation
+│   │   ├── Upgrade Installation
+│   │   ├── Migration (Data/Role Transfer)
+│   │   ├── Unattended Installation
+│   │   └── Network Installation
+│   │
+│   ├── Boot Concepts
+│   │   ├── POST (Power On Self Test)
+│   │   ├── BIOS (Legacy Firmware)
+│   │   ├── UEFI (Modern Firmware)
+│   │   ├── GPT (GUID Partition Table)
+│   │   ├── MBR (Master Boot Record)
+│   │   ├── Secure Boot
+│   │   ├── Boot Manager (bootmgr)
+│   │   ├── BCD (Boot Configuration Data)
+│   │   └── Winload.exe
+│   │
+│   ├── Deployment Technologies
+│   │   ├── WDS (Windows Deployment Services)
+│   │   ├── PXE Boot (Preboot Execution Environment)
+│   │   ├── MDT (Microsoft Deployment Toolkit)
+│   │   ├── SCCM/MECM (Configuration Manager)
+│   │   ├── Sysprep (System Preparation Tool)
+│   │   ├── DISM (Deployment Image Servicing and Management)
+│   │   ├── WIM (Windows Imaging Format)
+│   │   └── Answer Files (unattend.xml)
+│   │
+│   └── Recovery
+│       ├── Windows RE (Recovery Environment)
+│       ├── Startup Repair
+│       ├── Safe Mode
+│       ├── Last Known Good Configuration
+│       ├── System Restore
+│       └── Recovery Drive
+│
+├── 3. ACTIVE DIRECTORY DOMAIN SERVICES (AD DS)
+│   │
+│   ├── AD Fundamentals
+│   │   ├── Domain (Security Boundary)
+│   │   ├── Forest (Collection of Domains)
+│   │   ├── Tree (Hierarchical Domain Structure)
+│   │   ├── OU (Organizational Unit)
+│   │   ├── Site (Physical Network Structure)
+│   │   ├── Schema (AD Object Definitions)
+│   │   └── Global Catalog (Partial Object Store)
+│   │
+│   ├── Domain Controllers
+│   │   ├── DC (Domain Controller)
+│   │   ├── ADC (Additional Domain Controller)
+│   │   ├── RODC (Read Only Domain Controller)
+│   │   ├── Replication
+│   │   ├── SYSVOL
+│   │   ├── NTDS.DIT (AD Database File)
+│   │   └── FSMO Roles
+│   │       ├── Schema Master
+│   │       ├── Domain Naming Master
+│   │       ├── RID Master
+│   │       ├── PDC Emulator
+│   │       └── Infrastructure Master
+│   │
+│   ├── Authentication
+│   │   ├── Kerberos (Default Auth Protocol)
+│   │   ├── NTLM (Legacy Auth Protocol)
+│   │   ├── LDAP (Lightweight Directory Access Protocol)
+│   │   ├── SSO (Single Sign-On)
+│   │   └── Trust Relationships
+│   │
+│   ├── AD Administration
+│   │   ├── dsa.msc (AD Users & Computers)
+│   │   ├── Active Directory Sites & Services
+│   │   ├── User Accounts
+│   │   ├── Computer Accounts
+│   │   ├── Security Groups
+│   │   ├── Distribution Groups
+│   │   ├── Password Policies
+│   │   └── Account Lockout Policies
+│   │
+│   └── AD Security
+│       ├── Delegation
+│       ├── Least Privilege
+│       ├── Tiered Administration
+│       ├── AD Backup
+│       ├── System State Backup
+│       └── Tombstone Lifetime
+│
+├── 4. GROUP POLICY (GPO)
+│   │
+│   ├── Policy Types
+│   │   ├── Local Group Policy
+│   │   ├── Domain GPO
+│   │   ├── Site GPO
+│   │   └── OU-linked GPO
+│   │
+│   ├── GPO Components
+│   │   ├── GPT (Group Policy Template)
+│   │   ├── GPC (Group Policy Container)
+│   │   ├── SYSVOL Storage
+│   │   └── Administrative Templates (.admx)
+│   │
+│   ├── GPO Processing
+│   │   ├── LSDOU Order
+│   │   │   ├── Local
+│   │   │   ├── Site
+│   │   │   ├── Domain
+│   │   │   └── OU
+│   │   ├── Inheritance
+│   │   ├── Enforced Policies
+│   │   ├── Loopback Processing
+│   │   └── WMI Filtering
+│   │
+│   ├── Important Commands
+│   │   ├── gpupdate /force
+│   │   ├── gpresult
+│   │   ├── rsop.msc (Resultant Set of Policy)
+│   │   └── gpmc.msc (Group Policy Management Console)
+│   │
+│   └── Security Policies
+│       ├── Password Complexity
+│       ├── Account Lockout
+│       ├── Audit Policies
+│       ├── User Rights Assignment
+│       └── Software Restriction Policies
+│
+├── 5. DNS (DOMAIN NAME SYSTEM)
+│   │
+│   ├── DNS Concepts
+│   │   ├── Forward Lookup Zone
+│   │   ├── Reverse Lookup Zone
+│   │   ├── Recursive Query
+│   │   ├── Iterative Query
+│   │   ├── Root Hints
+│   │   ├── Forwarders
+│   │   └── Zone Transfer
+│   │
+│   ├── Record Types
+│   │   ├── A Record (IPv4 Mapping)
+│   │   ├── AAAA Record (IPv6 Mapping)
+│   │   ├── PTR Record (Reverse Lookup)
+│   │   ├── MX Record (Mail Exchange)
+│   │   ├── CNAME (Alias)
+│   │   ├── NS Record (Name Server)
+│   │   ├── SOA (Start of Authority)
+│   │   └── TXT Record
+│   │
+│   ├── DNS Security
+│   │   ├── Secure Dynamic Updates
+│   │   ├── DNSSEC (DNS Security Extensions)
+│   │   ├── Zone Transfer Restrictions
+│   │   └── Cache Poisoning Protection
+│   │
+│   └── DNS Troubleshooting
+│       ├── nslookup
+│       ├── Resolve-DnsName
+│       ├── ipconfig /flushdns
+│       ├── ipconfig /registerdns
+│       └── Event Logs
+│
+├── 6. DHCP (DYNAMIC HOST CONFIGURATION PROTOCOL)
+│   │
+│   ├── DHCP Basics
+│   │   ├── Scope
+│   │   ├── Lease
+│   │   ├── Reservation
+│   │   ├── Exclusion Range
+│   │   ├── Superscope
+│   │   └── DHCP Relay Agent
+│   │
+│   ├── DORA Process
+│   │   ├── Discover
+│   │   ├── Offer
+│   │   ├── Request
+│   │   └── Acknowledge
+│   │
+│   ├── Ports
+│   │   ├── UDP 67 (Server)
+│   │   └── UDP 68 (Client)
+│   │
+│   └── DHCP Security
+│       ├── DHCP Snooping
+│       ├── Rogue DHCP Detection
+│       └── MAC Reservations
+│
+├── 7. FILE SYSTEM & STORAGE
+│   │
+│   ├── File Systems
+│   │   ├── NTFS (New Technology File System)
+│   │   ├── FAT32
+│   │   ├── exFAT
+│   │   ├── ReFS (Resilient File System)
+│   │   └── File Attributes
+│   │       ├── Read-only
+│   │       ├── Hidden
+│   │       ├── System
+│   │       └── Archive
+│   │
+│   ├── NTFS Permissions
+│   │   ├── Full Control
+│   │   ├── Modify
+│   │   ├── Read & Execute
+│   │   ├── Read
+│   │   ├── Write
+│   │   └── Inheritance
+│   │
+│   ├── Share Permissions
+│   │   ├── Read
+│   │   ├── Change
+│   │   └── Full Control
+│   │
+│   ├── Disk Management
+│   │   ├── Basic Disk
+│   │   ├── Dynamic Disk
+│   │   ├── MBR
+│   │   ├── GPT
+│   │   ├── Partition
+│   │   ├── Volume
+│   │   ├── RAID 0 (Striping)
+│   │   ├── RAID 1 (Mirroring)
+│   │   └── RAID 5 (Parity)
+│   │
+│   ├── Storage Features
+│   │   ├── Storage Spaces
+│   │   ├── Deduplication
+│   │   ├── Shadow Copies
+│   │   ├── DFS (Distributed File System)
+│   │   └── BranchCache
+│   │
+│   └── FSRM (File Server Resource Manager)
+│       ├── Quotas
+│       ├── File Screening
+│       ├── Storage Reports
+│       └── Classification Management
+│
+├── 8. NETWORKING & REMOTE ACCESS
+│   │
+│   ├── IPv4
+│   │   ├── Classes A/B/C
+│   │   ├── Subnet Mask
+│   │   ├── CIDR
+│   │   ├── Default Gateway
+│   │   ├── APIPA (169.254.x.x)
+│   │   └── NAT
+│   │
+│   ├── IPv6
+│   │   ├── ::1 (Loopback)
+│   │   ├── FE80:: (Link Local)
+│   │   ├── Global Unicast
+│   │   ├── Multicast
+│   │   └── Dual Stack
+│   │
+│   ├── Remote Access
+│   │   ├── RDP (Remote Desktop Protocol)
+│   │   ├── VPN (Virtual Private Network)
+│   │   ├── DirectAccess
+│   │   ├── RRAS (Routing and Remote Access Service)
+│   │   └── WinRM (Windows Remote Management)
+│   │
+│   ├── Troubleshooting Commands
+│   │   ├── ping
+│   │   ├── tracert
+│   │   ├── pathping
+│   │   ├── arp -a
+│   │   ├── netstat -an
+│   │   ├── nslookup
+│   │   ├── ipconfig /all
+│   │   └── route print
+│   │
+│   └── Network Services
+│       ├── NLB (Network Load Balancing)
+│       ├── Failover Clustering
+│       ├── DFS Replication
+│       └── SMB (Server Message Block)
+│
+├── 9. IIS WEB SERVER
+│   │
+│   ├── IIS Components
+│   │   ├── Website
+│   │   ├── Virtual Directory
+│   │   ├── Application Pool
+│   │   ├── Worker Process (w3wp.exe)
+│   │   └── Bindings
+│   │
+│   ├── Protocols
+│   │   ├── HTTP (Port 80)
+│   │   ├── HTTPS (Port 443)
+│   │   ├── FTP (Port 21)
+│   │   └── WebDAV
+│   │
+│   ├── Security
+│   │   ├── SSL/TLS
+│   │   ├── Certificates
+│   │   ├── Authentication Methods
+│   │   │   ├── Anonymous
+│   │   │   ├── Basic
+│   │   │   ├── Windows Auth
+│   │   │   └── Digest
+│   │   └── Request Filtering
+│   │
+│   └── IIS Management
+│       ├── inetmgr
+│       ├── Logs
+│       ├── MIME Types
+│       ├── Host Headers
+│       └── Virtual Hosting
+│
+├── 10. HYPER-V & VIRTUALIZATION
+│   │
+│   ├── Hyper-V Concepts
+│   │   ├── Hypervisor
+│   │   ├── Virtual Machine
+│   │   ├── VHD/VHDX
+│   │   ├── Checkpoints
+│   │   ├── Dynamic Memory
+│   │   ├── Live Migration
+│   │   └── Replica
+│   │
+│   ├── Virtual Switches
+│   │   ├── External Switch
+│   │   ├── Internal Switch
+│   │   └── Private Switch
+│   │
+│   ├── VM Generation
+│   │   ├── Generation 1 (Legacy BIOS)
+│   │   └── Generation 2 (UEFI)
+│   │
+│   └── Virtualization Security
+│       ├── Shielded VM
+│       ├── Secure Boot
+│       └── TPM Virtualization
+│
+├── 11. WINDOWS SECURITY
+│   │
+│   ├── Authentication
+│   │   ├── Kerberos
+│   │   ├── NTLM
+│   │   ├── Smart Cards
+│   │   ├── MFA (Multi Factor Authentication)
+│   │   └── Credential Guard
+│   │
+│   ├── Encryption
+│   │   ├── BitLocker
+│   │   ├── EFS (Encrypting File System)
+│   │   └── TPM (Trusted Platform Module)
+│   │
+│   ├── Windows Defender
+│   │   ├── Antivirus
+│   │   ├── Firewall
+│   │   ├── SmartScreen
+│   │   └── Exploit Protection
+│   │
+│   ├── Auditing
+│   │   ├── Event Viewer
+│   │   ├── Security Logs
+│   │   ├── Audit Policies
+│   │   ├── SACL (System Access Control List)
+│   │   └── Logon Auditing
+│   │
+│   └── Security Concepts
+│       ├── CIA Triad
+│       │   ├── Confidentiality
+│       │   ├── Integrity
+│       │   └── Availability
+│       ├── Least Privilege
+│       ├── Zero Trust
+│       ├── Hardening
+│       └── Patch Management
+│
+├── 12. BACKUP & RECOVERY
+│   │
+│   ├── Backup Types
+│   │   ├── Full Backup
+│   │   ├── Incremental Backup
+│   │   ├── Differential Backup
+│   │   ├── System State Backup
+│   │   └── Bare Metal Recovery
+│   │
+│   ├── WSB (Windows Server Backup)
+│   │   ├── Scheduled Backup
+│   │   ├── Recovery Wizard
+│   │   ├── Volume Backup
+│   │   └── System Recovery
+│   │
+│   └── Disaster Recovery
+│       ├── Restore Points
+│       ├── Recovery Environment
+│       ├── Boot Repair
+│       └── AD Recovery
+│
+└── 13. POWERSHELL
+    │
+    ├── Basics
+    │   ├── Cmdlets (Verb-Noun Commands)
+    │   ├── Aliases
+    │   ├── Variables
+    │   ├── Arrays
+    │   ├── Objects
+    │   └── Pipelines (|)
+    │
+    ├── Common Cmdlets
+    │   ├── Get-Process
+    │   ├── Get-Service
+    │   ├── Get-Help
+    │   ├── Get-Command
+    │   ├── Restart-Service
+    │   ├── Stop-Process
+    │   ├── Test-Connection
+    │   └── Get-EventLog
+    │
+    ├── Remoting
+    │   ├── Enable-PSRemoting
+    │   ├── WinRM
+    │   ├── Enter-PSSession
+    │   ├── Invoke-Command
+    │   └── Remote Sessions
+    │
+    ├── Scripting
+    │   ├── Functions
+    │   ├── Loops
+    │   ├── Conditions
+    │   ├── Error Handling
+    │   ├── Debugging
+    │   ├── Background Jobs
+    │   └── Scheduled Tasks
+    │
+    └── Administration Automation
+        ├── Bulk User Creation
+        ├── Service Automation
+        ├── AD Automation
+        ├── IIS Automation
+        ├── Network Configuration
+        └── Security Auditing

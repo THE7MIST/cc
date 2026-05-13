@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux & Windows Admin Quiz | PGCP-ITISS</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Sora:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0e1117;
+    --bg2: #161b27;
+    --bg3: #1e2535;
+    --card: #1a2030;
+    --border: #2a3347;
+    --border2: #3a4560;
+    --text: #e8edf5;
+    --muted: #7a8aa0;
+    --linux: #22d3a0;
+    --linux-dim: #0d4035;
+    --win: #4da6ff;
+    --win-dim: #0d2545;
+    --correct: #22c55e;
+    --correct-dim: #0a2e1a;
+    --wrong: #f43f5e;
+    --wrong-dim: #2e0a14;
+    --accent: #f0b429;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Sora', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--linux);
+    letter-spacing: 0.5px;
+  }
+  .header-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+  }
+  .header-badge {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+  }
+
+  /* SCREENS */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* HOME */
+  .home-wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+  .home-hero {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .home-hero h1 {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+  .home-hero p {
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .track-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .track-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .track-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .track-card.linux::before { background: var(--linux); }
+  .track-card.windows::before { background: var(--win); }
+  .track-card:hover {
+    border-color: var(--border2);
+    background: var(--bg3);
+    transform: translateY(-2px);
+  }
+  .track-card.linux:hover { border-color: var(--linux); }
+  .track-card.windows:hover { border-color: var(--win); }
+  .track-icon {
+    font-size: 32px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .track-card h2 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .track-card p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .track-pill {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+  }
+  .linux .track-pill { background: var(--linux-dim); color: var(--linux); }
+  .windows .track-pill { background: var(--win-dim); color: var(--win); }
+
+  /* QUIZ */
+  .quiz-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 28px 24px 60px;
+  }
+
+  .quiz-topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .back-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Sora', sans-serif;
+    transition: all 0.15s;
+  }
+  .back-btn:hover { border-color: var(--border2); color: var(--text); }
+  .quiz-info { flex: 1; }
+  .quiz-track-name { font-size: 14px; font-weight: 500; color: var(--text); }
+  .quiz-topic { font-size: 12px; color: var(--muted); }
+  .q-num { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--muted); white-space: nowrap; }
+
+  .progress-track {
+    height: 4px;
+    background: var(--bg3);
+    border-radius: 4px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.35s ease;
+  }
+  .linux-bar { background: var(--linux); }
+  .windows-bar { background: var(--win); }
+
+  .score-strip {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .score-chip {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .chip-correct { background: var(--correct-dim); color: var(--correct); }
+  .chip-wrong { background: var(--wrong-dim); color: var(--wrong); }
+  .chip-left { background: var(--bg3); color: var(--muted); }
+
+  .question-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 14px;
+  }
+  .topic-tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .linux-tag { background: var(--linux-dim); color: var(--linux); }
+  .windows-tag { background: var(--win-dim); color: var(--win); }
+
+  .question-text {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+
+  .opt {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 13px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: border-color 0.15s, background 0.15s;
+    font-family: 'Sora', sans-serif;
+    line-height: 1.5;
+  }
+  .opt:hover:not(:disabled) {
+    border-color: var(--border2);
+    background: var(--card);
+  }
+  .opt:disabled { cursor: default; }
+  .opt.correct { background: var(--correct-dim); border-color: var(--correct); color: #86efac; }
+  .opt.wrong { background: var(--wrong-dim); border-color: var(--wrong); color: #fda4af; }
+  .opt-key {
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    flex-shrink: 0;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .opt.correct .opt-key { background: var(--correct); color: #fff; }
+  .opt.wrong .opt-key { background: var(--wrong); color: #fff; }
+
+  .explanation {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .explanation.show { display: block; }
+  .explanation strong { color: var(--accent); }
+
+  .nav-row {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-btn {
+    padding: 10px 22px;
+    border-radius: 9px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Sora', sans-serif;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--bg3);
+    color: var(--text);
+    transition: all 0.15s;
+  }
+  .nav-btn:hover { border-color: var(--border2); background: var(--card); }
+  .nav-btn.primary { background: var(--text); color: var(--bg); border-color: transparent; }
+  .nav-btn.primary:hover { opacity: 0.88; }
+  .nav-btn:disabled { opacity: 0.35; cursor: default; }
+
+  /* RESULTS */
+  .results-wrap {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .score-ring {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    border: 4px solid;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+  }
+  .score-pct {
+    font-size: 36px;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .score-lbl { font-size: 11px; color: var(--muted); }
+  .results-h { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+  .results-msg { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+  .stats-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 24px;
+    min-width: 100px;
+  }
+  .stat-n { font-size: 26px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+  .stat-l { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .res-btns { display: flex; gap: 12px; justify-content: center; }
+
+  @media (max-width: 520px) {
+    .track-grid { grid-template-columns: 1fr; }
+    .home-hero h1 { font-size: 22px; }
+    .stats-row { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-logo">$ PGCP-ITISS</span>
+  <span class="header-title">Linux &amp; Windows Administration Quiz</span>
+  <span class="header-badge" id="hdr-badge" style="display:none"></span>
+</div>
+
+<!-- HOME -->
+<div id="home" class="screen active">
+  <div class="home-wrap">
+    <div class="home-hero">
+      <h1>Admin Skills Quiz</h1>
+      <p>Test your knowledge of Linux and Windows system administration</p>
+    </div>
+    <div class="track-grid">
+      <div class="track-card linux" onclick="startQuiz('linux')">
+        <span class="track-icon">🐧</span>
+        <h2>Linux Administration</h2>
+        <p>File permissions, LVM, SSH, SELinux, text processing, DNS, NFS, Samba, Squid, Postfix, HA Proxy, VPN, DHCP and more</p>
+        <span class="track-pill">40 Questions</span>
+      </div>
+      <div class="track-card windows" onclick="startQuiz('windows')">
+        <span class="track-icon">🪟</span>
+        <h2>Windows Administration</h2>
+        <p>Active Directory, FSMO Roles, Group Policy, IIS, DNS, DHCP, Hyper-V, Trust Relationships and more</p>
+        <span class="track-pill">30 Questions</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" class="screen">
+  <div class="quiz-wrap">
+    <div class="quiz-topbar">
+      <button class="back-btn" onclick="goHome()">← Back</button>
+      <div class="quiz-info">
+        <div class="quiz-track-name" id="qt-name"></div>
+        <div class="quiz-topic" id="qt-topic"></div>
+      </div>
+      <div class="q-num" id="q-num">1 / 40</div>
+    </div>
+    <div class="progress-track"><div class="progress-bar" id="prog" style="width:0%"></div></div>
+    <div class="score-strip">
+      <span class="score-chip chip-correct" id="chip-c">✓ 0</span>
+      <span class="score-chip chip-wrong" id="chip-w">✗ 0</span>
+      <span class="score-chip chip-left" id="chip-l">40 left</span>
+    </div>
+    <div class="question-card">
+      <span class="topic-tag" id="topic-tag"></span>
+      <div class="question-text" id="q-text"></div>
+    </div>
+    <div class="options" id="opts"></div>
+    <div class="explanation" id="expl"></div>
+    <div class="nav-row">
+      <button class="nav-btn" id="btn-prev" onclick="prevQ()">← Prev</button>
+      <button class="nav-btn primary" id="btn-next" onclick="nextQ()">Next →</button>
+      <button class="nav-btn primary" id="btn-finish" onclick="showResults()" style="display:none">Finish ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="results" class="screen">
+  <div class="results-wrap">
+    <div class="score-ring" id="score-ring">
+      <div class="score-pct" id="res-pct">0%</div>
+      <div class="score-lbl">Score</div>
+    </div>
+    <div class="results-h" id="res-h">Quiz Complete!</div>
+    <div class="results-msg" id="res-msg"></div>
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-n" id="rs-c" style="color:#22c55e">0</div><div class="stat-l">Correct</div></div>
+      <div class="stat-box"><div class="stat-n" id="rs-w" style="color:#f43f5e">0</div><div class="stat-l">Wrong</div></div>
+      <div class="stat-box"><div class="stat-n" id="rs-s" style="color:#f0b429">0</div><div class="stat-l">Skipped</div></div>
+      <div class="stat-box"><div class="stat-n" id="rs-t">0</div><div class="stat-l">Total</div></div>
+    </div>
+    <div class="res-btns">
+      <button class="nav-btn" onclick="retryQuiz()">↺ Retry</button>
+      <button class="nav-btn" onclick="goHome()">⌂ Home</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+const LINUX_Q = [
+  // Introduction to Linux & File System Structure
+  {t:"Intro to Linux",q:"Which of the following is the kernel of the Linux operating system?",o:["GNOME","Bash","Linux Kernel","GNU"],a:2,e:"The Linux kernel is the core of the OS, managing hardware and system resources. GNU provides the utilities; GNOME is a desktop environment; Bash is a shell."},
+  {t:"File System Structure",q:"Which directory in Linux contains configuration files for the system?",o:["/bin","/etc","/var","/usr"],a:1,e:"/etc holds system-wide configuration files. /bin has essential binaries, /var has variable data, and /usr has user programs."},
+  {t:"File System Structure",q:"Where are temporary files stored in a Linux system?",o:["/opt","/tmp","/mnt","/srv"],a:1,e:"/tmp is designated for temporary files. It is usually cleared on reboot. /opt is for optional software, /mnt for mounting, /srv for service data."},
+  {t:"Inodes",q:"What does an inode store in a Linux file system?",o:["File name","File contents","File metadata (permissions, size, owner)","Directory listing"],a:2,e:"An inode stores metadata about a file: permissions, owner, timestamps, size, and pointers to data blocks — but NOT the file name."},
+  {t:"Inodes",q:"What command displays the inode number of a file?",o:["ls -l","file","stat","du"],a:2,e:"The 'stat' command displays detailed file information including the inode number, permissions, size, and timestamps."},
+  // User & Group Administration
+  {t:"User Administration",q:"Which file stores encrypted user passwords in modern Linux systems?",o:["/etc/passwd","/etc/shadow","/etc/group","/etc/login"],a:1,e:"/etc/shadow stores hashed passwords and password aging info. /etc/passwd stores user account info but passwords are now in shadow."},
+  {t:"User Administration",q:"Which command is used to add a new user in Linux?",o:["adduser","newuser","mkuser","createuser"],a:0,e:"'adduser' (or 'useradd') creates a new user account. 'adduser' is a higher-level wrapper in Debian-based systems."},
+  {t:"Group Administration",q:"Which command modifies a user's group membership without changing their primary group?",o:["groupmod","usermod -aG","chgrp","newgrp"],a:1,e:"'usermod -aG groupname username' appends the user to a supplementary group. The -a flag is essential to avoid removing them from other groups."},
+  // File Permissions
+  {t:"File Permissions",q:"What does the chmod value 755 set on a file?",o:["rwxr-xr-x","rwxrwxrwx","rw-r--r--","r-xr-xr-x"],a:0,e:"755 = owner:rwx (7), group:r-x (5), others:r-x (5). This is common for executable scripts and directories."},
+  {t:"File Permissions",q:"Which special permission bit, when set on an executable, runs it with the file owner's privileges?",o:["Sticky bit","SGID","SUID","Immutable bit"],a:2,e:"SUID (Set User ID) makes a program run with the file owner's UID. Classic example: /usr/bin/passwd runs as root."},
+  {t:"File Permissions",q:"What does the sticky bit do when set on a directory?",o:["Only root can delete files","Files run as group owner","Only file owners can delete their own files","Directory becomes immutable"],a:2,e:"The sticky bit on a directory (like /tmp) prevents users from deleting files owned by others, even if they have write permission on the directory."},
+  // ACL
+  {t:"ACL",q:"Which command sets an ACL on a file to give user 'john' read-write access?",o:["chmod u+rw john file","setfacl -m u:john:rw file","chown john file","getfacl -m john:rw file"],a:1,e:"setfacl (set file ACL) with -m (modify) sets ACL entries. Syntax: setfacl -m u:username:permissions filename."},
+  // Symbolic & Hard Links
+  {t:"Symbolic & Hard Links",q:"What is the key difference between a hard link and a symbolic link?",o:["Hard links can span file systems","Symbolic links share the same inode","Hard links share the same inode number","Symbolic links cannot be deleted"],a:2,e:"Hard links share the same inode — they are alternative names for the same data. Symbolic links store a path and can cross file system boundaries."},
+  {t:"Symbolic & Hard Links",q:"Which command creates a symbolic link named 'mylink' pointing to '/etc/hosts'?",o:["ln /etc/hosts mylink","ln -s /etc/hosts mylink","link -s mylink /etc/hosts","mklink mylink /etc/hosts"],a:1,e:"'ln -s target linkname' creates a symbolic (soft) link. Without -s, ln creates a hard link."},
+  // LVM
+  {t:"LVM Configuration",q:"What is the correct order of LVM setup?",o:["VG → PV → LV","LV → VG → PV","PV → VG → LV","VG → LV → PV"],a:2,e:"LVM order: Physical Volume (pvcreate) → Volume Group (vgcreate) → Logical Volume (lvcreate). PVs are grouped into VGs, and LVs are carved from VGs."},
+  {t:"LVM Configuration",q:"Which command extends a logical volume by 5GB?",o:["lvresize /dev/vg/lv 5G","lvextend -L +5G /dev/vg/lv","vgextend -L +5G /dev/vg/lv","lvcreate -L 5G /dev/vg"],a:1,e:"lvextend -L +5G increases the LV size. You then need to resize the filesystem (resize2fs for ext4) to use the extra space."},
+  // Swap Space
+  {t:"Swap Space",q:"Which command creates a swap area on a file called /swapfile?",o:["mkswap /swapfile","swapon /swapfile","mkfs.swap /swapfile","swapinit /swapfile"],a:0,e:"mkswap formats the file/partition as swap space. After mkswap, use 'swapon /swapfile' to activate it."},
+  // Mounting File Systems
+  {t:"Mounting File Systems",q:"Which file controls automatic mounting of file systems at boot?",o:["/etc/mounts","/etc/fstab","/proc/mounts","/etc/mtab"],a:1,e:"/etc/fstab (file system table) defines which file systems are mounted at boot, their mount points, type, and options."},
+  {t:"Mounting File Systems",q:"Which command unmounts the /data file system safely?",o:["mount -d /data","umount /data","rmount /data","detach /data"],a:1,e:"'umount /data' unmounts the file system. Use 'umount -l' for lazy unmount if the device is busy."},
+  // File System Types
+  {t:"File System Types",q:"Which Linux file system supports Copy-on-Write (CoW) and built-in RAID features?",o:["ext4","xfs","btrfs","fat32"],a:2,e:"Btrfs (B-tree file system) supports CoW, snapshots, built-in RAID, and checksumming. ext4 and xfs do not have native CoW."},
+  {t:"File System Types",q:"Which file system is best suited for large files and high-performance I/O on enterprise Linux?",o:["ext2","btrfs","xfs","tmpfs"],a:2,e:"XFS excels at large file handling and parallel I/O. It is the default file system in RHEL/CentOS 7+. ext2 is old; btrfs is newer but less mature for enterprise."},
+  // SSH
+  {t:"SSH Server",q:"Which file contains the SSH server configuration?",o:["/etc/ssh/ssh_config","/etc/ssh/sshd_config","/etc/sshd.conf","/etc/openssh/config"],a:1,e:"/etc/ssh/sshd_config is the SSH daemon (server) config. /etc/ssh/ssh_config is the client config. Changes require restarting sshd."},
+  {t:"SSH Server",q:"Which directive in sshd_config disables root login via SSH?",o:["AllowRoot no","RootLogin false","PermitRootLogin no","DisableRoot yes"],a:2,e:"Setting 'PermitRootLogin no' in sshd_config prevents direct root SSH login, a key security best practice."},
+  // SELinux
+  {t:"SELinux",q:"Which command checks the current SELinux enforcement mode?",o:["selinux-status","getenforce","sestatus -v","semode"],a:1,e:"'getenforce' quickly returns Enforcing, Permissive, or Disabled. 'sestatus' gives detailed info but getenforce is the direct answer."},
+  {t:"SELinux",q:"In SELinux, which mode logs violations but does not enforce policies?",o:["Disabled","Enforcing","Permissive","Targeted"],a:2,e:"Permissive mode logs all policy violations to the audit log without blocking them. It is useful for troubleshooting before enabling Enforcing mode."},
+  // Text Processing
+  {t:"grep",q:"Which grep option makes the search case-insensitive?",o:["-c","-i","-v","-n"],a:1,e:"grep -i performs case-insensitive matching. -c counts matches, -v inverts (shows non-matching), -n shows line numbers."},
+  {t:"Text Processing",q:"Which command extracts the 3rd field from a colon-delimited file like /etc/passwd?",o:["cut -f3 /etc/passwd","cut -d: -f3 /etc/passwd","awk -F: '{print $3}' works but cut syntax is: cut -d: -f3","grep -f3 /etc/passwd"],a:1,e:"cut -d: -f3 uses ':' as delimiter and extracts field 3. This extracts the UID from /etc/passwd."},
+  {t:"Text Processing",q:"Which command sorts lines and removes duplicates in one step?",o:["sort | uniq","sort -u","uniq -s","sort -d | uniq"],a:1,e:"sort -u sorts and removes duplicate lines in a single step. Alternatively, 'sort | uniq' achieves the same result in two steps."},
+  {t:"Text Processing",q:"What does the 'wc -l' command do?",o:["Counts words","Counts characters","Counts lines","Counts bytes"],a:2,e:"wc -l counts the number of newlines (lines) in a file or input. wc -w counts words, wc -c counts bytes, wc -m counts characters."},
+  {t:"Text Processing",q:"Which tr command converts all lowercase letters to uppercase?",o:["tr 'a-z' 'A-Z'","tr -u lower upper","tr lower upper","tr -l 'A-Z'"],a:0,e:"tr translates character by character. 'tr a-z A-Z' maps each lowercase letter to its uppercase equivalent."},
+  // Boot Process & Kernel
+  {t:"Boot Process",q:"What is the first process started by the Linux kernel during boot?",o:["bash","cron","init / systemd","getty"],a:2,e:"The kernel starts PID 1 which is init (SysV) or systemd (modern systems). All other processes are children of PID 1."},
+  {t:"Boot Process",q:"Which bootloader is most commonly used in modern Linux systems?",o:["LILO","GRUB2","SYSLINUX","rEFInd"],a:1,e:"GRUB2 (GRand Unified Bootloader version 2) is the standard bootloader for most Linux distributions including RHEL, Ubuntu, and Fedora."},
+  // Run Levels
+  {t:"Run Levels",q:"Which run level in SysV init corresponds to multi-user mode with networking but without GUI?",o:["Run level 0","Run level 1","Run level 3","Run level 5"],a:2,e:"Run level 3 is multi-user with networking (no GUI). Level 5 adds a graphical interface. Level 0 is halt, Level 1 is single-user."},
+  {t:"Run Levels",q:"Which systemd target is equivalent to run level 5 (graphical mode)?",o:["multi-user.target","graphical.target","runlevel5.target","desktop.target"],a:1,e:"graphical.target in systemd is equivalent to run level 5. multi-user.target equals run level 3. systemd targets replace traditional run levels."},
+  // DNS
+  {t:"DNS",q:"Which Linux DNS server software is most widely used for authoritative and recursive DNS?",o:["Unbound","PowerDNS","BIND (named)","dnsmasq"],a:2,e:"BIND (Berkeley Internet Name Domain), also called 'named', is the most widely deployed DNS server on Linux, used for both authoritative and recursive DNS."},
+  {t:"DNS",q:"Which configuration file defines DNS zones in BIND?",o:["/etc/hosts","/etc/resolv.conf","/etc/named.conf","/etc/bind.conf"],a:2,e:"/etc/named.conf (or /etc/bind/named.conf on Debian) is the main BIND configuration file that defines zones, options, and logging."},
+  // Samba
+  {t:"Samba",q:"What protocol does Samba implement to allow Linux to share files with Windows clients?",o:["NFS","FTP","SMB/CIFS","AFP"],a:2,e:"Samba implements the SMB/CIFS (Server Message Block / Common Internet File System) protocol, enabling Linux/Unix to share files and printers with Windows systems."},
+  // NFS
+  {t:"NFS",q:"Which file defines NFS exports (shared directories) on a Linux server?",o:["/etc/fstab","/etc/exports","/etc/nfs.conf","/etc/shares"],a:1,e:"/etc/exports defines which directories are exported via NFS, to which clients, and with what permissions. After editing, run 'exportfs -ra' to apply changes."},
+  // Squid
+  {t:"Squid",q:"What is the primary function of Squid in a Linux environment?",o:["Mail relay","Caching proxy server","DNS resolver","VPN gateway"],a:1,e:"Squid is a caching and forwarding HTTP/HTTPS proxy server. It caches web content to reduce bandwidth and improve response times."},
+  // Postfix & Dovecot
+  {t:"Postfix & Dovecot",q:"What is the role of Postfix in a Linux mail server setup?",o:["IMAP server","Mail delivery agent (MDA)","Mail transfer agent (MTA)","Spam filter"],a:2,e:"Postfix is an MTA — it sends and receives emails using SMTP. Dovecot handles IMAP/POP3 for mail retrieval by clients."},
+  // HA Proxy
+  {t:"HA Proxy",q:"What is HAProxy primarily used for?",o:["File sharing","Load balancing and proxying TCP/HTTP traffic","DNS resolution","Firewall management"],a:1,e:"HAProxy (High Availability Proxy) is a high-performance TCP/HTTP load balancer and proxy server used for distributing traffic across backend servers."},
+];
+
+const WINDOWS_Q = [
+  // Introduction
+  {t:"Windows Intro",q:"Which Windows Server edition is designed for organizations with 25 or fewer users and no domain?",o:["Windows Server Essentials","Windows Server Standard","Windows Server Datacenter","Windows Server Foundation"],a:0,e:"Windows Server Essentials is designed for small businesses with up to 25 users and 50 devices, with simplified management and no CAL requirements."},
+  // User & Group Admin
+  {t:"User & Group Admin",q:"Which built-in group in Windows has complete control over the local computer?",o:["Power Users","Domain Admins","Administrators","System Operators"],a:2,e:"The local 'Administrators' group has full control of the local machine. Domain Admins is a domain-level group that is typically added to local Administrators."},
+  {t:"User & Group Admin",q:"Which tool is used to manage local users and groups on a Windows Server?",o:["Active Directory Users and Computers","lusrmgr.msc","compmgmt.msc","secpol.msc"],a:1,e:"lusrmgr.msc (Local Users and Groups) manages local accounts. ADUC manages domain accounts. Both are available via compmgmt.msc."},
+  // Active Directory Intro
+  {t:"Active Directory",q:"What is Active Directory primarily used for?",o:["Web hosting","Network monitoring","Centralized identity and access management","Database management"],a:2,e:"Active Directory (AD) provides centralized authentication, authorization, and directory services for users, computers, and resources in a Windows network."},
+  // Domain Concepts
+  {t:"Domain Concepts",q:"What is a Windows domain?",o:["A group of workgroups","A logical group of computers sharing a central directory database","A subnet in a network","A collection of IP addresses"],a:1,e:"A Windows domain is a logical grouping of computers that share a centralized Active Directory database managed by Domain Controllers."},
+  // Forests & Trees
+  {t:"Forests & Trees",q:"In Active Directory, what is a forest?",o:["A single domain","A group of sites","The top-level container holding one or more domain trees","A collection of OUs"],a:2,e:"A forest is the top-level AD structure containing one or more domain trees that share a common schema, configuration, and Global Catalog."},
+  {t:"Forests & Trees",q:"What is an Active Directory tree?",o:["A collection of forests","A set of domains sharing a contiguous DNS namespace","A physical network topology","A group of domain controllers"],a:1,e:"An AD tree is a set of domains connected in a hierarchy that share a contiguous DNS namespace (e.g., corp.com, sales.corp.com)."},
+  // OUs
+  {t:"Organizational Units",q:"What is the primary purpose of Organizational Units (OUs) in Active Directory?",o:["To separate forests","To organize objects and apply Group Policy","To manage DNS zones","To configure DHCP scopes"],a:1,e:"OUs are containers used to organize AD objects (users, computers, groups) into logical units and to delegate administration or apply Group Policy Objects."},
+  {t:"Organizational Units",q:"Which Active Directory object can be placed inside an OU?",o:["Forests","Sites","Users, Computers, and Groups","Schema objects"],a:2,e:"OUs can contain users, computers, groups, printers, and other OUs. Forests and sites are separate AD structures and cannot be placed in OUs."},
+  // Domain Controllers
+  {t:"Domain Controllers",q:"What is the minimum number of domain controllers recommended for redundancy?",o:["1","2","4","6"],a:1,e:"At least 2 domain controllers are recommended. If one fails, the second maintains AD services. One DC is a single point of failure."},
+  {t:"Domain Controllers",q:"Which command promotes a Windows Server to a domain controller?",o:["dcpromo","netdom add","addsdomaincontroller","Install-ADDSDomainController"],a:3,e:"In Server 2012+, Install-ADDSDomainController is the PowerShell cmdlet used to promote a server. dcpromo was used in Server 2008 and earlier."},
+  // FSMO Roles
+  {t:"FSMO Roles",q:"How many FSMO (Flexible Single Master Operations) roles exist in Active Directory?",o:["3","4","5","6"],a:2,e:"There are 5 FSMO roles: Schema Master, Domain Naming Master (forest-wide), and RID Master, PDC Emulator, Infrastructure Master (domain-wide)."},
+  {t:"FSMO Roles",q:"Which FSMO role is responsible for maintaining backward compatibility with legacy Windows clients and managing password changes?",o:["RID Master","Schema Master","PDC Emulator","Infrastructure Master"],a:2,e:"The PDC Emulator acts as the primary domain controller for older clients, handles password changes, account lockouts, and time synchronization."},
+  {t:"FSMO Roles",q:"Which FSMO role allocates pools of relative identifiers to domain controllers?",o:["Infrastructure Master","RID Master","Domain Naming Master","Schema Master"],a:1,e:"The RID Master allocates RID pools to each DC. RIDs are combined with the domain SID to create unique Security Identifiers (SIDs) for new objects."},
+  // AD Sites & Services
+  {t:"AD Sites & Services",q:"What does Active Directory Sites and Services primarily manage?",o:["User accounts","DNS records","Replication topology and physical network structure","Group Policies"],a:2,e:"AD Sites and Services manages the physical network topology, defining sites (IP subnets), site links, and controlling replication schedules between DCs."},
+  // Replication
+  {t:"Replication",q:"What is the default replication interval between sites in Active Directory?",o:["5 minutes","15 minutes","180 minutes (3 hours)","60 minutes"],a:2,e:"Inter-site replication interval defaults to 180 minutes (3 hours). Intra-site replication is triggered automatically within ~15 seconds of a change."},
+  // Trust Relationships
+  {t:"Trust Relationships",q:"What type of trust is automatically created between domains in the same forest?",o:["External trust","Shortcut trust","Transitive two-way trust","Forest trust"],a:2,e:"Domains in the same AD forest automatically have transitive, two-way trusts. This means trust flows through the domain tree hierarchy automatically."},
+  {t:"Trust Relationships",q:"Which trust type is manually created between two separate forests?",o:["Shortcut trust","Realm trust","Forest trust","External trust"],a:2,e:"A forest trust is manually created between two separate AD forests, allowing users in one forest to access resources in the other."},
+  // DNS Configuration
+  {t:"DNS Configuration",q:"Which DNS record maps a hostname to an IPv4 address?",o:["CNAME","MX","A","PTR"],a:2,e:"An A (Address) record maps a hostname to an IPv4 address. AAAA maps to IPv6, CNAME is an alias, MX is for mail, PTR is for reverse DNS."},
+  {t:"DNS Configuration",q:"Which Windows DNS zone type is stored in Active Directory and replicated with it?",o:["Standard Primary","Standard Secondary","Stub","Active Directory-Integrated"],a:3,e:"AD-Integrated zones store DNS data in AD and use multi-master replication. All DCs can update the zone, improving fault tolerance over standard zones."},
+  // DHCP
+  {t:"DHCP Server",q:"What is a DHCP scope?",o:["A list of DNS servers","A range of IP addresses available for assignment to clients","A group of DHCP servers","A firewall rule for DHCP traffic"],a:1,e:"A DHCP scope defines a range of IP addresses that the DHCP server can lease to clients on a specific subnet, along with options like gateway and DNS."},
+  {t:"DHCP Server",q:"Which process ensures that a Windows DHCP server is authorized before serving IP addresses in a domain?",o:["DHCP Failover","DHCP Authorization","DHCP Superscope","DHCP Reservation"],a:1,e:"In an AD domain, DHCP servers must be authorized in AD before they can lease addresses. This prevents rogue DHCP servers from disrupting the network."},
+  // Group Policy
+  {t:"Group Policy",q:"Which tool is used to create and edit Group Policy Objects (GPOs)?",o:["gpedit.msc","gpmc.msc","secpol.msc","rsop.msc"],a:1,e:"gpmc.msc (Group Policy Management Console) is used to create, link, and manage GPOs in a domain. gpedit.msc edits only the local GPO."},
+  {t:"Group Policy",q:"In what order is Group Policy applied?",o:["Site → Domain → OU → Local","Local → Site → Domain → OU","Domain → Site → OU → Local","OU → Domain → Site → Local"],a:1,e:"Group Policy is applied in LSDOU order: Local → Site → Domain → OU. Later policies override earlier ones, so OU policies have the highest precedence."},
+  // Hyper-V
+  {t:"Windows Virtualization",q:"What is Hyper-V?",o:["A cloud storage service","A type-1 hypervisor built into Windows Server","A network monitoring tool","A container runtime"],a:1,e:"Hyper-V is a type-1 (bare-metal) hypervisor built into Windows Server and Windows 10/11 Pro that allows running virtual machines directly on hardware."},
+  {t:"Windows Virtualization",q:"What is a Hyper-V virtual switch used for?",o:["Storing VM snapshots","Providing network connectivity to virtual machines","Managing VM memory allocation","Backing up virtual machines"],a:1,e:"A Hyper-V virtual switch connects virtual machines to each other and to the physical network. Types include External, Internal, and Private."},
+  // IIS
+  {t:"IIS",q:"Which service must be installed on Windows Server to host websites?",o:["Apache","IIS (Internet Information Services)","Nginx","Tomcat"],a:1,e:"IIS (Internet Information Services) is Microsoft's built-in web server for hosting websites, web applications, and services on Windows Server."},
+  {t:"Application Pools",q:"What is the purpose of an IIS Application Pool?",o:["To store website files","To isolate web applications in separate worker processes","To manage SSL certificates","To configure DNS for websites"],a:1,e:"Application Pools isolate web applications by running them in separate worker processes (w3wp.exe), preventing one app's crash or security issue from affecting others."},
+  {t:"IIS",q:"Which protocol does IIS use by default for secure web traffic?",o:["FTP","HTTP","HTTPS (SSL/TLS)","SFTP"],a:2,e:"HTTPS (HTTP over SSL/TLS) is used for secure web traffic. IIS requires installing an SSL certificate and binding it to port 443 for HTTPS."},
+  {t:"DNS Server",q:"Which Windows Server role provides DNS resolution services for a domain?",o:["DHCP Server","DNS Server","Active Directory Certificate Services","Remote Access"],a:1,e:"The DNS Server role provides name resolution services. In an AD environment, DNS is critical and is typically installed alongside the Domain Controller role."},
+];
+
+// ─── APP STATE ────────────────────────────────────────────────────────────────
+let track = null, questions = [], cur = 0, answered = {}, correctCount = 0, wrongCount = 0;
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startQuiz(t) {
+  track = t;
+  questions = t === 'linux' ? LINUX_Q : WINDOWS_Q;
+  cur = 0; answered = {}; correctCount = 0; wrongCount = 0;
+
+  const hb = document.getElementById('hdr-badge');
+  if (t === 'linux') {
+    hb.textContent = 'Linux'; hb.style.background = '#0d4035'; hb.style.color = '#22d3a0';
+  } else {
+    hb.textContent = 'Windows'; hb.style.background = '#0d2545'; hb.style.color = '#4da6ff';
+  }
+  hb.style.display = 'inline-block';
+
+  renderQ();
+  showScreen('quiz');
+}
+
+function renderQ() {
+  const q = questions[cur];
+  const total = questions.length;
+  const isLinux = track === 'linux';
+
+  document.getElementById('qt-name').textContent = isLinux ? 'Linux Administration' : 'Windows Administration';
+  document.getElementById('qt-topic').textContent = q.t;
+  document.getElementById('q-num').textContent = (cur+1) + ' / ' + total;
+
+  const pct = Math.round((cur / total) * 100);
+  const bar = document.getElementById('prog');
+  bar.style.width = pct + '%';
+  bar.className = 'progress-bar ' + (isLinux ? 'linux-bar' : 'windows-bar');
+
+  const left = total - Object.keys(answered).length;
+  document.getElementById('chip-c').textContent = '✓ ' + correctCount;
+  document.getElementById('chip-w').textContent = '✗ ' + wrongCount;
+  document.getElementById('chip-l').textContent = left + ' left';
+
+  const tag = document.getElementById('topic-tag');
+  tag.textContent = q.t;
+  tag.className = 'topic-tag ' + (isLinux ? 'linux-tag' : 'windows-tag');
+
+  document.getElementById('q-text').textContent = q.q;
+
+  const optsDiv = document.getElementById('opts');
+  optsDiv.innerHTML = '';
+  const keys = ['A','B','C','D'];
+  const isAnswered = answered[cur] !== undefined;
+
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="opt-key">${keys[i]}</span>${opt}`;
+    btn.onclick = () => selectAns(i);
+    if (isAnswered) {
+      btn.disabled = true;
+      if (i === q.a) btn.classList.add('correct');
+      else if (i === answered[cur]) btn.classList.add('wrong');
+    }
+    optsDiv.appendChild(btn);
+  });
+
+  const expl = document.getElementById('expl');
+  if (isAnswered) {
+    expl.innerHTML = '<strong>Explanation:</strong> ' + q.e;
+    expl.classList.add('show');
+  } else {
+    expl.className = 'explanation';
+  }
+
+  const isLast = cur === total - 1;
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+  const btnFinish = document.getElementById('btn-finish');
+
+  btnPrev.disabled = cur === 0;
+  if (isLast) {
+    btnNext.style.display = 'none';
+    btnFinish.style.display = isAnswered ? 'inline-block' : 'none';
+  } else {
+    btnNext.style.display = 'inline-block';
+    btnNext.disabled = !isAnswered;
+    btnFinish.style.display = 'none';
+  }
+}
+
+function selectAns(idx) {
+  if (answered[cur] !== undefined) return;
+  answered[cur] = idx;
+  if (idx === questions[cur].a) correctCount++;
+  else wrongCount++;
+  renderQ();
+}
+
+function nextQ() { if (cur < questions.length-1) { cur++; renderQ(); } }
+function prevQ() { if (cur > 0) { cur--; renderQ(); } }
+
+function showResults() {
+  const total = questions.length;
+  const skipped = total - Object.keys(answered).length;
+  const pct = Math.round((correctCount / total) * 100);
+
+  document.getElementById('res-pct').textContent = pct + '%';
+  document.getElementById('rs-c').textContent = correctCount;
+  document.getElementById('rs-w').textContent = wrongCount;
+  document.getElementById('rs-s').textContent = skipped;
+  document.getElementById('rs-t').textContent = total;
+
+  const ring = document.getElementById('score-ring');
+  let color, title, msg;
+  if (pct >= 80) { color = '#22c55e'; title = 'Outstanding! 🎉'; msg = 'Excellent command of the material. You are exam-ready!'; }
+  else if (pct >= 60) { color = '#4da6ff'; title = 'Good Job! 👍'; msg = 'Solid effort. Review the topics you missed and try again.'; }
+  else { color = '#f43f5e'; title = 'Keep Practicing! 💪'; msg = 'Focus on the weaker areas. Revisit the study material and retry.'; }
+  ring.style.borderColor = color;
+  document.getElementById('res-pct').style.color = color;
+  document.getElementById('res-h').textContent = title;
+  document.getElementById('res-msg').textContent = msg;
+  showScreen('results');
+}
+
+function retryQuiz() { startQuiz(track); }
+function goHome() {
+  document.getElementById('hdr-badge').style.display = 'none';
+  showScreen('home');
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (document.getElementById('quiz').classList.contains('active')) {
+    if (['1','2','3','4'].includes(e.key)) selectAns(parseInt(e.key)-1);
+    if (e.key === 'ArrowRight') nextQ();
+    if (e.key === 'ArrowLeft') prevQ();
+  }
+});
+</script>
+</body>
+</html>

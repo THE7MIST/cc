@@ -1,0 +1,2195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Hati ka bachha Test</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#0f172a;
+        color:white;
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        padding:20px;
+    }
+
+    .container{
+        width:100%;
+        max-width:900px;
+        background:#111827;
+        border-radius:20px;
+        padding:30px;
+        box-shadow:0 0 25px rgba(0,0,0,0.5);
+    }
+
+    h1{
+        text-align:center;
+        margin-bottom:10px;
+        color:#38bdf8;
+    }
+
+    .subtitle{
+        text-align:center;
+        margin-bottom:25px;
+        color:#cbd5e1;
+    }
+
+    .top-bar{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:25px;
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+    .progress{
+        font-size:18px;
+        font-weight:bold;
+        color:#facc15;
+    }
+
+    .question-box{
+        margin-bottom:25px;
+    }
+
+    .question{
+        font-size:22px;
+        margin-bottom:20px;
+        line-height:1.5;
+    }
+
+    .options{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .option{
+        background:#1e293b;
+        border:2px solid transparent;
+        padding:15px;
+        border-radius:12px;
+        cursor:pointer;
+        transition:0.3s;
+        font-size:18px;
+    }
+
+    .option:hover{
+        background:#334155;
+        transform:scale(1.01);
+    }
+
+    .option.selected{
+        border:2px solid #38bdf8;
+        background:#0f766e;
+    }
+
+    .buttons{
+        display:flex;
+        justify-content:space-between;
+        margin-top:30px;
+        gap:15px;
+        flex-wrap:wrap;
+    }
+
+    button{
+        padding:14px 22px;
+        border:none;
+        border-radius:10px;
+        font-size:16px;
+        cursor:pointer;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    .prev-btn{
+        background:#475569;
+        color:white;
+    }
+
+    .next-btn{
+        background:#2563eb;
+        color:white;
+    }
+
+    .submit-btn{
+        background:#16a34a;
+        color:white;
+    }
+
+    button:hover{
+        opacity:0.9;
+        transform:translateY(-2px);
+    }
+
+    .result-box{
+        display:none;
+    }
+
+    .result-box h2{
+        text-align:center;
+        margin-bottom:20px;
+        color:#38bdf8;
+    }
+
+    .result-stats{
+        text-align:center;
+        margin-bottom:25px;
+        line-height:2;
+        font-size:20px;
+    }
+
+    .review{
+        margin-top:20px;
+    }
+
+    .review-item{
+        background:#1e293b;
+        padding:18px;
+        margin-bottom:15px;
+        border-radius:12px;
+    }
+
+    .correct{
+        color:#4ade80;
+        margin-top:10px;
+    }
+
+    .wrong{
+        color:#f87171;
+        margin-top:10px;
+    }
+
+    .answer{
+        color:#facc15;
+        margin-top:8px;
+    }
+
+    @media(max-width:600px){
+
+        .question{
+            font-size:18px;
+        }
+
+        .option{
+            font-size:16px;
+        }
+
+        button{
+            width:100%;
+        }
+
+        .buttons{
+            flex-direction:column;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="quiz-container">
+
+        <h1>Chhota Hati Test</h1>
+        <p class="subtitle"></p>
+
+        <div class="top-bar">
+            <div class="progress" id="progress">Question 1 / 40</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question" id="question"></div>
+
+            <div class="options" id="options"></div>
+        </div>
+
+        <div class="buttons">
+            <button class="prev-btn" id="prevBtn">Previous</button>
+            <button class="next-btn" id="nextBtn">Next</button>
+            <button class="submit-btn" id="submitBtn">Submit Quiz</button>
+        </div>
+
+    </div>
+
+    <div class="result-box" id="resultBox">
+        <h2>Quiz Result</h2>
+
+        <div class="result-stats" id="resultStats"></div>
+
+        <div class="review" id="review"></div>
+    </div>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+question:"An administrator wants to deploy the same Windows Server configuration to 50 systems with minimal manual work. Which approach is MOST appropriate?",
+options:[
+"Install Windows manually on every server",
+"Use disk cleanup utility",
+"Create and deploy a system image",
+"Use Event Viewer"
+],
+answer:"Create and deploy a system image"
+},
+
+{
+question:"Which Windows feature is specifically used for creating server backups?",
+options:[
+"Hyper-V",
+"Windows Server Backup",
+"WSUS",
+"BitLocker"
+],
+answer:"Windows Server Backup"
+},
+
+{
+question:"A company wants to move workloads from old hardware to new hardware with minimal downtime. Which task is being performed?",
+options:[
+"Formatting",
+"Scheduling",
+"Migration",
+"Compression"
+],
+answer:"Migration"
+},
+
+{
+question:"Which command-line utility is commonly used to create or manage Windows images?",
+options:[
+"DISM",
+"PING",
+"IPCONFIG",
+"CHKDSK"
+],
+answer:"DISM"
+},
+
+{
+question:"An administrator wants to prepare a Windows image before deployment by removing system-specific information. Which tool is used?",
+options:[
+"Task Manager",
+"Sysprep",
+"Regedit",
+"Netstat"
+],
+answer:"Sysprep"
+},
+
+{
+question:"Which boot mode is REQUIRED for Secure Boot support in modern Windows Server installations?",
+options:[
+"BIOS Legacy",
+"DOS Mode",
+"UEFI",
+"Safe Mode"
+],
+answer:"UEFI"
+},
+
+{
+question:"A server backup must run automatically every night at 2 AM. Which Windows utility is MOST suitable?",
+options:[
+"Resource Monitor",
+"Services.msc",
+"Task Scheduler",
+"Device Manager"
+],
+answer:"Task Scheduler"
+},
+
+{
+question:"Which file system is the default and recommended for modern Windows Server installations?",
+options:[
+"FAT16",
+"FAT32",
+"NTFS",
+"EXT4"
+],
+answer:"NTFS"
+},
+
+{
+question:"An administrator wants to capture and apply Windows images during deployment. Which technology is MOST associated with this process?",
+options:[
+"IIS",
+"WIM Imaging",
+"DHCP Relay",
+"Telnet"
+],
+answer:"WIM Imaging"
+},
+
+{
+question:"Which Windows Server tool helps manage drivers, features, and offline images?",
+options:[
+"DISM",
+"FTP",
+"ARP",
+"NSLOOKUP"
+],
+answer:"DISM"
+},
+
+{
+question:"A backup contains only files changed since the last full backup. What type of backup is this?",
+options:[
+"Mirror Backup",
+"Differential Backup",
+"Incremental Backup",
+"Snapshot Backup"
+],
+answer:"Incremental Backup"
+},
+
+{
+question:"An administrator wants to restore the complete operating system after hardware failure. Which backup type is MOST useful?",
+options:[
+"Temporary Backup",
+"System Image Backup",
+"Clipboard Backup",
+"User Profile Backup"
+],
+answer:"System Image Backup"
+},
+
+{
+question:"Which utility is commonly used to check Windows Server event logs?",
+options:[
+"Event Viewer",
+"Device Manager",
+"Services",
+"Disk Cleanup"
+],
+answer:"Event Viewer"
+},
+
+{
+question:"A company wants centralized deployment of Windows installations over a network. Which technology is MOST suitable?",
+options:[
+"PXE Boot",
+"Bluetooth Pairing",
+"SMTP Relay",
+"ICMP Redirect"
+],
+answer:"PXE Boot"
+},
+
+{
+question:"Which Windows deployment service allows network-based OS installation?",
+options:[
+"WDS",
+"DNS",
+"DFS",
+"IIS"
+],
+answer:"WDS"
+},
+
+{
+question:"An administrator accidentally deletes an important configuration file. Which backup objective is MOST important now?",
+options:[
+"Availability",
+"Recovery",
+"Authentication",
+"Compression"
+],
+answer:"Recovery"
+},
+
+{
+question:"Which command displays detailed IP configuration information in Windows?",
+options:[
+"ifconfig",
+"ipconfig /all",
+"route print",
+"tracert"
+],
+answer:"ipconfig /all"
+},
+
+{
+question:"A Windows Server image is mounted offline for modification before deployment. Which tool supports this operation?",
+options:[
+"DISM",
+"NSLOOKUP",
+"HOSTNAME",
+"TELNET"
+],
+answer:"DISM"
+},
+
+{
+question:"Which Microsoft feature helps automate repetitive administrative tasks using scripts?",
+options:[
+"PowerShell",
+"Notepad",
+"Paint",
+"WordPad"
+],
+answer:"PowerShell"
+},
+
+{
+question:"An administrator wants to maintain identical deployment configurations across multiple systems. Which approach is BEST?",
+options:[
+"Manual installation every time",
+"Using server imaging templates",
+"Random partitioning",
+"Separate OS versions on each system"
+],
+answer:"Using server imaging templates"
+},
+
+{
+question:"Which Active Directory component stores information about users, groups, and policies centrally?",
+options:[
+"DHCP",
+"DNS",
+"Active Directory Database",
+"IIS"
+],
+answer:"Active Directory Database"
+},
+
+{
+question:"An administrator wants users to log in using the same credentials across all systems in the organization. Which service enables this?",
+options:[
+"FTP",
+"Active Directory Domain Services (AD DS)",
+"NAT",
+"SNMP"
+],
+answer:"Active Directory Domain Services (AD DS)"
+},
+
+{
+question:"Which command is commonly used to install Active Directory Domain Services from PowerShell?",
+options:[
+"Install-WindowsFeature AD-Domain-Services",
+"enable-adservice",
+"add-domain-controller",
+"start-adds"
+],
+answer:"Install-WindowsFeature AD-Domain-Services"
+},
+
+{
+question:"A server responsible for authenticating users in a domain is called:",
+options:[
+"DHCP Server",
+"Proxy Server",
+"Domain Controller",
+"Print Server"
+],
+answer:"Domain Controller"
+},
+
+{
+question:"An organization deploys an additional domain controller mainly for:",
+options:[
+"Increasing monitor resolution",
+"Redundancy and fault tolerance",
+"Reducing RAM usage",
+"Disabling replication"
+],
+answer:"Redundancy and fault tolerance"
+},
+
+{
+question:"Which protocol does Active Directory primarily depend on for name resolution?",
+options:[
+"FTP",
+"DNS",
+"SNMP",
+"ICMP"
+],
+answer:"DNS"
+},
+
+{
+question:"A Windows 11 system joined to a domain but not hosting AD DS is categorized as:",
+options:[
+"Domain Controller",
+"Member Server",
+"Client Machine",
+"Root Server"
+],
+answer:"Client Machine"
+},
+
+{
+question:"Which MMC utility is MOST commonly used to manage Active Directory users and groups?",
+options:[
+"dsa.msc",
+"devmgmt.msc",
+"diskmgmt.msc",
+"eventvwr.msc"
+],
+answer:"dsa.msc"
+},
+
+{
+question:"An administrator wants to organize users into logical administrative units. Which AD object is MOST suitable?",
+options:[
+"OU (Organizational Unit)",
+"DNS Zone",
+"IP Scope",
+"Workgroup"
+],
+answer:"OU (Organizational Unit)"
+},
+
+{
+question:"Which feature automatically assigns IP addresses to clients in a network?",
+options:[
+"DNS",
+"DHCP",
+"LDAP",
+"AD DS"
+],
+answer:"DHCP"
+},
+
+{
+question:"A DHCP client is unable to obtain an IP address. Which protocol message is typically sent FIRST by the client?",
+options:[
+"DHCPACK",
+"DHCPDISCOVER",
+"DHCPREQUEST",
+"DHCPNAK"
+],
+answer:"DHCPDISCOVER"
+},
+
+{
+question:"Which port numbers are used by DHCP?",
+options:[
+"TCP 20/21",
+"UDP 67/68",
+"TCP 25",
+"UDP 161"
+],
+answer:"UDP 67/68"
+},
+
+{
+question:"An administrator wants to manually reserve a specific IP for one device using its MAC address. What is this called?",
+options:[
+"Lease Expiration",
+"Scope Deletion",
+"DHCP Reservation",
+"Zone Transfer"
+],
+answer:"DHCP Reservation"
+},
+
+{
+question:"Which DNS record maps a hostname to an IPv4 address?",
+options:[
+"MX",
+"PTR",
+"A Record",
+"CNAME"
+],
+answer:"A Record"
+},
+
+{
+question:"Which DNS record is specifically used for reverse lookup?",
+options:[
+"TXT",
+"PTR",
+"SOA",
+"AAAA"
+],
+answer:"PTR"
+},
+
+{
+question:"An administrator wants to centrally manage and track IP addresses across the enterprise. Which technology is designed for this?",
+options:[
+"IIS",
+"IPAM",
+"WDS",
+"DFS"
+],
+answer:"IPAM"
+},
+
+{
+question:"A newly promoted Domain Controller is not replicating properly. Which AD feature is MOST directly involved in synchronization between DCs?",
+options:[
+"Replication",
+"Compression",
+"Routing",
+"Fragmentation"
+],
+answer:"Replication"
+},
+
+{
+question:"Which command is commonly used to verify DNS resolution from a client machine?",
+options:[
+"tracert",
+"nslookup",
+"netstat",
+"route"
+],
+answer:"nslookup"
+},
+
+{
+question:"A member server differs from a Domain Controller because it:",
+options:[
+"Cannot join a domain",
+"Does not store AD DS database",
+"Cannot host services",
+"Uses Linux kernel"
+],
+answer:"Does not store AD DS database"
+},
+
+{
+question:"An administrator wants centralized authentication, authorization, and policy enforcement in Windows networks. Which infrastructure BEST provides this?",
+options:[
+"Workgroup",
+"Peer-to-Peer Network",
+"Active Directory Infrastructure",
+"Static Routing"
+],
+answer:"Active Directory Infrastructure"
+},
+
+{
+question:"Which policy applies only to a single local computer and not the entire domain?",
+options:[
+"Domain Policy",
+"Group Policy",
+"Local Security Policy",
+"Forest Policy"
+],
+answer:"Local Security Policy"
+},
+
+{
+question:"Which command is commonly used to force Group Policy updates immediately?",
+options:[
+"gpupdate /force",
+"net update",
+"policy-refresh",
+"gpo /reload"
+],
+answer:"gpupdate /force"
+},
+
+{
+question:"An administrator wants password complexity rules applied to every computer in a domain. Which feature is MOST suitable?",
+options:[
+"Local Users",
+"Group Policy",
+"Task Scheduler",
+"Device Manager"
+],
+answer:"Group Policy"
+},
+
+{
+question:"Which MMC console is commonly used to manage Group Policies?",
+options:[
+"gpmc.msc",
+"diskmgmt.msc",
+"devmgmt.msc",
+"perfmon.msc"
+],
+answer:"gpmc.msc"
+},
+
+{
+question:"A company wants users to access office resources securely from home through an encrypted tunnel. Which technology is MOST suitable?",
+options:[
+"FTP",
+"VPN",
+"Telnet",
+"ARP"
+],
+answer:"VPN"
+},
+
+{
+question:"Which protocol is MOST commonly associated with secure remote web access?",
+options:[
+"HTTP",
+"HTTPS",
+"SNMP",
+"TFTP"
+],
+answer:"HTTPS"
+},
+
+{
+question:"An administrator wants to verify network connectivity between two hosts. Which command is MOST commonly used?",
+options:[
+"ping",
+"mkdir",
+"format",
+"gpresult"
+],
+answer:"ping"
+},
+
+{
+question:"Which Windows command displays current network configuration details?",
+options:[
+"netstat",
+"ipconfig",
+"tracert",
+"route"
+],
+answer:"ipconfig"
+},
+
+{
+question:"A VPN mainly provides:",
+options:[
+"File Compression",
+"Secure Remote Connectivity",
+"Disk Partitioning",
+"DNS Replication"
+],
+answer:"Secure Remote Connectivity"
+},
+
+{
+question:"Which IIS service is primarily used for hosting websites on Windows Server?",
+options:[
+"FTP Service",
+"DNS Service",
+"Web Server Service",
+"DHCP Service"
+],
+answer:"Web Server Service"
+},
+
+{
+question:"Which default protocol/port combination is used by IIS for secure web traffic?",
+options:[
+"HTTP / 80",
+"HTTPS / 443",
+"FTP / 21",
+"DNS / 53"
+],
+answer:"HTTPS / 443"
+},
+
+{
+question:"Which command-line tool is commonly used to test whether a web server port is reachable?",
+options:[
+"telnet",
+"hostname",
+"shutdown",
+"tree"
+],
+answer:"telnet"
+},
+
+{
+question:"An administrator wants to host multiple websites on a single IIS server using different hostnames. Which IIS feature supports this?",
+options:[
+"Binding",
+"Compression",
+"Mirroring",
+"Partitioning"
+],
+answer:"Binding"
+},
+
+{
+question:"Which IPv6 address type represents the loopback address?",
+options:[
+"127.0.0.1",
+"::1",
+"FE80::1",
+"FF00::1"
+],
+answer:"::1"
+},
+
+{
+question:"Which IPv6 address type is automatically assigned for local network communication?",
+options:[
+"Public Address",
+"Link-Local Address",
+"Broadcast Address",
+"Loopback Address"
+],
+answer:"Link-Local Address"
+},
+
+{
+question:"Which feature allows files to be shared and replicated across multiple Windows servers?",
+options:[
+"DFS",
+"IIS",
+"WDS",
+"PXE"
+],
+answer:"DFS"
+},
+
+{
+question:"An administrator wants branch offices to access replicated shared folders efficiently. Which Windows technology is MOST suitable?",
+options:[
+"DFS Replication",
+"Telnet",
+"ICMP Redirect",
+"NAT Traversal"
+],
+answer:"DFS Replication"
+},
+
+{
+question:"Which command displays active network connections and listening ports?",
+options:[
+"netstat",
+"gpupdate",
+"tasklist",
+"whoami"
+],
+answer:"netstat"
+},
+
+{
+question:"A Group Policy setting is applied at the domain level but not taking effect on a client. Which command helps verify applied GPOs?",
+options:[
+"gpresult",
+"format",
+"diskpart",
+"chkdsk"
+],
+answer:"gpresult"
+},
+
+{
+question:"An administrator wants centralized management of security settings, software deployment, and login scripts in Windows networks. Which technology BEST supports this?",
+options:[
+"Group Policy Infrastructure",
+"Local Storage",
+"Standalone Workgroup",
+"DHCP Reservation"
+],
+answer:"Group Policy Infrastructure"
+},
+
+{
+question:"Which Windows service is primarily used for network-based OS deployment?",
+options:[
+"DFS",
+"WDS",
+"IIS",
+"NPS"
+],
+answer:"WDS"
+},
+
+{
+question:"A client system boots from network to install Windows automatically. Which protocol/service is MOST involved initially?",
+options:[
+"PXE",
+"SNMP",
+"FTP",
+"LDAP"
+],
+answer:"PXE"
+},
+
+{
+question:"Which service commonly works together with WDS to assign IP addresses during deployment?",
+options:[
+"IIS",
+"DNS",
+"DHCP",
+"Telnet"
+],
+answer:"DHCP"
+},
+
+{
+question:"An administrator wants to deploy the same Windows image to multiple systems efficiently. Which file format is MOST commonly used?",
+options:[
+".iso",
+".img",
+".wim",
+".sys"
+],
+answer:".wim"
+},
+
+{
+question:"Which Windows feature enables virtualization on Windows Server?",
+options:[
+"Hyper-V",
+"DFS",
+"NPS",
+"WDS"
+],
+answer:"Hyper-V"
+},
+
+{
+question:"Before installing Hyper-V, which hardware feature should generally be enabled in BIOS/UEFI?",
+options:[
+"RAID",
+"Virtualization Support (VT-x/AMD-V)",
+"Secure Copy",
+"DHCP Relay"
+],
+answer:"Virtualization Support (VT-x/AMD-V)"
+},
+
+{
+question:"A virtual machine cannot access external networks. Which Hyper-V component should be checked FIRST?",
+options:[
+"Virtual Switch",
+"Event Viewer",
+"Registry Editor",
+"DFS Namespace"
+],
+answer:"Virtual Switch"
+},
+
+{
+question:"Which Hyper-V virtual switch type allows communication only between VMs and host machine?",
+options:[
+"External",
+"Internal",
+"Private DNS",
+"Public"
+],
+answer:"Internal"
+},
+
+{
+question:"Which Hyper-V virtual switch type provides internet/network access to virtual machines?",
+options:[
+"Internal",
+"Private",
+"External",
+"Offline"
+],
+answer:"External"
+},
+
+{
+question:"An administrator wants to combine multiple physical disks into one logical storage pool. Which Windows feature supports this?",
+options:[
+"Storage Spaces",
+"Task Scheduler",
+"BitLocker",
+"Event Viewer"
+],
+answer:"Storage Spaces"
+},
+
+{
+question:"Which Windows utility is commonly used to manage disks and partitions graphically?",
+options:[
+"diskmgmt.msc",
+"services.msc",
+"secpol.msc",
+"perfmon.msc"
+],
+answer:"diskmgmt.msc"
+},
+
+{
+question:"Which command-line tool is commonly used to manage partitions and volumes?",
+options:[
+"gpupdate",
+"diskpart",
+"hostname",
+"nslookup"
+],
+answer:"diskpart"
+},
+
+{
+question:"Data deduplication mainly helps in:",
+options:[
+"Increasing CPU temperature",
+"Reducing duplicate data storage",
+"Encrypting DNS traffic",
+"Increasing bandwidth usage"
+],
+answer:"Reducing duplicate data storage"
+},
+
+{
+question:"Which Windows Server role helps manage quotas, file screening, and storage reports?",
+options:[
+"Hyper-V",
+"FSRM",
+"WDS",
+"IIS"
+],
+answer:"FSRM"
+},
+
+{
+question:"An administrator wants to block users from storing MP3 files on a server share. Which FSRM feature is MOST suitable?",
+options:[
+"File Screening",
+"DFS Replication",
+"Disk Cleanup",
+"Shadow Copy"
+],
+answer:"File Screening"
+},
+
+{
+question:"Which FSRM feature helps limit the amount of storage a user can consume?",
+options:[
+"DHCP Reservation",
+"Quota Management",
+"DNS Delegation",
+"PXE Boot"
+],
+answer:"Quota Management"
+},
+
+{
+question:"Network Policy Server (NPS) in Windows is MOST associated with:",
+options:[
+"Routing Authentication Policies",
+"Video Streaming",
+"Disk Formatting",
+"Hypervisor Scheduling"
+],
+answer:"Routing Authentication Policies"
+},
+
+{
+question:"Which protocol is commonly used by NPS for centralized authentication?",
+options:[
+"RADIUS",
+"FTP",
+"ICMP",
+"ARP"
+],
+answer:"RADIUS"
+},
+
+{
+question:"An administrator wants centralized authentication for VPN users using Windows Server. Which service is MOST suitable?",
+options:[
+"IIS",
+"WDS",
+"NPS",
+"DFS"
+],
+answer:"NPS"
+},
+
+{
+question:"A virtual machine consumes excessive storage because identical data exists repeatedly across VMs. Which feature can help optimize this?",
+options:[
+"Data Deduplication",
+"DHCP Scope",
+"DNS Forwarding",
+"Group Policy Loopback"
+],
+answer:"Data Deduplication"
+},
+
+{
+question:"Which Windows feature distributes incoming traffic across multiple servers for high availability?",
+options:[
+"DFS",
+"NLB",
+"WDS",
+"BitLocker"
+],
+answer:"NLB"
+},
+
+{
+question:"The primary purpose of Network Load Balancing is to:",
+options:[
+"Encrypt hard drives",
+"Increase fault tolerance and traffic distribution",
+"Assign IP addresses",
+"Create virtual machines"
+],
+answer:"Increase fault tolerance and traffic distribution"
+},
+
+{
+question:"A web server cluster continues operating even after one server fails. Which concept is being demonstrated?",
+options:[
+"Fragmentation",
+"Redundancy",
+"Compression",
+"Partitioning"
+],
+answer:"Redundancy"
+},
+
+{
+question:"An administrator wants to verify whether a Windows service is currently listening on a specific port. Which command is MOST useful?",
+options:[
+"gpupdate",
+"netstat -an",
+"diskpart",
+"chkdsk"
+],
+answer:"netstat -an"
+},
+
+{
+question:"Which built-in Windows firewall utility is commonly used for advanced firewall configuration?",
+options:[
+"wf.msc",
+"secpol.msc",
+"perfmon.msc",
+"cleanmgr.msc"
+],
+answer:"wf.msc"
+},
+
+{
+question:"An administrator wants to reduce the attack surface on a workstation. Which action is BEST?",
+options:[
+"Enable unnecessary services",
+"Disable unused services",
+"Open all ports",
+"Disable firewall permanently"
+],
+answer:"Disable unused services"
+},
+
+{
+question:"Which security principle grants users only the permissions necessary for their tasks?",
+options:[
+"Open Access",
+"Least Privilege",
+"Replication",
+"Mirroring"
+],
+answer:"Least Privilege"
+},
+
+{
+question:"A company wants centralized email management, calendaring, and mailbox services. Which Microsoft product is MOST suitable?",
+options:[
+"Hyper-V",
+"Exchange Server",
+"IIS",
+"WDS"
+],
+answer:"Exchange Server"
+},
+
+{
+question:"Which protocol is MOST commonly associated with email retrieval from mail servers?",
+options:[
+"POP3",
+"SNMP",
+"DHCP",
+"ICMP"
+],
+answer:"POP3"
+},
+
+{
+question:"Which protocol is commonly used for secure mail transfer between mail servers?",
+options:[
+"SMTP",
+"FTP",
+"ARP",
+"TFTP"
+],
+answer:"SMTP"
+},
+
+{
+question:"PowerShell is BEST described as:",
+options:[
+"A graphical image editor",
+"A command-line shell and scripting language",
+"A disk partition table",
+"A hardware driver"
+],
+answer:"A command-line shell and scripting language"
+},
+
+{
+question:"Which PowerShell cmdlet displays running processes?",
+options:[
+"Show-Process",
+"Get-Process",
+"List-Task",
+"Process-View"
+],
+answer:"Get-Process"
+},
+
+{
+question:"Which symbol is used in PowerShell pipelines to pass output between cmdlets?",
+options:[
+"&",
+"|",
+"#",
+"%"
+],
+answer:"|"
+},
+
+{
+question:"An administrator wants to execute commands on remote Windows systems using PowerShell. Which feature is required?",
+options:[
+"PowerShell Remoting",
+"DFS Replication",
+"PXE Boot",
+"DHCP Snooping"
+],
+answer:"PowerShell Remoting"
+},
+
+{
+question:"Which PowerShell cmdlet retrieves service information?",
+options:[
+"netstat",
+"Get-Service",
+"Show-Service",
+"service.msc"
+],
+answer:"Get-Service"
+},
+
+{
+question:"A PowerShell script fails due to restricted execution policies. Which command displays the current execution policy?",
+options:[
+"Get-ExecutionPolicy",
+"Show-Policy",
+"net execution",
+"gpresult"
+],
+answer:"Get-ExecutionPolicy"
+},
+
+{
+question:"Which PowerShell cmdlet is commonly used to get help about commands?",
+options:[
+"helpme",
+"Get-Help",
+"manpage",
+"command-help"
+],
+answer:"Get-Help"
+},
+
+{
+question:"An administrator wants a PowerShell task to continue running in the background independently. Which feature is MOST suitable?",
+options:[
+"Foreground Session",
+"Background Jobs",
+"Registry Replication",
+"Event Tracing"
+],
+answer:"Background Jobs"
+},
+
+{
+question:"Which command enables PowerShell remoting on a Windows system?",
+options:[
+"Enable-PSRemoting",
+"Start-RemoteShell",
+"winrm-start",
+"powershell-enable"
+],
+answer:"Enable-PSRemoting"
+},
+
+{
+question:"An administrator is troubleshooting why a PowerShell script terminates unexpectedly. Which concept is MOST directly related?",
+options:[
+"Error Handling and Debugging",
+"DHCP Reservation",
+"Disk Mirroring",
+"DFS Namespace"
+],
+answer:"Error Handling and Debugging"
+},
+
+{
+question:"Which Linux command is used to change file permissions?",
+options:[
+"chown",
+"chmod",
+"passwd",
+"grep"
+],
+answer:"chmod"
+},
+
+{
+question:"An administrator wants to change the ownership of a file to another user. Which command is MOST suitable?",
+options:[
+"chmod",
+"chgrp",
+"chown",
+"umask"
+],
+answer:"chown"
+},
+
+{
+question:"Which command displays the current working directory?",
+options:[
+"whoami",
+"pwd",
+"whereis",
+"finger"
+],
+answer:"pwd"
+},
+
+{
+question:"A user wants to search for lines containing the word error inside a log file. Which command is MOST suitable?",
+options:[
+"cp",
+"grep",
+"wc",
+"mkdir"
+],
+answer:"grep"
+},
+
+{
+question:"Which Linux command is commonly used to securely connect to a remote server?",
+options:[
+"telnet",
+"ftp",
+"ssh",
+"finger"
+],
+answer:"ssh"
+},
+
+{
+question:"Which protocol transfers files securely over SSH?",
+options:[
+"FTP",
+"TFTP",
+"SFTP",
+"SNMP"
+],
+answer:"SFTP"
+},
+
+{
+question:"An administrator wants to view the first few lines of a file. Which command is MOST suitable?",
+options:[
+"tail",
+"head",
+"wc",
+"echo"
+],
+answer:"head"
+},
+
+{
+question:"Which command displays the last lines of a growing log file in real time?",
+options:[
+"head -f",
+"tail -f",
+"grep -r",
+"cat -n"
+],
+answer:"tail -f"
+},
+
+{
+question:"Which command is commonly used to compress files using gzip?",
+options:[
+"zip",
+"tar",
+"gzip",
+"mount"
+],
+answer:"gzip"
+},
+
+{
+question:"An administrator wants to extract a .tar.gz archive. Which command is MOST appropriate?",
+options:[
+"tar -xzf file.tar.gz",
+"unzip file.tar.gz",
+"gzip -d file.tar.gz only",
+"cp file.tar.gz"
+],
+answer:"tar -xzf file.tar.gz"
+},
+
+{
+question:"Which command displays manual pages for Linux commands?",
+options:[
+"whatis",
+"man",
+"help",
+"infoall"
+],
+answer:"man"
+},
+
+{
+question:"Which command gives a short one-line description of a Linux command?",
+options:[
+"locate",
+"whatis",
+"whereis",
+"which"
+],
+answer:"whatis"
+},
+
+{
+question:"Which run level traditionally represents multi-user mode with networking in Linux?",
+options:[
+"Runlevel 0",
+"Runlevel 1",
+"Runlevel 3",
+"Runlevel 6"
+],
+answer:"Runlevel 3"
+},
+
+{
+question:"Which run level is associated with system reboot?",
+options:[
+"0",
+"1",
+"3",
+"6"
+],
+answer:"6"
+},
+
+{
+question:"Which boot loader is commonly used in modern Linux systems?",
+options:[
+"NTLDR",
+"BOOTMGR",
+"GRUB",
+"LILO only"
+],
+answer:"GRUB"
+},
+
+{
+question:"An administrator wants to install software packages in Red Hat–based Linux systems. Which package manager is MOST associated?",
+options:[
+"dpkg",
+"rpm",
+"apt",
+"pkgadd"
+],
+answer:"rpm"
+},
+
+{
+question:"Which package management tool is MOST commonly associated with Debian-based systems?",
+options:[
+"yum",
+"rpm",
+"apt",
+"zypper"
+],
+answer:"apt"
+},
+
+{
+question:"Which command displays currently running processes?",
+options:[
+"jobs",
+"ps",
+"wc",
+"echo"
+],
+answer:"ps"
+},
+
+{
+question:"An administrator wants to create a new empty directory. Which command is MOST suitable?",
+options:[
+"touch",
+"mkdir",
+"rmdir",
+"mkfs"
+],
+answer:"mkdir"
+},
+
+{
+question:"Which Linux command is commonly used to find the location of executables, source files, and man pages?",
+options:[
+"grep",
+"whereis",
+"locate",
+"pwd"
+],
+answer:"whereis"
+},
+
+{
+question:"Which Linux command is commonly used to safely shut down the system immediately?",
+options:[
+"reboot -f",
+"shutdown -h now",
+"halt -r",
+"init 3"
+],
+answer:"shutdown -h now"
+},
+
+{
+question:"A system administrator wants an automated Linux installation with predefined configurations. Which technology is MOST suitable?",
+options:[
+"Kickstart",
+"GRUB",
+"SSH",
+"VNC"
+],
+answer:"Kickstart"
+},
+
+{
+question:"Which file is commonly associated with Kickstart configuration?",
+options:[
+"/etc/passwd",
+"ks.cfg",
+"grub.conf",
+"shadow.cfg"
+],
+answer:"ks.cfg"
+},
+
+{
+question:"An administrator wants to create a new Linux user account from command line. Which command is MOST suitable?",
+options:[
+"addgroup",
+"passwd",
+"useradd",
+"chmod"
+],
+answer:"useradd"
+},
+
+{
+question:"Which command is commonly used to set or change a user's password in Linux?",
+options:[
+"usermod",
+"passwd",
+"chage",
+"finger"
+],
+answer:"passwd"
+},
+
+{
+question:"Which file securely stores encrypted user passwords in Linux?",
+options:["/etc/passwd","/etc/group","/etc/shadow","/boot/grub"],
+answer:"/etc/shadow"
+},
+
+{
+question:"An administrator wants to modify an existing user account. Which command is MOST appropriate?",
+options:["usermod","useradd","adduser","chown"],
+answer:"usermod"
+},
+
+{
+question:"Which command deletes a user account from Linux?",
+options:["rmuser","deluser","userdel","passwd -d"],
+answer:"userdel"
+},
+
+{
+question:"Which command creates a new group in Linux?",
+options:["groupadd","mkgroup","addgrp","usergroup"],
+answer:"groupadd"
+},
+
+{
+question:"Which command adds a user to a supplementary group?",
+options:["chmod","usermod -aG","groupmod -u","chgrp"],
+answer:"usermod -aG"
+},
+
+{
+question:"Which IPv6 address represents loopback functionality?",
+options:["127.0.0.1","FE80::1","::1","FF00::1"],
+answer:"::1"
+},
+
+{
+question:"Which command displays IP address configuration in Linux?",
+options:["ip addr","net view","route add","net share"],
+answer:"ip addr"
+},
+
+{
+question:"OpenSSH is primarily used for:",
+options:["Disk partitioning","Secure remote communication","DNS caching","File compression"],
+answer:"Secure remote communication"
+},
+
+{
+question:"Which default port is used by SSH?",
+options:["20","21","22","23"],
+answer:"22"
+},
+
+{
+question:"A remote administrator wants graphical desktop access to a Linux server. Which technology is MOST suitable?",
+options:["SSH","SCP","VNC","ICMP"],
+answer:"VNC"
+},
+
+{
+question:"Which protocol used by VNC primarily provides remote desktop functionality?",
+options:["RFB","FTP","SMTP","LDAP"],
+answer:"RFB"
+},
+
+{
+question:"Which command is commonly used to copy files securely over SSH?",
+options:["ftp","scp","telnet","finger"],
+answer:"scp"
+},
+
+{
+question:"An administrator wants to verify currently logged-in users in Linux. Which command is MOST suitable?",
+options:["who","wc","ps","grep"],
+answer:"who"
+},
+
+{
+question:"Which Linux file stores basic user account information such as username and UID?",
+options:["/etc/shadow","/etc/group","/etc/passwd","/etc/login"],
+answer:"/etc/passwd"
+},
+
+{
+question:"An administrator wants centralized authentication for Linux systems in enterprise environments. Which concept is MOST related?",
+options:["Network Authentication","File Compression","Disk Quotas","Kernel Compilation"],
+answer:"Network Authentication"
+},
+
+{
+question:"Which Linux utility is traditionally used for disk partition management?",
+options:["fdisk","grep","chmod","ps"],
+answer:"fdisk"
+},
+
+{
+question:"Which command-line utility supports GPT partition tables and large disks better than fdisk?",
+options:["tar","gdisk","mount","gzip"],
+answer:"gdisk"
+},
+
+{
+question:"LVM in Linux stands for:",
+options:["Logical Volume Manager","Linux Volume Mount","Local Virtual Memory","Logical Variable Mapping"],
+answer:"Logical Volume Manager"
+},
+
+{
+question:"An administrator wants to increase a filesystem size without repartitioning the entire disk. Which technology is MOST suitable?",
+options:["RAID 0","LVM","ext2 only","BIOS"],
+answer:"LVM"
+},
+
+{
+question:"Which LVM component combines physical storage devices into a storage pool?",
+options:["Logical Volume","Volume Group","Mount Point","Swap Area"],
+answer:"Volume Group"
+},
+
+{
+question:"Which command displays block devices and partitions in Linux?",
+options:["lsblk","finger","wc","whoami"],
+answer:"lsblk"
+},
+
+{
+question:"A Linux administrator wants to mount a filesystem temporarily. Which command is MOST suitable?",
+options:["mkfs","mount","fdisk","pwd"],
+answer:"mount"
+},
+
+{
+question:"Which file contains information about filesystems automatically mounted during boot?",
+options:["/etc/passwd","/etc/fstab","/etc/shadow","/etc/grub.conf"],
+answer:"/etc/fstab"
+},
+
+{
+question:"Which Linux service is traditionally responsible for print spooling and print management?",
+options:["SSH","CUPS","NIS","FTP"],
+answer:"CUPS"
+},
+
+{
+question:"An administrator wants to view currently running services in a systemd-based Linux system. Which command is MOST suitable?",
+options:["systemctl list-units --type=service","service all","chkconfig --list only","ps auxg"],
+answer:"systemctl list-units --type=service"
+},
+
+{
+question:"Which command is commonly used to start or stop services in modern Linux distributions using systemd?",
+options:["initctl","service","systemctl","runlevel"],
+answer:"systemctl"
+},
+
+{
+question:"An administrator wants a service to start automatically at boot in a systemd-based system. Which command is MOST suitable?",
+options:["systemctl enable service_name","service start boot","chkconfig off","init 5"],
+answer:"systemctl enable service_name"
+},
+
+{
+question:"Which directory commonly stores system-wide configuration files in Linux?",
+options:["/usr/bin","/etc","/dev","/proc"],
+answer:"/etc"
+},
+
+{
+question:"NIS in Linux networking is mainly associated with:",
+options:["Centralized user authentication information","Disk encryption","Boot loading","Process scheduling"],
+answer:"Centralized user authentication information"
+},
+
+{
+question:"Which command updates package information and installs patches in Debian-based systems?",
+options:["rpm -ivh","apt update && apt upgrade","fdisk -l","mkfs.ext4"],
+answer:"apt update && apt upgrade"
+},
+
+{
+question:"An administrator wants to check whether recent patches fixed known vulnerabilities. Which concept is MOST related?",
+options:["Patch Management","Disk Scheduling","Swap Allocation","RAID Striping"],
+answer:"Patch Management"
+},
+
+{
+question:"Which Linux graphical subsystem is traditionally associated with X configuration?",
+options:["Wayland","X Window System","OpenSSH","LVM"],
+answer:"X Window System"
+},
+
+{
+question:"A server crash occurs after a failed patch update. Which administrative concept is MOST important to reduce downtime?",
+options:["Snapshot and Recovery Planning","Broadcast Control","RAID 0 Striping","IPv6 Tunneling"],
+answer:"Snapshot and Recovery Planning"
+},
+
+{
+question:"Which RAID level provides redundancy using mirroring?",
+options:["RAID 0","RAID 1","RAID 5","RAID 10 only"],
+answer:"RAID 1"
+},
+
+{
+question:"An administrator wants to identify failed services after boot in a systemd Linux server. Which command is MOST suitable?",
+options:["systemctl --failed","mount -a","who -r","fdisk -l"],
+answer:"systemctl --failed"
+},
+
+{
+question:"Which Linux service is most commonly used for DNS server implementation?",
+options:["named (BIND)","postfix","squid","dovecot"],
+answer:"named (BIND)"
+},
+
+{
+question:"Which command is commonly used to test DNS resolution from Linux?",
+options:["dig","mount","chmod","route"],
+answer:"dig"
+},
+
+{
+question:"An administrator wants to configure reverse DNS lookup. Which DNS record type is MOST relevant?",
+options:["MX","PTR","CNAME","TXT"],
+answer:"PTR"
+},
+
+{
+question:"Which service allows Linux systems to share directories over a network mainly in Unix/Linux environments?",
+options:["FTP","Samba","NFS","Squid"],
+answer:"NFS"
+},
+
+{
+question:"Which file commonly controls exported NFS shares?",
+options:["/etc/fstab","/etc/exports","/etc/passwd","/etc/named.conf"],
+answer:"/etc/exports"
+},
+
+{
+question:"Which command displays active NFS exports from a server?",
+options:["showmount -e","mount -n","netstat -r","exportfs -u"],
+answer:"showmount -e"
+},
+
+{
+question:"An administrator wants secure file transfer over network using encrypted communication. Which protocol is MOST suitable?",
+options:["FTP","Telnet","SFTP","Finger"],
+answer:"SFTP"
+},
+
+{
+question:"Which default port is traditionally associated with FTP control connection?",
+options:["20","21","22","25"],
+answer:"21"
+},
+
+{
+question:"Samba in Linux is mainly used for:",
+options:["RAID management","Windows file and printer sharing interoperability","DNS forwarding only","Package installation"],
+answer:"Windows file and printer sharing interoperability"
+},
+
+{
+question:"Which protocol is primarily used by Samba services?",
+options:["SMB/CIFS","ICMP","SNMP","RIP"],
+answer:"SMB/CIFS"
+},
+
+{
+question:"Which DHCP configuration file is commonly used in Linux ISC DHCP server setups?",
+options:["/etc/dhcp/dhcpd.conf","/etc/fstab","/etc/exports","/etc/shadow"],
+answer:"/etc/dhcp/dhcpd.conf"
+},
+
+{
+question:"An administrator wants clients to automatically receive IP addresses. Which service is required?",
+options:["DNS","DHCP","NFS","Apache"],
+answer:"DHCP"
+},
+
+{
+question:"Which Linux web server is MOST commonly associated with virtual hosting?",
+options:["Postfix","Apache","Dovecot","Squid"],
+answer:"Apache"
+},
+
+{
+question:"In Apache, virtual hosting mainly allows:",
+options:["Multiple websites on one server","Disk mirroring","DHCP failover","RAID configuration"],
+answer:"Multiple websites on one server"
+},
+
+{
+question:"Which default port is used for HTTPS traffic in Apache?",
+options:["21","25","80","443"],
+answer:"443"
+},
+
+{
+question:"Squid proxy server is mainly used for:",
+options:["DNS zone transfers","Web proxy caching and filtering","Mail delivery","Disk partitioning"],
+answer:"Web proxy caching and filtering"
+},
+
+{
+question:"Which mail server software is commonly used for sending emails in Linux?",
+options:["Dovecot","Postfix","Samba","Squid"],
+answer:"Postfix"
+},
+
+{
+question:"Dovecot is primarily associated with:",
+options:["SMTP mail transfer","IMAP and POP3 mail access","DHCP leasing","DNS caching"],
+answer:"IMAP and POP3 mail access"
+},
+
+{
+question:"Which protocol is commonly used for secure email retrieval while keeping messages on server?",
+options:["POP3","IMAP","FTP","SNMP"],
+answer:"IMAP"
+},
+
+{
+question:"SquirrelMail is BEST categorized as:",
+options:["Command-line mail server","Web-based mail client","DNS management tool","DHCP relay agent"],
+answer:"Web-based mail client"
+},
+
+{
+question:"Which Linux utility is commonly used for viewing real-time system logs?",
+options:["top","tail -f","mount","passwd"],
+answer:"tail -f"
+},
+
+{
+question:"An administrator wants to identify processes consuming high CPU resources. Which command is MOST suitable?",
+options:["grep","top","chmod","route"],
+answer:"top"
+},
+
+{
+question:"Which security principle focuses on reducing system exposure to attacks?",
+options:["Threat Mitigation","Broadcast Control","RAID Striping","Swap Allocation"],
+answer:"Threat Mitigation"
+},
+
+{
+question:"Which Linux daemon is commonly associated with time synchronization?",
+options:["sshd","ntpd","httpd","cupsd"],
+answer:"ntpd"
+},
+
+{
+question:"NTP is primarily used for:",
+options:["Network file transfer","Time synchronization","DNS caching","Remote printing"],
+answer:"Time synchronization"
+},
+
+{
+question:"Which default port is associated with NTP?",
+options:["TCP 22","UDP 123","TCP 80","UDP 53"],
+answer:"UDP 123"
+},
+
+{
+question:"BIND in Linux is MOST commonly associated with:",
+options:["DNS services","Mail transfer","Disk management","Package installation"],
+answer:"DNS services"
+},
+
+{
+question:"An administrator wants to secure DNS infrastructure from unauthorized zone transfers. Which concept is MOST relevant?",
+options:["DNS Security","RAID Mirroring","Swap Tuning","Runlevel Configuration"],
+answer:"DNS Security"
+},
+
+{
+question:"LDAP is primarily used for:",
+options:["Centralized directory authentication","File compression","Disk formatting","Network routing"],
+answer:"Centralized directory authentication"
+},
+
+{
+question:"Which service is historically used in Linux for centralized authentication and account management?",
+options:["NIS","FTP","Apache","Squid"],
+answer:"NIS"
+},
+
+{
+question:"An administrator wants high availability for a web application by distributing requests across multiple servers. Which solution is MOST suitable?",
+options:["Apache Clustering / Load Balancer","RAID 0","DHCP Reservation","SSH Tunnel"],
+answer:"Apache Clustering / Load Balancer"
+},
+
+{
+question:"Which command is commonly used to check current system uptime and load average?",
+options:["finger","uptime","whoami","lsblk"],
+answer:"uptime"
+},
+
+{
+question:"A virtual machine is BEST described as:",
+options:["A physical disk partition","A software-based emulation of a computer system","A DNS replication service","A network protocol"],
+answer:"A software-based emulation of a computer system"
+},
+
+{
+question:"Which virtualization platform is commonly used in Linux environments?",
+options:["KVM","Postfix","Dovecot","Squid"],
+answer:"KVM"
+},
+
+{
+question:"In Bash scripting, which symbol redirects standard output to a file while overwriting existing content?",
+options:[">>",">","|","&"],
+answer:">"
+},
+
+{
+question:"Which symbol appends command output to an existing file?",
+options:[">",">>","<","||"],
+answer:">>"
+},
+
+{
+question:"Which Bash operator is used to pipe output from one command to another?",
+options:[">","&","|","#"],
+answer:"|"
+},
+
+{
+question:"An administrator wants to automate repetitive Linux administration tasks. Which approach is MOST suitable?",
+options:["Bash Scripting","Manual Execution Only","BIOS Configuration","RAID Rebuild"],
+answer:"Bash Scripting"
+},
+
+{
+question:"Which Linux utility is commonly used to schedule recurring automated tasks?",
+options:["cron","grep","mount","ps"],
+answer:"cron"
+},
+
+{
+question:"A Bash script terminates unexpectedly due to invalid variable handling. Which concept is MOST directly related?",
+options:["Script Debugging and Error Handling","DNS Delegation","NFS Exporting","Apache Virtual Hosting"],
+answer:"Script Debugging and Error Handling"
+}
+
+];
+
+let currentQuestion = 0;
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const submitBtn = document.getElementById("submitBtn");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML = `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option => {
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", () => {
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+        });
+
+        optionsEl.appendChild(div);
+    });
+}
+
+nextBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+        currentQuestion++;
+        loadQuestion();
+    }
+
+});
+
+prevBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+        currentQuestion--;
+        loadQuestion();
+    }
+
+});
+
+submitBtn.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+            score++;
+        }
+
+    });
+
+    document.getElementById("quiz-container").style.display = "none";
+
+    const resultBox = document.getElementById("resultBox");
+
+    resultBox.style.display = "block";
+
+    const percentage = ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats").innerHTML = `
+        <p>Total Questions: ${quizData.length}</p>
+        <p>Correct Answers: ${score}</p>
+        <p>Wrong Answers: ${quizData.length - score}</p>
+        <p>Percentage: ${percentage}%</p>
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const isCorrect = userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+            <h3>Q${index + 1}. ${q.question}</h3>
+
+            <p class="${isCorrect ? 'correct' : 'wrong'}">
+                Your Answer: ${userAnswers[index] || "Not Attempted"}
+            </p>
+
+            <p class="answer">
+                Correct Answer: ${q.answer}
+            </p>
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
