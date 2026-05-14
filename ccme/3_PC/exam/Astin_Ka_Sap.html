@@ -242,11 +242,885 @@ print('Pain')
 
 const quizData = [
 
+{
+question:"Which of the following is a valid Python function declaration?<br><br><pre><code>def show():\n    print(\"Hello\")</code></pre>",
+options:[
+"function show()",
+"define show()",
+"def show()",
+"fun show()"
+],
+answer:"def show()"
+},
 
+{
+question:"What will be the output?<br><br><pre><code>x = 5\ny = \"5\"\n\nprint(type(x), type(y))</code></pre>",
+options:[
+"<class 'int'> <class 'int'>",
+"<class 'str'> <class 'str'>",
+"<class 'int'> <class 'str'>",
+"Error"
+],
+answer:"<class 'int'> <class 'str'>"
+},
 
+{
+question:"Which statement about Python indentation is TRUE?",
+options:[
+"Indentation is optional",
+"Indentation only improves readability",
+"Indentation defines code blocks",
+"Python ignores indentation in loops"
+],
+answer:"Indentation defines code blocks"
+},
 
+{
+question:"What will happen?<br><br><pre><code>if True:\nprint(\"Hello\")</code></pre>",
+options:[
+"Prints Hello",
+"Runtime Error",
+"IndentationError",
+"Syntax ignored"
+],
+answer:"IndentationError"
+},
 
+{
+question:"Which data type is mutable?",
+options:[
+"Tuple",
+"String",
+"List",
+"Integer"
+],
+answer:"List"
+},
 
+{
+question:"What will be the output?<br><br><pre><code>a = [1, 2]\na.append(3)\nprint(a)</code></pre>",
+options:[
+"[1, 2]",
+"[1, 2, 3]",
+"(1, 2, 3)",
+"Error"
+],
+answer:"[1, 2, 3]"
+},
+
+{
+question:"Which symbol is used to define a dictionary?",
+options:[
+"( )",
+"[ ]",
+"{ }",
+"< >"
+],
+answer:"{ }"
+},
+
+{
+question:"Predict the output.<br><br><pre><code>data = {\"a\":1, \"b\":2}\nprint(data[\"b\"])</code></pre>",
+options:[
+"a",
+"1",
+"2",
+"Error"
+],
+answer:"2"
+},
+
+{
+question:"Which operation removes an item from a dictionary?<br><br><pre><code>student = {\"id\":101, \"name\":\"Raj\"}</code></pre>",
+options:[
+"remove(student[\"id\"])",
+"del student[\"id\"]",
+"delete student[\"id\"]",
+"erase student[\"id\"]"
+],
+answer:"del student[\"id\"]"
+},
+
+{
+question:"What is the output?<br><br><pre><code>nums = [10, 20, 30]\nprint(nums[1])</code></pre>",
+options:[
+"10",
+"20",
+"30",
+"Error"
+],
+answer:"20"
+},
+
+{
+question:"Which loop is best suited when the number of iterations is known?",
+options:[
+"while",
+"infinite",
+"for",
+"recursive"
+],
+answer:"for"
+},
+
+{
+question:"What will be printed?<br><br><pre><code>for i in range(3):\n    print(i)</code></pre>",
+options:[
+"1 2 3",
+"0 1 2",
+"0 1 2 3",
+"Infinite loop"
+],
+answer:"0 1 2"
+},
+
+{
+question:"A developer stores employee records as:<br><br><pre><code>emp = {\n    \"id\": 1,\n    \"name\": \"Amit\"\n}</code></pre><br>Why is dictionary preferred here?",
+options:[
+"Dictionaries maintain arithmetic order",
+"Dictionaries store key-value pairs",
+"Dictionaries only store integers",
+"Dictionaries avoid loops"
+],
+answer:"Dictionaries store key-value pairs"
+},
+
+{
+question:"Which statement about lists is FALSE?",
+options:[
+"Lists are ordered",
+"Lists can contain mixed datatypes",
+"Lists are immutable",
+"Lists support indexing"
+],
+answer:"Lists are immutable"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>x = \"Python\"\nprint(x[0])</code></pre>",
+options:[
+"P",
+"y",
+"Python",
+"Error"
+],
+answer:"P"
+},
+
+{
+question:"Which of the following creates an empty list?",
+options:[
+"{}",
+"()",
+"[]",
+"<>"
+],
+answer:"[]"
+},
+
+{
+question:"Which statement is MOST accurate?",
+options:[
+"Every object in Python is a function",
+"Every variable is permanently typed",
+"Everything in Python is treated as an object",
+"Objects cannot contain data"
+],
+answer:"Everything in Python is treated as an object"
+},
+
+{
+question:"Predict the output.<br><br><pre><code>values = [1, 2, 3]\nvalues.remove(2)\nprint(values)</code></pre>",
+options:[
+"[1, 2, 3]",
+"[1, 3]",
+"[2, 3]",
+"Error"
+],
+answer:"[1, 3]"
+},
+
+{
+question:"Which statement correctly takes user input?",
+options:[
+"x = input()",
+"scan(x)",
+"read(x)",
+"cin >> x"
+],
+answer:"x = input()"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>def add(a, b):\n    return a + b\n\nprint(add(2, 3))</code></pre>",
+options:[
+"23",
+"5",
+"add(2,3)",
+"Error"
+],
+answer:"5"
+},
+
+{
+question:"Which of the following correctly defines a tuple?<br><br><pre><code>t = (1, 2, 3)</code></pre>",
+options:[
+"List",
+"Dictionary",
+"Tuple",
+"Set"
+],
+answer:"Tuple"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>t = (10, 20, 30)\nprint(t[1])</code></pre>",
+options:[
+"10",
+"20",
+"30",
+"Error"
+],
+answer:"20"
+},
+
+{
+question:"Which statement about tuples is TRUE?",
+options:[
+"Tuples are mutable",
+"Tuples support item reassignment",
+"Tuples are immutable",
+"Tuples use { }"
+],
+answer:"Tuples are immutable"
+},
+
+{
+question:"Predict the output.<br><br><pre><code>x, y = 5, 10\nprint(x, y)</code></pre>",
+options:[
+"Error",
+"5",
+"10",
+"5 10"
+],
+answer:"5 10"
+},
+
+{
+question:"Which built-in function returns the datatype of an object?",
+options:[
+"dir()",
+"type()",
+"str()",
+"len()"
+],
+answer:"type()"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>name = \"Python\"\nprint(type(name))</code></pre>",
+options:[
+"<class 'int'>",
+"<class 'list'>",
+"<class 'str'>",
+"<class 'tuple'>"
+],
+answer:"<class 'str'>"
+},
+
+{
+question:"Which method converts an object into string format?",
+options:[
+"dir()",
+"str()",
+"tuple()",
+"type()"
+],
+answer:"str()"
+},
+
+{
+question:"A programmer wants to store unique roll numbers without duplicates. Which datatype is MOST suitable?",
+options:[
+"List",
+"Tuple",
+"Set",
+"String"
+],
+answer:"Set"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>s = {1, 2, 2, 3}\nprint(s)</code></pre>",
+options:[
+"{1, 2, 2, 3}",
+"{1, 2, 3}",
+"[1, 2, 3]",
+"Error"
+],
+answer:"{1, 2, 3}"
+},
+
+{
+question:"Which statement about sets is FALSE?",
+options:[
+"Sets store unique values",
+"Sets are unordered",
+"Sets allow duplicate entries",
+"Sets use { }"
+],
+answer:"Sets allow duplicate entries"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>data = \"a,b,c\"\nprint(data.split(\",\"))</code></pre>",
+options:[
+"('a','b','c')",
+"['a', 'b', 'c']",
+"a b c",
+"Error"
+],
+answer:"['a', 'b', 'c']"
+},
+
+{
+question:"Which operation joins list elements into a string?<br><br><pre><code>words = [\"I\", \"Love\", \"Python\"]</code></pre>",
+options:[
+"split(words)",
+"\",\".join(words)",
+"merge(words)",
+"combine(words)"
+],
+answer:"\",\".join(words)"
+},
+
+{
+question:"Predict the output.<br><br><pre><code>a = [1, 2]\nb = a\nb.append(3)\n\nprint(a)</code></pre>",
+options:[
+"[1, 2]",
+"[3]",
+"[1, 2, 3]",
+"Error"
+],
+answer:"[1, 2, 3]"
+},
+
+{
+question:"The example below mainly demonstrates:<br><br><pre><code>a = [10, 20]\nb = a</code></pre>",
+options:[
+"Tuple unpacking",
+"Object referencing",
+"Set creation",
+"Type casting"
+],
+answer:"Object referencing"
+},
+
+{
+question:"What will happen?<br><br><pre><code>t = (1, 2, 3)\nt[1] = 5</code></pre>",
+options:[
+"Tuple updates successfully",
+"Runtime warning",
+"TypeError",
+"IndexError"
+],
+answer:"TypeError"
+},
+
+{
+question:"Which function displays all available attributes/methods of an object?",
+options:[
+"show()",
+"dir()",
+"helpdir()",
+"type()"
+],
+answer:"dir()"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>nums = [5, 1, 3]\nnums.sort()\n\nprint(nums)</code></pre>",
+options:[
+"[5, 1, 3]",
+"[1, 3, 5]",
+"[5, 3, 1]",
+"Error"
+],
+answer:"[1, 3, 5]"
+},
+
+{
+question:"A developer wants to communicate between two systems over a network using Python. Which topic is MOST directly related?",
+options:[
+"Tuple packing",
+"Socket programming",
+"String splitting",
+"Named arguments"
+],
+answer:"Socket programming"
+},
+
+{
+question:"Which statement is MOST accurate regarding Python variables?",
+options:[
+"Variables permanently store memory locations only",
+"Variables directly contain objects",
+"Variables reference objects in memory",
+"Variables cannot change datatype"
+],
+answer:"Variables reference objects in memory"
+},
+
+{
+question:"Predict the output.<br><br><pre><code>def show(name=\"Python\"):\n    print(name)\n\nshow()</code></pre>",
+options:[
+"Error",
+"None",
+"Python",
+"show"
+],
+answer:"Python"
+},
+
+{
+question:"Which Python module is mainly used for Regular Expressions?",
+options:[
+"regexpy",
+"re",
+"reg",
+"pyregex"
+],
+answer:"re"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>import re\n\nresult = re.search(\"cat\", \"my cat sleeps\")\nprint(result is not None)</code></pre>",
+options:[
+"False",
+"None",
+"True",
+"Error"
+],
+answer:"True"
+},
+
+{
+question:"Which regex symbol matches any single character except newline?",
+options:[
+"*",
+".",
+"^",
+"$"
+],
+answer:"."
+},
+
+{
+question:"Predict the output.<br><br><pre><code>import re\n\ntxt = \"apple\"\nx = re.search(\"^a\", txt)\n\nprint(bool(x))</code></pre>",
+options:[
+"False",
+"True",
+"None",
+"Error"
+],
+answer:"True"
+},
+
+{
+question:"Which symbol checks whether a string STARTS with a pattern?",
+options:[
+"$",
+".",
+"^",
+"*"
+],
+answer:"^"
+},
+
+{
+question:"Which symbol checks whether a string ENDS with a pattern?",
+options:[
+"^",
+"$",
+"+",
+"?"
+],
+answer:"$"
+},
+
+{
+question:"A developer wants to validate whether an email contains a specific domain pattern. Which concept is MOST suitable?",
+options:[
+"Tuple unpacking",
+"Regular Expressions",
+"File handling",
+"Set operations"
+],
+answer:"Regular Expressions"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>import re\n\ntext = \"abc123\"\nresult = re.search(\"[0-9]\", text)\n\nprint(result.group())</code></pre>",
+options:[
+"abc",
+"0",
+"1",
+"Error"
+],
+answer:"1"
+},
+
+{
+question:"Which regex pattern matches a whitespace character?",
+options:[
+"\\S",
+"\\W",
+"\\s",
+"\\d"
+],
+answer:"\\s"
+},
+
+{
+question:"Which regex pattern matches a non-whitespace character?",
+options:[
+"\\S",
+"\\s",
+"\\n",
+"\\t"
+],
+answer:"\\S"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>def add(a, b):\n    return a + b\n\nprint(add(2, 5))</code></pre>",
+options:[
+"25",
+"7",
+"add",
+"Error"
+],
+answer:"7"
+},
+
+{
+question:"Which keyword is used to define a function in Python?",
+options:[
+"func",
+"function",
+"define",
+"def"
+],
+answer:"def"
+},
+
+{
+question:"Which statement BEST describes scripting in Python?",
+options:[
+"Python scripts cannot automate tasks",
+"Scripts are only used for web development",
+"Scripts automate repetitive operations",
+"Scripting requires compilation before execution"
+],
+answer:"Scripts automate repetitive operations"
+},
+
+{
+question:"Predict the output.<br><br><pre><code>def show():\n    print(\"Hello\")\n\nx = show()\nprint(x)</code></pre>",
+options:[
+"Hello",
+"None",
+"Hello None",
+"Error"
+],
+answer:"Hello None"
+},
+
+{
+question:"Which of the following is an OOP concept?",
+options:[
+"Compilation",
+"Encapsulation",
+"Tokenization",
+"Parsing"
+],
+answer:"Encapsulation"
+},
+
+{
+question:"What is created from a class?",
+options:[
+"Compiler",
+"Operator",
+"Object",
+"Module"
+],
+answer:"Object"
+},
+
+{
+question:"A programmer creates a blueprint called <code>Car</code>, then creates <code>BMW</code> and <code>Audi</code> using it. <code>BMW</code> and <code>Audi</code> are:",
+options:[
+"Methods",
+"Packages",
+"Objects",
+"Operators"
+],
+answer:"Objects"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>class Test:\n    pass\n\nobj = Test()\n\nprint(type(obj))</code></pre>",
+options:[
+"<class 'object'>",
+"<class 'Test'>",
+"<class 'type'>",
+"Error"
+],
+answer:"<class 'Test'>"
+},
+
+{
+question:"Which statement is MOST accurate regarding objects in Python?",
+options:[
+"Objects only store functions",
+"Objects cannot contain data members",
+"Objects combine data and behavior",
+"Objects are only created for lists"
+],
+answer:"Objects combine data and behavior"
+},
+
+{
+question:"Which Python module is commonly used for directory/path operations?",
+options:[
+"sys",
+"re",
+"os",
+"math"
+],
+answer:"os"
+},
+
+{
+question:"Which function is used to open a file in Python?",
+options:[
+"read()",
+"file()",
+"open()",
+"load()"
+],
+answer:"open()"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>f = open(\"demo.txt\", \"w\")\nprint(f.writable())</code></pre>",
+options:[
+"False",
+"True",
+"None",
+"Error"
+],
+answer:"True"
+},
+
+{
+question:"Which file mode truncates an existing file?",
+options:[
+"r",
+"a",
+"w",
+"x"
+],
+answer:"w"
+},
+
+{
+question:"Predict the output.<br><br><pre><code>f = open(\"test.txt\", \"w\")\nf.write(\"Python\")\nf.close()\n\nf = open(\"test.txt\", \"r\")\nprint(f.read())</code></pre>",
+options:[
+"Error",
+"Python",
+"None",
+"Blank output"
+],
+answer:"Python"
+},
+
+{
+question:"Which function reads ONE line from a file?",
+options:[
+"readall()",
+"readline()",
+"readlines()",
+"fetchline()"
+],
+answer:"readline()"
+},
+
+{
+question:"Which method returns a LIST of lines from a file?",
+options:[
+"read()",
+"getline()",
+"readline()",
+"readlines()"
+],
+answer:"readlines()"
+},
+
+{
+question:"A programmer wants to add logs at the END of a file without deleting existing content. Which mode should be used?",
+options:[
+"w",
+"r",
+"a",
+"x"
+],
+answer:"a"
+},
+
+{
+question:"What will happen?<br><br><pre><code>f = open(\"data.txt\", \"r\")\nf.write(\"Hello\")</code></pre>",
+options:[
+"Successfully writes",
+"Runtime warning",
+"Error because file is read-only",
+"Automatically changes mode"
+],
+answer:"Error because file is read-only"
+},
+
+{
+question:"Which Python module is commonly used for directory operations?",
+options:[
+"math",
+"os",
+"re",
+"sys"
+],
+answer:"os"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>import os\n\nprint(os.path.exists(\"demo.txt\"))</code></pre>",
+options:[
+"Returns file content",
+"Returns True/False",
+"Deletes file",
+"Error always"
+],
+answer:"Returns True/False"
+},
+
+{
+question:"Which function gives the current working directory?",
+options:[
+"os.current()",
+"os.getcwd()",
+"os.path()",
+"os.dir()"
+],
+answer:"os.getcwd()"
+},
+
+{
+question:"Predict the output.<br><br><pre><code>import hashlib\n\nx = hashlib.md5(b\"abc\")\nprint(type(x))</code></pre>",
+options:[
+"<class 'bytes'>",
+"<class 'str'>",
+"Hash object",
+"Integer"
+],
+answer:"Hash object"
+},
+
+{
+question:"Which library is mainly associated with hashing and integrity checking?",
+options:[
+"datetime",
+"hashlib",
+"socket",
+"shodan"
+],
+answer:"hashlib"
+},
+
+{
+question:"A security analyst wants to search internet-connected devices using Python automation. Which library/topic is MOST related?",
+options:[
+"hashlib",
+"datetime",
+"shodan",
+"tkinter"
+],
+answer:"shodan"
+},
+
+{
+question:"Which module is used for socket programming in Python?",
+options:[
+"server",
+"network",
+"socket",
+"client"
+],
+answer:"socket"
+},
+
+{
+question:"What is the primary purpose of sockets?",
+options:[
+"Image editing",
+"Two-way communication between systems",
+"File compression",
+"Data encryption only"
+],
+answer:"Two-way communication between systems"
+},
+
+{
+question:"What will be the output?<br><br><pre><code>import datetime\n\ntoday = datetime.date.today()\n\nprint(type(today))</code></pre>",
+options:[
+"<class 'str'>",
+"<class 'datetime.date'>",
+"<class 'int'>",
+"Error"
+],
+answer:"<class 'datetime.date'>"
+},
+
+{
+question:"Which statement BEST describes debugging?",
+options:[
+"Writing syntax only",
+"Removing logical/runtime errors",
+"Creating databases",
+"Encrypting programs"
+],
+answer:"Removing logical/runtime errors"
+},
+
+{
+question:"Which statement is MOST accurate regarding client-server architecture?",
+options:[
+"Clients always store databases",
+"Servers only work offline",
+"Clients request services from servers",
+"Servers cannot communicate with clients"
+],
+answer:"Clients request services from servers"
+},
+
+{
+question:"Predict the output.<br><br><pre><code>import os\n\nprint(os.path.isfile(\"abc.txt\"))</code></pre>",
+options:[
+"Returns True/False",
+"Prints file contents",
+"Deletes file",
+"Creates file automatically"
+],
+answer:"Returns True/False"
+}
 
 ];
 

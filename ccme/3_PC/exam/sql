@@ -1,0 +1,2356 @@
+A. MySQL: (10T + 12L + 8 SL)
+
+Session 1: (2T + 2L + 2SL)
+
+Theory:
+• Concepts of databases, tables, and schemas.
+• Syntax and examples for creating databases.
+• Best practices for organizing and naming databases.
+• Syntax and examples for dropping databases.
+
+Lab Assignment:
+• Create a MYSQL user.
+• Create a database and tables and then add data into those tables.
+• Delete/Modify a Table or Database.
+
+Self-Learning:
+• Explore the topics
+  ♦ Concept of ER Diagrams
+  ♦ Entities, Attributes, Primary key, Foreign key
+  ♦ Mapping ER diagram -> Mysql tables
+  ♦ Draw an ER Diagram and convert it into CREATE TABLE statements
+
+
+Session 2 & 3: (4T + 6L + 2SL)
+
+Theory:
+• Writing SELECT statements to fetch data.
+• Using WHERE clause for filtering data.
+• Sorting data using ORDER BY.
+• Basic JOIN operations to combine data from multiple tables.
+
+Lab Assignment:
+• Write SELECT statements to retrieve specific data from a database.
+• Use WHERE clauses to filter data and extract relevant information.
+• Apply ORDER BY clauses to sort retrieved data for analytical purposes.
+
+Self-Learning:
+• Explore the topics [Database Security in MYSQL]
+  ♦ Unauthorized access
+  ♦ Data leakage
+  ♦ Concepts of SQL Injection
+  ♦ Users, Roles, Privileges
+  ♦ Principle of least privilege
+  ♦ Create multiple MYSQL users: admin, readonly_user, app_user
+    Assign privileges using: GRANT,REVOKE
+
+
+Session 4 & 5: (4T + 4L + 4SL)
+
+Theory:
+• Using aggregate functions (SUM, COUNT, AVG).
+• GROUP BY and HAVING clauses for grouped data.
+• Subqueries and nested queries.
+
+Lab Assignment:
+• Utilize aggregate functions (SUM, COUNT, AVG) to perform calculations
+  on dataset columns.
+• Employ GROUP BY clauses to group data based on specified criteria.
+• Use HAVING clauses to filter grouped data based on aggregate
+  conditions.
+
+Self-Learning:
+• Explore the topics [Database Security in MYSQL]
+  ♦ Unauthorized access
+  ♦ Data leakage
+  ♦ Concepts of SQL Injection
+  ♦ Users, Roles, Privileges
+  ♦ Principle of least privilege
+  ♦ Create multiple MYSQL users: admin, readonly_user, app_user
+    Assign privileges using: GRANT,REVOKE
+
+• Explore the topics [Backup, Restore & Disaster Recovery]
+  ♦ Importance of backups in production systems
+  ♦ Learn the concepts of Logical vs Physical backup
+  ♦ Restore process & common failure scenarios
+  ♦ Delete data/table intentionally and restore from backup
+  ♦ Case Study: What happens if production database crashes at
+    midnight.
+
+• Explore the topics [Cloud Databases & Performance Basics]
+  ♦ Cloud Database
+  ♦ Differences between On-Prem MYSQL vs Cloud MYSQL
+  ♦ Vertical vs Horizontal scaling
+  ♦ Indexing
+  ♦ Learn the concepts of slow queries
+  ♦ Make a comparison between Local MYSQL vs Amazon RDS
+    MYSQL
+  ♦ Identify: Backup handling, Scaling options and Security features
+    offered by Cloud database.
+
+
+
+
+
+
+# 1. MYSQL TOPICS
+`````````````````````
+---
+
+# A. Database Fundamentals
+
+* Database concepts
+* Tables
+* Schemas
+* CREATE DATABASE
+* DROP DATABASE
+* CREATE TABLE
+* Modify/Delete tables
+* Insert data into tables
+
+---
+
+# B. ER Diagram Concepts
+
+* ER Diagrams
+* Entities
+* Attributes
+* Relationships
+* Primary Key
+* Foreign Key
+* Mapping ER → MySQL tables
+
+---
+
+# C. SQL Querying
+
+* SELECT statements
+* WHERE clause
+* ORDER BY
+* JOIN operations
+
+  * INNER JOIN
+  * LEFT JOIN
+  * RIGHT JOIN
+  * CROSS JOIN basics
+
+---
+
+# D. Aggregate Functions
+
+* SUM()
+* COUNT()
+* AVG()
+* MAX()
+* MIN()
+
+---
+
+# E. Grouping & Filtering
+
+* GROUP BY
+* HAVING
+
+---
+
+# F. Advanced SQL
+
+* Subqueries
+* Nested queries
+* DISTINCT
+* LIMIT
+* NULL handling
+
+---
+
+# G. Database Security
+
+* Unauthorized access
+* Data leakage
+* SQL Injection
+* Users
+* Roles
+* Privileges
+* GRANT
+* REVOKE
+* Principle of Least Privilege
+
+---
+
+# H. Backup & Recovery
+
+* Backup importance
+* Logical backup
+* Physical backup
+* Restore process
+* Disaster recovery
+* Production failure scenarios
+
+---
+
+# I. Cloud Database Concepts
+
+* Cloud databases
+* On-Prem vs Cloud MySQL
+* Amazon RDS basics
+* Vertical scaling
+* Horizontal scaling
+* Indexing
+* Slow queries
+* Performance basics
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 1. Which statement correctly creates a database named `college_db`?
+
+```sql
+CREATE DATABASE college_db;
+```
+
+A. `MAKE DATABASE college_db;`
+B. `CREATE DB college_db;`
+C. `CREATE DATABASE college_db;`
+D. `NEW DATABASE college_db;`
+
+✅ **Answer:** C
+
+---
+
+## 2. What is the primary purpose of a database schema?
+
+A. To delete records permanently
+B. To organize database objects logically
+C. To encrypt database passwords
+D. To sort rows automatically
+
+✅ **Answer:** B
+
+---
+
+## 3. Consider the query:
+
+```sql
+DROP DATABASE company;
+```
+
+What happens after execution?
+
+A. Only tables are deleted
+B. Database structure remains
+C. Entire database is removed
+D. Only users are removed
+
+✅ **Answer:** C
+
+---
+
+## 4. Which SQL statement inserts data into a table?
+
+A.
+
+```sql
+ADD INTO student VALUES(1,'A');
+```
+
+B.
+
+```sql
+INSERT INTO student VALUES(1,'A');
+```
+
+C.
+
+```sql
+PUT INTO student VALUES(1,'A');
+```
+
+D.
+
+```sql
+UPDATE student NEW VALUES(1,'A');
+```
+
+✅ **Answer:** B
+
+---
+
+## 5. Which clause is mainly used for filtering rows?
+
+A. ORDER BY
+B. GROUP BY
+C. WHERE
+D. JOIN
+
+✅ **Answer:** C
+
+---
+
+## 6. What will the following query return?
+
+```sql
+SELECT * FROM employee
+WHERE salary > 50000;
+```
+
+A. Employees with salary less than 50000
+B. Employees with salary equal to 50000
+C. Employees with salary greater than 50000
+D. All employees
+
+✅ **Answer:** C
+
+---
+
+## 7. Which statement about `ORDER BY` is TRUE?
+
+A. It deletes duplicate rows
+B. It filters rows
+C. It sorts retrieved data
+D. It joins tables
+
+✅ **Answer:** C
+
+---
+
+## 8. What is the default sorting order in SQL?
+
+A. RANDOM
+B. DESCENDING
+C. ASCENDING
+D. NULL
+
+✅ **Answer:** C
+
+---
+
+## 9. Which query sorts employees by salary from highest to lowest?
+
+```sql
+SELECT * FROM employee
+ORDER BY salary _____;
+```
+
+A. ASC
+B. HIGH
+C. DESC
+D. REVERSE
+
+✅ **Answer:** C
+
+---
+
+## 10. Which JOIN returns only matching rows from both tables?
+
+A. LEFT JOIN
+B. RIGHT JOIN
+C. INNER JOIN
+D. CROSS JOIN
+
+✅ **Answer:** C
+
+---
+
+## 11. Consider:
+
+```sql
+SELECT students.name, courses.course_name
+FROM students
+INNER JOIN courses
+ON students.course_id = courses.id;
+```
+
+Purpose of this query?
+
+A. Deletes unmatched rows
+B. Combines matching records from two tables
+C. Creates a new table
+D. Sorts courses
+
+✅ **Answer:** B
+
+---
+
+## 12. Which command removes all records but keeps table structure?
+
+A. DROP TABLE
+B. DELETE TABLE
+C. DELETE FROM table_name;
+D. REMOVE TABLE
+
+✅ **Answer:** C
+
+---
+
+## 13. Which statement modifies an existing table structure?
+
+A.
+
+```sql
+MODIFY TABLE student;
+```
+
+B.
+
+```sql
+ALTER TABLE student;
+```
+
+C.
+
+```sql
+CHANGE TABLE student;
+```
+
+D.
+
+```sql
+UPDATE STRUCTURE student;
+```
+
+✅ **Answer:** B
+
+---
+
+## 14. A company wants employee records sorted alphabetically by name.
+
+Which query is most appropriate?
+
+```sql
+SELECT * FROM employee
+ORDER BY name ASC;
+```
+
+A. Retrieves random records
+B. Sorts names alphabetically
+C. Deletes duplicate names
+D. Filters employee names
+
+✅ **Answer:** B
+
+---
+
+## 15. Which query contains a syntax error?
+
+A.
+
+```sql
+SELECT * FROM student;
+```
+
+B.
+
+```sql
+SELECT name FROM student;
+```
+
+C.
+
+```sql
+SELECT FROM student;
+```
+
+D.
+
+```sql
+SELECT * FROM student WHERE age > 18;
+```
+
+✅ **Answer:** C
+
+---
+
+## 16. Which statement is TRUE regarding databases and tables?
+
+A. Tables exist independently without databases
+B. Database stores organized collections of tables
+C. Tables contain schemas only
+D. Schemas delete tables automatically
+
+✅ **Answer:** B
+
+---
+
+## 17. What does this query do?
+
+```sql
+SELECT name, marks
+FROM students
+WHERE marks >= 75
+ORDER BY marks DESC;
+```
+
+A. Deletes students with marks below 75
+B. Displays students scoring 75 or more sorted by highest marks first
+C. Sorts names alphabetically only
+D. Creates a marks table
+
+✅ **Answer:** B
+
+---
+
+## 18. Which option best describes a table in MySQL?
+
+A. A programming language
+B. Collection of rows and columns storing related data
+C. Network configuration
+D. SQL operator
+
+✅ **Answer:** B
+
+---
+
+## 19. Which keyword is used to retrieve all columns from a table?
+
+A. ALL
+B. #
+C. *
+D. COLUMN
+
+✅ **Answer:** C
+
+---
+
+## 20. A developer accidentally executes:
+
+```sql
+DROP DATABASE sales_db;
+```
+
+Which outcome is MOST accurate?
+
+A. Only records are deleted
+B. Database becomes read-only
+C. Entire database and contained tables are removed
+D. Database users are modified
+
+✅ **Answer:** C
+
+---
+
+## 21. Which query correctly fetches only employee names?
+
+A.
+
+```sql
+SELECT employee FROM name;
+```
+
+B.
+
+```sql
+GET name FROM employee;
+```
+
+C.
+
+```sql
+SELECT name FROM employee;
+```
+
+D.
+
+```sql
+FETCH employee.name;
+```
+
+✅ **Answer:** C
+
+---
+
+## 22. Which operator is commonly used with `WHERE` for equality checking?
+
+A. `:=`
+B. `==`
+C. `=`
+D. `===`
+
+✅ **Answer:** C
+
+---
+
+## 23. Consider the query:
+
+```sql
+SELECT * FROM orders
+ORDER BY order_date;
+```
+
+If no order is specified, results are sorted in:
+
+A. Descending order
+B. Ascending order
+C. Random order
+D. Join order
+
+✅ **Answer:** B
+
+---
+
+## 24. Which query correctly creates a table?
+
+```sql
+CREATE TABLE student (
+id INT,
+name VARCHAR(50)
+);
+```
+
+A. Valid syntax
+B. Missing database keyword
+C. `VARCHAR` cannot be used
+D. `INT` is invalid in MySQL
+
+✅ **Answer:** A
+
+---
+
+## 25. Two tables contain customer and order details. Which SQL feature is specifically designed to combine related records?
+
+A. WHERE
+B. ORDER BY
+C. JOIN
+D. INSERT
+
+✅ **Answer:** C
+
+
+
+# Extracted Syllabus (From Provided Page)
+
+## Session 4 & 5 (4T + 4L + 4SL)
+
+### Theory
+
+* Using aggregate functions (`SUM`, `COUNT`, `AVG`)
+* `GROUP BY` and `HAVING` clauses for grouped data
+* Subqueries and nested queries
+
+---
+
+## Lab Assignment
+
+* Utilize aggregate functions (`SUM`, `COUNT`, `AVG`) to perform calculations on dataset columns
+* Employ `GROUP BY` clauses to group data based on specified criteria
+* Use `HAVING` clauses to filter grouped data based on aggregate conditions
+
+---
+
+## Self-Learning Topics Included
+
+### Database Security in MYSQL
+
+* Unauthorized access
+* Data leakage
+* SQL Injection
+* Users, Roles, Privileges
+* Principle of least privilege
+* `GRANT`, `REVOKE`
+
+### Backup, Restore & Disaster Recovery
+
+* Importance of backups
+* Logical vs Physical backup
+* Restore process
+* Production crash scenarios
+
+### Cloud Databases & Performance Basics
+
+* Cloud Database
+* On-Prem MYSQL vs Cloud MYSQL
+* Vertical vs Horizontal scaling
+* Indexing
+* Slow queries
+* Amazon RDS MYSQL
+* Backup handling, scaling, security in cloud DB
+
+---
+
+# 25 MCQs — MySQL / SQL (Advanced Topics)
+
+---
+
+## 1. Which aggregate function returns the total sum of a numeric column?
+
+A. `COUNT()`
+B. `AVG()`
+C. `SUM()`
+D. `TOTAL()`
+
+✅ **Answer:** C
+
+---
+
+## 2. What will this query return?
+
+```sql id="bq9m0e"
+SELECT COUNT(*) 
+FROM employees;
+```
+
+A. Sum of salaries
+B. Number of columns
+C. Number of rows in `employees`
+D. Average employee count
+
+✅ **Answer:** C
+
+---
+
+## 3. Which clause is mandatory when using aggregate functions on categorized data?
+
+A. WHERE
+B. GROUP BY
+C. ORDER BY
+D. LIMIT
+
+✅ **Answer:** B
+
+---
+
+## 4. Consider:
+
+```sql id="i1dczd"
+SELECT department, AVG(salary)
+FROM employees
+GROUP BY department;
+```
+
+Purpose of query?
+
+A. Deletes departments
+B. Displays average salary per department
+C. Sorts employees
+D. Finds highest employee salary only
+
+✅ **Answer:** B
+
+---
+
+## 5. Which clause filters grouped data after aggregation?
+
+A. WHERE
+B. FILTER
+C. HAVING
+D. ORDER BY
+
+✅ **Answer:** C
+
+---
+
+## 6. Which query is valid?
+
+A.
+
+```sql id="jlwm3s"
+SELECT dept, COUNT(*)
+FROM emp
+WHERE COUNT(*) > 5
+GROUP BY dept;
+```
+
+B.
+
+```sql id="cxw2u6"
+SELECT dept, COUNT(*)
+FROM emp
+GROUP BY dept
+HAVING COUNT(*) > 5;
+```
+
+C.
+
+```sql id="xynk8p"
+SELECT dept
+HAVING COUNT(*) > 5;
+```
+
+D.
+
+```sql id="pkl7gx"
+GROUP BY dept COUNT(*);
+```
+
+✅ **Answer:** B
+
+---
+
+## 7. What is a subquery?
+
+A. A deleted query
+B. Query inside another SQL query
+C. Duplicate database
+D. Cloud backup method
+
+✅ **Answer:** B
+
+---
+
+## 8. Consider:
+
+```sql id="6aw3nt"
+SELECT name
+FROM employee
+WHERE salary > (
+    SELECT AVG(salary)
+    FROM employee
+);
+```
+
+What does it display?
+
+A. Employees with lowest salary
+B. Employees earning above average salary
+C. Average salary only
+D. Duplicate salaries
+
+✅ **Answer:** B
+
+---
+
+## 9. Which aggregate function ignores NULL values?
+
+A. `AVG()`
+B. `SUM()`
+C. `COUNT(column)`
+D. All of the above
+
+✅ **Answer:** D
+
+---
+
+## 10. Which statement regarding `COUNT(*)` is TRUE?
+
+A. Counts only non-NULL rows
+B. Counts all rows including NULL-containing rows
+C. Counts columns only
+D. Counts distinct values automatically
+
+✅ **Answer:** B
+
+---
+
+## 11. A database administrator wants a readonly user.
+
+Which command is MOST appropriate?
+
+```sql id="owmzrr"
+GRANT SELECT ON company.* TO 'readonly_user';
+```
+
+A. Grants full database control
+B. Grants only read permission
+C. Deletes privileges
+D. Creates backup access
+
+✅ **Answer:** B
+
+---
+
+## 12. Which command removes privileges from a MySQL user?
+
+A. DELETE
+B. REMOVE
+C. REVOKE
+D. DENY
+
+✅ **Answer:** C
+
+---
+
+## 13. Principle of Least Privilege means:
+
+A. Give all users admin rights
+B. Restrict users to minimum required permissions
+C. Disable all users
+D. Use one shared account
+
+✅ **Answer:** B
+
+---
+
+## 14. Which situation BEST represents SQL Injection?
+
+A.
+
+```sql id="5j00xw"
+SELECT * FROM users;
+```
+
+B.
+
+```sql id="jkvh7g"
+' OR 1=1 --
+```
+
+C.
+
+```sql id="k2tzmr"
+CREATE DATABASE company;
+```
+
+D.
+
+```sql id="q1f7dz"
+ORDER BY salary;
+```
+
+✅ **Answer:** B
+
+---
+
+## 15. Which is a common consequence of SQL Injection?
+
+A. Improved indexing
+B. Unauthorized data access
+C. Faster backups
+D. Cloud scaling
+
+✅ **Answer:** B
+
+---
+
+## 16. Which backup type generally stores SQL statements for recreation?
+
+A. Logical backup
+B. Physical backup
+C. Binary backup
+D. Horizontal backup
+
+✅ **Answer:** A
+
+---
+
+## 17. Which backup type copies actual database files directly?
+
+A. Logical backup
+B. Physical backup
+C. Virtual backup
+D. Temporary backup
+
+✅ **Answer:** B
+
+---
+
+## 18. A production database crashes at midnight.
+
+Which action should be performed FIRST?
+
+A. Delete logs
+B. Restore from valid backup
+C. Remove indexes
+D. Disable database users
+
+✅ **Answer:** B
+
+---
+
+## 19. Which concept improves query performance by speeding up data retrieval?
+
+A. Backup
+B. SQL Injection
+C. Indexing
+D. Cloud replication
+
+✅ **Answer:** C
+
+---
+
+## 20. Excessive indexing may negatively affect:
+
+A. SELECT performance only
+B. INSERT and UPDATE operations
+C. User creation
+D. Database naming
+
+✅ **Answer:** B
+
+---
+
+## 21. Which query likely causes slow execution on a very large table without indexes?
+
+```sql id="gcn1ys"
+SELECT * FROM transactions
+WHERE customer_name = 'Rahul';
+```
+
+A. Fast because WHERE always uses index
+B. May perform full table scan
+C. Automatically creates index
+D. Cannot execute in MySQL
+
+✅ **Answer:** B
+
+---
+
+## 22. Vertical scaling means:
+
+A. Adding more database servers
+B. Increasing CPU/RAM of existing server
+C. Deleting unused databases
+D. Creating cloud users
+
+✅ **Answer:** B
+
+---
+
+## 23. Horizontal scaling means:
+
+A. Increasing storage in same machine
+B. Adding additional servers/nodes
+C. Compressing database tables
+D. Removing backups
+
+✅ **Answer:** B
+
+---
+
+## 24. Which feature is commonly provided automatically by cloud databases like Amazon RDS?
+
+A. Manual electricity management
+B. Automatic backups
+C. Hardware assembly
+D. SQL syntax correction
+
+✅ **Answer:** B
+
+---
+
+## 25. Consider the query:
+
+```sql id="5y3mle"
+SELECT department, SUM(salary)
+FROM employees
+GROUP BY department
+HAVING SUM(salary) > 100000;
+```
+
+What does this query return?
+
+A. Employees earning more than 100000 individually
+B. Departments whose total salary exceeds 100000
+C. All departments sorted by salary
+D. Highest paid employee from each department
+
+✅ **Answer:** B
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+## 1. Which of the following is a valid Python function declaration?
+
+```python
+def show():
+    print("Hello")
+```
+
+A. `function show()`
+B. `define show()`
+C. `def show()`
+D. `fun show()`
+
+✅ **Answer:** C
+
+---
+
+## 2. What will be the output?
+
+```python
+x = 5
+y = "5"
+
+print(type(x), type(y))
+```
+
+A. `<class 'int'> <class 'int'>`
+B. `<class 'str'> <class 'str'>`
+C. `<class 'int'> <class 'str'>`
+D. Error
+
+✅ **Answer:** C
+
+---
+
+## 3. Which statement about Python indentation is TRUE?
+
+A. Indentation is optional
+B. Indentation only improves readability
+C. Indentation defines code blocks
+D. Python ignores indentation in loops
+
+✅ **Answer:** C
+
+---
+
+## 4. What will happen?
+
+```python
+if True:
+print("Hello")
+```
+
+A. Prints Hello
+B. Runtime Error
+C. IndentationError
+D. Syntax ignored
+
+✅ **Answer:** C
+
+---
+
+## 5. Which data type is mutable?
+
+A. Tuple
+B. String
+C. List
+D. Integer
+
+✅ **Answer:** C
+
+---
+
+## 6. What will be the output?
+
+```python
+a = [1, 2]
+a.append(3)
+print(a)
+```
+
+A. `[1, 2]`
+B. `[1, 2, 3]`
+C. `(1, 2, 3)`
+D. Error
+
+✅ **Answer:** B
+
+---
+
+## 7. Which symbol is used to define a dictionary?
+
+A. `( )`
+B. `[ ]`
+C. `{ }`
+D. `< >`
+
+✅ **Answer:** C
+
+---
+
+## 8. Predict the output.
+
+```python
+data = {"a":1, "b":2}
+print(data["b"])
+```
+
+A. a
+B. 1
+C. 2
+D. Error
+
+✅ **Answer:** C
+
+---
+
+## 9. Which operation removes an item from a dictionary?
+
+```python
+student = {"id":101, "name":"Raj"}
+```
+
+A. `remove(student["id"])`
+B. `del student["id"]`
+C. `delete student["id"]`
+D. `erase student["id"]`
+
+✅ **Answer:** B
+
+---
+
+## 10. What is the output?
+
+```python
+nums = [10, 20, 30]
+print(nums[1])
+```
+
+A. 10
+B. 20
+C. 30
+D. Error
+
+✅ **Answer:** B
+
+---
+
+## 11. Which loop is best suited when the number of iterations is known?
+
+A. while
+B. infinite
+C. for
+D. recursive
+
+✅ **Answer:** C
+
+---
+
+## 12. What will be printed?
+
+```python
+for i in range(3):
+    print(i)
+```
+
+A.
+
+```python
+1 2 3
+```
+
+B.
+
+```python
+0 1 2
+```
+
+C.
+
+```python
+0 1 2 3
+```
+
+D. Infinite loop
+
+✅ **Answer:** B
+
+---
+
+## 13. Scenario-Based
+
+A developer stores employee records as:
+
+```python
+emp = {
+    "id": 1,
+    "name": "Amit"
+}
+```
+
+Why is dictionary preferred here?
+
+A. Dictionaries maintain arithmetic order
+B. Dictionaries store key-value pairs
+C. Dictionaries only store integers
+D. Dictionaries avoid loops
+
+✅ **Answer:** B
+
+---
+
+## 14. Which statement about lists is FALSE?
+
+A. Lists are ordered
+B. Lists can contain mixed datatypes
+C. Lists are immutable
+D. Lists support indexing
+
+✅ **Answer:** C
+
+---
+
+## 15. What will be the output?
+
+```python
+x = "Python"
+print(x[0])
+```
+
+A. P
+B. y
+C. Python
+D. Error
+
+✅ **Answer:** A
+
+---
+
+## 16. Which of the following creates an empty list?
+
+A. `{}`
+B. `()`
+C. `[]`
+D. `<>`
+
+✅ **Answer:** C
+
+---
+
+## 17. Confusing Option-Oriented MCQ
+
+Which statement is MOST accurate?
+
+A. Every object in Python is a function
+B. Every variable is permanently typed
+C. Everything in Python is treated as an object
+D. Objects cannot contain data
+
+✅ **Answer:** C
+
+---
+
+## 18. Predict the output.
+
+```python
+values = [1, 2, 3]
+values.remove(2)
+print(values)
+```
+
+A. `[1, 2, 3]`
+B. `[1, 3]`
+C. `[2, 3]`
+D. Error
+
+✅ **Answer:** B
+
+---
+
+## 19. Which statement correctly takes user input?
+
+A.
+
+```python
+x = input()
+```
+
+B.
+
+```python
+scan(x)
+```
+
+C.
+
+```python
+read(x)
+```
+
+D.
+
+```python
+cin >> x
+```
+
+✅ **Answer:** A
+
+---
+
+## 20. What will be the output?
+
+```python
+def add(a, b):
+    return a + b
+
+print(add(2, 3))
+```
+
+A. 23
+B. 5
+C. add(2,3)
+D. Error
+
+✅ **Answer:** B
+
+
+---
+
+## 1. Which of the following correctly defines a tuple?
+
+```python id="8xpw8k"
+t = (1, 2, 3)
+```
+
+A. List
+B. Dictionary
+C. Tuple
+D. Set
+
+✅ **Answer:** C
+
+---
+
+## 2. What will be the output?
+
+```python id="5y1n48"
+t = (10, 20, 30)
+print(t[1])
+```
+
+A. 10
+B. 20
+C. 30
+D. Error
+
+✅ **Answer:** B
+
+---
+
+## 3. Which statement about tuples is TRUE?
+
+A. Tuples are mutable
+B. Tuples support item reassignment
+C. Tuples are immutable
+D. Tuples use `{ }`
+
+✅ **Answer:** C
+
+---
+
+## 4. Predict the output.
+
+```python id="w3ehc7"
+x, y = 5, 10
+print(x, y)
+```
+
+A. Error
+B. 5
+C. 10
+D. 5 10
+
+✅ **Answer:** D
+
+---
+
+## 5. Which built-in function returns the datatype of an object?
+
+A. `dir()`
+B. `type()`
+C. `str()`
+D. `len()`
+
+✅ **Answer:** B
+
+---
+
+## 6. What will be the output?
+
+```python id="e3lnak"
+name = "Python"
+print(type(name))
+```
+
+A. `<class 'int'>`
+B. `<class 'list'>`
+C. `<class 'str'>`
+D. `<class 'tuple'>`
+
+✅ **Answer:** C
+
+---
+
+## 7. Which method converts an object into string format?
+
+A. `dir()`
+B. `str()`
+C. `tuple()`
+D. `type()`
+
+✅ **Answer:** B
+
+---
+
+## 8. Scenario-Based
+
+A programmer wants to store unique roll numbers without duplicates. Which datatype is MOST suitable?
+
+A. List
+B. Tuple
+C. Set
+D. String
+
+✅ **Answer:** C
+
+---
+
+## 9. What will be the output?
+
+```python id="4prc51"
+s = {1, 2, 2, 3}
+print(s)
+```
+
+A. `{1, 2, 2, 3}`
+B. `{1, 2, 3}`
+C. `[1, 2, 3]`
+D. Error
+
+✅ **Answer:** B
+
+---
+
+## 10. Which statement about sets is FALSE?
+
+A. Sets store unique values
+B. Sets are unordered
+C. Sets allow duplicate entries
+D. Sets use `{ }`
+
+✅ **Answer:** C
+
+---
+
+## 11. What will be the output?
+
+```python id="8u90zn"
+data = "a,b,c"
+print(data.split(","))
+```
+
+A. `('a','b','c')`
+B. `['a', 'b', 'c']`
+C. `a b c`
+D. Error
+
+✅ **Answer:** B
+
+---
+
+## 12. Which operation joins list elements into a string?
+
+```python id="yz0m8y"
+words = ["I", "Love", "Python"]
+```
+
+A.
+
+```python id="n3a1ga"
+split(words)
+```
+
+B.
+
+```python id="2u9wy0"
+",".join(words)
+```
+
+C.
+
+```python id="2p42po"
+merge(words)
+```
+
+D.
+
+```python id="mkaj1g"
+combine(words)
+```
+
+✅ **Answer:** B
+
+---
+
+## 13. Predict the output.
+
+```python id="gvjlwm"
+a = [1, 2]
+b = a
+b.append(3)
+
+print(a)
+```
+
+A. `[1, 2]`
+B. `[3]`
+C. `[1, 2, 3]`
+D. Error
+
+✅ **Answer:** C
+
+---
+
+## 14. Concept-Checking MCQ
+
+The example below mainly demonstrates:
+
+```python id="ow8ozx"
+a = [10, 20]
+b = a
+```
+
+A. Tuple unpacking
+B. Object referencing
+C. Set creation
+D. Type casting
+
+✅ **Answer:** B
+
+---
+
+## 15. What will happen?
+
+```python id="0t5r5n"
+t = (1, 2, 3)
+t[1] = 5
+```
+
+A. Tuple updates successfully
+B. Runtime warning
+C. TypeError
+D. IndexError
+
+✅ **Answer:** C
+
+---
+
+## 16. Which function displays all available attributes/methods of an object?
+
+A. `show()`
+B. `dir()`
+C. `helpdir()`
+D. `type()`
+
+✅ **Answer:** B
+
+---
+
+## 17. What will be the output?
+
+```python id="w7dnzk"
+nums = [5, 1, 3]
+nums.sort()
+
+print(nums)
+```
+
+A. `[5, 1, 3]`
+B. `[1, 3, 5]`
+C. `[5, 3, 1]`
+D. Error
+
+✅ **Answer:** B
+
+---
+
+## 18. Scenario-Based
+
+A developer wants to communicate between two systems over a network using Python. Which topic is MOST directly related?
+
+A. Tuple packing
+B. Socket programming
+C. String splitting
+D. Named arguments
+
+✅ **Answer:** B
+
+---
+
+## 19. Confusing Option-Oriented MCQ
+
+Which statement is MOST accurate regarding Python variables?
+
+A. Variables permanently store memory locations only
+B. Variables directly contain objects
+C. Variables reference objects in memory
+D. Variables cannot change datatype
+
+✅ **Answer:** C
+
+---
+
+## 20. Predict the output.
+
+```python id="9o7xk3"
+def show(name="Python"):
+    print(name)
+
+show()
+```
+
+A. Error
+B. None
+C. Python
+D. show
+
+✅ **Answer:** C
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 1. Which Python module is mainly used for Regular Expressions?
+
+A. `regexpy`
+B. `re`
+C. `reg`
+D. `pyregex`
+
+✅ **Answer:** B
+
+---
+
+## 2. What will be the output?
+
+```python id="2k4r7n"
+import re
+
+result = re.search("cat", "my cat sleeps")
+print(result is not None)
+```
+
+A. False
+B. None
+C. True
+D. Error
+
+✅ **Answer:** C
+
+---
+
+## 3. Which regex symbol matches any single character except newline?
+
+A. `*`
+B. `.`
+C. `^`
+D. `$`
+
+✅ **Answer:** B
+
+---
+
+## 4. Predict the output.
+
+```python id="x1rm9w"
+import re
+
+txt = "apple"
+x = re.search("^a", txt)
+
+print(bool(x))
+```
+
+A. False
+B. True
+C. None
+D. Error
+
+✅ **Answer:** B
+
+---
+
+## 5. Which symbol checks whether a string STARTS with a pattern?
+
+A. `$`
+B. `.`
+C. `^`
+D. `*`
+
+✅ **Answer:** C
+
+---
+
+## 6. Which symbol checks whether a string ENDS with a pattern?
+
+A. `^`
+B. `$`
+C. `+`
+D. `?`
+
+✅ **Answer:** B
+
+---
+
+## 7. Scenario-Based
+
+A developer wants to validate whether an email contains a specific domain pattern. Which concept is MOST suitable?
+
+A. Tuple unpacking
+B. Regular Expressions
+C. File handling
+D. Set operations
+
+✅ **Answer:** B
+
+---
+
+## 8. What will be the output?
+
+```python id="3yz5e2"
+import re
+
+text = "abc123"
+result = re.search("[0-9]", text)
+
+print(result.group())
+```
+
+A. abc
+B. 0
+C. 1
+D. Error
+
+✅ **Answer:** C
+
+---
+
+## 9. Which regex pattern matches a whitespace character?
+
+A. `\S`
+B. `\W`
+C. `\s`
+D. `\d`
+
+✅ **Answer:** C
+
+---
+
+## 10. Which regex pattern matches a non-whitespace character?
+
+A. `\S`
+B. `\s`
+C. `\n`
+D. `\t`
+
+✅ **Answer:** A
+
+---
+
+## 11. What will be the output?
+
+```python id="lwqg8i"
+def add(a, b):
+    return a + b
+
+print(add(2, 5))
+```
+
+A. 25
+B. 7
+C. add
+D. Error
+
+✅ **Answer:** B
+
+---
+
+## 12. Which keyword is used to define a function in Python?
+
+A. `func`
+B. `function`
+C. `define`
+D. `def`
+
+✅ **Answer:** D
+
+---
+
+## 13. Concept-Checking MCQ
+
+Which statement BEST describes scripting in Python?
+
+A. Python scripts cannot automate tasks
+B. Scripts are only used for web development
+C. Scripts automate repetitive operations
+D. Scripting requires compilation before execution
+
+✅ **Answer:** C
+
+---
+
+## 14. Predict the output.
+
+```python id="5ngbkp"
+def show():
+    print("Hello")
+
+x = show()
+print(x)
+```
+
+A. Hello
+B. None
+C. Hello None
+D. Error
+
+✅ **Answer:** C
+
+---
+
+## 15. Which of the following is an OOP concept?
+
+A. Compilation
+B. Encapsulation
+C. Tokenization
+D. Parsing
+
+✅ **Answer:** B
+
+---
+
+## 16. What is created from a class?
+
+A. Compiler
+B. Operator
+C. Object
+D. Module
+
+✅ **Answer:** C
+
+---
+
+## 17. Scenario-Based
+
+A programmer creates a blueprint called `Car`, then creates `BMW` and `Audi` using it. `BMW` and `Audi` are:
+
+A. Methods
+B. Packages
+C. Objects
+D. Operators
+
+✅ **Answer:** C
+
+---
+
+## 18. What will be the output?
+
+```python id="vyd5mu"
+class Test:
+    pass
+
+obj = Test()
+
+print(type(obj))
+```
+
+A. `<class 'object'>`
+B. `<class 'Test'>`
+C. `<class 'type'>`
+D. Error
+
+✅ **Answer:** B
+
+---
+
+## 19. Confusing Option-Oriented MCQ
+
+Which statement is MOST accurate regarding objects in Python?
+
+A. Objects only store functions
+B. Objects cannot contain data members
+C. Objects combine data and behavior
+D. Objects are only created for lists
+
+✅ **Answer:** C
+
+---
+
+## 20. Which Python module is commonly used for directory/path operations?
+
+A. `sys`
+B. `re`
+C. `os`
+D. `math`
+
+✅ **Answer:** C
+
+
+
+---
+
+## 1. Which function is used to open a file in Python?
+
+A. `read()`
+B. `file()`
+C. `open()`
+D. `load()`
+
+✅ **Answer:** C
+
+---
+
+## 2. What will be the output?
+
+```python id="k0m1y8"
+f = open("demo.txt", "w")
+print(f.writable())
+```
+
+A. False
+B. True
+C. None
+D. Error
+
+✅ **Answer:** B
+
+---
+
+## 3. Which file mode truncates an existing file?
+
+A. `r`
+B. `a`
+C. `w`
+D. `x`
+
+✅ **Answer:** C
+
+---
+
+## 4. Predict the output.
+
+```python id="1gbk31"
+f = open("test.txt", "w")
+f.write("Python")
+f.close()
+
+f = open("test.txt", "r")
+print(f.read())
+```
+
+A. Error
+B. Python
+C. None
+D. Blank output
+
+✅ **Answer:** B
+
+---
+
+## 5. Which function reads ONE line from a file?
+
+A. `readall()`
+B. `readline()`
+C. `readlines()`
+D. `fetchline()`
+
+✅ **Answer:** B
+
+---
+
+## 6. Which method returns a LIST of lines from a file?
+
+A. `read()`
+B. `getline()`
+C. `readline()`
+D. `readlines()`
+
+✅ **Answer:** D
+
+---
+
+## 7. Scenario-Based
+
+A programmer wants to add logs at the END of a file without deleting existing content. Which mode should be used?
+
+A. `w`
+B. `r`
+C. `a`
+D. `x`
+
+✅ **Answer:** C
+
+---
+
+## 8. What will happen?
+
+```python id="xrw6kh"
+f = open("data.txt", "r")
+f.write("Hello")
+```
+
+A. Successfully writes
+B. Runtime warning
+C. Error because file is read-only
+D. Automatically changes mode
+
+✅ **Answer:** C
+
+---
+
+## 9. Which Python module is commonly used for directory operations?
+
+A. `math`
+B. `os`
+C. `re`
+D. `sys`
+
+✅ **Answer:** B
+
+---
+
+## 10. What will be the output?
+
+```python id="hn7q5m"
+import os
+
+print(os.path.exists("demo.txt"))
+```
+
+A. Returns file content
+B. Returns True/False
+C. Deletes file
+D. Error always
+
+✅ **Answer:** B
+
+---
+
+## 11. Which function gives the current working directory?
+
+A. `os.current()`
+B. `os.getcwd()`
+C. `os.path()`
+D. `os.dir()`
+
+✅ **Answer:** B
+
+---
+
+## 12. Predict the output.
+
+```python id="q9a5m7"
+import hashlib
+
+x = hashlib.md5(b"abc")
+print(type(x))
+```
+
+A. `<class 'bytes'>`
+B. `<class 'str'>`
+C. Hash object
+D. Integer
+
+✅ **Answer:** C
+
+---
+
+## 13. Which library is mainly associated with hashing and integrity checking?
+
+A. `datetime`
+B. `hashlib`
+C. `socket`
+D. `shodan`
+
+✅ **Answer:** B
+
+---
+
+## 14. Scenario-Based
+
+A security analyst wants to search internet-connected devices using Python automation. Which library/topic is MOST related?
+
+A. `hashlib`
+B. `datetime`
+C. `shodan`
+D. `tkinter`
+
+✅ **Answer:** C
+
+---
+
+## 15. Which module is used for socket programming in Python?
+
+A. `server`
+B. `network`
+C. `socket`
+D. `client`
+
+✅ **Answer:** C
+
+---
+
+## 16. What is the primary purpose of sockets?
+
+A. Image editing
+B. Two-way communication between systems
+C. File compression
+D. Data encryption only
+
+✅ **Answer:** B
+
+---
+
+## 17. What will be the output?
+
+```python id="qmfh0r"
+import datetime
+
+today = datetime.date.today()
+
+print(type(today))
+```
+
+A. `<class 'str'>`
+B. `<class 'datetime.date'>`
+C. `<class 'int'>`
+D. Error
+
+✅ **Answer:** B
+
+---
+
+## 18. Concept-Checking MCQ
+
+Which statement BEST describes debugging?
+
+A. Writing syntax only
+B. Removing logical/runtime errors
+C. Creating databases
+D. Encrypting programs
+
+✅ **Answer:** B
+
+---
+
+## 19. Confusing Option-Oriented MCQ
+
+Which statement is MOST accurate regarding client-server architecture?
+
+A. Clients always store databases
+B. Servers only work offline
+C. Clients request services from servers
+D. Servers cannot communicate with clients
+
+✅ **Answer:** C
+
+---
+
+## 20. Predict the output.
+
+```python id="yabg8i"
+import os
+
+print(os.path.isfile("abc.txt"))
+```
+
+A. Returns True/False
+B. Prints file contents
+C. Deletes file
+D. Creates file automatically
+
+✅ **Answer:** A

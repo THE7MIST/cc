@@ -1,0 +1,786 @@
+PYTHON MASTER REVISION MAP
+(Reference style similar to Linux Administration structured knowledge map)
+
+PYTHON
+├── Python Fundamentals
+│   ├── Introduction
+│   │   ├── Python (interpreted high-level language)
+│   │   ├── CPython (default interpreter)
+│   │   ├── Python Philosophy (readability)
+│   │   ├── Dynamic Typing
+│   │   ├── Cross-platform Support
+│   │   └── Open Source Ecosystem
+│   │
+│   ├── Installation & Environment
+│   │   ├── Windows Installation
+│   │   ├── Linux Installation
+│   │   ├── macOS Installation
+│   │   ├── python --version
+│   │   ├── pip --version
+│   │   ├── pip install package
+│   │   ├── Virtual Environments
+│   │   │   ├── python -m venv env
+│   │   │   ├── source env/bin/activate
+│   │   │   └── env\Scripts\activate
+│   │   │
+│   │   ├── Environment Variables
+│   │   │   ├── PATH
+│   │   │   ├── PYTHONPATH
+│   │   │   └── site-packages
+│   │   │
+│   │   ├── Package Managers
+│   │   │   ├── pip
+│   │   │   ├── poetry
+│   │   │   └── conda
+│   │   │
+│   │   └── IDEs/Editors
+│   │       ├── VS Code
+│   │       ├── PyCharm
+│   │       ├── Jupyter Notebook
+│   │       ├── Spyder
+│   │       └── IDLE
+│   │
+│   ├── Running Python
+│   │   ├── Interactive Shell
+│   │   ├── Script Execution
+│   │   │   ├── python file.py
+│   │   │   ├── python3 file.py
+│   │   │   └── chmod +x script.py
+│   │   │
+│   │   ├── Shebang
+│   │   │   └── #!/usr/bin/python3
+│   │   │
+│   │   └── REPL
+│   │
+│   ├── First Programs
+│   │   ├── print()
+│   │   ├── input()
+│   │   ├── comments
+│   │   ├── multiline strings
+│   │   └── escape sequences
+│   │
+│   ├── Syntax Rules
+│   │   ├── Indentation
+│   │   ├── Code Blocks
+│   │   ├── Statements
+│   │   ├── Keywords
+│   │   └── Naming Conventions
+│   │
+│   └── Exam Hotspots
+│       ├── Python vs Compiled Languages
+│       ├── IndentationError
+│       ├── Script vs Interactive Mode
+│       ├── PATH Variable
+│       └── pip Usage
+│
+├── Native Data Types
+│   ├── Numeric Types
+│   │   ├── int
+│   │   ├── float
+│   │   ├── complex
+│   │   └── bool
+│   │
+│   ├── Sequence Types
+│   │   ├── str
+│   │   ├── list
+│   │   ├── tuple
+│   │   └── range
+│   │
+│   ├── Mapping Type
+│   │   └── dict
+│   │
+│   ├── Set Types
+│   │   ├── set
+│   │   └── frozenset
+│   │
+│   ├── Binary Types
+│   │   ├── bytes
+│   │   ├── bytearray
+│   │   └── memoryview
+│   │
+│   ├── Type Conversion
+│   │   ├── int()
+│   │   ├── float()
+│   │   ├── str()
+│   │   ├── list()
+│   │   ├── tuple()
+│   │   └── set()
+│   │
+│   ├── Built-in Inspection
+│   │   ├── type()
+│   │   ├── dir()
+│   │   ├── help()
+│   │   ├── id()
+│   │   └── isinstance()
+│   │
+│   └── Exam Hotspots
+│       ├── Mutable vs Immutable
+│       ├── Type Casting
+│       ├── Dynamic Typing
+│       ├── Object References
+│       └── Memory Representation
+│
+├── Variables & Assignment
+│   ├── Variable Declaration
+│   ├── Dynamic Assignment
+│   ├── Multiple Assignment
+│   │   ├── x, y = 1, 2
+│   │   ├── tuple unpacking
+│   │   └── swapping variables
+│   │
+│   ├── Object References
+│   ├── Memory Addressing
+│   ├── Reference Counting
+│   ├── Global Variables
+│   ├── Local Variables
+│   ├── global keyword
+│   ├── nonlocal keyword
+│   └── Exam Hotspots
+│       ├── Variable Scope
+│       ├── Aliasing
+│       ├── Mutable Object References
+│       └── Multiple Assignment
+│
+├── Operators & Expressions
+│   ├── Arithmetic Operators
+│   ├── Comparison Operators
+│   ├── Assignment Operators
+│   ├── Logical Operators
+│   ├── Membership Operators
+│   ├── Identity Operators
+│   ├── Bitwise Operators
+│   ├── Operator Precedence
+│   └── Exam Hotspots
+│       ├── == vs is
+│       ├── and/or precedence
+│       ├── Bitwise Logic
+│       └── Short-circuit Evaluation
+│
+├── Control Flow
+│   ├── Conditional Statements
+│   │   ├── if
+│   │   ├── elif
+│   │   ├── else
+│   │   └── nested if
+│   │
+│   ├── Loops
+│   │   ├── for loop
+│   │   ├── while loop
+│   │   ├── nested loops
+│   │   └── infinite loops
+│   │
+│   ├── Loop Control
+│   │   ├── break
+│   │   ├── continue
+│   │   ├── pass
+│   │   └── else in loops
+│   │
+│   ├── Iteration Tools
+│   │   ├── range()
+│   │   ├── enumerate()
+│   │   ├── zip()
+│   │   └── iterators
+│   │
+│   └── Exam Hotspots
+│       ├── for vs while
+│       ├── Loop Complexity
+│       ├── Nested Loop Logic
+│       └── break vs continue
+│
+├── Strings
+│   ├── String Basics
+│   │   ├── indexing
+│   │   ├── slicing
+│   │   ├── immutability
+│   │   └── unicode support
+│   │
+│   ├── String Methods
+│   │   ├── upper()
+│   │   ├── lower()
+│   │   ├── strip()
+│   │   ├── replace()
+│   │   ├── split()
+│   │   ├── join()
+│   │   ├── find()
+│   │   ├── count()
+│   │   └── startswith()
+│   │
+│   ├── Formatting
+│   │   ├── f-strings
+│   │   ├── format()
+│   │   ├── % formatting
+│   │   └── alignment
+│   │
+│   ├── String Algorithms
+│   │   ├── longest substring
+│   │   ├── palindrome detection
+│   │   ├── valid parentheses
+│   │   └── pattern searching
+│   │
+│   ├── Encoding
+│   │   ├── UTF-8
+│   │   ├── ASCII
+│   │   ├── encode()
+│   │   └── decode()
+│   │
+│   └── Exam Hotspots
+│       ├── String Immutability
+│       ├── split vs join
+│       ├── Slicing
+│       ├── Unicode Handling
+│       └── Time Complexity
+│
+├── Lists
+│   ├── List Basics
+│   │   ├── ordered collection
+│   │   ├── mutable structure
+│   │   ├── indexing
+│   │   └── slicing
+│   │
+│   ├── List Operations
+│   │   ├── append()
+│   │   ├── insert()
+│   │   ├── extend()
+│   │   ├── remove()
+│   │   ├── pop()
+│   │   ├── clear()
+│   │   ├── reverse()
+│   │   ├── sort()
+│   │   └── copy()
+│   │
+│   ├── Searching & Traversal
+│   │   ├── in operator
+│   │   ├── loops
+│   │   ├── enumerate()
+│   │   └── list comprehensions
+│   │
+│   ├── Advanced Concepts
+│   │   ├── shallow copy
+│   │   ├── deep copy
+│   │   ├── nested lists
+│   │   └── list unpacking
+│   │
+│   ├── Algorithms
+│   │   ├── merge intervals
+│   │   ├── product except self
+│   │   ├── longest consecutive sequence
+│   │   └── sliding window
+│   │
+│   └── Exam Hotspots
+│       ├── append vs extend
+│       ├── sort vs sorted
+│       ├── Mutable References
+│       ├── Nested Lists
+│       └── List Complexity
+│
+├── Dictionaries
+│   ├── Dictionary Basics
+│   │   ├── key-value pairs
+│   │   ├── mutable mapping
+│   │   ├── hashing
+│   │   └── ordered dictionaries
+│   │
+│   ├── Dictionary Operations
+│   │   ├── get()
+│   │   ├── keys()
+│   │   ├── values()
+│   │   ├── items()
+│   │   ├── pop()
+│   │   ├── update()
+│   │   ├── clear()
+│   │   └── del
+│   │
+│   ├── Traversal
+│   │   ├── for key in dict
+│   │   ├── items iteration
+│   │   └── nested dictionaries
+│   │
+│   ├── Dictionary Comprehension
+│   ├── Hash Tables
+│   ├── Collision Handling
+│   └── Exam Hotspots
+│       ├── Mutable Keys
+│       ├── Hashing
+│       ├── dict vs list
+│       └── Time Complexity
+│
+├── Tuples & Sets
+│   ├── Tuples
+│   │   ├── immutable sequences
+│   │   ├── tuple packing
+│   │   ├── tuple unpacking
+│   │   ├── nested tuples
+│   │   └── tuple swapping
+│   │
+│   ├── Tuple Algorithms
+│   │   ├── swap_tuple_elements()
+│   │   ├── tuple sorting
+│   │   └── tuple pairing
+│   │
+│   ├── Sets
+│   │   ├── unique values
+│   │   ├── unordered structure
+│   │   ├── add()
+│   │   ├── remove()
+│   │   ├── union()
+│   │   ├── intersection()
+│   │   ├── difference()
+│   │   └── symmetric_difference()
+│   │
+│   ├── Set Theory Concepts
+│   │   ├── membership testing
+│   │   ├── duplicates removal
+│   │   └── hashing
+│   │
+│   └── Exam Hotspots
+│       ├── Tuple Immutability
+│       ├── Set Uniqueness
+│       ├── Tuple Packing
+│       └── Set Operations
+│
+├── Functions & Functional Programming
+│   ├── Function Basics
+│   │   ├── def keyword
+│   │   ├── return statement
+│   │   ├── parameters
+│   │   └── recursion
+│   │
+│   ├── Function Arguments
+│   │   ├── positional arguments
+│   │   ├── keyword arguments
+│   │   ├── default arguments
+│   │   ├── *args
+│   │   └── **kwargs
+│   │
+│   ├── Lambda Functions
+│   ├── Higher Order Functions
+│   │   ├── map()
+│   │   ├── filter()
+│   │   ├── reduce()
+│   │   └── zip()
+│   │
+│   ├── Decorators
+│   ├── Closures
+│   ├── Generators
+│   │   ├── yield
+│   │   └── generator expressions
+│   │
+│   ├── Functional Concepts
+│   │   ├── immutability
+│   │   ├── pure functions
+│   │   └── lazy evaluation
+│   │
+│   └── Exam Hotspots
+│       ├── Recursion
+│       ├── Default Arguments
+│       ├── Lambda Functions
+│       ├── map/filter
+│       └── Generators
+│
+├── Regular Expressions (re)
+│   ├── re Module
+│   │   ├── import re
+│   │   ├── re.search()
+│   │   ├── re.match()
+│   │   ├── re.findall()
+│   │   ├── re.sub()
+│   │   ├── re.split()
+│   │   └── re.compile()
+│   │
+│   ├── Pattern Symbols
+│   │   ├── . (any character)
+│   │   ├── ^ (start)
+│   │   ├── $ (end)
+│   │   ├── * (zero or more)
+│   │   ├── + (one or more)
+│   │   ├── ? (optional)
+│   │   ├── [] (character set)
+│   │   ├── \d (digit)
+│   │   ├── \w (word)
+│   │   ├── \s (whitespace)
+│   │   └── \S (non-whitespace)
+│   │
+│   ├── Regex Applications
+│   │   ├── email validation
+│   │   ├── IP cleaning
+│   │   ├── CamelCase → snake_case
+│   │   ├── log parsing
+│   │   └── password validation
+│   │
+│   ├── Advanced Regex
+│   │   ├── groups
+│   │   ├── named groups
+│   │   ├── lookahead
+│   │   ├── lookbehind
+│   │   └── backreferences
+│   │
+│   └── Exam Hotspots
+│       ├── Regex Symbols
+│       ├── re.search vs re.match
+│       ├── Pattern Matching
+│       ├── Log Parsing
+│       └── String Validation
+│
+├── Object Oriented Programming (OOP)
+│   ├── OOP Concepts
+│   │   ├── Class
+│   │   ├── Object
+│   │   ├── Encapsulation
+│   │   ├── Inheritance
+│   │   ├── Polymorphism
+│   │   └── Abstraction
+│   │
+│   ├── Class Components
+│   │   ├── __init__()
+│   │   ├── instance variables
+│   │   ├── class variables
+│   │   ├── methods
+│   │   └── self keyword
+│   │
+│   ├── Inheritance Types
+│   │   ├── single inheritance
+│   │   ├── multiple inheritance
+│   │   ├── multilevel inheritance
+│   │   └── hierarchical inheritance
+│   │
+│   ├── Method Types
+│   │   ├── instance methods
+│   │   ├── class methods
+│   │   ├── static methods
+│   │   └── magic methods
+│   │
+│   ├── Dunder Methods
+│   │   ├── __str__()
+│   │   ├── __repr__()
+│   │   ├── __len__()
+│   │   └── __iter__()
+│   │
+│   ├── Memory Management
+│   │   ├── garbage collection
+│   │   ├── reference counting
+│   │   └── gc module
+│   │
+│   └── Exam Hotspots
+│       ├── Class vs Object
+│       ├── Encapsulation
+│       ├── Inheritance
+│       ├── self keyword
+│       └── Constructor Usage
+│
+├── File Handling & OS Operations
+│   ├── File Operations
+│   │   ├── open()
+│   │   ├── read()
+│   │   ├── readline()
+│   │   ├── readlines()
+│   │   ├── write()
+│   │   ├── writelines()
+│   │   ├── seek()
+│   │   ├── tell()
+│   │   └── close()
+│   │
+│   ├── File Modes
+│   │   ├── r
+│   │   ├── w
+│   │   ├── a
+│   │   ├── x
+│   │   ├── rb
+│   │   └── wb
+│   │
+│   ├── Context Managers
+│   │   └── with open() as f
+│   │
+│   ├── File System Operations
+│   │   ├── os.getcwd()
+│   │   ├── os.listdir()
+│   │   ├── os.path.exists()
+│   │   ├── os.path.isfile()
+│   │   ├── os.mkdir()
+│   │   ├── os.rmdir()
+│   │   ├── shutil module
+│   │   └── pathlib module
+│   │
+│   ├── Paths
+│   │   ├── absolute path
+│   │   ├── relative path
+│   │   ├── /home/user/
+│   │   ├── C:\Users\
+│   │   └── symbolic links
+│   │
+│   ├── Permissions
+│   │   ├── chmod
+│   │   ├── stat
+│   │   ├── read/write/execute
+│   │   └── octal permissions
+│   │
+│   ├── File Analysis
+│   │   ├── word counting
+│   │   ├── line counting
+│   │   ├── log reading
+│   │   └── webpage content parsing
+│   │
+│   └── Exam Hotspots
+│       ├── File Modes
+│       ├── read vs readline
+│       ├── Path Operations
+│       ├── Context Managers
+│       └── Permission Checking
+│
+├── Networking & Socket Programming
+│   ├── Networking Fundamentals
+│   │   ├── IP Address
+│   │   ├── MAC Address
+│   │   ├── DNS
+│   │   ├── TCP/IP
+│   │   ├── UDP
+│   │   └── Client-Server Architecture
+│   │
+│   ├── Common Ports
+│   │   ├── 80 (HTTP)
+│   │   ├── 443 (HTTPS)
+│   │   ├── 22 (SSH)
+│   │   ├── 21 (FTP)
+│   │   ├── 25 (SMTP)
+│   │   ├── 3306 (MySQL)
+│   │   └── 53 (DNS)
+│   │
+│   ├── socket Module
+│   │   ├── socket()
+│   │   ├── bind()
+│   │   ├── listen()
+│   │   ├── accept()
+│   │   ├── connect()
+│   │   ├── send()
+│   │   ├── recv()
+│   │   └── close()
+│   │
+│   ├── Client Programs
+│   ├── Server Programs
+│   ├── Multi-client Handling
+│   ├── Threaded Sockets
+│   ├── Web Requests
+│   │   ├── requests module
+│   │   ├── urllib
+│   │   └── HTTP methods
+│   │
+│   ├── Monitoring & Analysis
+│   │   ├── packet inspection
+│   │   ├── client activity monitoring
+│   │   ├── Wireshark basics
+│   │   └── logging
+│   │
+│   └── Exam Hotspots
+│       ├── TCP vs UDP
+│       ├── Socket Lifecycle
+│       ├── Client-Server Model
+│       ├── Port Numbers
+│       └── send vs recv
+│
+├── Libraries & Modules
+│   ├── Standard Libraries
+│   │   ├── os
+│   │   ├── sys
+│   │   ├── math
+│   │   ├── random
+│   │   ├── datetime
+│   │   ├── hashlib
+│   │   ├── socket
+│   │   ├── json
+│   │   ├── csv
+│   │   ├── re
+│   │   └── threading
+│   │
+│   ├── hashlib
+│   │   ├── md5
+│   │   ├── sha1
+│   │   ├── sha256
+│   │   ├── hashing integrity
+│   │   └── password hashing
+│   │
+│   ├── datetime
+│   │   ├── date.today()
+│   │   ├── datetime.now()
+│   │   ├── timedelta
+│   │   └── formatting
+│   │
+│   ├── shodan
+│   │   ├── internet device search
+│   │   ├── banners
+│   │   ├── exposed services
+│   │   └── reconnaissance
+│   │
+│   ├── Third-party Ecosystem
+│   │   ├── numpy
+│   │   ├── pandas
+│   │   ├── flask
+│   │   ├── django
+│   │   ├── scikit-learn
+│   │   └── selenium
+│   │
+│   └── Exam Hotspots
+│       ├── hashlib Usage
+│       ├── datetime Operations
+│       ├── os Module
+│       ├── re Module
+│       └── socket Module
+│
+├── Algorithms & Problem Solving
+│   ├── Time Complexity
+│   │   ├── O(1)
+│   │   ├── O(log n)
+│   │   ├── O(n)
+│   │   ├── O(n log n)
+│   │   ├── O(n²)
+│   │   └── Big-O Analysis
+│   │
+│   ├── Searching Algorithms
+│   │   ├── linear search
+│   │   └── binary search
+│   │
+│   ├── Sorting Algorithms
+│   │   ├── bubble sort
+│   │   ├── selection sort
+│   │   ├── insertion sort
+│   │   ├── merge sort
+│   │   ├── quick sort
+│   │   └── timsort
+│   │
+│   ├── Divide & Conquer
+│   ├── Dynamic Programming
+│   ├── Sliding Window
+│   ├── Greedy Algorithms
+│   ├── Bit Manipulation
+│   │   ├── XOR
+│   │   ├── AND
+│   │   ├── OR
+│   │   └── shifts
+│   │
+│   ├── Number Theory
+│   │   ├── GCD
+│   │   ├── LCM
+│   │   ├── prime numbers
+│   │   └── Euclidean Algorithm
+│   │
+│   └── Exam Hotspots
+│       ├── O(n) Logic
+│       ├── XOR Tricks
+│       ├── Sorting Complexity
+│       ├── Divide & Conquer
+│       └── Dynamic Programming
+│
+├── Web & Client-Server Concepts
+│   ├── Web Architecture
+│   │   ├── client
+│   │   ├── server
+│   │   ├── request-response model
+│   │   └── REST APIs
+│   │
+│   ├── Web Servers
+│   │   ├── Apache
+│   │   ├── Nginx
+│   │   ├── Gunicorn
+│   │   └── uWSGI
+│   │
+│   ├── Client Scripting
+│   │   ├── browser interaction
+│   │   ├── requests
+│   │   └── automation
+│   │
+│   ├── APIs
+│   │   ├── GET
+│   │   ├── POST
+│   │   ├── PUT
+│   │   ├── DELETE
+│   │   └── JSON handling
+│   │
+│   └── Exam Hotspots
+│       ├── HTTP Methods
+│       ├── Client vs Server
+│       ├── REST Basics
+│       └── JSON Parsing
+│
+├── Debugging & Testing
+│   ├── Debugging Basics
+│   │   ├── syntax errors
+│   │   ├── runtime errors
+│   │   ├── logical errors
+│   │   └── exception tracing
+│   │
+│   ├── Debugging Tools
+│   │   ├── pdb
+│   │   ├── print debugging
+│   │   ├── logging module
+│   │   └── IDE debuggers
+│   │
+│   ├── Exception Handling
+│   │   ├── try
+│   │   ├── except
+│   │   ├── finally
+│   │   ├── raise
+│   │   └── custom exceptions
+│   │
+│   ├── Testing
+│   │   ├── unittest
+│   │   ├── pytest
+│   │   ├── assertions
+│   │   └── mocking
+│   │
+│   └── Exam Hotspots
+│       ├── Syntax vs Runtime Errors
+│       ├── Exception Handling
+│       ├── try-except
+│       ├── Logging
+│       └── Debugging Flow
+│
+├── Security & Exploit Concepts
+│   ├── Security Basics
+│   │   ├── authentication
+│   │   ├── authorization
+│   │   ├── encryption
+│   │   └── hashing
+│   │
+│   ├── Exploit Development Basics
+│   │   ├── sockets
+│   │   ├── payload concepts
+│   │   ├── client-server exploits
+│   │   └── exploit analysis
+│   │
+│   ├── Secure Coding
+│   │   ├── input validation
+│   │   ├── sanitization
+│   │   ├── safe file handling
+│   │   └── secure sockets
+│   │
+│   ├── Logging & Monitoring
+│   │   ├── event logging
+│   │   ├── system monitoring
+│   │   └── audit trails
+│   │
+│   └── Exam Hotspots
+│       ├── Hashing
+│       ├── Socket Security
+│       ├── Debugging
+│       ├── Exploit Basics
+│       └── Monitoring
+│
+└── Most Important Concept Differentiations
+    ├── list vs tuple
+    ├── tuple vs set
+    ├── append vs extend
+    ├── sort vs sorted
+    ├── shallow copy vs deep copy
+    ├── == vs is
+    ├── mutable vs immutable
+    ├── local vs global variables
+    ├── TCP vs UDP
+    ├── read() vs readline()
+    ├── regex search vs match
+    ├── class vs object
+    ├── method vs function
+    ├── recursion vs iteration
+    ├── compile-time vs runtime errors
+    ├── threading vs multiprocessing
+    ├── absolute vs relative path
+    ├── hashing vs encryption
+    ├── divide & conquer vs dynamic programming
+    └── client vs server

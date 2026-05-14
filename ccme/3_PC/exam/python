@@ -1,0 +1,585 @@
+
+
+B. Python: (20T +28 L + 12 SL)
+
+Session 6: (2T + 2L)
+
+Theory:
+• Installing Python
+• Your First Python Program
+• Declaring Functions
+• Overview of Objects
+• Indenting Code
+• Native Data types
+
+Lab Assignment:
+• Try to install Python in windows and Linux (if by default not installed)
+• Program on Datatypes.
+• Make small program to print Hello Word
+• Make a script file in Python and run that script.
+• Take an input from user while running the program and print the output.
+• Use for/while loop and If-else condition in program.
+
+
+Session 7 & 8: (4T +4L +2SL)
+
+Theory:
+• Introducing Dictionaries
+• Defining Dictionaries
+• Modifying Dictionaries
+• Deleting Items from Dictionaries
+• Introducing Lists
+• Defining Lists
+• Adding Elements to Lists
+• Searching Lists
+• Deleting List Elements
+• Using List Operators
+
+Lab Assignment:
+• Create a dictionary, print that dictionary.
+• Use for/while loop while running the program.
+• Insert/delete an item in dictionary.
+
+Self-Learning:
+• Given an unsorted list of integers nums, find the length of the longest
+  consecutive sequence of elements. The algorithm should run in O(n)
+  time.
+  Example: Input: nums = [100, 4, 200, 1, 3, 2]
+  Output: 4 (The sequence is [1, 2, 3, 4])
+
+• Given a list of integers nums, return a list output such that output[i] is
+  equal to the product of all the elements in nums except nums[i]. You
+  must solve it without using division and in O(n) time.
+  Input: nums = [1, 2, 3, 4]
+  Output: [24, 12, 8, 6] (234=24, 134=12, 124=8, 123=6)
+
+• Given a list of intervals, where each interval is represented as a list [start,
+  end], merge all overlapping intervals and return a new list of the non-
+  overlapping intervals that cover all the intervals in the input.
+  Example: Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+  Output: [[1,6],[8,10],[15,18]] (Intervals [1,3] and [2,6] overlap, merging
+  into [1,6])
+
+
+Session 9: (2T + 2L +2SL)
+
+Theory:
+• Introducing Tuples
+• Declaring variables
+• Referencing Variables
+• Assigning Multiple Values at Once
+• Joining Lists and Splitting Strings
+• Introduction to Set
+
+Lab Assignment:
+• Create a tuple, print that tuple.
+• Use for/while loop while running the program.
+• Insert/delete an item in tuple.
+
+Self-Learning:
+• Write a Python function swap_tuple_elements(tup, i, j) that takes a
+  tuple tup and two indices i and j as input. The function should return
+  a new tuple where the elements at indices i and j are swapped.
+  input_tuple = (10, 20, 30, 40)
+  swap_tuple_elements(input_tuple, 1, 3)
+  Expected output: (10, 40, 30, 20)
+
+• Given a list of tuples, where each tuple contains a name (string) and a
+  score (integer), write a Python function sort_scores(data) that sorts the
+  list of tuples in descending order based on the score.
+  scores = [('Alice', 88), ('Bob', 92), ('Charlie', 75), ('David', 92)]
+  Expected output: [('Bob', 92), ('David', 92), ('Alice', 88), ('Charlie', 75)]
+
+• Given 2 tuples, perform cross pairing of corresponding tuples, convert to
+  single tuple if 1st element of both tuple matches.
+  Input : test_list1 = [(1, 7), (6, 7), (8, 100), (4, 21)],
+          test_list2 = [(1, 3), (2, 1), (9, 7), (2, 17)]
+  Output : [(7, 3)]
+  Explanation : 1 occurs as tuple element at pos. 1 in both tuple, its 2nd
+  elements are paired and returned.
+
+  Input : test_list1 = [(10, 7), (6, 7), (8, 100), (4, 21)],
+          test_list2 = [(1, 3), (2, 1), (9, 7), (2, 17)]
+  Output : [ ]
+  Explanation : No pairing possible.
+
+
+Session 10: (2T + 2L + 2SL)
+
+Theory:
+• Optional and Named Arguments
+• type, str, dir, and Other Built-In Functions
+• Object References
+• Socket with Python
+
+Lab Assignment:
+• Append/insert/extend/remove/sort/reverse a list.
+• Append/insert/extend/remove/sort/reverse a string.
+• Use Built-in functions.
+
+Self-Learning:
+• Given a string, find the length of the longest substring that does not
+  contain any repeating characters
+  Example: length_of_longest_substring("abcabcbb") should
+  return 3 (for "abc").
+
+• Given a string s, return the longest palindromic substring in s.
+  Example: For "babad", the answer is "bab" (or "aba").
+
+• Given a string s consisting of opening and closing parenthesis '(' and ')',
+  find the length of the longest valid parenthesis substring. A valid
+  parenthesis substring is one where every opening bracket '(' has a
+  corresponding closing bracket ')' in the correct order.
+  Examples:
+  Input: s = "()"
+  Output: 2
+  Explanation: The longest valid parentheses substring is "()".
+
+  Input: s = "(()))"
+  Output: 6
+
+
+Session 11: (2T + 4L + 2SL)
+
+Theory:
+• Regular Expressions Using python
+• Scripting in Python
+• Functions and Functional Programming
+
+Lab Assignment:
+• Use regular expression to take a regular expression and search any
+  pattern.
+• Do all of these with the help of regular expression.
+  ♦ Match a single character except newline.
+  ♦ Match a word.
+  ♦ Match a single whitespace character.
+  ♦ Match any Non-whitespace character.
+
+Self-Learning:
+• Write a Python program to check that a string contains only a certain
+  set of characters (in this case a-z, A-Z and 0-9)
+
+• Write a Python program to remove leading zeros from an IP address.
+  Input: 216.08.094.196
+  Output: 216.8.94.196
+
+• Write a Python function that converts a CamelCase string into
+  a snake_case string using re.sub(). The solution should insert an
+  underscore before every uppercase letter (except the first one) and
+  convert the entire string to lowercase. Example
+  Input: "thisIsAConversionExample"
+  Expected Output: "this_is_a_conversion_example"
+
+• Given a sample log file line, use re.split() to divide the string into a list
+  containing the timestamp, log_level, message, and details. The
+  separators are consistent patterns of brackets, spaces, and hyphens.
+  Example Input: "[2025-12-17 10:00:00] - ERROR - User login failed:
+  Invalid credentials"
+  Expected Output: ['2025-12-17 10:00:00', 'ERROR', 'User login failed',
+  'Invalid credentials']
+
+
+Session 12: (2T + 3L)
+
+Theory:
+• Object Oriented Linux Environment
+• Classes, Objects and OOPS concepts
+
+Lab Assignment:
+• Do practice of memory management questions.
+• To find out Current directory of a file
+• To find out all folders & files inside given folder.
+• To find out absolute path and relative path.
+• To check if a file or folder exists or not.
+• To create/remove a Directory.
+• To check the permissions.
+
+
+Session 13 & 14: (4T + 6L)
+
+Theory:
+• File Handling
+• Directory Access Permissions
+• Controls Socket
+
+Lab Assignment:
+• To read or write a file using python.
+• Print everything written in a file.
+• Count, lines of the file
+• Count, words of the file
+• To read a web page content
+
+
+Session 15: (2T + 5L + 4SL)
+
+Theory:
+• Libraries (eg., hashlib, shodan, datetime)
+• Servers and Clients Arch
+• Web Servers and Client scripting
+• Exploit Development techniques
+• Debugging basics
+
+Lab Assignment:
+• Create a socket between a server and a client then analyse and monitor
+  all activities of client.
+• Exploit using socket programming
+• Exploit analysis
+• Debugging
+
+Self-Learning:
+• Explore about sorting and searching Algorithms
+• Learn the difference in time complexity (best, average, worst case)
+• Learn about Divide and Conquer Approach
+• Make a comparison between divide and conquer Vs Dynamic
+  Programming
+• Learn about Number theory
+• Learn how bit manipulation works
+• Solve the following:
+  ♦ Given an array of integers where every element appears twice except
+    for one, find that single number. Your algorithm should have a linear
+    runtime complexity and use only constant extra space. Input:
+    [4,1,2,1,2] Output: 4
+
+  ♦ Given two positive integers a and b, the task is to find the GCD of the
+    two numbers.Input: a=20, b=28 Output:4
+
+
+
+
+
+
+
+
+
+```````````````````````````````````````````````````````````````````|
+# 2. PYTHON TOPICS                                                 |
+```````````````````````````````````````````````````````````````````|
+---
+
+# A. Python Basics
+
+* Installing Python
+* Hello World
+* Python scripts
+* Functions
+* Objects overview
+* Indentation
+* Native datatypes
+* User input
+* if-else
+* Loops
+
+  * for
+  * while
+
+---
+
+# B. Dictionaries
+
+* Dictionary creation
+* Insert/update/delete dictionary items
+* Dictionary traversal
+
+---
+
+# C. Lists
+
+* List creation
+* Add elements
+* Search elements
+* Delete elements
+* List operators
+* append()
+* insert()
+* extend()
+* remove()
+* sort()
+* reverse()
+
+---
+
+# D. Problem Solving / DSA Basics
+
+* Longest consecutive sequence
+* Product array except self
+* Merge intervals
+* Time complexity basics
+* O(n)
+* Sorting algorithms
+* Searching algorithms
+* Divide and Conquer
+* Dynamic Programming basics
+* Number theory
+* Bit manipulation
+* XOR logic
+* GCD
+
+---
+
+# E. Tuples
+
+* Tuple creation
+* Tuple traversal
+* Tuple swapping
+* Tuple matching
+
+---
+
+# F. Variables & Assignment
+
+* Variable declaration
+* Multiple assignment
+* Referencing variables
+
+---
+
+# G. Strings
+
+* String operations
+* Joining lists
+* Splitting strings
+* Longest substring problems
+* Longest palindrome
+* Parentheses problems
+
+---
+
+# H. Sets
+
+* Set introduction
+* Unique values
+* Set operations basics
+
+---
+
+# I. Functions & Built-ins
+
+* Optional arguments
+* Named arguments
+* Built-in functions:
+
+  * type()
+  * str()
+  * dir()
+
+---
+
+# J. Socket Programming
+
+* Socket basics
+* Client-server communication
+* Socket creation
+* Monitoring client activities
+* Exploit basics using sockets
+
+---
+
+# K. Regular Expressions (VERY IMPORTANT)
+
+* re module
+* Pattern matching
+* re.split()
+* Character matching
+* Word matching
+* Whitespace matching
+* Non-whitespace matching
+* CamelCase → snake_case
+* IP cleaning
+* Log parsing
+
+---
+
+# L. Functional Programming
+
+* Functions
+* Functional concepts basics
+
+---
+
+# M. OOP Concepts
+
+* Classes
+* Objects
+* Encapsulation
+* Inheritance
+* OOP basics
+
+---
+
+# N. Linux Environment + File System
+
+* Current directory
+* Files & folders
+* Absolute path
+* Relative path
+* File existence checking
+* Create/remove directory
+* File permissions
+
+---
+
+# O. File Handling
+
+* open()
+* read()
+* write()
+* File reading/writing
+* Count lines
+* Count words
+* Read webpage content
+
+---
+
+# P. Libraries
+
+* hashlib
+* shodan
+* datetime
+
+---
+
+# Q. Web & Networking Concepts
+
+* Servers and clients architecture
+* Web server basics
+* Client scripting basics
+
+---
+
+# R. Debugging & Exploit Basics
+
+* Debugging basics
+* Exploit analysis
+* Exploit development basics
+
+---
+
+# 3. MOST IMPORTANT EXAM TOPICS
+
+---
+
+# SQL High Priority
+
+| Topic               | Priority |
+| ------------------- | -------- |
+| SELECT              | EXTREME  |
+| JOINS               | EXTREME  |
+| GROUP BY/HAVING     | EXTREME  |
+| Aggregate Functions | EXTREME  |
+| NULL handling       | HIGH     |
+| PK/FK               | HIGH     |
+| SQL Injection       | HIGH     |
+| Backup/Indexing     | MEDIUM   |
+
+---
+
+# Python High Priority
+
+| Topic                 | Priority |
+| --------------------- | -------- |
+| Lists/Dictionaries    | EXTREME  |
+| Strings               | EXTREME  |
+| Regex                 | EXTREME  |
+| File Handling         | EXTREME  |
+| OOP                   | HIGH     |
+| Socket Programming    | HIGH     |
+| Loops/Conditions      | HIGH     |
+| Built-in Functions    | HIGH     |
+| Algorithms/Complexity | HIGH     |
+
+---
+
+# 4. Hidden Core of the Syllabus
+
+This syllabus secretly combines:
+
+| Area              | Real Purpose          |
+| ----------------- | --------------------- |
+| Python            | Automation            |
+| SQL               | Data handling         |
+| Regex             | Log analysis          |
+| Sockets           | Networking            |
+| Linux paths/files | System administration |
+| SQL Injection     | Cybersecurity         |
+| Backup/Recovery   | DBA concepts          |
+| Algorithms        | Problem-solving       |
+| File handling     | Automation scripting  |
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

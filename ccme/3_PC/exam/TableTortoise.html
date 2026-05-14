@@ -242,14 +242,557 @@
 
 const quizData = [
 
+{
+question:"Which statement correctly creates a database named <code>college_db</code>?<br><br><pre><code>CREATE DATABASE college_db;</code></pre>",
+options:[
+"MAKE DATABASE college_db;",
+"CREATE DB college_db;",
+"CREATE DATABASE college_db;",
+"NEW DATABASE college_db;"
+],
+answer:"CREATE DATABASE college_db;"
+},
 
+{
+question:"What is the primary purpose of a database schema?",
+options:[
+"To delete records permanently",
+"To organize database objects logically",
+"To encrypt database passwords",
+"To sort rows automatically"
+],
+answer:"To organize database objects logically"
+},
 
+{
+question:"Consider the query:<br><br><pre><code>DROP DATABASE company;</code></pre><br>What happens after execution?",
+options:[
+"Only tables are deleted",
+"Database structure remains",
+"Entire database is removed",
+"Only users are removed"
+],
+answer:"Entire database is removed"
+},
 
+{
+question:"Which SQL statement inserts data into a table?",
+options:[
+"ADD INTO student VALUES(1,'A');",
+"INSERT INTO student VALUES(1,'A');",
+"PUT INTO student VALUES(1,'A');",
+"UPDATE student NEW VALUES(1,'A');"
+],
+answer:"INSERT INTO student VALUES(1,'A');"
+},
 
+{
+question:"Which clause is mainly used for filtering rows?",
+options:[
+"ORDER BY",
+"GROUP BY",
+"WHERE",
+"JOIN"
+],
+answer:"WHERE"
+},
 
+{
+question:"What will the following query return?<br><br><pre><code>SELECT * FROM employee\nWHERE salary > 50000;</code></pre>",
+options:[
+"Employees with salary less than 50000",
+"Employees with salary equal to 50000",
+"Employees with salary greater than 50000",
+"All employees"
+],
+answer:"Employees with salary greater than 50000"
+},
+
+{
+question:"Which statement about <code>ORDER BY</code> is TRUE?",
+options:[
+"It deletes duplicate rows",
+"It filters rows",
+"It sorts retrieved data",
+"It joins tables"
+],
+answer:"It sorts retrieved data"
+},
+
+{
+question:"What is the default sorting order in SQL?",
+options:[
+"RANDOM",
+"DESCENDING",
+"ASCENDING",
+"NULL"
+],
+answer:"ASCENDING"
+},
+
+{
+question:"Which query sorts employees by salary from highest to lowest?<br><br><pre><code>SELECT * FROM employee\nORDER BY salary _____;</code></pre>",
+options:[
+"ASC",
+"HIGH",
+"DESC",
+"REVERSE"
+],
+answer:"DESC"
+},
+
+{
+question:"Which JOIN returns only matching rows from both tables?",
+options:[
+"LEFT JOIN",
+"RIGHT JOIN",
+"INNER JOIN",
+"CROSS JOIN"
+],
+answer:"INNER JOIN"
+},
+
+{
+question:"Consider:<br><br><pre><code>SELECT students.name, courses.course_name\nFROM students\nINNER JOIN courses\nON students.course_id = courses.id;</code></pre><br>Purpose of this query?",
+options:[
+"Deletes unmatched rows",
+"Combines matching records from two tables",
+"Creates a new table",
+"Sorts courses"
+],
+answer:"Combines matching records from two tables"
+},
+
+{
+question:"Which command removes all records but keeps table structure?",
+options:[
+"DROP TABLE",
+"DELETE TABLE",
+"DELETE FROM table_name;",
+"REMOVE TABLE"
+],
+answer:"DELETE FROM table_name;"
+},
+
+{
+question:"Which statement modifies an existing table structure?",
+options:[
+"MODIFY TABLE student;",
+"ALTER TABLE student;",
+"CHANGE TABLE student;",
+"UPDATE STRUCTURE student;"
+],
+answer:"ALTER TABLE student;"
+},
+
+{
+question:"A company wants employee records sorted alphabetically by name.<br><br>Which query is most appropriate?<br><br><pre><code>SELECT * FROM employee\nORDER BY name ASC;</code></pre>",
+options:[
+"Retrieves random records",
+"Sorts names alphabetically",
+"Deletes duplicate names",
+"Filters employee names"
+],
+answer:"Sorts names alphabetically"
+},
+
+{
+question:"Which query contains a syntax error?",
+options:[
+"SELECT * FROM student;",
+"SELECT name FROM student;",
+"SELECT FROM student;",
+"SELECT * FROM student WHERE age > 18;"
+],
+answer:"SELECT FROM student;"
+},
+
+{
+question:"Which statement is TRUE regarding databases and tables?",
+options:[
+"Tables exist independently without databases",
+"Database stores organized collections of tables",
+"Tables contain schemas only",
+"Schemas delete tables automatically"
+],
+answer:"Database stores organized collections of tables"
+},
+
+{
+question:"What does this query do?<br><br><pre><code>SELECT name, marks\nFROM students\nWHERE marks >= 75\nORDER BY marks DESC;</code></pre>",
+options:[
+"Deletes students with marks below 75",
+"Displays students scoring 75 or more sorted by highest marks first",
+"Sorts names alphabetically only",
+"Creates a marks table"
+],
+answer:"Displays students scoring 75 or more sorted by highest marks first"
+},
+
+{
+question:"Which option best describes a table in MySQL?",
+options:[
+"A programming language",
+"Collection of rows and columns storing related data",
+"Network configuration",
+"SQL operator"
+],
+answer:"Collection of rows and columns storing related data"
+},
+
+{
+question:"Which keyword is used to retrieve all columns from a table?",
+options:[
+"ALL",
+"#",
+"*",
+"COLUMN"
+],
+answer:"*"
+},
+
+{
+question:"A developer accidentally executes:<br><br><pre><code>DROP DATABASE sales_db;</code></pre><br>Which outcome is MOST accurate?",
+options:[
+"Only records are deleted",
+"Database becomes read-only",
+"Entire database and contained tables are removed",
+"Database users are modified"
+],
+answer:"Entire database and contained tables are removed"
+},
+
+{
+question:"Which query correctly fetches only employee names?",
+options:[
+"SELECT employee FROM name;",
+"GET name FROM employee;",
+"SELECT name FROM employee;",
+"FETCH employee.name;"
+],
+answer:"SELECT name FROM employee;"
+},
+
+{
+question:"Which operator is commonly used with <code>WHERE</code> for equality checking?",
+options:[
+":=",
+"==",
+"=",
+"==="
+],
+answer:"="
+},
+
+{
+question:"Consider the query:<br><br><pre><code>SELECT * FROM orders\nORDER BY order_date;</code></pre><br>If no order is specified, results are sorted in:",
+options:[
+"Descending order",
+"Ascending order",
+"Random order",
+"Join order"
+],
+answer:"Ascending order"
+},
+
+{
+question:"Which query correctly creates a table?<br><br><pre><code>CREATE TABLE student (\nid INT,\nname VARCHAR(50)\n);</code></pre>",
+options:[
+"Valid syntax",
+"Missing database keyword",
+"VARCHAR cannot be used",
+"INT is invalid in MySQL"
+],
+answer:"Valid syntax"
+},
+
+{
+question:"Two tables contain customer and order details. Which SQL feature is specifically designed to combine related records?",
+options:[
+"WHERE",
+"ORDER BY",
+"JOIN",
+"INSERT"
+],
+answer:"JOIN"
+},
+
+{
+question:"Which aggregate function returns the total sum of a numeric column?",
+options:[
+"COUNT()",
+"AVG()",
+"SUM()",
+"TOTAL()"
+],
+answer:"SUM()"
+},
+
+{
+question:"What will this query return?<br><br><pre><code>SELECT COUNT(*) \nFROM employees;</code></pre>",
+options:[
+"Sum of salaries",
+"Number of columns",
+"Number of rows in employees",
+"Average employee count"
+],
+answer:"Number of rows in employees"
+},
+
+{
+question:"Which clause is mandatory when using aggregate functions on categorized data?",
+options:[
+"WHERE",
+"GROUP BY",
+"ORDER BY",
+"LIMIT"
+],
+answer:"GROUP BY"
+},
+
+{
+question:"Consider:<br><br><pre><code>SELECT department, AVG(salary)\nFROM employees\nGROUP BY department;</code></pre><br>Purpose of query?",
+options:[
+"Deletes departments",
+"Displays average salary per department",
+"Sorts employees",
+"Finds highest employee salary only"
+],
+answer:"Displays average salary per department"
+},
+
+{
+question:"Which clause filters grouped data after aggregation?",
+options:[
+"WHERE",
+"FILTER",
+"HAVING",
+"ORDER BY"
+],
+answer:"HAVING"
+},
+
+{
+question:"Which query is valid?",
+options:[
+"SELECT dept, COUNT(*) FROM emp WHERE COUNT(*) > 5 GROUP BY dept;",
+"SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING COUNT(*) > 5;",
+"SELECT dept HAVING COUNT(*) > 5;",
+"GROUP BY dept COUNT(*);"
+],
+answer:"SELECT dept, COUNT(*) FROM emp GROUP BY dept HAVING COUNT(*) > 5;"
+},
+
+{
+question:"What is a subquery?",
+options:[
+"A deleted query",
+"Query inside another SQL query",
+"Duplicate database",
+"Cloud backup method"
+],
+answer:"Query inside another SQL query"
+},
+
+{
+question:"Consider:<br><br><pre><code>SELECT name\nFROM employee\nWHERE salary > (\n    SELECT AVG(salary)\n    FROM employee\n);</code></pre><br>What does it display?",
+options:[
+"Employees with lowest salary",
+"Employees earning above average salary",
+"Average salary only",
+"Duplicate salaries"
+],
+answer:"Employees earning above average salary"
+},
+
+{
+question:"Which aggregate function ignores NULL values?",
+options:[
+"AVG()",
+"SUM()",
+"COUNT(column)",
+"All of the above"
+],
+answer:"All of the above"
+},
+
+{
+question:"Which statement regarding <code>COUNT(*)</code> is TRUE?",
+options:[
+"Counts only non-NULL rows",
+"Counts all rows including NULL-containing rows",
+"Counts columns only",
+"Counts distinct values automatically"
+],
+answer:"Counts all rows including NULL-containing rows"
+},
+
+{
+question:"A database administrator wants a readonly user.<br><br>Which command is MOST appropriate?<br><br><pre><code>GRANT SELECT ON company.* TO 'readonly_user';</code></pre>",
+options:[
+"Grants full database control",
+"Grants only read permission",
+"Deletes privileges",
+"Creates backup access"
+],
+answer:"Grants only read permission"
+},
+
+{
+question:"Which command removes privileges from a MySQL user?",
+options:[
+"DELETE",
+"REMOVE",
+"REVOKE",
+"DENY"
+],
+answer:"REVOKE"
+},
+
+{
+question:"Principle of Least Privilege means:",
+options:[
+"Give all users admin rights",
+"Restrict users to minimum required permissions",
+"Disable all users",
+"Use one shared account"
+],
+answer:"Restrict users to minimum required permissions"
+},
+
+{
+question:"Which situation BEST represents SQL Injection?",
+options:[
+"SELECT * FROM users;",
+"' OR 1=1 --",
+"CREATE DATABASE company;",
+"ORDER BY salary;"
+],
+answer:"' OR 1=1 --"
+},
+
+{
+question:"Which is a common consequence of SQL Injection?",
+options:[
+"Improved indexing",
+"Unauthorized data access",
+"Faster backups",
+"Cloud scaling"
+],
+answer:"Unauthorized data access"
+},
+
+{
+question:"Which backup type generally stores SQL statements for recreation?",
+options:[
+"Logical backup",
+"Physical backup",
+"Binary backup",
+"Horizontal backup"
+],
+answer:"Logical backup"
+},
+
+{
+question:"Which backup type copies actual database files directly?",
+options:[
+"Logical backup",
+"Physical backup",
+"Virtual backup",
+"Temporary backup"
+],
+answer:"Physical backup"
+},
+
+{
+question:"A production database crashes at midnight.<br><br>Which action should be performed FIRST?",
+options:[
+"Delete logs",
+"Restore from valid backup",
+"Remove indexes",
+"Disable database users"
+],
+answer:"Restore from valid backup"
+},
+
+{
+question:"Which concept improves query performance by speeding up data retrieval?",
+options:[
+"Backup",
+"SQL Injection",
+"Indexing",
+"Cloud replication"
+],
+answer:"Indexing"
+},
+
+{
+question:"Excessive indexing may negatively affect:",
+options:[
+"SELECT performance only",
+"INSERT and UPDATE operations",
+"User creation",
+"Database naming"
+],
+answer:"INSERT and UPDATE operations"
+},
+
+{
+question:"Which query likely causes slow execution on a very large table without indexes?<br><br><pre><code>SELECT * FROM transactions\nWHERE customer_name = 'Rahul';</code></pre>",
+options:[
+"Fast because WHERE always uses index",
+"May perform full table scan",
+"Automatically creates index",
+"Cannot execute in MySQL"
+],
+answer:"May perform full table scan"
+},
+
+{
+question:"Vertical scaling means:",
+options:[
+"Adding more database servers",
+"Increasing CPU/RAM of existing server",
+"Deleting unused databases",
+"Creating cloud users"
+],
+answer:"Increasing CPU/RAM of existing server"
+},
+
+{
+question:"Horizontal scaling means:",
+options:[
+"Increasing storage in same machine",
+"Adding additional servers/nodes",
+"Compressing database tables",
+"Removing backups"
+],
+answer:"Adding additional servers/nodes"
+},
+
+{
+question:"Which feature is commonly provided automatically by cloud databases like Amazon RDS?",
+options:[
+"Manual electricity management",
+"Automatic backups",
+"Hardware assembly",
+"SQL syntax correction"
+],
+answer:"Automatic backups"
+},
+
+{
+question:"Consider the query:<br><br><pre><code>SELECT department, SUM(salary)\nFROM employees\nGROUP BY department\nHAVING SUM(salary) > 100000;</code></pre><br>What does this query return?",
+options:[
+"Employees earning more than 100000 individually",
+"Departments whose total salary exceeds 100000",
+"All departments sorted by salary",
+"Highest paid employee from each department"
+],
+answer:"Departments whose total salary exceeds 100000"
+}
 
 ];
-
 
 
 let currentQuestion = 0;
