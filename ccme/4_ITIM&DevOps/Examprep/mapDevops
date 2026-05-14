@@ -1,0 +1,800 @@
+DEVOPS MASTER REVISION MAP
+(Reference style similar to Linux Administration structured knowledge map)
+
+DEVOPS
+├── DevOps Fundamentals
+│   ├── Definition
+│   │   ├── Development + Operations Integration
+│   │   ├── Automation-Driven Delivery
+│   │   ├── Continuous Feedback
+│   │   ├── Faster Release Cycles
+│   │   └── Reliability + Scalability
+│   │
+│   ├── Core Principles
+│   │   ├── CI (Continuous Integration)
+│   │   ├── CD (Continuous Delivery)
+│   │   ├── Continuous Deployment
+│   │   ├── Infrastructure as Code (IaC)
+│   │   ├── Monitoring & Observability
+│   │   ├── Automation
+│   │   ├── Collaboration
+│   │   ├── Version Control
+│   │   └── Feedback Loops
+│   │
+│   ├── DevOps Lifecycle
+│   │   ├── Plan
+│   │   ├── Develop
+│   │   ├── Build
+│   │   ├── Test
+│   │   ├── Release
+│   │   ├── Deploy
+│   │   ├── Operate
+│   │   └── Monitor
+│   │
+│   ├── DevOps Methodologies
+│   │   ├── Agile
+│   │   ├── Scrum
+│   │   ├── Kanban
+│   │   ├── Lean
+│   │   ├── GitOps
+│   │   ├── SRE (Site Reliability Engineering)
+│   │   └── Platform Engineering
+│   │
+│   ├── Key Terminologies
+│   │   ├── Immutable Infrastructure
+│   │   ├── Drift
+│   │   ├── Idempotency
+│   │   ├── Artifact
+│   │   ├── Pipeline
+│   │   ├── Orchestration
+│   │   ├── Provisioning
+│   │   ├── Deployment
+│   │   ├── Rollback
+│   │   ├── Blue-Green Deployment
+│   │   ├── Canary Deployment
+│   │   ├── Self-Healing
+│   │   └── Horizontal Scaling
+│   │
+│   └── Exam Hotspots
+│       ├── CI vs CD
+│       ├── Deployment vs Release
+│       ├── Scaling vs Load Balancing
+│       ├── Monitoring vs Logging
+│       └── IaC vs Configuration Management
+│
+├── Linux Fundamentals for DevOps
+│   ├── File System
+│   │   ├── /
+│   │   ├── /etc
+│   │   ├── /var
+│   │   ├── /home
+│   │   ├── /opt
+│   │   ├── /usr
+│   │   └── /tmp
+│   │
+│   ├── User Management
+│   │   ├── useradd
+│   │   ├── passwd
+│   │   ├── usermod
+│   │   ├── groupadd
+│   │   └── sudo
+│   │
+│   ├── Permissions
+│   │   ├── chmod
+│   │   ├── chown
+│   │   ├── sticky bit
+│   │   ├── SUID
+│   │   └── SGID
+│   │
+│   ├── Networking Commands
+│   │   ├── ping
+│   │   ├── traceroute
+│   │   ├── curl
+│   │   ├── wget
+│   │   ├── netstat
+│   │   ├── ss
+│   │   ├── ifconfig/ip
+│   │   └── nslookup/dig
+│   │
+│   ├── Process Management
+│   │   ├── ps
+│   │   ├── top
+│   │   ├── htop
+│   │   ├── kill
+│   │   ├── nice
+│   │   └── systemctl
+│   │
+│   ├── Services
+│   │   ├── systemd
+│   │   ├── journald
+│   │   ├── sshd
+│   │   └── cron
+│   │
+│   └── Important Ports
+│       ├── 22 (SSH)
+│       ├── 80 (HTTP)
+│       ├── 443 (HTTPS)
+│       ├── 3306 (MySQL)
+│       ├── 5432 (PostgreSQL)
+│       ├── 6379 (Redis)
+│       └── 8080 (Application Servers)
+│
+├── Virtualization
+│   ├── Concepts
+│   │   ├── Hypervisor
+│   │   ├── Virtual Machine
+│   │   ├── Guest OS
+│   │   ├── Host OS
+│   │   ├── Snapshot
+│   │   ├── Cloning
+│   │   └── Template
+│   │
+│   ├── Hypervisor Types
+│   │   ├── Type-1 (Bare Metal)
+│   │   │   ├── VMware ESXi
+│   │   │   ├── Hyper-V
+│   │   │   └── Xen
+│   │   │
+│   │   └── Type-2 (Hosted)
+│   │       ├── VirtualBox
+│   │       ├── VMware Workstation
+│   │       └── Parallels
+│   │
+│   ├── Virtualization Types
+│   │   ├── Hardware Virtualization
+│   │   ├── Para-Virtualization
+│   │   ├── Full Virtualization
+│   │   └── OS-Level Virtualization
+│   │
+│   ├── Commands
+│   │   ├── virsh
+│   │   ├── VBoxManage
+│   │   └── qm
+│   │
+│   └── Exam Hotspots
+│       ├── Type-1 vs Type-2
+│       ├── Snapshot vs Clone
+│       ├── VM vs Container
+│       └── Hypervisor Role
+│
+├── Storage & SAN
+│   ├── SAN (Storage Area Network)
+│   │   ├── iSCSI
+│   │   ├── Fibre Channel
+│   │   ├── Shared Storage
+│   │   ├── Multipathing
+│   │   └── High Availability
+│   │
+│   ├── NAS (Network Attached Storage)
+│   │   ├── NFS
+│   │   ├── SMB/CIFS
+│   │   └── File Sharing
+│   │
+│   ├── ZFS
+│   │   ├── Pools
+│   │   ├── Snapshots
+│   │   ├── Data Integrity
+│   │   ├── Compression
+│   │   └── RAID-Z
+│   │
+│   ├── FreeNAS/TrueNAS
+│   │   ├── Web UI
+│   │   ├── Volume Management
+│   │   └── Replication
+│   │
+│   └── Exam Hotspots
+│       ├── SAN vs NAS
+│       ├── iSCSI Purpose
+│       ├── Shared Storage
+│       └── ZFS Snapshot
+│
+├── Cloud Computing
+│   ├── Cloud Fundamentals
+│   │   ├── Elasticity
+│   │   ├── Scalability
+│   │   ├── Pay-as-you-go
+│   │   ├── Multi-Tenancy
+│   │   └── On-Demand Provisioning
+│   │
+│   ├── Service Models
+│   │   ├── IaaS
+│   │   ├── PaaS
+│   │   ├── SaaS
+│   │   └── FaaS
+│   │
+│   ├── Deployment Models
+│   │   ├── Public Cloud
+│   │   ├── Private Cloud
+│   │   ├── Hybrid Cloud
+│   │   └── Multi-Cloud
+│   │
+│   ├── AWS
+│   │   ├── EC2
+│   │   │   ├── Security Groups
+│   │   │   ├── AMI
+│   │   │   ├── Key Pairs
+│   │   │   └── Auto Scaling
+│   │   │
+│   │   ├── S3
+│   │   │   ├── Buckets
+│   │   │   ├── Versioning
+│   │   │   ├── Lifecycle Rules
+│   │   │   └── Static Hosting
+│   │   │
+│   │   ├── Lambda
+│   │   │   ├── Serverless
+│   │   │   ├── Event Triggers
+│   │   │   └── Functions
+│   │   │
+│   │   ├── VPC
+│   │   │   ├── CIDR
+│   │   │   ├── Public Subnet
+│   │   │   ├── Private Subnet
+│   │   │   ├── Route Table
+│   │   │   ├── Internet Gateway
+│   │   │   ├── NAT Gateway
+│   │   │   ├── NACL
+│   │   │   └── Security Groups
+│   │   │
+│   │   ├── IAM
+│   │   │   ├── Users
+│   │   │   ├── Groups
+│   │   │   ├── Roles
+│   │   │   └── Policies
+│   │   │
+│   │   └── CloudWatch
+│   │       ├── Logs
+│   │       ├── Metrics
+│   │       └── Alarms
+│   │
+│   ├── Cloud Ports
+│   │   ├── 22 (SSH)
+│   │   ├── 80 (HTTP)
+│   │   ├── 443 (HTTPS)
+│   │   └── 3389 (RDP)
+│   │
+│   └── Exam Hotspots
+│       ├── Public vs Private Subnet
+│       ├── SG vs NACL
+│       ├── EC2 vs Lambda
+│       ├── IaaS vs PaaS
+│       └── Auto Scaling
+│
+├── Version Control System (Git & GitHub)
+│   ├── Git Basics
+│   │   ├── Repository
+│   │   ├── Commit
+│   │   ├── Branch
+│   │   ├── Merge
+│   │   ├── Rebase
+│   │   └── Staging Area
+│   │
+│   ├── Git Workflow
+│   │   ├── git init
+│   │   ├── git clone
+│   │   ├── git add
+│   │   ├── git commit
+│   │   ├── git push
+│   │   ├── git pull
+│   │   ├── git fetch
+│   │   ├── git merge
+│   │   ├── git rebase
+│   │   └── git checkout
+│   │
+│   ├── Branching Strategies
+│   │   ├── Git Flow
+│   │   ├── Feature Branch
+│   │   ├── Trunk Based Development
+│   │   └── Release Branch
+│   │
+│   ├── GitHub
+│   │   ├── Pull Request
+│   │   ├── Fork
+│   │   ├── Actions
+│   │   ├── Webhooks
+│   │   └── Protected Branches
+│   │
+│   ├── Important Files
+│   │   ├── .gitignore
+│   │   ├── .github/workflows/
+│   │   └── README.md
+│   │
+│   └── Exam Hotspots
+│       ├── clone vs fork
+│       ├── fetch vs pull
+│       ├── merge vs rebase
+│       ├── staging area
+│       └── branch conflicts
+│
+├── CI/CD Pipelines
+│   ├── CI/CD Concepts
+│   │   ├── Build Automation
+│   │   ├── Automated Testing
+│   │   ├── Continuous Delivery
+│   │   ├── Continuous Deployment
+│   │   └── Release Automation
+│   │
+│   ├── Pipeline Stages
+│   │   ├── Source
+│   │   ├── Build
+│   │   ├── Test
+│   │   ├── Security Scan
+│   │   ├── Artifact Storage
+│   │   ├── Deploy
+│   │   └── Monitor
+│   │
+│   ├── Deployment Strategies
+│   │   ├── Rolling Update
+│   │   ├── Blue-Green
+│   │   ├── Canary
+│   │   ├── Recreate
+│   │   └── A/B Deployment
+│   │
+│   ├── Artifact Repositories
+│   │   ├── Nexus
+│   │   ├── Artifactory
+│   │   └── DockerHub
+│   │
+│   └── Exam Hotspots
+│       ├── CI vs CD
+│       ├── Rollback
+│       ├── Build Failure
+│       ├── Artifact
+│       └── Deployment Strategy
+│
+├── Jenkins
+│   ├── Jenkins Architecture
+│   │   ├── Master Node
+│   │   ├── Agent Node
+│   │   ├── Executors
+│   │   └── Plugins
+│   │
+│   ├── Installation
+│   │   ├── Port 8080
+│   │   ├── /var/lib/jenkins
+│   │   ├── systemctl status jenkins
+│   │   └── java dependency
+│   │
+│   ├── Job Types
+│   │   ├── Freestyle Project
+│   │   ├── Pipeline
+│   │   ├── Multibranch Pipeline
+│   │   └── Folder Jobs
+│   │
+│   ├── Jenkinsfile
+│   │   ├── Declarative Pipeline
+│   │   ├── Scripted Pipeline
+│   │   ├── stages
+│   │   ├── steps
+│   │   └── post actions
+│   │
+│   ├── Integrations
+│   │   ├── GitHub
+│   │   ├── Docker
+│   │   ├── Kubernetes
+│   │   ├── SonarQube
+│   │   └── Slack
+│   │
+│   ├── Important Concepts
+│   │   ├── Webhooks
+│   │   ├── Trigger Builds
+│   │   ├── Poll SCM
+│   │   ├── Credentials
+│   │   └── Build Artifacts
+│   │
+│   └── Exam Hotspots
+│       ├── Freestyle vs Pipeline
+│       ├── Jenkinsfile Purpose
+│       ├── Agent vs Master
+│       ├── Webhooks
+│       └── Pipeline Stages
+│
+├── Docker
+│   ├── Containerization Concepts
+│   │   ├── Containers
+│   │   ├── Images
+│   │   ├── Layers
+│   │   ├── Namespaces
+│   │   ├── cgroups
+│   │   └── OCI Standard
+│   │
+│   ├── Docker Architecture
+│   │   ├── Docker Engine
+│   │   ├── Docker Daemon (dockerd)
+│   │   ├── Docker CLI
+│   │   ├── Container Runtime
+│   │   └── Registry
+│   │
+│   ├── Docker Commands
+│   │   ├── docker pull
+│   │   ├── docker run
+│   │   ├── docker ps
+│   │   ├── docker images
+│   │   ├── docker exec
+│   │   ├── docker logs
+│   │   ├── docker stop
+│   │   ├── docker rm
+│   │   ├── docker build
+│   │   ├── docker push
+│   │   ├── docker volume ls
+│   │   └── docker network ls
+│   │
+│   ├── Dockerfile
+│   │   ├── FROM
+│   │   ├── RUN
+│   │   ├── COPY
+│   │   ├── ADD
+│   │   ├── CMD
+│   │   ├── ENTRYPOINT
+│   │   ├── EXPOSE
+│   │   └── ENV
+│   │
+│   ├── Docker Networking
+│   │   ├── Bridge
+│   │   ├── Host
+│   │   ├── Overlay
+│   │   └── None
+│   │
+│   ├── Docker Storage
+│   │   ├── Volumes
+│   │   ├── Bind Mounts
+│   │   ├── tmpfs
+│   │   └── Persistent Storage
+│   │
+│   ├── Docker Compose
+│   │   ├── docker-compose.yml
+│   │   ├── services
+│   │   ├── volumes
+│   │   ├── networks
+│   │   └── environment
+│   │
+│   ├── DockerHub
+│   │   ├── Image Registry
+│   │   ├── Tags
+│   │   ├── Push/Pull
+│   │   └── Versioning
+│   │
+│   ├── Ports
+│   │   ├── 2375 (Docker API)
+│   │   ├── 2376 (Docker TLS)
+│   │   └── 5000 (Private Registry)
+│   │
+│   └── Exam Hotspots
+│       ├── Image vs Container
+│       ├── CMD vs ENTRYPOINT
+│       ├── Volume vs Bind Mount
+│       ├── COPY vs ADD
+│       ├── Layer Caching
+│       └── Container Lifecycle
+│
+├── Container Orchestration
+│   ├── Kubernetes
+│   │   ├── Architecture
+│   │   │   ├── Control Plane
+│   │   │   │   ├── API Server
+│   │   │   │   ├── Scheduler
+│   │   │   │   ├── Controller Manager
+│   │   │   │   └── etcd
+│   │   │   │
+│   │   │   └── Worker Node
+│   │   │       ├── kubelet
+│   │   │       ├── kube-proxy
+│   │   │       └── Container Runtime
+│   │   │
+│   │   ├── Kubernetes Objects
+│   │   │   ├── Pod
+│   │   │   ├── Deployment
+│   │   │   ├── ReplicaSet
+│   │   │   ├── StatefulSet
+│   │   │   ├── DaemonSet
+│   │   │   ├── Service
+│   │   │   ├── ConfigMap
+│   │   │   ├── Secret
+│   │   │   ├── Namespace
+│   │   │   └── Ingress
+│   │   │
+│   │   ├── Service Types
+│   │   │   ├── ClusterIP
+│   │   │   ├── NodePort
+│   │   │   ├── LoadBalancer
+│   │   │   └── ExternalName
+│   │   │
+│   │   ├── kubectl Commands
+│   │   │   ├── kubectl get pods
+│   │   │   ├── kubectl describe
+│   │   │   ├── kubectl logs
+│   │   │   ├── kubectl exec
+│   │   │   ├── kubectl apply
+│   │   │   ├── kubectl delete
+│   │   │   └── kubectl scale
+│   │   │
+│   │   ├── Features
+│   │   │   ├── Self-Healing
+│   │   │   ├── Auto Scaling
+│   │   │   ├── Rolling Updates
+│   │   │   ├── Load Balancing
+│   │   │   └── Service Discovery
+│   │   │
+│   │   ├── Important Ports
+│   │   │   ├── 6443 (API Server)
+│   │   │   ├── 2379-2380 (etcd)
+│   │   │   ├── 10250 (kubelet)
+│   │   │   └── 30000-32767 (NodePort)
+│   │   │
+│   │   └── Exam Hotspots
+│   │       ├── Pod vs Container
+│   │       ├── Deployment vs StatefulSet
+│   │       ├── ConfigMap vs Secret
+│   │       ├── NodePort vs ClusterIP
+│   │       └── etcd Role
+│   │
+│   ├── Docker Swarm
+│   │   ├── Manager Node
+│   │   ├── Worker Node
+│   │   ├── Services
+│   │   ├── Replicas
+│   │   ├── Overlay Network
+│   │   └── Swarm Mode
+│   │
+│   └── Exam Hotspots
+│       ├── Swarm vs Kubernetes
+│       ├── Replica Scaling
+│       ├── Rolling Updates
+│       └── Self-Healing
+│
+├── Configuration Management
+│   ├── Ansible
+│   │   ├── Architecture
+│   │   │   ├── Control Node
+│   │   │   ├── Managed Node
+│   │   │   └── SSH-Based Agentless
+│   │   │
+│   │   ├── Inventory
+│   │   │   ├── Static Inventory
+│   │   │   ├── Dynamic Inventory
+│   │   │   └── inventory.ini
+│   │   │
+│   │   ├── Playbooks
+│   │   │   ├── YAML Syntax
+│   │   │   ├── tasks
+│   │   │   ├── handlers
+│   │   │   ├── variables
+│   │   │   └── loops
+│   │   │
+│   │   ├── Roles
+│   │   │   ├── defaults
+│   │   │   ├── handlers
+│   │   │   ├── tasks
+│   │   │   ├── templates
+│   │   │   └── vars
+│   │   │
+│   │   ├── Commands
+│   │   │   ├── ansible all -m ping
+│   │   │   ├── ansible-playbook
+│   │   │   ├── ansible-galaxy
+│   │   │   └── ansible-vault
+│   │   │
+│   │   └── Exam Hotspots
+│   │       ├── Agentless Architecture
+│   │       ├── Playbook vs Role
+│   │       ├── Inventory Purpose
+│   │       ├── YAML Syntax
+│   │       └── Idempotency
+│   │
+│   ├── Puppet
+│   │   ├── Master-Agent Model
+│   │   ├── Manifests
+│   │   ├── Modules
+│   │   ├── Catalog
+│   │   └── Desired State
+│   │
+│   └── Chef
+│       ├── Recipes
+│       ├── Cookbooks
+│       ├── Chef Server
+│       ├── Workstation
+│       └── Nodes
+│
+├── Infrastructure as Code (Terraform)
+│   ├── Terraform Basics
+│   │   ├── Providers
+│   │   ├── Resources
+│   │   ├── Variables
+│   │   ├── Outputs
+│   │   ├── Modules
+│   │   └── State
+│   │
+│   ├── Workflow
+│   │   ├── terraform init
+│   │   ├── terraform validate
+│   │   ├── terraform plan
+│   │   ├── terraform apply
+│   │   ├── terraform destroy
+│   │   └── terraform fmt
+│   │
+│   ├── Important Files
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   ├── outputs.tf
+│   │   ├── terraform.tfvars
+│   │   └── terraform.tfstate
+│   │
+│   ├── Remote Backend
+│   │   ├── AWS S3
+│   │   ├── State Locking
+│   │   ├── Collaboration
+│   │   └── Versioning
+│   │
+│   ├── Modules
+│   │   ├── Reusability
+│   │   ├── Abstraction
+│   │   └── Standardization
+│   │
+│   └── Exam Hotspots
+│       ├── plan vs apply
+│       ├── state management
+│       ├── modules
+│       ├── variables
+│       └── remote backend
+│
+├── Monitoring & Observability
+│   ├── Monitoring Concepts
+│   │   ├── Metrics
+│   │   ├── Logs
+│   │   ├── Traces
+│   │   ├── Alerting
+│   │   └── Dashboards
+│   │
+│   ├── Prometheus
+│   │   ├── Pull Model
+│   │   ├── Time-Series Database
+│   │   ├── PromQL
+│   │   ├── Alertmanager
+│   │   └── Exporters
+│   │
+│   ├── Exporters
+│   │   ├── Node Exporter
+│   │   ├── Windows Exporter
+│   │   ├── MySQL Exporter
+│   │   └── Blackbox Exporter
+│   │
+│   ├── Grafana
+│   │   ├── Dashboards
+│   │   ├── Visualization
+│   │   └── Alerts
+│   │
+│   ├── Logging Stack
+│   │   ├── ELK Stack
+│   │   │   ├── Elasticsearch
+│   │   │   ├── Logstash
+│   │   │   └── Kibana
+│   │   │
+│   │   └── Loki
+│   │
+│   ├── Important Ports
+│   │   ├── 9090 (Prometheus)
+│   │   ├── 9100 (Node Exporter)
+│   │   ├── 3000 (Grafana)
+│   │   ├── 5601 (Kibana)
+│   │   └── 9200 (Elasticsearch)
+│   │
+│   └── Exam Hotspots
+│       ├── Monitoring vs Observability
+│       ├── Push vs Pull
+│       ├── Metrics vs Logs
+│       ├── Exporter Purpose
+│       └── Alertmanager
+│
+├── Networking for DevOps
+│   ├── Networking Basics
+│   │   ├── IP Addressing
+│   │   ├── CIDR
+│   │   ├── DNS
+│   │   ├── DHCP
+│   │   ├── NAT
+│   │   └── Routing
+│   │
+│   ├── Protocols
+│   │   ├── HTTP/HTTPS
+│   │   ├── SSH
+│   │   ├── FTP/SFTP
+│   │   ├── TCP/UDP
+│   │   └── ICMP
+│   │
+│   ├── Load Balancing
+│   │   ├── Layer 4
+│   │   ├── Layer 7
+│   │   ├── Reverse Proxy
+│   │   └── HAProxy/NGINX
+│   │
+│   ├── Kubernetes Networking
+│   │   ├── CNI
+│   │   ├── Pod Networking
+│   │   ├── Service Discovery
+│   │   └── Ingress Controller
+│   │
+│   └── Exam Hotspots
+│       ├── TCP vs UDP
+│       ├── Public vs Private IP
+│       ├── DNS Resolution
+│       ├── NAT Purpose
+│       └── Reverse Proxy
+│
+├── Security in DevOps (DevSecOps)
+│   ├── IAM
+│   ├── Secrets Management
+│   │   ├── Vault
+│   │   ├── Kubernetes Secrets
+│   │   └── AWS Secrets Manager
+│   │
+│   ├── Security Scanning
+│   │   ├── SAST
+│   │   ├── DAST
+│   │   ├── Dependency Scanning
+│   │   └── Container Scanning
+│   │
+│   ├── Container Security
+│   │   ├── Least Privilege
+│   │   ├── Non-Root Containers
+│   │   ├── Signed Images
+│   │   └── Runtime Security
+│   │
+│   ├── CI/CD Security
+│   │   ├── Secret Injection
+│   │   ├── Secure Pipelines
+│   │   ├── RBAC
+│   │   └── Artifact Signing
+│   │
+│   └── Exam Hotspots
+│       ├── Secret vs ConfigMap
+│       ├── RBAC
+│       ├── Principle of Least Privilege
+│       └── Secure CI/CD
+│
+└── Troubleshooting & Production Operations
+    ├── Deployment Failures
+    │   ├── CrashLoopBackOff
+    │   ├── ImagePullBackOff
+    │   ├── Port Conflicts
+    │   ├── Dependency Failure
+    │   └── Rollback
+    │
+    ├── Container Issues
+    │   ├── OOMKilled
+    │   ├── Resource Limits
+    │   ├── Disk Exhaustion
+    │   ├── Volume Mount Failure
+    │   └── Networking Failure
+    │
+    ├── CI/CD Issues
+    │   ├── Build Failure
+    │   ├── Test Failure
+    │   ├── Merge Conflict
+    │   ├── Pipeline Timeout
+    │   └── Artifact Corruption
+    │
+    ├── Infrastructure Issues
+    │   ├── State Drift
+    │   ├── Misconfigured SG
+    │   ├── DNS Failure
+    │   ├── Node Failure
+    │   └── High CPU Usage
+    │
+    ├── Monitoring Scenarios
+    │   ├── Alert Fatigue
+    │   ├── False Positive Alerts
+    │   ├── Missing Metrics
+    │   ├── High Latency
+    │   └── Service Downtime
+    │
+    └── Most Important Concept Differentiations
+        ├── VM vs Container
+        ├── Docker vs Kubernetes
+        ├── CI vs CD
+        ├── Rolling vs Blue-Green
+        ├── Terraform vs Ansible
+        ├── Image vs Container
+        ├── Volume vs Bind Mount
+        ├── SG vs NACL
+        ├── Deployment vs StatefulSet
+        └── Monitoring vs Logging

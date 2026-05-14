@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>ITIL Panda — “See the dark circles under your eyes.” Mock Test</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#0f172a;
+        color:white;
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        padding:20px;
+    }
+
+    .container{
+        width:100%;
+        max-width:900px;
+        background:#111827;
+        border-radius:20px;
+        padding:30px;
+        box-shadow:0 0 25px rgba(0,0,0,0.5);
+    }
+
+    h1{
+        text-align:center;
+        margin-bottom:10px;
+        color:#38bdf8;
+    }
+
+    .subtitle{
+        text-align:center;
+        margin-bottom:25px;
+        color:#cbd5e1;
+    }
+
+    .top-bar{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:25px;
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+    .progress{
+        font-size:18px;
+        font-weight:bold;
+        color:#facc15;
+    }
+
+    .question-box{
+        margin-bottom:25px;
+    }
+
+    .question{
+        font-size:22px;
+        margin-bottom:20px;
+        line-height:1.5;
+    }
+
+    .options{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .option{
+        background:#1e293b;
+        border:2px solid transparent;
+        padding:15px;
+        border-radius:12px;
+        cursor:pointer;
+        transition:0.3s;
+        font-size:18px;
+    }
+
+    .option:hover{
+        background:#334155;
+        transform:scale(1.01);
+    }
+
+    .option.selected{
+        border:2px solid #38bdf8;
+        background:#0f766e;
+    }
+
+    .buttons{
+        display:flex;
+        justify-content:space-between;
+        margin-top:30px;
+        gap:15px;
+        flex-wrap:wrap;
+    }
+
+    button{
+        padding:14px 22px;
+        border:none;
+        border-radius:10px;
+        font-size:16px;
+        cursor:pointer;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    .prev-btn{
+        background:#475569;
+        color:white;
+    }
+
+    .next-btn{
+        background:#2563eb;
+        color:white;
+    }
+
+    .submit-btn{
+        background:#16a34a;
+        color:white;
+    }
+
+    button:hover{
+        opacity:0.9;
+        transform:translateY(-2px);
+    }
+
+    .result-box{
+        display:none;
+    }
+
+    .result-box h2{
+        text-align:center;
+        margin-bottom:20px;
+        color:#38bdf8;
+    }
+
+    .result-stats{
+        text-align:center;
+        margin-bottom:25px;
+        line-height:2;
+        font-size:20px;
+    }
+
+    .review{
+        margin-top:20px;
+    }
+
+    .review-item{
+        background:#1e293b;
+        padding:18px;
+        margin-bottom:15px;
+        border-radius:12px;
+    }
+
+    .correct{
+        color:#4ade80;
+        margin-top:10px;
+    }
+
+    .wrong{
+        color:#f87171;
+        margin-top:10px;
+    }
+
+    .answer{
+        color:#facc15;
+        margin-top:8px;
+    }
+
+    @media(max-width:600px){
+
+        .question{
+            font-size:18px;
+        }
+
+        .option{
+            font-size:16px;
+        }
+
+        button{
+            width:100%;
+        }
+
+        .buttons{
+            flex-direction:column;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="quiz-container">
+
+        <h1>DevOwl 🦉 </h1>
+   <h3 style="font-family:Arial,sans-serif; color:#137eb8; font-weight:500; margin:8px 0; text-align:center;">
+“Who needs sleep when you have deadlines.” 
+</h3>
+        <p class="subtitle"></p>
+
+        <div class="top-bar">
+            <div class="progress" id="progress">Question 1 / 40</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question" id="question"></div>
+
+            <div class="options" id="options"></div>
+        </div>
+
+        <div class="buttons">
+            <button class="prev-btn" id="prevBtn">Previous</button>
+            <button class="next-btn" id="nextBtn">Next</button>
+            <button class="submit-btn" id="submitBtn">Submit Quiz</button>
+        </div>
+
+    </div>
+
+    <div class="result-box" id="resultBox">
+        <h2>Quiz Result</h2>
+
+        <div class="result-stats" id="resultStats"></div>
+
+        <div class="review" id="review"></div>
+    </div>
+
+</div>
+
+<script>
+
+const quizData = [
+
+
+
+{
+question:"A DevOps engineer wants multiple isolated application environments on a single physical server while maximizing hardware utilization. Which technology directly enables this capability?",
+options:[
+"SAN replication",
+"Virtualization",
+"Load balancing",
+"RAID striping"
+],
+answer:"Virtualization"
+},
+
+{
+question:"Which virtualization type runs directly on physical hardware without requiring a host operating system?",
+options:[
+"Hosted Virtualization",
+"Type-2 Hypervisor",
+"Bare-metal Hypervisor",
+"Para-Containerization"
+],
+answer:"Bare-metal Hypervisor"
+},
+
+{
+question:"A company installs VMware Workstation on Windows laptops for developers to test Docker clusters locally. This is an example of:",
+options:[
+"Type-1 virtualization",
+"Hardware-assisted SAN deployment",
+"Type-2 virtualization",
+"Para-virtual storage orchestration"
+],
+answer:"Type-2 virtualization"
+},
+
+{
+question:"Which option BEST differentiates snapshots from cloning in infrastructure environments?",
+options:[
+"Snapshot creates independent VM copies immediately",
+"Clone captures point-in-time VM state only",
+"Snapshot preserves VM state; clone creates a separate usable instance",
+"Both are identical in virtualization platforms"
+],
+answer:"Snapshot preserves VM state; clone creates a separate usable instance"
+},
+
+{
+question:"A CI/CD testing environment must be replicated quickly for parallel testing pipelines. Which virtualization feature is MOST suitable?",
+options:[
+"Snapshot",
+"Template",
+"SAN zoning",
+"RAID mirroring"
+],
+answer:"Template"
+},
+
+{
+question:"In para-virtualization, guest operating systems primarily:",
+options:[
+"Execute without hypervisor awareness",
+"Interact directly with physical disks only",
+"Are aware of virtualization and cooperate with the hypervisor",
+"Eliminate the need for a hypervisor entirely"
+],
+answer:"Are aware of virtualization and cooperate with the hypervisor"
+},
+
+{
+question:"Which statement about Type-1 and Type-2 hypervisors is TRUE?",
+options:[
+"Type-2 hypervisors are preferred in large cloud data centers",
+"Type-1 hypervisors generally provide better performance isolation",
+"Type-1 virtualization requires a host operating system",
+"Type-2 hypervisors run directly on bare metal hardware"
+],
+answer:"Type-1 hypervisors generally provide better performance isolation"
+},
+
+{
+question:"A DevOps team restores a failed Jenkins build server to the exact previous state captured 15 minutes earlier. Which virtualization feature was MOST likely used?",
+options:[
+"Cloning",
+"Template provisioning",
+"Snapshot rollback",
+"SAN zoning"
+],
+answer:"Snapshot rollback"
+},
+
+{
+question:"An infrastructure architect wants centralized block-level storage accessible over IP networks for virtualization clusters. Which technology BEST fits this requirement?",
+options:[
+"FTP",
+"NFS only",
+"iSCSI-based SAN",
+"DNS replication"
+],
+answer:"iSCSI-based SAN"
+},
+
+{
+question:"What is the PRIMARY operational advantage of using SAN in highly available infrastructure?",
+options:[
+"Reduced CPU scheduling overhead",
+"Shared storage accessibility across systems",
+"Elimination of virtualization requirements",
+"Automatic application recompilation"
+],
+answer:"Shared storage accessibility across systems"
+},
+
+{
+question:"A Kubernetes cluster requires persistent shared storage accessible even if worker nodes fail. Which infrastructure concept from the syllabus is MOST relevant?",
+options:[
+"Hardware virtualization",
+"SAN-based storage",
+"Snapshot scheduling only",
+"Type-2 hypervisors exclusively"
+],
+answer:"SAN-based storage"
+},
+
+{
+question:"Which storage technology is specifically known for integrity verification, pooling, and advanced snapshot capability?",
+options:[
+"FAT32",
+"ext2",
+"ZFS",
+"NTFS only"
+],
+answer:"ZFS"
+},
+
+{
+question:"A production deployment pipeline depends heavily on rapid rollback of VM states after failed updates. Which combination is MOST useful?",
+options:[
+"RAID + DNS",
+"Snapshots + Virtualization",
+"FTP + Templates",
+"NAT + VLAN"
+],
+answer:"Snapshots + Virtualization"
+},
+
+{
+question:"Which of the following scenarios BEST represents operational high availability?",
+options:[
+"A single VM stores all production data locally",
+"Multiple systems can access shared storage during node failure",
+"Developers manually copy backups every week",
+"CI pipelines execute without logging"
+],
+answer:"Multiple systems can access shared storage during node failure"
+},
+
+{
+question:"A cloud engineer deploys identical preconfigured Ubuntu environments repeatedly for Terraform testing. Which feature minimizes setup time?",
+options:[
+"Templates",
+"Snapshots",
+"SAN masking",
+"Hypervisor scheduling"
+],
+answer:"Templates"
+},
+
+{
+question:"Which statement regarding hardware virtualization is MOST accurate?",
+options:[
+"It removes the need for guest operating systems",
+"It allows virtualization using processor-level support features",
+"It is identical to containerization",
+"It works only with SAN infrastructure"
+],
+answer:"It allows virtualization using processor-level support features"
+},
+
+{
+question:"An administrator configures shared enterprise storage using FreeNAS for multiple virtualization hosts. Which infrastructure objective is MOST likely intended?",
+options:[
+"GPU acceleration",
+"Distributed CI logging",
+"Centralized resilient storage",
+"Kernel recompilation automation"
+],
+answer:"Centralized resilient storage"
+},
+
+{
+question:"Which option would MOST likely improve disaster recovery capabilities in a virtualized DevOps environment?",
+options:[
+"Removing snapshots to save space",
+"Centralized SAN storage with snapshots",
+"Replacing virtualization with manual deployments",
+"Disabling storage redundancy"
+],
+answer:"Centralized SAN storage with snapshots"
+},
+
+{
+question:"A deployment pipeline provisions multiple temporary testing VMs from a standardized base image. The base reusable master image is called a:",
+options:[
+"Snapshot",
+"Template",
+"ReplicaSet",
+"Storage pool"
+],
+answer:"Template"
+},
+
+{
+question:"Which operational issue is MOST commonly reduced through virtualization in modern DevOps environments?",
+options:[
+"Version control branching conflicts",
+"Underutilization of physical hardware resources",
+"Source-code merge failures",
+"API authentication latency"
+],
+answer:"Underutilization of physical hardware resources"
+},
+
+{
+question:"A DevOps engineer provisions virtual machines, storage, and networking resources directly from a cloud provider while managing the operating systems manually. Which cloud service model is being used?",
+options:[
+"SaaS",
+"PaaS",
+"IaaS",
+"FaaS"
+],
+answer:"IaaS"
+},
+
+{
+question:"Which cloud deployment model is MOST appropriate for an organization requiring both on-premises control and scalable public cloud bursting during peak CI/CD workloads?",
+options:[
+"Public Cloud",
+"Private Cloud",
+"Hybrid Cloud",
+"Community Cloud"
+],
+answer:"Hybrid Cloud"
+},
+
+{
+question:"A company uses GitHub Actions to deploy containers to Kubernetes clusters hosted entirely by a third-party provider over the internet. This environment is BEST classified as:",
+options:[
+"Private cloud",
+"Hybrid virtualization",
+"Public cloud",
+"Bare-metal orchestration"
+],
+answer:"Public cloud"
+},
+
+{
+question:"Which component primarily controls authentication and authorization in cloud environments?",
+options:[
+"SLA",
+"IAM",
+"CDN",
+"RAID"
+],
+answer:"IAM"
+},
+
+{
+question:"A DevOps team wants developers to deploy applications without managing servers, operating systems, or runtime patching. Which service model BEST satisfies this requirement?",
+options:[
+"IaaS",
+"SaaS",
+"PaaS",
+"SAN-as-a-Service"
+],
+answer:"PaaS"
+},
+
+{
+question:"Which statement regarding SLA in cloud environments is MOST accurate?",
+options:[
+"SLA defines infrastructure scripting syntax",
+"SLA specifies agreed service availability and responsibilities",
+"SLA replaces IAM policies",
+"SLA manages Kubernetes scheduling decisions"
+],
+answer:"SLA specifies agreed service availability and responsibilities"
+},
+
+{
+question:"A CI/CD pipeline automatically interacts with AWS services using REST-based API calls and access tokens. This demonstrates:",
+options:[
+"Cloud API integration",
+"Hypervisor abstraction",
+"Bare-metal provisioning",
+"Static infrastructure deployment"
+],
+answer:"Cloud API integration"
+},
+
+{
+question:"Which cloud service category MOST directly provides managed relational databases without requiring manual installation?",
+options:[
+"Compute Services",
+"Database Services",
+"Media Services",
+"Integration Services"
+],
+answer:"Database Services"
+},
+
+{
+question:"A startup wants fully managed email, document editing, and collaboration software accessible through browsers. Which cloud model BEST matches this requirement?",
+options:[
+"IaaS",
+"PaaS",
+"SaaS",
+"Virtual SAN"
+],
+answer:"SaaS"
+},
+
+{
+question:"Which statement BEST differentiates IaaS from PaaS?",
+options:[
+"PaaS exposes hardware-level virtualization directly",
+"IaaS abstracts runtime environments completely",
+"PaaS reduces infrastructure management responsibilities for developers",
+"IaaS eliminates operating system administration entirely"
+],
+answer:"PaaS reduces infrastructure management responsibilities for developers"
+},
+
+{
+question:"An operations team uses Chef recipes to ensure Apache is installed identically across 200 Linux servers. This is an example of:",
+options:[
+"Manual provisioning",
+"Configuration management",
+"Virtual desktop orchestration",
+"Network segmentation"
+],
+answer:"Configuration management"
+},
+
+{
+question:"Which concept ensures repeated execution of Chef or Puppet configurations produces the same final system state without unintended changes?",
+options:[
+"Horizontal scaling",
+"Idempotency",
+"Immutable networking",
+"Resource pooling"
+],
+answer:"Idempotency"
+},
+
+{
+question:"A Puppet agent periodically retrieves desired configurations from a centralized Puppet server. This architecture primarily follows a:",
+options:[
+"Push-based execution model",
+"Peer-to-peer deployment model",
+"Pull-based configuration model",
+"Serverless execution pattern"
+],
+answer:"Pull-based configuration model"
+},
+
+{
+question:"Which tool is MOST closely associated with infrastructure provisioning through recipes written in Ruby-like syntax?",
+options:[
+"Terraform",
+"Chef",
+"Prometheus",
+"Docker Compose"
+],
+answer:"Chef"
+},
+
+{
+question:"A DevOps engineer wants infrastructure definitions that automatically enforce desired package versions and service states across environments. Which approach BEST fits this requirement?",
+options:[
+"Manual shell scripting only",
+"Configuration management tools",
+"Traditional FTP deployment",
+"Static VM snapshots"
+],
+answer:"Configuration management tools"
+},
+
+{
+question:"Which scenario BEST represents practical cloud elasticity?",
+options:[
+"Restarting failed containers manually",
+"Increasing compute resources automatically during traffic spikes",
+"Migrating Git repositories between branches",
+"Running Puppet manifests locally once"
+],
+answer:"Increasing compute resources automatically during traffic spikes"
+},
+
+{
+question:"A cloud-native deployment architecture distributes application components across compute, storage, networking, and security layers. This overall structural arrangement is called:",
+options:[
+"Cloud architecture",
+"Source branching strategy",
+"Hypervisor topology",
+"Snapshot orchestration"
+],
+answer:"Cloud architecture"
+},
+
+{
+question:"An organization wants strict control over sensitive production workloads while still using public cloud for testing environments. Which deployment model is MOST suitable?",
+options:[
+"Public Cloud",
+"Private Cloud only",
+"Hybrid Cloud",
+"Dedicated SaaS Cloud"
+],
+answer:"Hybrid Cloud"
+},
+
+{
+question:"Which statement about Chef and Puppet is TRUE in infrastructure automation contexts?",
+options:[
+"Both are primarily container runtimes",
+"Both are configuration management tools",
+"Both replace cloud providers entirely",
+"Both are monitoring-only platforms"
+],
+answer:"Both are configuration management tools"
+},
+
+{
+question:"A production deployment failed because different servers had inconsistent package versions and manual configuration drift. Which DevOps practice would MOST directly prevent this issue?",
+options:[
+"Manual patch management",
+"Configuration management automation using Chef/Puppet",
+"Increasing VM memory allocation",
+"Replacing Git with centralized storage"
+],
+answer:"Configuration management automation using Chef/Puppet"
+},
+
+{
+question:"A DevOps engineer wants to continuously collect CPU, memory, and disk metrics from Linux servers using Prometheus. Which component should be installed on the target Linux machines?",
+options:[
+"kube-proxy",
+"Node Exporter",
+"Docker Compose",
+"Jenkins Agent"
+],
+answer:"Node Exporter"
+},
+
+{
+question:"Which statement BEST describes Prometheus in a DevOps monitoring architecture?",
+options:[
+"It is primarily a container runtime",
+"It uses pull-based metric collection",
+"It replaces Kubernetes orchestration",
+"It functions only as a log storage system"
+],
+answer:"It uses pull-based metric collection"
+},
+
+{
+question:"A Windows production server must expose system metrics for Prometheus scraping. Which exporter is MOST appropriate?",
+options:[
+"Node Exporter",
+"cAdvisor",
+"Windows Exporter",
+"Fluentd"
+],
+answer:"Windows Exporter"
+},
+
+{
+question:"Which Prometheus feature allows graphical visualization of collected infrastructure metrics directly from its interface?",
+options:[
+"Registry API",
+"Prometheus Web UI",
+"Docker Registry",
+"Kubernetes Dashboard"
+],
+answer:"Prometheus Web UI"
+},
+
+{
+question:"A DevOps team wants to detect unusual memory spikes before production outages occur. Which operational practice is MOST closely associated with this requirement?",
+options:[
+"Infrastructure templating",
+"System monitoring",
+"Branch rebasing",
+"Container layering"
+],
+answer:"System monitoring"
+},
+
+{
+question:"Which statement regarding Prometheus metrics is TRUE?",
+options:[
+"Metrics are generally represented as time-series data",
+"Prometheus stores only static logs",
+"Prometheus requires manual polling from clients",
+"Metrics cannot include labels"
+],
+answer:"Metrics are generally represented as time-series data"
+},
+
+{
+question:"A containerized application must expose web traffic on host port 8000 while internally serving on port 80. Which Docker command option is MOST relevant?",
+options:[
+"--volume",
+"--network host",
+"-p 8000:80",
+"--link"
+],
+answer:"-p 8000:80"
+},
+
+{
+question:"Which Docker component defines how a custom image should be built automatically?",
+options:[
+"Jenkinsfile",
+"Dockerfile",
+"Compose YAML only",
+"Prometheus rule file"
+],
+answer:"Dockerfile"
+},
+
+{
+question:"A DevOps engineer wants multiple containers such as frontend, backend, and database services to start together with one command. Which Docker feature BEST supports this?",
+options:[
+"Docker Swarm",
+"Docker Compose",
+"Node Exporter",
+"Registry replication"
+],
+answer:"Docker Compose"
+},
+
+{
+question:"Which statement BEST differentiates a Docker image from a container?",
+options:[
+"Images are running processes while containers are templates",
+"Containers are executable runtime instances of images",
+"Images require exposed ports but containers do not",
+"Containers cannot exist without hypervisors"
+],
+answer:"Containers are executable runtime instances of images"
+},
+
+{
+question:"A CI/CD pipeline builds a Docker image after every Git commit and uploads it to DockerHub. Which DevOps principle is MOST directly demonstrated?",
+options:[
+"Manual deployment lifecycle",
+"Automated artifact delivery",
+"Static infrastructure allocation",
+"Offline provisioning"
+],
+answer:"Automated artifact delivery"
+},
+
+{
+question:"Which Docker concept ensures persistent application data remains available even if a container is deleted?",
+options:[
+"Overlay network",
+"Docker volume",
+"Image layer cache",
+"Build context"
+],
+answer:"Docker volume"
+},
+
+{
+question:"A production deployment failed because application dependencies differed across servers. Which Docker advantage MOST directly addresses this issue?",
+options:[
+"Kernel recompilation",
+"Environment consistency through containerization",
+"Dynamic DNS balancing",
+"Hardware acceleration abstraction"
+],
+answer:"Environment consistency through containerization"
+},
+
+{
+question:"Which command sequence is MOST commonly associated with publishing Docker images to a registry?",
+options:[
+"docker build → docker tag → docker push",
+"docker exec → docker cp → docker attach",
+"docker inspect → docker pause → docker unpause",
+"docker rm → docker network create → docker login"
+],
+answer:"docker build → docker tag → docker push"
+},
+
+{
+question:"A monitoring dashboard shows one container consuming unusually high CPU resources after deployment. Which DevOps operational domain is primarily involved in detecting this issue?",
+options:[
+"Version control",
+"Infrastructure provisioning",
+"Observability and monitoring",
+"Branch management"
+],
+answer:"Observability and monitoring"
+},
+
+{
+question:"Which Docker networking capability allows containers to communicate with each other using isolated virtual networks?",
+options:[
+"Image registry",
+"Container namespaces only",
+"Docker Networking",
+"Layer caching"
+],
+answer:"Docker Networking"
+},
+
+{
+question:"A DevOps engineer modifies the `index.html` file inside an httpd container and immediately sees updated web output in the browser. Which operational concept is being demonstrated?",
+options:[
+"Live containerized application update",
+"Immutable infrastructure enforcement",
+"Kubernetes rolling deployment",
+"Git rebase conflict resolution"
+],
+answer:"Live containerized application update"
+},
+
+{
+question:"Which statement regarding CI/CD pipelines is MOST accurate?",
+options:[
+"CI focuses only on production deployment approvals",
+"CD eliminates all testing requirements",
+"CI/CD automates integration, build, testing, and deployment workflows",
+"CI/CD applies only to Kubernetes clusters"
+],
+answer:"CI/CD automates integration, build, testing, and deployment workflows"
+},
+
+{
+question:"A Docker containerized application requires interactive runtime input from users. Which Docker execution mode is MOST relevant?",
+options:[
+"Detached daemon mode only",
+"Interactive terminal execution",
+"Read-only filesystem mode",
+"Build cache mode"
+],
+answer:"Interactive terminal execution"
+},
+
+{
+question:"A DevOps team deploys applications using containers instead of traditional virtual machines mainly because containers:",
+options:[
+"Require separate guest operating systems for every application",
+"Are generally lightweight and portable across environments",
+"Eliminate networking requirements entirely",
+"Replace source code repositories completely"
+],
+answer:"Are generally lightweight and portable across environments"
+},
+
+{
+question:"A developer copies a remote GitHub repository to a local machine for modification. Which Git command performs this operation?",
+options:[
+"git init",
+"git fetch",
+"git clone",
+"git merge"
+],
+answer:"git clone"
+},
+
+{
+question:"Which Git operation actually records staged changes into the local repository history?",
+options:[
+"git push",
+"git commit",
+"git pull",
+"git clone"
+],
+answer:"git commit"
+},
+
+{
+question:"A DevOps engineer modifies application code locally and wants the changes uploaded to GitHub after committing. Which command is MOST appropriate?",
+options:[
+"git rebase",
+"git add",
+"git push",
+"git stash"
+],
+answer:"git push"
+},
+
+{
+question:"Which statement BEST differentiates Git from GitHub?",
+options:[
+"GitHub is a distributed version control system itself",
+"Git is a cloud platform built over Jenkins",
+"Git is a version control tool while GitHub hosts repositories remotely",
+"Git and GitHub are identical technologies"
+],
+answer:"Git is a version control tool while GitHub hosts repositories remotely"
+},
+
+{
+question:"A Jenkins pipeline automatically starts after a developer pushes code to GitHub. Which DevOps concept is MOST directly demonstrated?",
+options:[
+"Continuous Integration",
+"Manual release orchestration",
+"Infrastructure fragmentation",
+"Static deployment modeling"
+],
+answer:"Continuous Integration"
+},
+{
+question:"Which Git configuration command is commonly used before making commits on a new machine?",
+options:[
+"git remote add",
+"git config user.name",
+"git branch --delete",
+"git pull origin"
+],
+answer:"git config user.name"
+},
+
+{
+question:"A CI/CD workflow builds a Docker image whenever source code changes are committed. Which sequence BEST represents the normal DevOps workflow?",
+options:[
+"Deploy → Commit → Build → Push",
+"Clone → Modify → Commit → Push → Build",
+"Push → Clone → Rollback → Build",
+"Build → Delete Repo → Push → Deploy"
+],
+answer:"Clone → Modify → Commit → Push → Build"
+},
+
+{
+question:"Which Jenkins feature allows automation of software build, testing, and deployment workflows?",
+options:[
+"Snapshot orchestration",
+"CI/CD pipelines",
+"SAN replication",
+"Hypervisor scheduling"
+],
+answer:"CI/CD pipelines"
+},
+
+{
+question:"A DevOps engineer wants Jenkins to automatically retrieve source code from GitHub repositories during builds. Which integration is MOST relevant?",
+options:[
+"Jenkins + Docker integration",
+"Jenkins + GitHub integration",
+"Jenkins + SAN integration",
+"Jenkins + RAID integration"
+],
+answer:"Jenkins + GitHub integration"
+},
+
+{
+question:"A Docker image created in Jenkins must be shared across deployment servers through a centralized registry. Which platform is MOST appropriate?",
+options:[
+"DockerHub",
+"Node Exporter",
+"Prometheus",
+"etcd"
+],
+answer:"DockerHub"
+},
+
+{
+question:"Which statement regarding Jenkins is TRUE?",
+options:[
+"Jenkins is primarily a database replication engine",
+"Jenkins is used for CI/CD automation",
+"Jenkins replaces container runtimes completely",
+"Jenkins functions only as a source control repository"
+],
+answer:"Jenkins is used for CI/CD automation"
+},
+
+{
+question:"A deployment pipeline creates an image using a Dockerfile and later exports it as `crop-back.tar`. Which Docker capability is MOST closely related?",
+options:[
+"Image archival/export",
+"Kubernetes scaling",
+"DNS service discovery",
+"Git branch rebasing"
+],
+answer:"Image archival/export"
+},
+
+{
+question:"A Jenkins job builds a web application container using the NGINX image and deploys it automatically after successful tests. Which DevOps practice is BEST represented?",
+options:[
+"Continuous Deployment",
+"Manual provisioning",
+"Static release management",
+"Offline orchestration"
+],
+answer:"Continuous Deployment"
+},
+
+{
+question:"Which command sequence MOST accurately represents a basic Git workflow?",
+options:[
+"git push → git clone → git commit",
+"git add → git commit → git push",
+"git commit → git init → git clone",
+"git branch → git reset → git remove"
+],
+answer:"git add → git commit → git push"
+},
+
+{
+question:"A DevOps engineer wants repeatable build environments inside Jenkins pipelines to eliminate “works on my machine” issues. Which technology MOST directly helps?",
+options:[
+"Docker containers",
+"FTP servers",
+"RAID mirroring",
+"Static VLAN mapping"
+],
+answer:"Docker containers"
+},
+
+{
+question:"Which component in a CI/CD pipeline typically acts as the automation orchestrator for builds and deployments?",
+options:[
+"DockerHub",
+"Jenkins",
+"Git only",
+"Prometheus"
+],
+answer:"Jenkins"
+},
+
+{
+question:"A developer commits source code locally but forgets to push it. Which statement is TRUE?",
+options:[
+"Changes are already available on GitHub",
+"Changes exist only in the local repository",
+"Jenkins automatically uploads commits to GitHub",
+"DockerHub synchronizes Git repositories automatically"
+],
+answer:"Changes exist only in the local repository"
+},
+
+{
+question:"Which scenario BEST represents automated deployment?",
+options:[
+"Manually copying binaries to production servers",
+"Jenkins automatically building and deploying after GitHub commits",
+"Developers testing applications only on laptops",
+"Running Docker containers without version control"
+],
+answer:"Jenkins automatically building and deploying after GitHub commits"
+},
+
+{
+question:"A DevOps pipeline uses Jenkins, GitHub, and Docker together. Which workflow is MOST realistic?",
+options:[
+"GitHub stores code → Jenkins builds → Docker packages application",
+"Docker stores Git commits → Jenkins replaces GitHub",
+"Jenkins acts as container runtime while Docker manages repositories",
+"GitHub deploys infrastructure without CI/CD tools"
+],
+answer:"GitHub stores code → Jenkins builds → Docker packages application"
+},
+
+{
+question:"A production deployment failed because an incorrect image version was manually deployed. Which DevOps practice would MOST directly reduce this issue?",
+options:[
+"Automated CI/CD pipelines with version-controlled builds",
+"Manual FTP uploads",
+"Static infrastructure allocation",
+"Disabling source control commits"
+],
+answer:"Automated CI/CD pipelines with version-controlled builds"
+},
+
+{
+question:"A DevOps engineer launches a virtual Linux server on AWS to host Jenkins and Docker services. Which AWS service is MOST appropriate?",
+options:[
+"S3",
+"Lambda",
+"EC2",
+"Route53"
+],
+answer:"EC2"
+},
+
+{
+question:"Which AWS service is BEST suited for storing Docker image backups, application logs, and static deployment artifacts?",
+options:[
+"EC2",
+"Lambda",
+"S3",
+"IAM"
+],
+answer:"S3"
+},
+
+{
+question:"A serverless backend automatically executes code whenever a file is uploaded to cloud storage. Which AWS service MOST directly supports this architecture?",
+options:[
+"EC2",
+"Lambda",
+"VPC Peering",
+"Docker Swarm"
+],
+answer:"Lambda"
+},
+
+{
+question:"Which AWS networking component provides logical isolation for cloud infrastructure resources?",
+options:[
+"S3 Bucket",
+"EC2 Auto Scaling",
+"VPC",
+"Lambda Layer"
+],
+answer:"VPC"
+},
+
+{
+question:"A company deploys a web-facing bastion server in a public subnet while keeping database servers isolated in a private subnet. What is the PRIMARY purpose of this architecture?",
+options:[
+"Reduce Git merge conflicts",
+"Improve infrastructure security isolation",
+"Replace IAM policies",
+"Eliminate monitoring requirements"
+],
+answer:"Improve infrastructure security isolation"
+},
+
+{
+question:"Which statement regarding public and private subnets is MOST accurate?",
+options:[
+"Private subnets are directly exposed to the internet by default",
+"Public subnets generally allow internet-routable resources",
+"Both subnet types always share identical routing behavior",
+"Public subnets eliminate the need for security groups"
+],
+answer:"Public subnets generally allow internet-routable resources"
+},
+
+{
+question:"A DevOps engineer accesses a private EC2 instance indirectly through a public-facing server. This operational pattern MOST closely resembles:",
+options:[
+"Bastion host architecture",
+"Immutable deployment",
+"Container layering",
+"Sidecar orchestration"
+],
+answer:"Bastion host architecture"
+},
+
+{
+question:"Which orchestration platform is MOST strongly associated with Pods, Deployments, and Services?",
+options:[
+"Docker Compose",
+"Jenkins",
+"Kubernetes",
+"Prometheus"
+],
+answer:"Kubernetes"
+},
+
+{
+question:"A Docker Swarm service initially runs with one replica and later scales automatically to ten replicas during increased traffic. Which DevOps capability is demonstrated?",
+options:[
+"Snapshot recovery",
+"Horizontal scaling",
+"Vertical partitioning",
+"Static provisioning"
+],
+answer:"Horizontal scaling"
+},
+
+{
+question:"Which statement BEST differentiates Docker Swarm from Kubernetes?",
+options:[
+"Kubernetes supports orchestration concepts like Pods and Deployments extensively",
+"Docker Swarm is a source control system",
+"Kubernetes cannot scale services",
+"Docker Swarm replaces container images entirely"
+],
+answer:"Kubernetes supports orchestration concepts like Pods and Deployments extensively"
+},
+
+{
+question:"A DevOps team updates an NGINX container image after modifying `index.html` and deploys the updated image without manually recreating all containers. Which concept is MOST closely represented?",
+options:[
+"Rolling service update",
+"Static infrastructure deployment",
+"Hypervisor migration",
+"Monolithic scaling"
+],
+answer:"Rolling service update"
+},
+
+{
+question:"A Kubernetes cluster contains one master node and three worker nodes. Which node type is PRIMARILY responsible for running application workloads?",
+options:[
+"Control Plane Node only",
+"Worker Nodes",
+"Registry Node",
+"Monitoring Node"
+],
+answer:"Worker Nodes"
+},
+
+{
+question:"Which workflow BEST represents a modern container deployment lifecycle?",
+options:[
+"Edit server directly → restart manually → no version tracking",
+"Build image → push to DockerHub → deploy/update orchestrated service",
+"Compile locally → FTP binaries → reboot network switch",
+"Create VM snapshot → delete registry → scale manually"
+],
+answer:"Build image → push to DockerHub → deploy/update orchestrated service"
+},
+
+{
+question:"A microservices-based application requires automated deployment, scaling, and recovery of multiple containers across nodes. Which technology BEST fits this requirement?",
+options:[
+"GitHub only",
+"Kubernetes orchestration",
+"S3 static hosting only",
+"RAID mirroring"
+],
+answer:"Kubernetes orchestration"
+},
+
+{
+question:"Which AWS service model category does EC2 MOST closely belong to?",
+options:[
+"SaaS",
+"PaaS",
+"IaaS",
+"FaaS"
+],
+answer:"IaaS"
+},
+
+{
+question:"A DevOps engineer modifies a container image and updates a Kubernetes Deployment using the new image tag. What is the PRIMARY operational advantage?",
+options:[
+"Manual infrastructure provisioning",
+"Controlled application rollout with version tracking",
+"Elimination of networking requirements",
+"Removal of container abstraction"
+],
+answer:"Controlled application rollout with version tracking"
+},
+
+{
+question:"A Kubernetes orchestration environment becomes production-ready primarily because it supports:",
+options:[
+"Manual container execution only",
+"Automated scaling and workload management",
+"Hypervisor replacement",
+"Source code compilation directly inside routers"
+],
+answer:"Automated scaling and workload management"
+},
+
+{
+question:"Which statement regarding microservice deployment is TRUE?",
+options:[
+"All application components must run inside one container",
+"Independent services can be deployed and scaled separately",
+"Microservices eliminate the need for networking",
+"Kubernetes supports only monolithic applications"
+],
+answer:"Independent services can be deployed and scaled separately"
+},
+
+{
+question:"A deployment pipeline pushes container images to DockerHub before orchestration platforms pull and deploy them. DockerHub acts primarily as a:",
+options:[
+"Hypervisor manager",
+"Container registry",
+"CI pipeline engine",
+"Monitoring exporter"
+],
+answer:"Container registry"
+},
+
+{
+question:"A production environment requires automatic workload redistribution if one node fails in a cluster. Which orchestration capability MOST directly addresses this requirement?",
+options:[
+"Git rebasing",
+"Container self-healing and scheduling",
+"Static IP reservation only",
+"Manual rollback scripting"
+],
+answer:"Container self-healing and scheduling"
+},
+
+{
+question:"A DevOps engineer wants to automate package installation and service startup across multiple Linux servers without manually logging into each machine. Which tool BEST fits this requirement?",
+options:[
+"DockerHub",
+"Prometheus",
+"Ansible",
+"GitHub"
+],
+answer:"Ansible"
+},
+
+{
+question:"Which Ansible feature primarily defines reusable automation steps written in YAML format?",
+options:[
+"Inventory",
+"Playbook",
+"Registry",
+"Workspace"
+],
+answer:"Playbook"
+},
+
+{
+question:"A DevOps administrator configures SSH keys so Ansible can execute tasks across servers without interactive password prompts. What is the PRIMARY operational advantage?",
+options:[
+"Reduced hypervisor overhead",
+"Passwordless automation execution",
+"Container image optimization",
+"Static infrastructure allocation"
+],
+answer:"Passwordless automation execution"
+},
+
+{
+question:"Which command is commonly used to verify connectivity between Ansible control node and managed hosts?",
+options:[
+"ICMP network routing only",
+"SSH-based Ansible communication",
+"Docker daemon availability",
+"Kubernetes cluster health"
+],
+answer:"SSH-based Ansible communication"
+},
+
+{
+question:"A DevOps team wants one reusable automation component to install MySQL on multiple environments consistently. Which Ansible concept BEST supports this?",
+options:[
+"Branching",
+"Roles",
+"Pods",
+"Pipelines"
+],
+answer:"Roles"
+},
+
+{
+question:"Which file in Ansible typically contains grouped target hosts for automation execution?",
+options:[
+"Jenkinsfile",
+"Dockerfile",
+"Inventory file",
+"Terraform state file"
+],
+answer:"Inventory file"
+},
+
+{
+question:"An Ansible playbook installs NGINX and ensures the service remains started. This MOST closely represents:",
+options:[
+"Configuration management",
+"Container orchestration",
+"Log aggregation",
+"Image layering"
+],
+answer:"Configuration management"
+},
+
+{
+question:"Which statement regarding Ansible is TRUE?",
+options:[
+"It requires agents on all managed nodes",
+"It is primarily agentless using SSH",
+"It replaces cloud networking",
+"It functions only inside containers"
+],
+answer:"It is primarily agentless using SSH"
+},
+
+{
+question:"A production deployment repeatedly fails because different servers have inconsistent package versions. Which DevOps approach MOST directly solves this issue?",
+options:[
+"Manual administration",
+"Configuration management automation",
+"Static routing",
+"Hypervisor migration"
+],
+answer:"Configuration management automation"
+},
+
+{
+question:"Which syntax format is MOST commonly associated with Ansible playbooks?",
+options:[
+"JSON only",
+"XML",
+"YAML",
+"INI exclusively"
+],
+answer:"YAML"
+},
+
+{
+question:"A DevOps engineer applies the same Ansible role across staging and production environments. What is the PRIMARY benefit?",
+options:[
+"Reduced source control usage",
+"Infrastructure consistency and reusability",
+"Elimination of networking",
+"Removal of CI/CD pipelines"
+],
+answer:"Infrastructure consistency and reusability"
+},
+
+{
+question:"Which Terraform principle allows infrastructure resources to be defined using code instead of manual console operations?",
+options:[
+"Immutable logging",
+"Infrastructure as Code",
+"Continuous profiling",
+"Stateful deployment"
+],
+answer:"Infrastructure as Code"
+},
+
+{
+question:"A Terraform configuration provisions an EC2 instance, VPC, and subnet automatically in AWS. Which operational practice is demonstrated?",
+options:[
+"Manual deployment",
+"Infrastructure provisioning automation",
+"Runtime container patching",
+"Static scaling"
+],
+answer:"Infrastructure provisioning automation"
+},
+
+{
+question:"Which Terraform file concept stores the current known infrastructure state?",
+options:[
+"inventory.yml",
+"terraform.tfstate",
+"Dockerfile",
+"Jenkinsfile"
+],
+answer:"terraform.tfstate"
+},
+
+{
+question:"A DevOps engineer accidentally deletes an EC2 instance manually from AWS Console, but Terraform still tracks it. Which component helps Terraform detect this mismatch?",
+options:[
+"Docker Registry",
+"Terraform state",
+"Git tags",
+"Ansible inventory"
+],
+answer:"Terraform state"
+},
+
+{
+question:"Which Terraform command previews infrastructure changes BEFORE actual deployment?",
+options:[
+"terraform push",
+"terraform inspect",
+"terraform plan",
+"terraform build"
+],
+answer:"terraform plan"
+},
+
+{
+question:"Which Terraform command actually creates or updates infrastructure resources?",
+options:[
+"terraform apply",
+"terraform init-only",
+"terraform verify",
+"terraform compose"
+],
+answer:"terraform apply"
+},
+
+{
+question:"A DevOps team uses Terraform modules repeatedly across projects for VPC creation. What is the PRIMARY advantage?",
+options:[
+"Increased manual intervention",
+"Reusable infrastructure definitions",
+"Elimination of variables",
+"Static networking"
+],
+answer:"Reusable infrastructure definitions"
+},
+
+{
+question:"Which AWS service is commonly used as a remote backend for collaborative Terraform state management?",
+options:[
+"EC2",
+"Lambda",
+"S3",
+"CloudFront"
+],
+answer:"S3"
+},
+
+{
+question:"A Terraform configuration uses variables for subnet IDs and instance types. What is the MAIN purpose of variables?",
+options:[
+"Replace all state files",
+"Improve flexibility and reusability",
+"Eliminate cloud credentials",
+"Prevent deployment automation"
+],
+answer:"Improve flexibility and reusability"
+},
+
+{
+question:"A CI/CD pipeline provisions infrastructure using Terraform before deploying applications through Ansible. Which workflow is MOST realistic?",
+options:[
+"Terraform provisions infra → Ansible configures servers",
+"Ansible provisions hypervisors → Terraform manages Git branches",
+"DockerHub provisions VPCs → Jenkins manages DNS",
+"Kubernetes replaces all IaC tooling automatically"
+],
+answer:"Terraform provisions infra → Ansible configures servers"
+},
+
+{
+question:"Which statement BEST differentiates Terraform from Ansible?",
+options:[
+"Terraform mainly focuses on provisioning infrastructure resources",
+"Ansible is primarily a monitoring tool",
+"Terraform cannot interact with cloud providers",
+"Ansible replaces version control systems"
+],
+answer:"Terraform mainly focuses on provisioning infrastructure resources"
+},
+
+{
+question:"A DevOps engineer wants repeatable provisioning of multiple EC2 instances in different subnets using the same reusable logic. Which Terraform capability BEST supports this?",
+options:[
+"Roles",
+"Exporters",
+"Modules",
+"Sidecars"
+],
+answer:"Modules"
+},
+
+{
+question:"A deployment pipeline fails because two engineers modified infrastructure simultaneously and overwrote Terraform state. Which practice MOST directly reduces this issue?",
+options:[
+"Remote shared backend state management",
+"Manual YAML editing",
+"Static IP reservation",
+"Local-only provisioning"
+],
+answer:"Remote shared backend state management"
+},
+
+{
+question:"Which operational issue is MOST commonly addressed using configuration management tools like Ansible?",
+options:[
+"Configuration drift",
+"DNS recursion",
+"RAID synchronization",
+"CPU virtualization"
+],
+answer:"Configuration drift"
+},
+
+{
+question:"An organization provisions infrastructure using Terraform and stores configurations in Git repositories. Which DevOps principle is MOST strongly represented?",
+options:[
+"Immutable networking",
+"Version-controlled infrastructure",
+"Offline deployment",
+"Hardware-only scaling"
+],
+answer:"Version-controlled infrastructure"
+},
+
+{
+question:"A Terraform configuration creates security groups alongside EC2 instances. Which infrastructure domain is being automated?",
+options:[
+"Source control only",
+"Cloud networking and compute provisioning",
+"Hypervisor firmware management",
+"Application debugging exclusively"
+],
+answer:"Cloud networking and compute provisioning"
+},
+
+{
+question:"A DevOps team deploys database servers through Ansible roles and later scales infrastructure using Terraform modules. Which statement is MOST accurate?",
+options:[
+"Terraform and Ansible serve completely identical purposes",
+"Terraform provisions infrastructure while Ansible configures systems",
+"Ansible replaces cloud providers entirely",
+"Terraform is mainly a monitoring framework"
+],
+answer:"Terraform provisions infrastructure while Ansible configures systems"
+},
+
+{
+question:"A production rollout requires infrastructure creation, application configuration, and automated deployment validation. Which combined tooling approach BEST fits?",
+options:[
+"Terraform + Ansible + CI/CD pipeline",
+"FTP + manual SSH",
+"Static VM snapshots only",
+"RAID + DNS replication"
+],
+answer:"Terraform + Ansible + CI/CD pipeline"
+},
+
+{
+question:"A DevOps engineer wants infrastructure deployments to be reproducible, auditable, scalable, and version-controlled across environments. Which overall approach BEST satisfies this requirement?",
+options:[
+"Manual cloud console configuration",
+"Infrastructure as Code with Terraform",
+"Spreadsheet-based provisioning",
+"Local-only shell execution without repositories"
+],
+answer:"Infrastructure as Code with Terraform"
+}
+
+
+
+];
+
+
+
+let currentQuestion = 0;
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const submitBtn = document.getElementById("submitBtn");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML = `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option => {
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", () => {
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+        });
+
+        optionsEl.appendChild(div);
+    });
+}
+
+nextBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+        currentQuestion++;
+        loadQuestion();
+    }
+
+});
+
+prevBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+        currentQuestion--;
+        loadQuestion();
+    }
+
+});
+
+submitBtn.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+            score++;
+        }
+
+    });
+
+    document.getElementById("quiz-container").style.display = "none";
+
+    const resultBox = document.getElementById("resultBox");
+
+    resultBox.style.display = "block";
+
+    const percentage = ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats").innerHTML = `
+        <p>Total Questions: ${quizData.length}</p>
+        <p>Correct Answers: ${score}</p>
+        <p>Wrong Answers: ${quizData.length - score}</p>
+        <p>Percentage: ${percentage}%</p>
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const isCorrect = userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+            <h3>Q${index + 1}. ${q.question}</h3>
+
+            <p class="${isCorrect ? 'correct' : 'wrong'}">
+                Your Answer: ${userAnswers[index] || "Not Attempted"}
+            </p>
+
+            <p class="answer">
+                Correct Answer: ${q.answer}
+            </p>
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>ITIL Panda — “See the dark circles under your eyes.” Mock Test</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#0f172a;
+        color:white;
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        padding:20px;
+    }
+
+    .container{
+        width:100%;
+        max-width:900px;
+        background:#111827;
+        border-radius:20px;
+        padding:30px;
+        box-shadow:0 0 25px rgba(0,0,0,0.5);
+    }
+
+    h1{
+        text-align:center;
+        margin-bottom:10px;
+        color:#38bdf8;
+    }
+
+    .subtitle{
+        text-align:center;
+        margin-bottom:25px;
+        color:#cbd5e1;
+    }
+
+    .top-bar{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:25px;
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+    .progress{
+        font-size:18px;
+        font-weight:bold;
+        color:#facc15;
+    }
+
+    .question-box{
+        margin-bottom:25px;
+    }
+
+    .question{
+        font-size:22px;
+        margin-bottom:20px;
+        line-height:1.5;
+    }
+
+    .options{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .option{
+        background:#1e293b;
+        border:2px solid transparent;
+        padding:15px;
+        border-radius:12px;
+        cursor:pointer;
+        transition:0.3s;
+        font-size:18px;
+    }
+
+    .option:hover{
+        background:#334155;
+        transform:scale(1.01);
+    }
+
+    .option.selected{
+        border:2px solid #38bdf8;
+        background:#0f766e;
+    }
+
+    .buttons{
+        display:flex;
+        justify-content:space-between;
+        margin-top:30px;
+        gap:15px;
+        flex-wrap:wrap;
+    }
+
+    button{
+        padding:14px 22px;
+        border:none;
+        border-radius:10px;
+        font-size:16px;
+        cursor:pointer;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    .prev-btn{
+        background:#475569;
+        color:white;
+    }
+
+    .next-btn{
+        background:#2563eb;
+        color:white;
+    }
+
+    .submit-btn{
+        background:#16a34a;
+        color:white;
+    }
+
+    button:hover{
+        opacity:0.9;
+        transform:translateY(-2px);
+    }
+
+    .result-box{
+        display:none;
+    }
+
+    .result-box h2{
+        text-align:center;
+        margin-bottom:20px;
+        color:#38bdf8;
+    }
+
+    .result-stats{
+        text-align:center;
+        margin-bottom:25px;
+        line-height:2;
+        font-size:20px;
+    }
+
+    .review{
+        margin-top:20px;
+    }
+
+    .review-item{
+        background:#1e293b;
+        padding:18px;
+        margin-bottom:15px;
+        border-radius:12px;
+    }
+
+    .correct{
+        color:#4ade80;
+        margin-top:10px;
+    }
+
+    .wrong{
+        color:#f87171;
+        margin-top:10px;
+    }
+
+    .answer{
+        color:#facc15;
+        margin-top:8px;
+    }
+
+    @media(max-width:600px){
+
+        .question{
+            font-size:18px;
+        }
+
+        .option{
+            font-size:16px;
+        }
+
+        button{
+            width:100%;
+        }
+
+        .buttons{
+            flex-direction:column;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="quiz-container">
+
+        <h1>ITIL Panda  </h1>
+   <h3 style="font-family:Arial,sans-serif; color:#137eb8; font-weight:500; margin:8px 0; text-align:center;">
+“See the dark circles under your eyes.” 🐼
+</h3>
+        <p class="subtitle"></p>
+
+        <div class="top-bar">
+            <div class="progress" id="progress">Question 1 / 40</div>
+        </div>
+
+        <div class="question-box">
+            <div class="question" id="question"></div>
+
+            <div class="options" id="options"></div>
+        </div>
+
+        <div class="buttons">
+            <button class="prev-btn" id="prevBtn">Previous</button>
+            <button class="next-btn" id="nextBtn">Next</button>
+            <button class="submit-btn" id="submitBtn">Submit Quiz</button>
+        </div>
+
+    </div>
+
+    <div class="result-box" id="resultBox">
+        <h2>Quiz Result</h2>
+
+        <div class="result-stats" id="resultStats"></div>
+
+        <div class="review" id="review"></div>
+    </div>
+
+</div>
+
+<script>
+
+const quizData = [
+
+
+{
+question:"A company is planning to introduce AI-based customer support services to stay ahead of competitors in a rapidly changing market. Which Service Strategy concept is primarily being applied?",
+options:[
+"Demand management",
+"Competition and market space",
+"Incident management",
+"Service continuity"
+],
+answer:"Competition and market space"
+},
+
+{
+question:"An IT department provides services only within its own organization and not to external customers. Which type of service provider is this?",
+options:[
+"Type I",
+"Type II",
+"Type III",
+"Shared external provider"
+],
+answer:"Type I"
+},
+
+{
+question:"A company wants IT services to directly contribute to business growth and customer retention rather than just infrastructure support. Which concept best fits this approach?",
+options:[
+"Technical management",
+"Service management as a strategic asset",
+"Event management",
+"Asset tagging"
+],
+answer:"Service management as a strategic asset"
+},
+
+{
+question:"A service manager is calculating expected profit, operational cost, and long-term business gain before implementing a new IT platform. Which area is being evaluated?",
+options:[
+"Availability management",
+"Financial management",
+"Service desk operation",
+"Capacity management"
+],
+answer:"Financial management"
+},
+
+{
+question:"An organization notices heavy traffic spikes during festival sales causing website slowdowns. Which process should primarily predict and align resources with business demand?",
+options:[
+"Problem management",
+"Change management",
+"Demand management",
+"Knowledge management"
+],
+answer:"Demand management"
+},
+
+{
+question:"A company maintains a list of active services, planned services, and retired services to make strategic decisions. Which process manages this information?",
+options:[
+"Service portfolio management",
+"Service catalog management",
+"Incident management",
+"Availability management"
+],
+answer:"Service portfolio management"
+},
+
+{
+question:"A business wants to identify strengths, weaknesses, opportunities, and threats before launching a cloud platform. Which strategy technique is being used?",
+options:[
+"KPI analysis",
+"SWOT analysis",
+"Root cause analysis",
+"CMDB evaluation"
+],
+answer:"SWOT analysis"
+},
+
+{
+question:"A manager is responsible for ensuring that staff roles, ownership, and responsibilities are properly assigned during service operations. Which area mainly addresses this?",
+options:[
+"Key roles and responsibilities of staff",
+"Service continuity",
+"Event management",
+"Technical deployment"
+],
+answer:"Key roles and responsibilities of staff"
+},
+
+{
+question:"An organization is designing a new banking application expected to support future business growth and increased customer load. Which Service Design principle is most relevant?",
+options:[
+"Incident escalation",
+"Future business requirements",
+"Event filtering",
+"Request fulfillment"
+],
+answer:"Future business requirements"
+},
+
+{
+question:"A detailed document contains architecture diagrams, support models, policies, capacity plans, and security requirements for a new service. What is this document called?",
+options:[
+"SLA",
+"CMDB",
+"Service Design Package (SDP)",
+"RFC"
+],
+answer:"Service Design Package (SDP)"
+},
+
+{
+question:"Users want a centralized portal showing all available IT services provided by the organization. Which process supports this requirement?",
+options:[
+"Service catalog management",
+"Demand management",
+"Financial management",
+"Problem management"
+],
+answer:"Service catalog management"
+},
+
+{
+question:"A customer complains that agreed response times are not being met by the IT support team. Which process is primarily responsible for managing such agreements?",
+options:[
+"Service level management",
+"Capacity management",
+"Event management",
+"Release management"
+],
+answer:"Service level management"
+},
+
+{
+question:"A streaming platform expects millions of concurrent users during a live sports event. Which design activity is most critical?",
+options:[
+"Service continuity",
+"Capacity management",
+"Service catalog management",
+"Incident classification"
+],
+answer:"Capacity management"
+},
+
+{
+question:"A disaster destroys a primary data center, but services continue running from a backup location with minimal downtime. Which concept enabled this?",
+options:[
+"Service level management",
+"IT service continuity",
+"Demand management",
+"Financial governance"
+],
+answer:"IT service continuity"
+},
+
+{
+question:"A healthcare organization is implementing encryption, access control, and audit logging to protect patient records. Which Service Design area is being emphasized?",
+options:[
+"Service portfolio management",
+"Information Security",
+"Event fulfillment",
+"Capacity planning"
+],
+answer:"Information Security"
+},
+
+{
+question:"A company is comparing expected business value against implementation cost before approving a new IT service. Which concept is mainly involved?",
+options:[
+"ROI",
+"SLA",
+"KPI",
+"RFC"
+],
+answer:"ROI"
+},
+
+{
+question:"An enterprise notices that users frequently request additional storage every month. Which process should analyze and influence these usage patterns?",
+options:[
+"Incident management",
+"Service portfolio management",
+"Demand management",
+"Technical management"
+],
+answer:"Demand management"
+},
+
+{
+question:"A service provider is preparing policies, documentation standards, architecture guidelines, and compliance rules before launching a new cloud service. Which lifecycle stage is this?",
+options:[
+"Service Operation",
+"Service Design",
+"Service Transition",
+"Continual Service Improvement"
+],
+answer:"Service Design"
+},
+
+{
+question:"A customer-facing service requires guaranteed uptime and defined recovery timelines documented between the provider and client. Which document primarily defines this agreement?",
+options:[
+"SDP",
+"CAB report",
+"SLA",
+"CMDB"
+],
+answer:"SLA"
+},
+
+{
+question:"An IT architect wants to ensure that future mergers, expansion, and increased workloads can be supported without redesigning the entire infrastructure. Which design focus is most important?",
+options:[
+"Service continuity",
+"Scalability and capacity planning",
+"Incident prioritization",
+"Ticket escalation"
+],
+answer:"Scalability and capacity planning"
+},
+
+{
+question:"A critical production server failed after an unauthorized configuration modification. Which ITIL process should primarily detect and control such configuration inconsistencies?",
+options:[
+"Incident Management",
+"Service Asset and Configuration Management",
+"Event Management",
+"Problem Management"
+],
+answer:"Service Asset and Configuration Management"
+},
+
+{
+question:"An organization is preparing deployment timelines, rollback procedures, resource allocation, and risk coordination before a major ERP rollout. Which process is mainly responsible?",
+options:[
+"Change Management",
+"Transition Planning and Support",
+"Knowledge Management",
+"Service Desk Management"
+],
+answer:"Transition Planning and Support"
+},
+
+{
+question:"A deployment team is transferring approved application packages from staging to production servers. Which process is directly responsible?",
+options:[
+"Incident Management",
+"Problem Management",
+"Release and Deployment Management",
+"Event Management"
+],
+answer:"Release and Deployment Management"
+},
+
+{
+question:"A proposed firewall upgrade may impact multiple business applications. Which process must evaluate risk, approval, and business impact before implementation?",
+options:[
+"Release Management",
+"Change Management",
+"Asset Management",
+"Technical Management"
+],
+answer:"Change Management"
+},
+
+{
+question:"An engineer resolves a rare database issue and documents the fix for future troubleshooting. Which process mainly ensures this knowledge becomes reusable organizational information?",
+options:[
+"SACM",
+"Incident Management",
+"Knowledge Management",
+"Event Management"
+],
+answer:"Knowledge Management"
+},
+
+{
+question:"A support engineer receives alerts showing CPU utilization crossing threshold limits, but no user complaints have yet occurred. What type of management process is handling this situation?",
+options:[
+"Problem Management",
+"Incident Management",
+"Event Management",
+"Request Fulfillment"
+],
+answer:"Event Management"
+},
+
+{
+question:"Users cannot access email services after a network outage. The immediate goal is restoring service as quickly as possible. Which process is primarily involved?",
+options:[
+"Problem Management",
+"Incident Management",
+"Knowledge Management",
+"Capacity Management"
+],
+answer:"Incident Management"
+},
+
+{
+question:"An organization repeatedly experiences storage failures every month. The root cause must be identified permanently instead of repeatedly restoring services. Which process should lead this investigation?",
+options:[
+"Event Management",
+"Incident Management",
+"Problem Management",
+"Service Desk Management"
+],
+answer:"Problem Management"
+},
+
+{
+question:"A user requests installation of approved office software through the company portal. Which process most likely handles this request?",
+options:[
+"Incident Management",
+"Request Fulfillment",
+"Problem Management",
+"Change Evaluation"
+],
+answer:"Request Fulfillment"
+},
+
+{
+question:"A company wants complete visibility into hardware inventory, ownership, software versions, and lifecycle tracking. Which process best aligns with this requirement?",
+options:[
+"Asset Management",
+"Event Management",
+"Service Desk",
+"Application Management"
+],
+answer:"Asset Management"
+},
+
+{
+question:"Which function acts as the single point of contact between users and the IT organization?",
+options:[
+"Technical Management",
+"Service Desk",
+"Application Management",
+"Change Advisory Board"
+],
+answer:"Service Desk"
+},
+
+{
+question:"Database administrators are responsible for maintaining backend infrastructure, tuning servers, and handling OS-level dependencies. Which ITIL function best matches this role?",
+options:[
+"Application Management",
+"Service Desk",
+"Technical Management",
+"Incident Management"
+],
+answer:"Technical Management"
+},
+
+{
+question:"A software support team is responsible for maintaining application code, fixing software bugs, and managing application lifecycle support. Which function is this?",
+options:[
+"Technical Management",
+"Application Management",
+"Event Management",
+"SACM"
+],
+answer:"Application Management"
+},
+
+{
+question:"An enterprise decides to use cheaper infrastructure even though uptime reliability may slightly reduce. Which Service Operation concept is being balanced?",
+options:[
+"Availability vs continuity",
+"Reliability vs cost",
+"Capacity vs scalability",
+"Security vs governance"
+],
+answer:"Reliability vs cost"
+},
+
+{
+question:"A monitoring tool generates thousands of alerts daily, but only critical alerts are escalated to support teams. Which process mainly filters and interprets these notifications?",
+options:[
+"Problem Management",
+"Event Management",
+"Asset Management",
+"Knowledge Management"
+],
+answer:"Event Management"
+},
+
+{
+question:"After deployment of a new HR portal, users face multiple login failures due to misconfigured authentication settings. The service desk restores access temporarily while another team investigates the underlying cause. Which pair of processes is involved?",
+options:[
+"Event Management + Asset Management",
+"Incident Management + Problem Management",
+"Change Management + Capacity Management",
+"SACM + Request Fulfillment"
+],
+answer:"Incident Management + Problem Management"
+},
+
+{
+question:"An organization defines ownership for improvement initiatives, assigns responsible teams, and schedules recurring review meetings. Which CSI concept is primarily being implemented?",
+options:[
+"Release governance",
+"Ongoing scheduling and ownership assignment",
+"Technical escalation",
+"Service catalog control"
+],
+answer:"Ongoing scheduling and ownership assignment"
+},
+
+{
+question:"A company conducts repeated awareness programs to ensure staff follow operational procedures and security practices consistently. Which CSI activity is this?",
+options:[
+"Knowledge transfer",
+"Training and awareness",
+"Release validation",
+"Change authorization"
+],
+answer:"Training and awareness"
+},
+
+{
+question:"A production change failed because teams did not communicate deployment dependencies properly. Which Service Transition process should have coordinated planning and support activities?",
+options:[
+"Transition Planning and Support",
+"Event Management",
+"Incident Management",
+"Application Management"
+],
+answer:"Transition Planning and Support"
+},
+
+{
+question:"A CMDB contains outdated relationships between servers and applications, causing failed impact analysis during change approval. Which process owns maintaining accurate CI relationships?",
+options:[
+"Knowledge Management",
+"Service Desk",
+"Service Asset and Configuration Management",
+"Event Fulfillment"
+],
+answer:"Service Asset and Configuration Management"
+},
+
+{
+question:"A company is designing a Tier-III style data center intended to maintain operations during hardware maintenance without complete shutdown. Which design principle is MOST critical?",
+options:[
+"Single uplink architecture",
+"Fault tolerance and redundancy",
+"Shared cooling dependency",
+"Reduced rack spacing"
+],
+answer:"Fault tolerance and redundancy"
+},
+
+{
+question:"A newly deployed data center experiences overheating even though server capacity utilization is only 45%. Which area was MOST likely underestimated during planning?",
+options:[
+"WAN bandwidth",
+"HVAC and airflow planning",
+"ISP redundancy",
+"Rack labeling standards"
+],
+answer:"HVAC and airflow planning"
+},
+
+{
+question:"Which factor is MOST important while selecting a geographic location for a mission-critical disaster recovery data center?",
+options:[
+"Nearby shopping facilities",
+"Lowest office rent only",
+"Natural disaster risk profile",
+"Employee parking availability"
+],
+answer:"Natural disaster risk profile"
+},
+
+{
+question:"A data center architect intentionally leaves unoccupied rack space between high-density servers. What is the PRIMARY reason?",
+options:[
+"Increase cable length",
+"Reduce ISP dependency",
+"Improve airflow and thermal dissipation",
+"Simplify operating system upgrades"
+],
+answer:"Improve airflow and thermal dissipation"
+},
+
+{
+question:"Which component is MOST directly responsible for maintaining environmental temperature and humidity inside a data center?",
+options:[
+"CMDB",
+"HVAC",
+"SAN",
+"SLA"
+],
+answer:"HVAC"
+},
+
+{
+question:"An enterprise wants to ensure that failure of one ISP does not disconnect branch offices from headquarters. Which design principle is being implemented?",
+options:[
+"Asset management",
+"WAN redundancy",
+"Incident escalation",
+"Logical partitioning"
+],
+answer:"WAN redundancy"
+},
+
+{
+question:"A NOC team receives alerts regarding abnormal packet loss across multiple WAN links before users report service degradation. Which operational concept is being demonstrated?",
+options:[
+"Reactive troubleshooting",
+"Preventive monitoring",
+"Root cause elimination",
+"Configuration auditing"
+],
+answer:"Preventive monitoring"
+},
+
+{
+question:"Which statement BEST differentiates physical security from logical security in a data center?",
+options:[
+"Physical security protects applications while logical security protects buildings",
+"Logical security includes CCTV monitoring",
+"Physical security controls physical access, while logical security controls digital/system access",
+"Logical security mainly focuses on HVAC systems"
+],
+answer:"Physical security controls physical access, while logical security controls digital/system access"
+},
+
+{
+question:"A data center uses biometric scanners, mantraps, and surveillance cameras at entry points. Which security domain is primarily being enforced?",
+options:[
+"Network security",
+"Physical security",
+"Logical security",
+"Service continuity"
+],
+answer:"Physical security"
+},
+
+{
+question:"Which of the following BEST describes modular cabling design?",
+options:[
+"A design using temporary unmanaged connections",
+"A scalable and structured cabling approach for easier maintenance and expansion",
+"A wireless-only architecture",
+"An ISP-controlled fiber deployment model"
+],
+answer:"A scalable and structured cabling approach for easier maintenance and expansion"
+},
+
+{
+question:"A company experiences repeated cable tracing issues because network cables were deployed without structured organization. Which infrastructure principle was MOST likely ignored?",
+options:[
+"Capacity planning",
+"Modular cabling design",
+"HVAC zoning",
+"ISP monitoring"
+],
+answer:"Modular cabling design"
+},
+
+{
+question:"Which infrastructure component primarily distributes network connectivity from the core network to different sections inside a data center?",
+options:[
+"Point of Distribution",
+"Service Catalog",
+"CMDB",
+"Incident Queue"
+],
+answer:"Point of Distribution"
+},
+
+{
+question:"A financial institution wants uninterrupted online banking services even during regional network failures. Which solution BEST addresses this requirement?",
+options:[
+"Single ISP with high bandwidth",
+"Multiple WAN links and ISP redundancy",
+"Increased rack density",
+"Reduced network segmentation"
+],
+answer:"Multiple WAN links and ISP redundancy"
+},
+
+{
+question:"A monitoring dashboard in a NOC displays CPU usage, network latency, disk failures, and temperature alerts in real time. Which operational objective is MOST directly supported?",
+options:[
+"Business portfolio management",
+"Continuous infrastructure monitoring",
+"Service catalog optimization",
+"Capacity retirement planning"
+],
+answer:"Continuous infrastructure monitoring"
+},
+
+{
+question:"Which statement regarding data center power planning is MOST accurate?",
+options:[
+"Only current device power consumption matters",
+"Future scalability and peak load must also be considered",
+"UPS systems eliminate the need for generators",
+"Cooling systems operate independently from power planning"
+],
+answer:"Future scalability and peak load must also be considered"
+},
+
+{
+question:"An organization installs raised flooring primarily to improve which operational capability?",
+options:[
+"End-user ticket handling",
+"Airflow management and cable routing",
+"SLA negotiation",
+"WAN encryption"
+],
+answer:"Airflow management and cable routing"
+},
+
+{
+question:"A company wants to reduce downtime risk caused by overheating in a high-density rack environment. Which approach is MOST appropriate?",
+options:[
+"Increase rack density further",
+"Disable environmental monitoring",
+"Implement proper cooling zones and airflow control",
+"Remove redundant cooling systems"
+],
+answer:"Implement proper cooling zones and airflow control"
+},
+
+{
+question:"Which of the following is MOST associated with logical security in a data center?",
+options:[
+"Fire suppression system",
+"Rack locking mechanism",
+"Role-based access control (RBAC)",
+"Raised floor architecture"
+],
+answer:"Role-based access control (RBAC)"
+},
+
+{
+question:"A data center cleaning team uses improper cleaning equipment that generates static electricity near critical servers. What risk does this MOST likely introduce?",
+options:[
+"WAN saturation",
+"Electrostatic discharge damage",
+"SLA violation reporting",
+"Routing loop formation"
+],
+answer:"Electrostatic discharge damage"
+},
+
+{
+question:"A company is estimating required network bandwidth before launching a large-scale video streaming platform. Which factor is MOST critical during planning?",
+options:[
+"Wallpaper policy",
+"User traffic patterns and peak concurrency",
+"Rack color coding",
+"CCTV storage duration"
+],
+answer:"User traffic patterns and peak concurrency"
+},
+
+{
+question:"A company uses separate power feeds connected to independent UPS systems for critical servers. Which objective is primarily being achieved?",
+options:[
+"Logical isolation",
+"Power redundancy",
+"Modular monitoring",
+"WAN segmentation"
+],
+answer:"Power redundancy"
+},
+
+{
+question:"Which of the following is MOST likely to create a single point of failure inside a data center?",
+options:[
+"Multiple WAN providers",
+"Redundant cooling systems",
+"Single core switch architecture",
+"Dual power supplies"
+],
+answer:"Single core switch architecture"
+},
+
+{
+question:"A network administrator wants to reduce electromagnetic interference and improve organized cable management between racks. Which infrastructure approach should be prioritized?",
+options:[
+"Randomized cable routing",
+"Structured modular cabling",
+"Shared uplink chaining",
+"Flat network topology"
+],
+answer:"Structured modular cabling"
+},
+
+{
+question:"A company chooses a data center location near a hydroelectric power source mainly to achieve which operational advantage?",
+options:[
+"Reduced VLAN complexity",
+"Lower power instability risk",
+"Faster incident escalation",
+"Reduced CMDB synchronization issues"
+],
+answer:"Lower power instability risk"
+},
+
+{
+question:"Which monitoring activity is MOST commonly performed by a Network Operations Center (NOC)?",
+options:[
+"Source code debugging",
+"Real-time infrastructure monitoring",
+"SLA contract drafting",
+"Financial auditing"
+],
+answer:"Real-time infrastructure monitoring"
+},
+
+{
+question:"A data center experiences repeated network congestion during backup windows. Which planning parameter was MOST likely underestimated?",
+options:[
+"HVAC capacity",
+"Physical rack spacing",
+"Network bandwidth requirements",
+"Cleaning procedures"
+],
+answer:"Network bandwidth requirements"
+},
+
+{
+question:"Which statement regarding data center cooling is MOST accurate?",
+options:[
+"Cooling only affects user comfort",
+"Cooling is unrelated to server lifespan",
+"Improper cooling may cause hardware instability and failures",
+"Cooling is only needed for storage devices"
+],
+answer:"Improper cooling may cause hardware instability and failures"
+},
+
+{
+question:"An organization deploys geographically distributed data centers primarily to improve which capability?",
+options:[
+"Cable management",
+"Business continuity and disaster resilience",
+"Rack labeling standards",
+"Physical cleaning efficiency"
+],
+answer:"Business continuity and disaster resilience"
+},
+
+{
+question:"A security audit reveals that terminated employees still have VPN access credentials. Which security domain failure does this MOST directly indicate?",
+options:[
+"Physical security weakness",
+"HVAC failure",
+"Logical security weakness",
+"WAN redundancy issue"
+],
+answer:"Logical security weakness"
+},
+
+{
+question:"Which of the following BEST represents a prerequisite during early data center planning?",
+options:[
+"Determining decorative office layout",
+"Estimating infrastructure power and cooling requirements",
+"Selecting employee cafeteria vendors",
+"Defining social media policies"
+],
+answer:"Estimating infrastructure power and cooling requirements"
+}
+
+];
+
+
+
+let currentQuestion = 0;
+let userAnswers = new Array(quizData.length).fill(null);
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const progressEl = document.getElementById("progress");
+
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const submitBtn = document.getElementById("submitBtn");
+
+function loadQuestion(){
+
+    const current = quizData[currentQuestion];
+
+    questionEl.innerHTML = current.question;
+
+    progressEl.innerHTML = `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    optionsEl.innerHTML = "";
+
+    current.options.forEach(option => {
+
+        const div = document.createElement("div");
+
+        div.classList.add("option");
+
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = option;
+
+        div.addEventListener("click", () => {
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+        });
+
+        optionsEl.appendChild(div);
+    });
+}
+
+nextBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion < quizData.length - 1){
+        currentQuestion++;
+        loadQuestion();
+    }
+
+});
+
+prevBtn.addEventListener("click", ()=>{
+
+    if(currentQuestion > 0){
+        currentQuestion--;
+        loadQuestion();
+    }
+
+});
+
+submitBtn.addEventListener("click", showResults);
+
+function showResults(){
+
+    let score = 0;
+
+    quizData.forEach((q,index)=>{
+
+        if(userAnswers[index] === q.answer){
+            score++;
+        }
+
+    });
+
+    document.getElementById("quiz-container").style.display = "none";
+
+    const resultBox = document.getElementById("resultBox");
+
+    resultBox.style.display = "block";
+
+    const percentage = ((score / quizData.length) * 100).toFixed(2);
+
+    document.getElementById("resultStats").innerHTML = `
+        <p>Total Questions: ${quizData.length}</p>
+        <p>Correct Answers: ${score}</p>
+        <p>Wrong Answers: ${quizData.length - score}</p>
+        <p>Percentage: ${percentage}%</p>
+    `;
+
+    const review = document.getElementById("review");
+
+    review.innerHTML = "";
+
+    quizData.forEach((q,index)=>{
+
+        const div = document.createElement("div");
+
+        div.classList.add("review-item");
+
+        const isCorrect = userAnswers[index] === q.answer;
+
+        div.innerHTML = `
+            <h3>Q${index + 1}. ${q.question}</h3>
+
+            <p class="${isCorrect ? 'correct' : 'wrong'}">
+                Your Answer: ${userAnswers[index] || "Not Attempted"}
+            </p>
+
+            <p class="answer">
+                Correct Answer: ${q.answer}
+            </p>
+        `;
+
+        review.appendChild(div);
+
+    });
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

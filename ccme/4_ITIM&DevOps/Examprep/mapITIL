@@ -1,0 +1,628 @@
+ITIM / ITIL MASTER REVISION MAP
+(Reference style similar to Linux Administration structured knowledge map)
+
+ITIM / ITIL
+├── IT Service Management (ITSM)
+│   ├── Definition
+│   │   ├── Managing IT services aligned with business goals
+│   │   ├── Service Lifecycle Management
+│   │   ├── Value Delivery Model
+│   │   └── Governance + Operations + Improvement
+│   │
+│   ├── Core Objectives
+│   │   ├── Business Alignment
+│   │   ├── Service Availability
+│   │   ├── Risk Reduction
+│   │   ├── Cost Optimization
+│   │   ├── Service Reliability
+│   │   ├── Scalability
+│   │   ├── Customer Satisfaction
+│   │   └── Continual Improvement
+│   │
+│   ├── ITSM Frameworks
+│   │   ├── ITIL
+│   │   ├── COBIT (Governance)
+│   │   ├── ISO/IEC 20000 (ITSM Standard)
+│   │   ├── ISO 27001 (Information Security)
+│   │   ├── DevOps
+│   │   ├── Agile
+│   │   ├── Lean
+│   │   └── Six Sigma
+│   │
+│   ├── ITIL Versions
+│   │   ├── ITIL v2
+│   │   ├── ITIL v3
+│   │   │   ├── Service Lifecycle Model
+│   │   │   └── 5 Lifecycle Stages
+│   │   └── ITIL v4
+│   │       ├── Service Value System (SVS)
+│   │       ├── Service Value Chain
+│   │       ├── Practices
+│   │       ├── Governance
+│   │       └── Guiding Principles
+│   │
+│   ├── Service Lifecycle
+│   │   ├── Service Strategy
+│   │   ├── Service Design
+│   │   ├── Service Transition
+│   │   ├── Service Operation
+│   │   └── Continual Service Improvement (CSI)
+│   │
+│   ├── Key Terminologies
+│   │   ├── Service (Value delivery without ownership)
+│   │   ├── Utility (Fit for purpose)
+│   │   ├── Warranty (Fit for use)
+│   │   ├── KPI (Key Performance Indicator)
+│   │   ├── SLA (Service Level Agreement)
+│   │   ├── OLA (Operational Level Agreement)
+│   │   ├── UC (Underpinning Contract)
+│   │   ├── ROI (Return on Investment)
+│   │   ├── RFC (Request For Change)
+│   │   ├── CAB (Change Advisory Board)
+│   │   ├── CMDB (Configuration Management Database)
+│   │   ├── CI (Configuration Item)
+│   │   ├── Known Error
+│   │   ├── Workaround
+│   │   ├── Incident
+│   │   ├── Problem
+│   │   ├── Event
+│   │   ├── Change
+│   │   ├── Release
+│   │   └── Deployment
+│   │
+│   └── Important Standards
+│       ├── ISO 20000
+│       ├── ISO 27001
+│       ├── ISO 22301 (Business Continuity)
+│       ├── NIST
+│       ├── GDPR
+│       └── PCI-DSS
+│
+├── Service Strategy
+│   ├── Purpose
+│   │   ├── Business Value Creation
+│   │   ├── Competitive Advantage
+│   │   ├── Strategic Planning
+│   │   ├── Service Portfolio Optimization
+│   │   └── Market Positioning
+│   │
+│   ├── Core Concepts
+│   │   ├── Market Analysis
+│   │   ├── SWOT Analysis
+│   │   │   ├── Strengths
+│   │   │   ├── Weaknesses
+│   │   │   ├── Opportunities
+│   │   │   └── Threats
+│   │   ├── Risk Assessment
+│   │   ├── Demand Forecasting
+│   │   ├── Service Value
+│   │   ├── Customer Outcomes
+│   │   ├── Business Case
+│   │   └── Cost-Benefit Analysis
+│   │
+│   ├── Service Provider Types
+│   │   ├── Type I (Internal Service Provider)
+│   │   ├── Type II (Shared Services Unit)
+│   │   └── Type III (External Service Provider)
+│   │
+│   ├── Financial Management
+│   │   ├── Budgeting
+│   │   ├── Accounting
+│   │   ├── Charging
+│   │   ├── ROI Calculation
+│   │   ├── TCO (Total Cost of Ownership)
+│   │   └── Cost Modeling
+│   │
+│   ├── Service Portfolio Management
+│   │   ├── Service Pipeline
+│   │   ├── Service Catalog
+│   │   ├── Retired Services
+│   │   ├── Service Approval
+│   │   └── Portfolio Optimization
+│   │
+│   ├── Demand Management
+│   │   ├── User Profiles
+│   │   ├── Pattern of Business Activity (PBA)
+│   │   ├── Capacity Prediction
+│   │   ├── Workload Analysis
+│   │   └── Peak Usage Planning
+│   │
+│   ├── Roles
+│   │   ├── Service Strategy Manager
+│   │   ├── Financial Manager
+│   │   ├── Portfolio Manager
+│   │   ├── Demand Manager
+│   │   └── Business Relationship Manager
+│   │
+│   └── Exam Hotspots
+│       ├── ROI vs KPI
+│       ├── Service Portfolio vs Service Catalog
+│       ├── Utility vs Warranty
+│       ├── Demand vs Capacity
+│       └── Business Value vs Technical Value
+│
+├── Service Design
+│   ├── Purpose
+│   │   ├── Design New Services
+│   │   ├── Improve Existing Services
+│   │   ├── Ensure Scalability
+│   │   ├── Availability Planning
+│   │   └── Security Integration
+│   │
+│   ├── Design Components
+│   │   ├── Architecture Design
+│   │   ├── Process Design
+│   │   ├── Policy Design
+│   │   ├── Documentation Standards
+│   │   ├── Technology Architecture
+│   │   └── Supplier Integration
+│   │
+│   ├── Service Design Package (SDP)
+│   │   ├── Service Requirements
+│   │   ├── Architecture Diagrams
+│   │   ├── Capacity Plans
+│   │   ├── Security Policies
+│   │   ├── Recovery Procedures
+│   │   ├── Support Models
+│   │   ├── SLA Definitions
+│   │   └── Deployment Requirements
+│   │
+│   ├── Service Catalog Management
+│   │   ├── Business Service Catalog
+│   │   ├── Technical Service Catalog
+│   │   ├── Available Services
+│   │   ├── Requestable Services
+│   │   └── Service Visibility
+│   │
+│   ├── Service Level Management (SLM)
+│   │   ├── SLA
+│   │   ├── OLA
+│   │   ├── Underpinning Contract
+│   │   ├── Service Targets
+│   │   ├── Availability Targets
+│   │   └── Response/Resolution Time
+│   │
+│   ├── Capacity Management
+│   │   ├── Business Capacity Management
+│   │   ├── Service Capacity Management
+│   │   ├── Component Capacity Management
+│   │   ├── Performance Monitoring
+│   │   ├── Scalability Planning
+│   │   └── Workload Forecasting
+│   │
+│   ├── Availability Management
+│   │   ├── Uptime
+│   │   ├── MTBF (Mean Time Between Failures)
+│   │   ├── MTTR (Mean Time To Repair)
+│   │   ├── Fault Tolerance
+│   │   ├── Redundancy
+│   │   └── High Availability
+│   │
+│   ├── IT Service Continuity Management (ITSCM)
+│   │   ├── Disaster Recovery
+│   │   ├── Backup Strategy
+│   │   ├── Business Continuity
+│   │   ├── Failover
+│   │   ├── Recovery Site
+│   │   ├── RTO (Recovery Time Objective)
+│   │   └── RPO (Recovery Point Objective)
+│   │
+│   ├── Information Security Management
+│   │   ├── CIA Triad
+│   │   │   ├── Confidentiality
+│   │   │   ├── Integrity
+│   │   │   └── Availability
+│   │   ├── Access Control
+│   │   ├── Encryption
+│   │   ├── IAM (Identity and Access Management)
+│   │   ├── RBAC (Role Based Access Control)
+│   │   ├── MFA (Multi Factor Authentication)
+│   │   ├── Audit Logging
+│   │   └── Compliance
+│   │
+│   ├── Tools
+│   │   ├── CMDB Tools
+│   │   ├── ServiceNow
+│   │   ├── BMC Remedy
+│   │   ├── Jira Service Management
+│   │   ├── Monitoring Tools
+│   │   └── Documentation Repositories
+│   │
+│   └── Exam Hotspots
+│       ├── SLA vs OLA
+│       ├── Capacity vs Availability
+│       ├── Catalog vs Portfolio
+│       ├── SDP Contents
+│       ├── Continuity vs Availability
+│       └── Security vs Continuity
+│
+├── Service Transition
+│   ├── Purpose
+│   │   ├── Controlled Change Introduction
+│   │   ├── Risk Reduction
+│   │   ├── Stable Deployments
+│   │   └── Knowledge Transfer
+│   │
+│   ├── Service Asset and Configuration Management (SACM)
+│   │   ├── Configuration Item (CI)
+│   │   ├── Asset Tracking
+│   │   ├── CI Relationships
+│   │   ├── Configuration Baseline
+│   │   ├── Version Control
+│   │   └── Audit and Verification
+│   │
+│   ├── CMDB
+│   │   ├── Hardware Records
+│   │   ├── Software Records
+│   │   ├── Dependency Mapping
+│   │   ├── Network Topology
+│   │   ├── Ownership Records
+│   │   └── Change History
+│   │
+│   ├── Change Management
+│   │   ├── Standard Change
+│   │   ├── Normal Change
+│   │   ├── Emergency Change
+│   │   ├── RFC Workflow
+│   │   ├── Impact Assessment
+│   │   ├── Risk Evaluation
+│   │   ├── Approval Workflow
+│   │   └── Backout Plan
+│   │
+│   ├── CAB (Change Advisory Board)
+│   │   ├── Review Changes
+│   │   ├── Risk Evaluation
+│   │   ├── Approval Authority
+│   │   ├── Scheduling Decisions
+│   │   └── Emergency CAB (ECAB)
+│   │
+│   ├── Release and Deployment Management
+│   │   ├── Release Policy
+│   │   ├── Deployment Models
+│   │   ├── Blue-Green Deployment
+│   │   ├── Canary Release
+│   │   ├── Rollback Procedures
+│   │   ├── Early Life Support (ELS)
+│   │   └── Production Rollout
+│   │
+│   ├── Knowledge Management
+│   │   ├── Known Error Database (KEDB)
+│   │   ├── Lessons Learned
+│   │   ├── Documentation
+│   │   ├── Runbooks
+│   │   ├── SOPs (Standard Operating Procedures)
+│   │   └── Knowledge Sharing
+│   │
+│   ├── Transition Planning and Support
+│   │   ├── Resource Planning
+│   │   ├── Scheduling
+│   │   ├── Coordination
+│   │   ├── Communication
+│   │   └── Risk Planning
+│   │
+│   ├── Related Technologies
+│   │   ├── Git
+│   │   ├── CI/CD Pipelines
+│   │   ├── Jenkins
+│   │   ├── Docker
+│   │   ├── Kubernetes
+│   │   ├── Infrastructure as Code
+│   │   └── Version Control Systems
+│   │
+│   └── Exam Hotspots
+│       ├── Incident vs Problem vs Change
+│       ├── SACM vs CMDB
+│       ├── Release vs Deployment
+│       ├── CAB vs ECAB
+│       ├── Standard vs Emergency Change
+│       └── Known Error vs Incident
+│
+├── Service Operation
+│   ├── Purpose
+│   │   ├── Stable Operations
+│   │   ├── Service Restoration
+│   │   ├── Incident Resolution
+│   │   ├── User Support
+│   │   └── Operational Monitoring
+│   │
+│   ├── Event Management
+│   │   ├── Event Detection
+│   │   ├── Monitoring Systems
+│   │   ├── Alert Generation
+│   │   ├── Threshold Monitoring
+│   │   ├── Correlation Engines
+│   │   └── Event Filtering
+│   │
+│   ├── Incident Management
+│   │   ├── Incident Logging
+│   │   ├── Categorization
+│   │   ├── Prioritization
+│   │   ├── Escalation
+│   │   │   ├── Functional Escalation
+│   │   │   └── Hierarchical Escalation
+│   │   ├── SLA Tracking
+│   │   ├── Resolution
+│   │   └── Incident Closure
+│   │
+│   ├── Problem Management
+│   │   ├── Root Cause Analysis
+│   │   ├── Trend Analysis
+│   │   ├── Known Errors
+│   │   ├── Workarounds
+│   │   ├── Reactive Problem Management
+│   │   └── Proactive Problem Management
+│   │
+│   ├── Request Fulfillment
+│   │   ├── Password Reset
+│   │   ├── Software Installation
+│   │   ├── User Provisioning
+│   │   ├── Access Requests
+│   │   └── Standard Requests
+│   │
+│   ├── Access Management
+│   │   ├── User Authentication
+│   │   ├── Authorization
+│   │   ├── RBAC
+│   │   ├── Privileged Access
+│   │   └── Access Revocation
+│   │
+│   ├── Service Desk
+│   │   ├── Single Point of Contact (SPOC)
+│   │   ├── Ticketing Systems
+│   │   ├── User Communication
+│   │   ├── Escalation Coordination
+│   │   ├── Knowledge Base Usage
+│   │   └── SLA Coordination
+│   │
+│   ├── Technical Management
+│   │   ├── Infrastructure Support
+│   │   ├── Server Administration
+│   │   ├── Network Support
+│   │   ├── OS Support
+│   │   └── Technical Expertise
+│   │
+│   ├── Application Management
+│   │   ├── Application Lifecycle
+│   │   ├── Performance Monitoring
+│   │   ├── Bug Fixing
+│   │   ├── Patch Management
+│   │   └── Application Support
+│   │
+│   ├── Monitoring and Observability
+│   │   ├── NOC (Network Operations Center)
+│   │   ├── SOC (Security Operations Center)
+│   │   ├── Dashboards
+│   │   ├── Metrics
+│   │   ├── Logs
+│   │   ├── Traces
+│   │   └── Alerts
+│   │
+│   ├── Ticketing Tools
+│   │   ├── ServiceNow
+│   │   ├── Jira
+│   │   ├── BMC Remedy
+│   │   ├── Zendesk
+│   │   └── Freshservice
+│   │
+│   ├── Monitoring Tools
+│   │   ├── Nagios
+│   │   ├── Zabbix
+│   │   ├── Prometheus
+│   │   ├── Grafana
+│   │   ├── SolarWinds
+│   │   └── Datadog
+│   │
+│   └── Exam Hotspots
+│       ├── Incident vs Problem
+│       ├── Event vs Incident
+│       ├── Request vs Incident
+│       ├── SPOC Role
+│       ├── Escalation Types
+│       └── Root Cause Analysis
+│
+├── Continual Service Improvement (CSI)
+│   ├── Purpose
+│   │   ├── Continuous Optimization
+│   │   ├── Service Quality Improvement
+│   │   ├── KPI Tracking
+│   │   └── Process Maturity
+│   │
+│   ├── PDCA Cycle
+│   │   ├── Plan
+│   │   ├── Do
+│   │   ├── Check
+│   │   └── Act
+│   │
+│   ├── CSI Activities
+│   │   ├── Metrics Collection
+│   │   ├── KPI Monitoring
+│   │   ├── Trend Analysis
+│   │   ├── Benchmarking
+│   │   ├── Feedback Analysis
+│   │   ├── Service Review
+│   │   └── Process Optimization
+│   │
+│   ├── Metrics
+│   │   ├── SLA Compliance
+│   │   ├── Incident Resolution Time
+│   │   ├── Availability Percentage
+│   │   ├── Customer Satisfaction (CSAT)
+│   │   ├── Mean Resolution Time
+│   │   ├── Change Success Rate
+│   │   └── Service Uptime
+│   │
+│   ├── Reporting
+│   │   ├── Operational Reports
+│   │   ├── Management Reports
+│   │   ├── Executive Dashboards
+│   │   ├── Trend Reports
+│   │   └── Audit Reports
+│   │
+│   ├── Improvement Models
+│   │   ├── Kaizen
+│   │   ├── Lean
+│   │   ├── Six Sigma
+│   │   └── Agile Feedback Loops
+│   │
+│   └── Exam Hotspots
+│       ├── KPI vs Metric
+│       ├── PDCA Cycle
+│       ├── Benchmarking
+│       ├── Continuous Improvement
+│       └── Feedback Analysis
+│
+├── Data Center Management
+│   ├── Data Center Architecture
+│   │   ├── Tier Classification
+│   │   │   ├── Tier I
+│   │   │   ├── Tier II
+│   │   │   ├── Tier III
+│   │   │   └── Tier IV
+│   │   ├── High Availability
+│   │   ├── Redundancy
+│   │   ├── Fault Tolerance
+│   │   ├── Scalability
+│   │   └── Disaster Recovery Design
+│   │
+│   ├── Physical Infrastructure
+│   │   ├── Rack Design
+│   │   ├── Raised Floor
+│   │   ├── Cable Trays
+│   │   ├── Hot/Cold Aisle
+│   │   ├── Rack Spacing
+│   │   └── Structural Planning
+│   │
+│   ├── Power Infrastructure
+│   │   ├── UPS
+│   │   ├── PDU (Power Distribution Unit)
+│   │   ├── Generator Backup
+│   │   ├── Redundant Power Feeds
+│   │   ├── Peak Load Planning
+│   │   └── Power Monitoring
+│   │
+│   ├── Cooling and HVAC
+│   │   ├── Precision Cooling
+│   │   ├── Airflow Management
+│   │   ├── Temperature Monitoring
+│   │   ├── Humidity Control
+│   │   ├── Cooling Zones
+│   │   └── Environmental Sensors
+│   │
+│   ├── Network Infrastructure
+│   │   ├── Core Network
+│   │   ├── WAN Links
+│   │   ├── ISP Redundancy
+│   │   ├── Network Segmentation
+│   │   ├── Bandwidth Planning
+│   │   └── Points of Distribution
+│   │
+│   ├── Storage Infrastructure
+│   │   ├── SAN
+│   │   ├── NAS
+│   │   ├── RAID
+│   │   ├── Backup Storage
+│   │   └── Replication
+│   │
+│   ├── Security
+│   │   ├── Physical Security
+│   │   │   ├── CCTV
+│   │   │   ├── Biometric Access
+│   │   │   ├── Smart Locks
+│   │   │   ├── Security Guards
+│   │   │   └── Mantraps
+│   │   │
+│   │   ├── Logical Security
+│   │   │   ├── Firewall
+│   │   │   ├── VPN
+│   │   │   ├── IDS/IPS
+│   │   │   ├── IAM
+│   │   │   └── Access Policies
+│   │   │
+│   │   └── Environmental Security
+│   │       ├── Fire Suppression
+│   │       ├── Water Leakage Detection
+│   │       ├── Smoke Sensors
+│   │       └── Static Control
+│   │
+│   ├── NOC Operations
+│   │   ├── Real-time Monitoring
+│   │   ├── Alert Management
+│   │   ├── Incident Escalation
+│   │   ├── Performance Monitoring
+│   │   ├── Capacity Monitoring
+│   │   └── Infrastructure Health
+│   │
+│   ├── Monitoring Tools
+│   │   ├── Nagios
+│   │   ├── Zabbix
+│   │   ├── SolarWinds
+│   │   ├── Grafana
+│   │   ├── PRTG
+│   │   └── Prometheus
+│   │
+│   ├── Data Center Standards
+│   │   ├── TIA-942
+│   │   ├── ISO 27001
+│   │   ├── Uptime Institute Tier Standards
+│   │   ├── ANSI Standards
+│   │   └── IEEE Standards
+│   │
+│   └── Exam Hotspots
+│       ├── HVAC Purpose
+│       ├── Tier III vs Tier IV
+│       ├── Physical vs Logical Security
+│       ├── WAN Redundancy
+│       ├── Raised Floor Benefits
+│       ├── Power Redundancy
+│       └── NOC Responsibilities
+│
+└── Troubleshooting + Operational Scenarios
+    ├── Incident Scenarios
+    │   ├── Service Down
+    │   ├── SLA Breach
+    │   ├── Priority Escalation
+    │   ├── Major Incident
+    │   └── User Lockout
+    │
+    ├── Problem Scenarios
+    │   ├── Repeated Failures
+    │   ├── Root Cause Analysis
+    │   ├── Known Error Creation
+    │   └── Trend Identification
+    │
+    ├── Change Scenarios
+    │   ├── Emergency Patch
+    │   ├── Failed Deployment
+    │   ├── Rollback Activation
+    │   └── CAB Approval
+    │
+    ├── Capacity Scenarios
+    │   ├── CPU Bottleneck
+    │   ├── Storage Exhaustion
+    │   ├── Traffic Surge
+    │   └── Scalability Failure
+    │
+    ├── Continuity Scenarios
+    │   ├── Data Center Failure
+    │   ├── Disaster Recovery
+    │   ├── Backup Restoration
+    │   └── Failover Testing
+    │
+    ├── Security Scenarios
+    │   ├── Unauthorized Access
+    │   ├── Privilege Escalation
+    │   ├── Data Leakage
+    │   ├── Insider Threat
+    │   └── Audit Failure
+    │
+    └── Most Important Concept Differentiations
+        ├── Incident vs Problem
+        ├── Event vs Incident
+        ├── Service Catalog vs Service Portfolio
+        ├── SLA vs OLA
+        ├── Availability vs Capacity
+        ├── Change vs Release
+        ├── SACM vs CMDB
+        ├── Utility vs Warranty
+        ├── KPI vs Metric
+        └── Continuity vs Availability
